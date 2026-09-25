@@ -1,2 +1,61 @@
-# WebsitedesignandPrompts
-all the cool looking websites are behind paywalls for people to access, i am trying to democratize this and create a collection of awesome website templates with detailed prompts on how they are built so they can be redily adapted to your use case and can be customized. 
+# Website Design and Prompts
+
+> All the cool-looking websites are behind paywalls for people to access. I am trying to democratize this and create a collection of awesome website templates with detailed prompts on how they are built, so they can be readily adapted to your use case and customized.
+
+[![Deploy to GitHub Pages](https://github.com/knarayanareddy/WebsitedesignandPrompts/actions/workflows/deploy.yml/badge.svg)](https://github.com/knarayanareddy/WebsitedesignandPrompts/actions/workflows/deploy.yml)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-black?style=flat&logo=github)](https://knarayanareddy.github.io/WebsitedesignandPrompts/)
+
+---
+
+## 🌐 Live Showcase
+
+Visit the deployed GitHub Pages site to experience the templates live in action:
+👉 **[https://knarayanareddy.github.io/WebsitedesignandPrompts/](https://knarayanareddy.github.io/WebsitedesignandPrompts/)**
+
+---
+
+## 📚 Templates Catalog
+
+| # | Template Name | Folder | Description | Tech Stack | Prompts & Docs | Live Preview |
+|---|---|---|---|---|---|---|
+| **01** | **Securify (Video-Embedded Scroll Story)** | [`videoembeddeddesign/`](./videoembeddeddesign/) | Full-screen 11-chapter cinematic storytelling landing page with synchronized video loops, fluid typography, and dark-mode minimalism. | React 19, Vite 8, Tailwind CSS v4, TypeScript | [Prompt Spec](./videoembeddeddesign/securify/ADAPTED_PROMPT.md) · [Build Log](./videoembeddeddesign/securify/BUILD_LOG.md) · [Video Picks](./videoembeddeddesign/video_picks.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/) |
+
+*More curated designs and prompt kits coming soon!*
+
+---
+
+## 💡 How to Use These Templates
+
+Each template folder in this repository is completely self-contained and includes:
+1. **Ready-to-Run Codebase:** Production-quality React/Vite/Tailwind code ready to clone and run locally.
+2. **AI Adaptation Prompts (`ADAPTED_PROMPT.md`):** Complete, battle-tested prompt specifications that you can feed into coding assistants (such as Antigravity, Claude, ChatGPT, or Cursor) to reproduce or customize the design for your own brand.
+3. **Build & Architecture Logs (`BUILD_LOG.md`):** Architectural explanations, performance notes, lazy-loading strategies, and deployment guides.
+4. **Curated Media Assets:** Documentation and verified links for commercial-free stock assets, photography, and video b-roll.
+
+---
+
+## 🛠 Local Development
+
+To run any template locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/knarayanareddy/WebsitedesignandPrompts.git
+cd WebsitedesignandPrompts
+
+# Enter the template's project folder (e.g. videoembeddeddesign)
+cd videoembeddeddesign/securify
+
+# Install dependencies and start the dev server
+npm install
+npm run dev
+```
+
+Open `http://localhost:5173` to explore the design locally.
+
+---
+
+## 📄 License & Attribution
+
+- Code templates and prompts are provided under the MIT License.
+- Stock videos and imagery are sourced from [Pexels](https://www.pexels.com/license/) (free for commercial use, no attribution required).
