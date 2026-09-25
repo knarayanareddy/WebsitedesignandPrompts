@@ -1,0 +1,9 @@
+{
+  "categories": {
+    "correctness": "error"
+  },
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": ["dist/**", "node_modules/**"]
+}
