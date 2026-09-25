@@ -14,6 +14,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 - **Aethera® (White-to-Night Haven):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/)
 - **Measured (Multi-Surface Wearable):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/)
 - **Ethan Vale (3D Spatial Sphere Archive):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/)
+- **SynapseX (Neural-AI Interface):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/)
 
 ---
 
@@ -25,6 +26,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | **02** | **Aethera® (White-to-Night Scroll Story)** | [`aetherascrollstory/`](./aetherascrollstory/) | Full-screen 8-chapter digital studio haven featuring self-hosted 1080p video loops, custom rAF fade loops, and white-to-night-to-white aesthetic. | React 18, Vite 6, Tailwind CSS v3, TypeScript | [Prompt Spec](./aetherascrollstory/ADAPTED_PROMPT.md) · [Build Log](./aetherascrollstory/BUILD_LOG.md) · [Video Picks](./aetherascrollstory/VIDEO_PICKS.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/) |
 | **03** | **Measured (Interactive Multi-Surface Wearable)** | [`measured/`](./measured/) | Luxury health wearable landing page across 5 interactive surfaces featuring hardware-accelerated spotlight mask reveals, live PPG optics simulation, and material customizer. | React 19, Vite 7, Tailwind CSS v4, TypeScript | [Prompt Spec](./measured/ADAPTED_PROMPT.md) · [Build Log](./measured/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/) |
 | **04** | **Ethan Vale (3D Spatial Sphere Archive)** | [`ethan-vale-archive/`](./ethan-vale-archive/) | Fine-art wildlife photography archive mathematically projected on an interactive 3D Fibonacci sphere with drag momentum, depth shading, and FLIP modal. | Vanilla HTML5, CSS3 3D, Vanilla ES6+ | [Prompt Spec](./ethan-vale-archive/ADAPTED_PROMPT.md) · [Build Log](./ethan-vale-archive/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/) |
+| **05** | **SynapseX (Neural-AI Interface)** | [`synapsex/`](./synapsex/) | Futuristic cyberpunk neural-AI landing page featuring 3D cursor parallax, dynamic multi-stage scroll camera tilt, rolling telemetry counters, and magnetic hardware layer stacks. | React 18, Vite 5, Tailwind CSS v3, Framer Motion v12, TypeScript | [Prompt Spec](./synapsex/ADAPTED_PROMPT.md) · [Build Log](./synapsex/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -64,6 +66,10 @@ npm install && npm run dev
 # 4. To run Ethan Vale (0 dependencies):
 cd ../ethan-vale-archive
 npx serve . # or python3 -m http.server 8080
+
+# 5. To run SynapseX:
+cd ../synapsex
+npm install && npm run dev
 ```
 
 Open `http://localhost:5173` to explore the design locally.

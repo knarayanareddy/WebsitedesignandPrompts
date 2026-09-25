@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    background-color: #000;
+  }
+
+  body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'Space Mono', monospace;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: #ffffff;
+    color: #000000;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Lenis smooth scroll
+   -------------------------------------------------------------------------- */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Hero "TRANSCENDENCE" watermark
+   -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   Cyberpunk interaction keyframes
+   -------------------------------------------------------------------------- */
+
+/* Sweeping laser scanline across active Architecture cards */
+@keyframes scanline {
+  0% {
+    top: 0%;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+/* Glitch flicker for metric column scanlines on hover */
+@keyframes flicker {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 0.75;
+  }
+  40% {
+    opacity: 0.15;
+  }
+  60% {
+    opacity: 0.85;
+  }
+  80% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
+}
+
+.glitch-scanlines {
+  background-image: repeating-linear-gradient(
+    to right,
+    transparent 0 3px,
+    rgba(255, 255, 255, 0.05) 3px 4px
+  );
+  opacity: 0.4;
+}
+
+.column-flicker:hover .glitch-scanlines {
+  animation: flicker 0.45s steps(2, end) infinite;
+}
+
+/* Lucide icon micro-interaction: pulse + 360deg spin on card hover */
+@keyframes icon-pulse-spin {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.15) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.feature-card:hover .feature-icon {
+  animation: icon-pulse-spin 0.6s ease-in-out;
+}
+
+/* --------------------------------------------------------------------------
+   Hero "TRANSCENDENCE" watermark
+   -------------------------------------------------------------------------- */
+.watermark {
+  font-family: 'Anton SC', 'Space Mono', sans-serif;
+  font-size: clamp(120px, 30vw, 520px);
+  line-height: 1;
+  letter-spacing: -4px;
+  opacity: 0.1;
+  background: radial-gradient(circle, rgba(142, 127, 148, 0) 0%, #8e7f94 70%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  white-space: nowrap;
+  user-select: none;
+  pointer-events: none;
+}
