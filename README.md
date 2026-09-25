@@ -10,7 +10,8 @@
 ## 🌐 Live Showcase
 
 Visit the deployed GitHub Pages site to experience the templates live in action:
-👉 **[https://knarayanareddy.github.io/WebsitedesignandPrompts/](https://knarayanareddy.github.io/WebsitedesignandPrompts/)**
+- **Securify (Dark Cinematic Story):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/](https://knarayanareddy.github.io/WebsitedesignandPrompts/)
+- **Aethera® (White-to-Night Haven):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/)
 
 ---
 
@@ -19,6 +20,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | # | Template Name | Folder | Description | Tech Stack | Prompts & Docs | Live Preview |
 |---|---|---|---|---|---|---|
 | **01** | **Securify (Video-Embedded Scroll Story)** | [`videoembeddeddesign/`](./videoembeddeddesign/) | Full-screen 11-chapter cinematic storytelling landing page with synchronized video loops, fluid typography, and dark-mode minimalism. | React 19, Vite 8, Tailwind CSS v4, TypeScript | [Prompt Spec](./videoembeddeddesign/securify/ADAPTED_PROMPT.md) · [Build Log](./videoembeddeddesign/securify/BUILD_LOG.md) · [Video Picks](./videoembeddeddesign/video_picks.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/) |
+| **02** | **Aethera® (White-to-Night Scroll Story)** | [`aetherascrollstory/`](./aetherascrollstory/) | Full-screen 8-chapter digital studio haven featuring self-hosted 1080p video loops, custom rAF fade loops, and white-to-night-to-white aesthetic. | React 18, Vite 6, Tailwind CSS v3, TypeScript | [Prompt Spec](./aetherascrollstory/ADAPTED_PROMPT.md) · [Build Log](./aetherascrollstory/BUILD_LOG.md) · [Video Picks](./aetherascrollstory/VIDEO_PICKS.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -43,12 +45,13 @@ To run any template locally:
 git clone https://github.com/knarayanareddy/WebsitedesignandPrompts.git
 cd WebsitedesignandPrompts
 
-# Enter the template's project folder (e.g. videoembeddeddesign)
+# 1. To run Securify:
 cd videoembeddeddesign/securify
+npm install && npm run dev
 
-# Install dependencies and start the dev server
-npm install
-npm run dev
+# 2. To run Aethera:
+cd ../../aetherascrollstory
+npm install && npm run dev
 ```
 
 Open `http://localhost:5173` to explore the design locally.

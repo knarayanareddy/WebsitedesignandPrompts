@@ -1,0 +1,84 @@
+/* ---------------------------------------------------------------------------
+   Aethera theme — scroll-story landing
+   Reveal animations are gated by `.is-active` on the chapter <section>:
+   content sits at opacity 0 until the chapter scrolls into view, then rises.
+--------------------------------------------------------------------------- */
+
+/* fade-rise: opacity 0 -> 1, translateY(20px) -> 0, 0.8s ease-out */
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-rise,
+.animate-fade-rise-delay,
+.animate-fade-rise-delay-2 {
+  opacity: 0;
+}
+
+.is-active .animate-fade-rise {
+  animation: fade-rise 0.8s ease-out both;
+}
+.is-active .animate-fade-rise-delay {
+  animation: fade-rise 0.8s ease-out 0.2s both;
+}
+.is-active .animate-fade-rise-delay-2 {
+  animation: fade-rise 0.8s ease-out 0.4s both;
+}
+
+/* Scroll cue: 1px x 32px line, bounces down/up, opacity pulses */
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateY(8px);
+    opacity: 0.35;
+  }
+}
+
+.scroll-cue-line {
+  width: 1px;
+  height: 32px;
+  animation: scroll-cue 2s ease-in-out infinite;
+}
+
+/* Hero display type, per spec */
+.hero-title {
+  line-height: 0.95;
+  letter-spacing: -2.46px;
+}
+
+/* Gentle drift on the brand mark */
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-fade-rise,
+  .animate-fade-rise-delay,
+  .animate-fade-rise-delay-2 {
+    opacity: 1;
+    animation: none !important;
+  }
+  .scroll-cue-line {
+    animation: none;
+  }
+}
