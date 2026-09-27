@@ -34,6 +34,21 @@ function VideoFallback() {
   );
 }
 
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
+
+function usePrefersReducedMotion(): boolean {
+  const [reduced, setReduced] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(REDUCED_MOTION_QUERY).matches,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+  return reduced;
+}
+
 export const RevealVideo = memo(function RevealVideo({
   src,
   active,
@@ -44,15 +59,18 @@ export const RevealVideo = memo(function RevealVideo({
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [failed, setFailed] = useState(false);
   const [playing, setPlaying] = useState(false);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || failed || !src) return;
+    if (!v || failed || !src || reduced) return;
     if (active) v.play().catch(() => {});
     else v.pause();
-  }, [active, failed, src]);
+  }, [active, failed, src, reduced]);
 
-  if (!src || failed) return <VideoFallback />;
+  // No source, a load failure, or a reduced-motion preference: the (CSS-paused)
+  // fallback artwork is shown instead of a looping clip.
+  if (!src || failed || reduced) return <VideoFallback />;
 
   return (
     <div className="absolute inset-0">

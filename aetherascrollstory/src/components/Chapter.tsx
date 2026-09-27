@@ -23,7 +23,7 @@ export default function Chapter({ chapter, active }: Props) {
   return (
     <section
       id={chapter.id}
-      className={`relative h-screen w-full overflow-hidden ${light ? 'bg-white' : 'bg-black'} ${
+      className={`relative h-svh w-full overflow-hidden ${light ? 'bg-white' : 'bg-black'} ${
         active ? 'is-active' : ''
       }`}
     >

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { gsap, ScrollTrigger } from './lib/gsap';
 import Lenis from 'lenis';
+import { usePrefersReducedMotion } from './lib/motion';
 import LoadingScreen from './components/LoadingScreen';
 import Hero from './components/Hero';
 import Works from './components/Works';
@@ -12,9 +13,14 @@ import Footer from './components/Footer';
 export default function App(): JSX.Element {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const lenisRef = useRef<Lenis | null>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
-  /* ---- Lenis smooth scroll, synced with GSAP ScrollTrigger ---- */
+  /* ---- Lenis smooth scroll, synced with GSAP ScrollTrigger ----
+     Skipped entirely under prefers-reduced-motion: the page then uses native
+     scrolling and ScrollTrigger listens to the window directly. */
   useEffect(() => {
+    if (reducedMotion) return;
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t: number): number => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -32,17 +38,22 @@ export default function App(): JSX.Element {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    // Recalculate pinned sections once webfonts settle.
-    if (document.fonts) {
-      document.fonts.ready.then(() => {
-        ScrollTrigger.refresh();
-      });
-    }
-
     return () => {
       gsap.ticker.remove(raf);
       lenis.destroy();
       lenisRef.current = null;
+    };
+  }, [reducedMotion]);
+
+  /* ---- Recalculate pinned sections once webfonts settle ---- */
+  useEffect(() => {
+    if (!document.fonts) return;
+    let cancelled = false;
+    document.fonts.ready.then(() => {
+      if (!cancelled) ScrollTrigger.refresh();
+    });
+    return () => {
+      cancelled = true;
     };
   }, []);
 
@@ -64,17 +75,22 @@ export default function App(): JSX.Element {
     setIsLoading(false);
   }, []);
 
-  const handleNavigate = useCallback((target: string): void => {
-    const lenis = lenisRef.current;
-    if (lenis) {
-      lenis.scrollTo(target, { duration: 1.4 });
-    } else {
-      document.querySelector<HTMLElement>(target)?.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, []);
+  const handleNavigate = useCallback(
+    (target: string): void => {
+      const lenis = lenisRef.current;
+      if (lenis && !reducedMotion) {
+        lenis.scrollTo(target, { duration: 1.4 });
+      } else {
+        document
+          .querySelector<HTMLElement>(target)
+          ?.scrollIntoView({ behavior: reducedMotion ? 'auto' : 'smooth', block: 'start' });
+      }
+    },
+    [reducedMotion],
+  );
 
   return (
-    <div className="min-h-screen bg-bg font-body text-text-primary">
+    <div className="min-h-svh bg-bg font-body text-text-primary">
       {isLoading && <LoadingScreen onComplete={handleLoadingComplete} />}
       <main>
         <Hero ready={!isLoading} onNavigate={handleNavigate} />

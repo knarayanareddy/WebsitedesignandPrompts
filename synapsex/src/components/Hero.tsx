@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import BackgroundVideo from './BackgroundVideo';
 import ScrambleIn from './ScrambleIn';
+import { usePrefersReducedMotion } from '../lib/motion';
 
 const HERO_VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_083515_290e5a10-0b95-41af-a5e2-32b6389baa4d.mp4';
@@ -12,6 +14,7 @@ export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const inView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const reducedMotion = usePrefersReducedMotion();
 
   // Cursor coordinates normalized from -1 to 1.
   const rawX = useMotionValue(0);
@@ -35,14 +38,32 @@ export default function Hero() {
   const rate = useRef(1);
 
   useEffect(() => {
-    const video = videoRef.current;
-    if (video) {
-      video.muted = true;
-      video.playbackRate = 1;
-      video.play().catch(() => {
-        /* autoplay can be blocked until first gesture */
-      });
-    }
+    // Reduced motion: no cursor parallax, no time-warp, video stays paused
+    // (BackgroundVideo handles the pause itself).
+    if (reducedMotion) return;
+
+    // Smoothly ease playback toward the target; decay to 1.0x when idle.
+    // The loop only runs while the rate is actually away from 1.0x — it is
+    // (re)started by pointer movement and stops itself once settled, instead
+    // of writing playbackRate on every frame for the life of the page.
+    let raf = 0;
+    const loop = () => {
+      targetRate.current += (1 - targetRate.current) * 0.03;
+      rate.current += (targetRate.current - rate.current) * 0.06;
+      const settled = Math.abs(targetRate.current - 1) < 0.002 && Math.abs(rate.current - 1) < 0.002;
+      if (settled) {
+        targetRate.current = 1;
+        rate.current = 1;
+      }
+      const videoNow = videoRef.current;
+      if (videoNow) {
+        videoNow.playbackRate = Math.min(1.6, Math.max(1, rate.current));
+      }
+      raf = settled ? 0 : requestAnimationFrame(loop);
+    };
+    const ensureLoop = () => {
+      if (raf === 0) raf = requestAnimationFrame(loop);
+    };
 
     const onPointerMove = (e: PointerEvent) => {
       // Normalized cursor coordinates for the tilt/parallax system.
@@ -57,44 +78,28 @@ export default function Hero() {
         const speed = Math.hypot(e.clientX - prev.x, e.clientY - prev.y) / dt;
         const boost = Math.min(0.6, speed * 0.18);
         targetRate.current = Math.min(1.6, Math.max(targetRate.current, 1 + boost));
+        if (boost > 0.002) ensureLoop();
       }
       lastPointer.current = { x: e.clientX, y: e.clientY, t: now };
     };
-    window.addEventListener('pointermove', onPointerMove);
-
-    // Smoothly ease playback toward the target; decay to 1.0x when idle.
-    let raf = 0;
-    const loop = () => {
-      targetRate.current += (1 - targetRate.current) * 0.03;
-      rate.current += (targetRate.current - rate.current) * 0.06;
-      const videoNow = videoRef.current;
-      if (videoNow) {
-        videoNow.playbackRate = Math.min(1.6, Math.max(1, rate.current));
-      }
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop);
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
 
     return () => {
       window.removeEventListener('pointermove', onPointerMove);
-      cancelAnimationFrame(raf);
+      if (raf !== 0) cancelAnimationFrame(raf);
+      const videoNow = videoRef.current;
+      if (videoNow) videoNow.playbackRate = 1;
     };
-  }, [rawX, rawY]);
+  }, [rawX, rawY, reducedMotion]);
 
   return (
     <section ref={sectionRef} id="hero" className="relative h-[100dvh] overflow-hidden bg-black">
-      {/* Video #1 - hero: always alive (autoplay, loop, smooth 60fps) */}
-      <video
+      {/* Video #1 - hero: plays while on screen; paused under reduced motion */}
+      <BackgroundVideo
         ref={videoRef}
         src={HERO_VIDEO}
+        eager
         className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-        aria-hidden="true"
-        tabIndex={-1}
       />
 
       {/* Legibility scrims */}

@@ -28,13 +28,19 @@ type Chapter = {
   cta?: boolean
 }
 
-const REF_VIDEO =
+/**
+ * Hero clip. This is the original reference asset and is served from a
+ * third-party CDN that this repository does not control — see ASSETS.md.
+ * To self-host, drop your clip in `public/` and point this at `./hero.mp4`.
+ * If the URL ever stops resolving, the chapter falls back to its poster.
+ */
+const HERO_VIDEO =
   'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_063509_7d167302-4fd4-480b-8260-18ab572333d4.mp4'
 
 const CHAPTERS: Chapter[] = [
   {
     id: 'hero',
-    video: REF_VIDEO,
+    video: HERO_VIDEO,
     poster: 'poster-hero.jpg',
     shade: '',
     wordSize: 'text-[14vw] md:text-[13vw]',
@@ -308,12 +314,20 @@ function useInView<T extends HTMLElement>(threshold = 0.35) {
   return { ref, inView }
 }
 
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
 function usePrefersReducedMotion() {
-  const [reduced] = useState(
-    () =>
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  const [reduced, setReduced] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(REDUCED_MOTION_QUERY).matches,
   )
+
+  useEffect(() => {
+    const mq = window.matchMedia(REDUCED_MOTION_QUERY)
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   return reduced
 }
 
@@ -329,41 +343,148 @@ function Logo() {
   )
 }
 
+const NAV_LINKS = [
+  { label: 'platform', href: '#watch' },
+  { label: 'solutions', href: '#scale' },
+  { label: 'company', href: '#proof' },
+  { label: 'support', href: '#calm' },
+]
+
 function Navbar() {
+  const [open, setOpen] = useState(false)
+  const openBtnRef = useRef<HTMLButtonElement | null>(null)
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null)
+
+  // Escape closes, scroll is locked, focus moves into the drawer and back out.
+  useEffect(() => {
+    if (!open) return
+    const opener = openBtnRef.current // captured now; the ref may change before cleanup
+    const prevOverflow = document.documentElement.style.overflow
+    document.documentElement.style.overflow = 'hidden'
+    closeBtnRef.current?.focus()
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.documentElement.style.overflow = prevOverflow
+      opener?.focus()
+    }
+  }, [open])
+
+  // Close automatically if the viewport grows past the mobile breakpoint.
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 768px)')
+    const onChange = (e: MediaQueryListEvent) => {
+      if (e.matches) setOpen(false)
+    }
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-10 pt-6">
-      <nav className="flex items-center justify-between gap-4">
-        <a
-          href="#hero"
-          className="flex items-center gap-2 bg-neutral-900/90 backdrop-blur rounded-full pl-4 pr-6 py-3"
-        >
-          <Logo />
-          <span className="text-white text-sm font-normal tracking-tight">securify</span>
-        </a>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-40 px-6 md:px-10 pt-6">
+        <nav aria-label="Primary" className="flex items-center justify-between gap-4">
+          <a
+            href="#hero"
+            className="flex items-center gap-2 bg-neutral-900/90 backdrop-blur rounded-full pl-4 pr-6 py-3"
+          >
+            <Logo />
+            <span className="text-white text-sm font-normal tracking-tight">securify</span>
+          </a>
 
-        <div className="hidden md:flex items-center gap-1 bg-neutral-900/90 backdrop-blur rounded-full px-3 py-2">
-          <a href="#watch" className="text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full">
-            platform
-          </a>
-          <a href="#scale" className="text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full">
-            solutions
-          </a>
-          <a href="#proof" className="text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full">
-            company
-          </a>
-          <a href="#calm" className="text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full">
-            support
-          </a>
+          <div className="hidden md:flex items-center gap-1 bg-neutral-900/90 backdrop-blur rounded-full px-3 py-2">
+            {NAV_LINKS.map((l) => (
+              <a
+                key={l.href}
+                href={l.href}
+                className="text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full"
+              >
+                {l.label}
+              </a>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <a
+              href="#calm"
+              className="bg-white text-black text-sm font-normal rounded-full px-6 py-3 hover:bg-neutral-200 transition-colors"
+            >
+              get started
+            </a>
+            <button
+              ref={openBtnRef}
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+              className="md:hidden flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900/90 backdrop-blur"
+            >
+              <span aria-hidden="true" className="relative block h-3 w-5">
+                <span className="absolute left-0 top-0 h-px w-full bg-white" />
+                <span className="absolute bottom-0 left-0 h-px w-full bg-white" />
+              </span>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {open && (
+        <div
+          id="mobile-menu"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Menu"
+          className="fixed inset-0 z-50 flex flex-col bg-black md:hidden"
+        >
+          <div className="flex items-center justify-between px-6 pt-6">
+            <a href="#hero" onClick={() => setOpen(false)} className="flex items-center gap-2 pl-1">
+              <Logo />
+              <span className="text-white text-sm tracking-tight">securify</span>
+            </a>
+            <button
+              ref={closeBtnRef}
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900/90"
+            >
+              <span aria-hidden="true" className="relative block h-3.5 w-3.5">
+                <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 rotate-45 bg-white" />
+                <span className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 -rotate-45 bg-white" />
+              </span>
+            </button>
+          </div>
+
+          <nav aria-label="Mobile" className="flex flex-1 flex-col justify-center gap-2 px-8">
+            {NAV_LINKS.map((l, i) => (
+              <a
+                key={l.href}
+                href={l.href}
+                onClick={() => setOpen(false)}
+                className="hero-title py-2 text-5xl font-medium text-white/90 hover:text-white"
+              >
+                <span className="mr-4 align-middle text-xs tracking-[0.3em] text-white/40">0{i + 1}</span>
+                {l.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="px-8 pb-10">
+            <a
+              href="#calm"
+              onClick={() => setOpen(false)}
+              className="block w-full rounded-full bg-white px-6 py-4 text-center text-sm text-black"
+            >
+              get started
+            </a>
+          </div>
         </div>
-
-        <a
-          href="#calm"
-          className="bg-white text-black text-sm font-normal rounded-full px-6 py-3 hover:bg-neutral-200 transition-colors"
-        >
-          get started
-        </a>
-      </nav>
-    </header>
+      )}
+    </>
   )
 }
 
@@ -450,37 +571,55 @@ function Scene({
 }: {
   ch: Chapter
   index: number
-  onActive: (i: number, v: boolean) => void
+  onActive: (i: number) => void
 }) {
   const { ref, inView } = useInView<HTMLElement>(0.35)
   const videoRef = useRef<HTMLVideoElement | null>(null)
+  const [videoFailed, setVideoFailed] = useState(false)
   const reduced = usePrefersReducedMotion()
   const HeadingTag = index === 0 ? 'h1' : 'h2'
 
   useEffect(() => {
-    if (inView) onActive(index, true)
+    if (inView) onActive(index)
   }, [inView, index, onActive])
 
   useEffect(() => {
     const v = videoRef.current
-    if (!v || reduced) return
+    if (!v || videoFailed) return
+    if (reduced) {
+      v.pause()
+      return
+    }
     if (inView) v.play().catch(() => {})
     else v.pause()
-  }, [inView, reduced])
+  }, [inView, reduced, videoFailed])
 
   return (
-    <section ref={ref} id={ch.id} className="relative h-screen w-full overflow-hidden bg-black">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 w-full h-full object-cover"
-        src={ch.video}
-        poster={ch.poster}
-        autoPlay={index === 0}
-        loop
-        muted
-        playsInline
-        preload={index === 0 ? 'auto' : 'metadata'}
-      />
+    <section ref={ref} id={ch.id} className="relative h-svh w-full overflow-hidden bg-black">
+      {videoFailed ? (
+        // The clip could not be fetched (hotlinked assets can disappear) — keep the poster.
+        <img
+          src={ch.poster}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={ch.video}
+          poster={ch.poster}
+          // Under prefers-reduced-motion nothing autoplays; the poster stays.
+          autoPlay={index === 0 && !reduced}
+          loop
+          muted
+          playsInline
+          preload={index === 0 ? 'auto' : 'metadata'}
+          aria-hidden="true"
+          onError={() => setVideoFailed(true)}
+        />
+      )}
 
       {/* readability overlays — monochrome only */}
       {ch.shade && <div className={`absolute inset-0 pointer-events-none ${ch.shade}`} />}

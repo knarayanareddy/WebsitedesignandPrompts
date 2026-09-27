@@ -1,0 +1,125 @@
+name: Deploy to GitHub Pages
+
+# Builds all six templates on every push and pull request (so the build is
+# always verified), and publishes the assembled site to the `gh-pages` branch
+# on pushes to `main`. GitHub Pages is already configured to serve that branch,
+# so no repository settings need to change.
+#
+# Published layout (mirrors the links in README.md):
+#   /                    -> videoembeddeddesign/securify
+#   /aetherascrollstory/ -> aetherascrollstory
+#   /measured/           -> measured
+#   /ethanvale/          -> ethan-vale-archive (static, no build step)
+#   /synapsex/           -> synapsex
+#   /portfolio/          -> portfolio
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build all templates
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            videoembeddeddesign/securify/package-lock.json
+            aetherascrollstory/package-lock.json
+            measured/package-lock.json
+            synapsex/package-lock.json
+            portfolio/package-lock.json
+
+      - name: Build Securify (01)
+        working-directory: videoembeddeddesign/securify
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Build Aethera (02)
+        working-directory: aetherascrollstory
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Build Measured (03)
+        working-directory: measured
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Build SynapseX (05)
+        working-directory: synapsex
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Build Portfolio (06)
+        working-directory: portfolio
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build
+
+      - name: Assemble Pages tree
+        run: |
+          set -euo pipefail
+          rm -rf _site
+          mkdir -p _site/aetherascrollstory _site/measured _site/ethanvale _site/synapsex _site/portfolio
+          cp -R videoembeddeddesign/securify/dist/. _site/
+          cp -R aetherascrollstory/dist/.           _site/aetherascrollstory/
+          cp -R measured/dist/.                     _site/measured/
+          cp -R synapsex/dist/.                     _site/synapsex/
+          cp -R portfolio/dist/.                    _site/portfolio/
+          # Ethan Vale (04) is a dependency-free static page: ship the runtime files only.
+          cp ethan-vale-archive/index.html ethan-vale-archive/favicon.svg _site/ethanvale/
+          touch _site/.nojekyll
+          echo "Published tree:" && find _site -maxdepth 2 -type d | sort
+
+      - name: Upload site artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: _site
+          retention-days: 7
+          if-no-files-found: error
+
+  deploy:
+    name: Publish gh-pages
+    # Only real pushes to main publish; pull requests just verify the build.
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Download site artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: _site
+
+      - name: Push to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          # A fresh orphan commit every deploy keeps the branch free of stale
+          # files from earlier manual deploys (e.g. duplicated template folders).
+          force_orphan: true
+          commit_message: "deploy: ${{ github.sha }}"

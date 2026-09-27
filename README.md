@@ -4,6 +4,7 @@
 
 [![Deploy to GitHub Pages](https://github.com/knarayanareddy/WebsitedesignandPrompts/actions/workflows/deploy.yml/badge.svg)](https://github.com/knarayanareddy/WebsitedesignandPrompts/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/Live_Demo-GitHub_Pages-black?style=flat&logo=github)](https://knarayanareddy.github.io/WebsitedesignandPrompts/)
+[![License: MIT](https://img.shields.io/badge/Code-MIT-green.svg)](./LICENSE)
 
 ---
 
@@ -40,7 +41,9 @@ Each template folder in this repository is completely self-contained and include
 1. **Ready-to-Run Codebase:** Production-quality React/Vite/Tailwind code ready to clone and run locally.
 2. **AI Adaptation Prompts (`ADAPTED_PROMPT.md`):** Complete, battle-tested prompt specifications that you can feed into coding assistants (such as Antigravity, Claude, ChatGPT, or Cursor) to reproduce or customize the design for your own brand.
 3. **Build & Architecture Logs (`BUILD_LOG.md`):** Architectural explanations, performance notes, lazy-loading strategies, and deployment guides.
-4. **Curated Media Assets:** Documentation and verified links for commercial-free stock assets, photography, and video b-roll.
+4. **Curated Media Assets:** Documentation and verified links for stock assets, photography, and video b-roll — with provenance and licence per asset in [`ASSETS.md`](./ASSETS.md).
+
+Every template honours `prefers-reduced-motion`, ships a working mobile navigation, degrades to a poster/placeholder when a hot-linked asset is unavailable, and is keyboard-operable. The review that drove those changes is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md).
 
 ---
 
@@ -80,9 +83,26 @@ npm install && npm run dev
 
 Open `http://localhost:5173` to explore the design locally.
 
+Production builds: `npm run build` in any Vite template writes `dist/` (all use `base: './'`, so the output works from any sub-path). CI builds on **Node 22**; use Node ≥ 22.12 (or 20.19+) locally — Securify (Vite 8) and Measured (Vite 7) require it, the Vite 5/6 templates also accept Node 18/20.
+
+---
+
+## 🚀 Deployment (GitHub Pages)
+
+The live site is published by [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml):
+
+- **`build` job** (every push to `main`, every pull request, manual dispatch): `npm ci && npm run build` for the five Vite templates, then assembles a single `_site/` tree — Securify at the root, `/aetherascrollstory/`, `/measured/`, `/synapsex/`, `/portfolio/` from their `dist/` folders, and `/ethanvale/` from `ethan-vale-archive/index.html` + favicon — plus a `.nojekyll` marker. The tree is uploaded as a workflow artifact, so a PR shows whether everything still builds.
+- **`deploy` job** (push to `main` only): publishes `_site/` to the `gh-pages` branch with `peaceiris/actions-gh-pages` (`force_orphan`, so the branch only ever contains the current build). GitHub Pages must be set to serve from `gh-pages` / root.
+
+No template needs a per-app deploy step; `dist/` folders and `_site/` are git-ignored.
+
 ---
 
 ## 📄 License & Attribution
 
-- Code templates and prompts are provided under the MIT License.
-- Stock videos and imagery are sourced from [Pexels](https://www.pexels.com/license/) (free for commercial use, no attribution required).
+- **Code, prompts and documentation** are released under the [MIT License](./LICENSE).
+- **Media is licensed separately** and mostly hot-linked from third parties. [`ASSETS.md`](./ASSETS.md) lists, per template, every video/image source, its licence, whether it is committed in this repo and what fallback renders if it is unavailable:
+  - Pexels clips (Securify chapters, Aethera loops) — [Pexels License](https://www.pexels.com/license/), free for commercial use.
+  - Unsplash photos (Portfolio) — [Unsplash License](https://unsplash.com/license).
+  - AI-generated reference clips/stills on a third-party CloudFront bucket (`hf_…` files: Securify/Aethera/Measured heroes, all Ethan Vale stills, all SynapseX clips) and the Portfolio's Mux stream — **ownership undocumented; placeholders only. Replace them before publishing a template as your own site.**
+- Fonts are loaded from Google Fonts (SIL Open Font License).

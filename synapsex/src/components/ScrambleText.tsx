@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { prefersReducedMotion } from '../lib/motion';
 
 const GLYPHS =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><';
@@ -33,7 +34,7 @@ export default function ScrambleText({ text, className }: ScrambleTextProps) {
   );
 
   const scramble = () => {
-    if (running.current) return;
+    if (running.current || prefersReducedMotion()) return;
     running.current = true;
 
     const total = text.length;

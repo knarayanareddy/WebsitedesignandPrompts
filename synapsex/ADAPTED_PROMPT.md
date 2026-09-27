@@ -62,11 +62,13 @@ Quadrant path rotated at 0°, 90°, 180°, 270°:
 ## Page Architecture
 
 ### 1. Hero Section (`Hero.tsx`, h-[100dvh])
-- Video #1 autoplays in background at 60 FPS with 24×24px dot-matrix overlay.
+- Video #1 plays in the background (muted, loop, playsInline) with a 24×24px dot-matrix overlay. Render every background clip through one `BackgroundVideo` component: play only while on screen (IntersectionObserver), `preload="metadata"` except the hero, stay paused when `prefers-reduced-motion` is set, and replace the element with a dark gradient plate on `error`.
 - Cursor 3D Parallax: Normalizes mouse coordinates from -1 to 1, piped through Framer Motion springs (`stiffness: 150, damping: 20`).
 - Background watermark `"TRANSCENDENCE"` translates with depth (`x: mouseX * -30px, y: mouseY * -20px`).
 - Hero typography tilts in 3D: `perspective: 900px`, `rotateY: mouseX * 8deg, rotateX: mouseY * -8deg`.
-- Interactive Time-Warp: Rapid cursor velocity accelerates video playback up to `1.6x`, smoothly decaying back to `1.0x` when idle.
+- Interactive Time-Warp: Rapid cursor velocity accelerates video playback up to `1.6x`, smoothly decaying back to `1.0x` when idle. Run the easing loop only while the rate is away from 1.0x (start it on pointer movement, stop when settled) and skip it under reduced motion.
+- Reduced motion: skip Lenis (native scroll), wrap the app in `<MotionConfig reducedMotion="user">`, resolve scramble text and counters instantly, disable decorative CSS keyframe loops.
+- Fonts: load Google Fonts via `<link rel="preconnect">` + `<link rel="stylesheet">` in `index.html`, not a CSS `@import`.
 
 ### 2. Floating Spring Capsule Navbar (`Navbar.tsx`, fixed top-0 z-50 h-20)
 - Left Group:

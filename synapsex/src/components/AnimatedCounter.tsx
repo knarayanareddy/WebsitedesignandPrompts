@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { prefersReducedMotion } from '../lib/motion';
 import { motion } from 'framer-motion';
 
 function format(v: number, decimals: number, suffix: string, padInt?: number): string {
@@ -65,6 +66,12 @@ export default function AnimatedCounter({
   const start = () => {
     if (startedRef.current) return;
     startedRef.current = true;
+
+    // Reduced motion: no jitter or tween, render the final figure at once.
+    if (prefersReducedMotion()) {
+      setDisplay(format(value, decimals, suffix, padInt));
+      return;
+    }
 
     if (!jitter) {
       runCount();

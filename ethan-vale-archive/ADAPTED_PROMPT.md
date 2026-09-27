@@ -298,7 +298,11 @@ Ignore resize deltas under 20px in either axis (scrollbar and mobile URL bar). O
 Card chrome: figure fills the card, overflow hidden, border-radius 3px, background #0a0a0a. Hover scale 1.045 over .5s ease. img opacity 0 until class .in, then opacity 1. After body.revealed, img opacity transitions .8s ease-out. Do NOT fade cards in during the intro.
 Depth is a flat black wash, not a CSS filter: figure::after inset 0, background rgba(0,0,0,var(--d,0)), inset box-shadow 0 0 0 1px rgba(255,255,255,.07), border-radius 3px, pointer-events none.
 
-Image loading: the _min.webp files are ~2528px wide. Decode each once on a canvas, downscale to cardDecodeMax (420 / 520 / 640 / 760 px at <=380 / <=640 / <=900 / else), export webp quality 0.88, and use that blob URL on both the sphere card and the matching grid image. If natural width is already under the cap, or canvas/CORS fails, use the original thumb URL. Avatar is downscaled to max width 160. Splash progress counts 21 stills + the film. crossOrigin anonymous on the probe image.
+Image loading: derive every URL from one ASSET_BASE constant (thumbUrl(id) = ASSET_BASE + id + '_min.webp', fullUrl(id) = ASSET_BASE + id + '.png'). Preload each thumbnail with Image.decode() and only add the .in class once decoded. Do NOT re-encode through a canvas. Attach an error handler to every img: on failure add class .missing to the figure and set data-title so CSS can paint a titled placeholder (::before with content: attr(data-title)); a failed still must still count toward splash progress. Splash progress counts 21 stills + the film.
+
+Keyboard: sphere cards and grid figures get role="button", tabindex="0" and an aria-label (title — place); Enter and Space open the lightbox; draw a :focus-visible outline. When the lightbox opens move focus to the Close button, trap Tab inside it, and on close return focus to the element that opened it (or the sphere card if it came from a now-hidden grid tile).
+
+Render loop: cache the perspective value in computeLayout instead of calling getComputedStyle each frame, snap camZ to its target once within 0.01px, and skip all DOM writes on frames where rotation, camera, scroll progress, lightbox state, radius and perspective are unchanged.
 
 CAMERA LOOP (requestAnimationFrame, started during the splash, one synchronous frame first)
 State: spin 0, tilt -4 degrees, camZ 0, dragX/dragY 0, velX/velY 0, pitch limit 32 degrees, focused index -1.
@@ -425,7 +429,7 @@ One complete index.html. Black page, Playfair plus Inter, the CloudFront film UR
 
 ### 1. Adapting to Different Portfolios
 To re-skin this 3D sphere experience for other domains (e.g., architectural firm, automotive design, fashion lookbook, digital agency):
-1. **Asset Array (`SHOTS`)**: Replace the 21 CloudFront image records in the `SHOTS` array with your own imagery (remote CDN or local `./images/` directory).
+1. **Asset Array (`SHOTS`)**: Replace the 21 image records in the `SHOTS` array with your own imagery and point `ASSET_BASE` at wherever the `<id>_min.webp` / `<id>.png` pairs live (remote CDN or a local `./images/` directory).
 2. **Metadata Fields**: Modify `title`, `place`, and `note` to fit your content (e.g., `client`, `year`, `materials`, or `dimensions`).
 3. **Variable Sphere Density ($N$)**: If you have more or fewer than 21 items, simply update `const N = SHOTS.length`. The Fibonacci lattice algorithm automatically redistributes any arbitrary number $N$ evenly across the sphere without changing any mathematical constants.
 

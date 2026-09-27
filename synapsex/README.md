@@ -65,6 +65,7 @@ synapsex/
 │   ├── components/
 │   │   ├── AnimatedCounter.tsx  # Viewport counter with decimal jitter pre-roll
 │   │   ├── Architecture.tsx     # 3D magnetic cards & live SVG sine wave
+│   │   ├── BackgroundVideo.tsx  # Viewport-gated, reduced-motion-aware bg video w/ error fallback
 │   │   ├── CinematicText.tsx    # Multi-stage 3D camera scroll perspective
 │   │   ├── Footer.tsx           # Split video & mission statement
 │   │   ├── Hero.tsx             # 3D parallax hero & cursor time-warp
@@ -76,10 +77,11 @@ synapsex/
 │   │   ├── SynapseXLogo.tsx     # 4-fold rotational vector logo
 │   │   └── Technology.tsx       # Cursor-tracking radial spotlight cards
 │   ├── lib/
-│   │   └── scroll.ts            # Lenis smooth-scroll bridge
+│   │   ├── motion.ts            # prefers-reduced-motion helpers (sync + hook)
+│   │   └── scroll.ts            # Lenis smooth-scroll bridge (native fallback)
 │   ├── App.tsx                  # Root page layout
 │   ├── index.css                # Tailwind base, Lenis styles & keyframes
-│   └── main.tsx                 # App mount & Lenis initialization
+│   └── main.tsx                 # App mount, MotionConfig & Lenis initialization
 ├── ADAPTED_PROMPT.md            # Master AI prompt kit & adaptation guide
 ├── BUILD_LOG.md                 # In-depth physics formulas & engineering log
 ├── package.json

@@ -1,3 +1,4 @@
+import BackgroundVideo from './BackgroundVideo';
 import SynapseXLogo from './SynapseXLogo';
 
 const FOOTER_VIDEO =
@@ -8,17 +9,7 @@ export default function Footer() {
     <footer id="footer" className="relative grid min-h-[70dvh] grid-cols-1 bg-black md:grid-cols-2">
       {/* Left: video filling half width */}
       <div className="relative min-h-[45dvh] overflow-hidden md:min-h-full">
-        <video
-          src={FOOTER_VIDEO}
-          className="absolute inset-0 h-full w-full object-cover"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden="true"
-          tabIndex={-1}
-        />
+        <BackgroundVideo src={FOOTER_VIDEO} className="absolute inset-0 h-full w-full object-cover" />
       </div>
 
       {/* Right: logo, mission, copyright */}
