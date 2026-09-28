@@ -227,6 +227,18 @@
       gap: 0.5rem;
     }
 
+    .nojs-note {
+      grid-column: 1 / -1;
+      margin: 0 0 8px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
     .filter-btn {
       background: transparent;
       border: 1px solid transparent;
@@ -541,6 +553,13 @@
     <!-- Gallery Grid -->
     <div class="grid" id="templatesGrid">
 
+      <noscript>
+        <p class="nojs-note">
+          JavaScript is off, so the filter buttons and search box are inactive. All six
+          templates below are listed and linked regardless — each demo needs JavaScript too.
+        </p>
+      </noscript>
+
       <!-- 1. SynapseX (Neural-AI) -->
       <article class="card" data-category="interactive" data-title="synapsex neural-ai">
         <div class="card-banner">
@@ -579,7 +598,7 @@
         </div>
       </article>
 
-      <!-- 7. Ethan Vale 3D Sphere Archive -->
+      <!-- 2. Ethan Vale 3D Sphere Archive -->
       <article class="card" data-category="interactive" data-title="ethan vale 3d spatial archive">
         <div class="card-banner">
           <div class="card-banner-bg" style="background: linear-gradient(135deg, #0A0A0C 0%, #15161E 100%);">
@@ -617,7 +636,7 @@
         </div>
       </article>
 
-      <!-- 8. Editorial Dark Portfolio -->
+      <!-- 3. Editorial Dark Portfolio -->
       <article class="card" data-category="editorial" data-title="editorial dark portfolio michael smith">
         <div class="card-banner">
           <div class="card-banner-bg" style="background: linear-gradient(135deg, #0A0A0A 0%, #1F1F1F 100%);">
@@ -654,7 +673,7 @@
         </div>
       </article>
 
-      <!-- 9. Aethera Scroll-Story -->
+      <!-- 4. Aethera Scroll-Story -->
       <article class="card" data-category="cinematic" data-title="aethera white-to-night scroll story">
         <div class="card-banner">
           <div class="card-banner-bg" style="background: linear-gradient(135deg, #18181B 0%, #3F3F46 100%);">
@@ -697,7 +716,7 @@
         </div>
       </article>
 
-      <!-- 10. Measured Wearable -->
+      <!-- 5. Measured Wearable -->
       <article class="card" data-category="interactive" data-title="measured interactive wearable">
         <div class="card-banner">
           <div class="card-banner-bg" style="background: linear-gradient(135deg, #09090B 0%, #18181B 100%);">
@@ -735,7 +754,7 @@
         </div>
       </article>
 
-      <!-- 11. Securify (Video Embedded) -->
+      <!-- 6. Securify (Video Embedded) -->
       <article class="card" data-category="cinematic" data-title="securify video embedded storytelling">
         <div class="card-banner">
           <div class="card-banner-bg" style="background: linear-gradient(135deg, #030712 0%, #111827 100%);">
