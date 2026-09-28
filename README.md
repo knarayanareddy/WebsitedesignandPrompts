@@ -86,3 +86,25 @@ Open `http://localhost:5173` to explore the design locally.
 
 - Code templates and prompts are provided under the MIT License.
 - Stock videos and imagery are sourced from [Pexels](https://www.pexels.com/license/) (free for commercial use, no attribution required).
+
+<!-- repo-maintainer:curation:start -->
+### Daily curation — 2026-09-28
+
+Added automatically by `repo_maintainer.py --mode curate`.
+
+| # | Template | Folder | Description | Tech Stack | Prompts & Docs |
+|---|---|---|---|---|---|
+| **01** | **Adapted prompt — Aethera scroll-story landing page (8 videos, one coherent story)** | [`aetherascrollstory/`](./aetherascrollstory/) | A curated design template. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./aetherascrollstory/ADAPTED_PROMPT.md) · [Guide](./aetherascrollstory/README.md) |
+| **02** | **Brutalist Ledger** | [`brutalist-ledger/`](./brutalist-ledger/) | Raw concrete, hard rules, and one screaming accent colour. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./brutalist-ledger/ADAPTED_PROMPT.md) · [Guide](./brutalist-ledger/README.md) |
+| **03** | **Adapted AI Prompt: Ethan Vale 3D Spatial Photography Archive** | [`ethan-vale-archive/`](./ethan-vale-archive/) | A curated design template. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./ethan-vale-archive/ADAPTED_PROMPT.md) · [Guide](./ethan-vale-archive/README.md) |
+| **04** | **Gallery of Ordinary** | [`gallery-of-ordinary/`](./gallery-of-ordinary/) | A type-only index that lets the pictures argue for themselves. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./gallery-of-ordinary/ADAPTED_PROMPT.md) · [Guide](./gallery-of-ordinary/README.md) |
+| **05** | **Harbour Logistics** | [`harbour-logistics/`](./harbour-logistics/) | A supply-chain control room that a non-technical buyer can read. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./harbour-logistics/ADAPTED_PROMPT.md) · [Guide](./harbour-logistics/README.md) |
+| **06** | **Kinetic Type Lab** | [`kinetic-type-lab/`](./kinetic-type-lab/) | A specimen sheet that animates every glyph it introduces. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./kinetic-type-lab/ADAPTED_PROMPT.md) · [Guide](./kinetic-type-lab/README.md) |
+| **07** | **ADAPTED PROMPT — "Measured" Multi-Surface Scroll Experience** | [`measured/`](./measured/) | A curated design template. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./measured/ADAPTED_PROMPT.md) · [Guide](./measured/README.md) |
+| **08** | **Adapted AI Prompt: Editorial Dark Portfolio** | [`portfolio/`](./portfolio/) | A curated design template. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./portfolio/ADAPTED_PROMPT.md) · [Guide](./portfolio/README.md) |
+| **09** | **Quiet Museum** | [`quiet-museum/`](./quiet-museum/) | An object archive where the caption does all of the storytelling. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./quiet-museum/ADAPTED_PROMPT.md) · [Guide](./quiet-museum/README.md) |
+| **10** | **Adapted AI Prompt: SynapseX Neural-AI BCI Landing Page** | [`synapsex/`](./synapsex/) | A curated design template. | Vanilla HTML5, CSS3, ES6+ | [Prompt Spec](./synapsex/ADAPTED_PROMPT.md) · [Guide](./synapsex/README.md) |
+
+> Each template is standalone: open `index.html` and it runs. No build
+> step, no npm install, and no remote image placeholders.
+<!-- repo-maintainer:curation:end -->
