@@ -43,4 +43,4 @@ direct ancestor plus this pass, so the work is portable.
 | C7 | Securify compiles without `strict` | Add `"strict": true` to `tsconfig.app.json` and fix fallout | [ ] |
 | C8 | The 1440p Securify finale is streamed raw from Pexels | Trim/re-encode to 1080p and self-host (`BUILD_LOG.md` §5 recipe) | [ ] |
 | C9 | `videoembeddeddesign/video_search/` (2.1 MB of research scripts and frames) is committed | Move to the template docs or delete | [ ] |
-| C10 | Tooling drift across templates (Vite 5/6/7/8, Tailwind 3/4, TS 5.6/5.9/6.0) | Upgrade deliberately, one template at a time; CI builds all of them meanwhile | [ ] |
+| C10 | Tooling drift across templates (Vite 5/6/7/8, Tailwind 3/4, TS 5.6/5.9/6.0). `npm audit` on `synapsex` reports 2 advisories (moderate + high) through `esbuild <=0.24.2` / `vite <=6.4.2` — dev-server only, fixed by `npm audit fix --force` (a Vite 8 major bump) | Upgrade deliberately, one template at a time; CI builds all of them meanwhile | [ ] |

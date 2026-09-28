@@ -18,6 +18,13 @@
 | **Biggest content risk** | 5 of 6 templates hotlink third-party media from one CloudFront "user bucket" and Unsplash/Pexels/Mux — single point of failure, and the claimed MIT licence is not backed by a `LICENSE` file or asset provenance doc (both were deleted in the revert). |
 | **Biggest opportunity** | ~1,047 lines of real quality fixes (a11y, reduced-motion, video fallbacks, error handling) exist on an orphan branch (`arena/01a0e42a…`, commit `9061482`) and were never merged. `main` is byte-for-byte the *pre-fix* state plus a workflow + hub. |
 
+> **Status update (2026-09-28, same day):** the P0 and P1 findings in §7 are implemented in
+> [PR #2](https://github.com/knarayanareddy/WebsitedesignandPrompts/pull/2) — the pipeline now
+> builds and publishes `dist/`, verifies the assembled tree before deploy, and the missing
+> licence / provenance / gitignore files are restored. What remains is tracked in
+> [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md) (notably the unmerged §7 accessibility work).
+> The analysis below is kept as written, describing the state before those fixes.
+
 ---
 
 ## 2. Anatomy

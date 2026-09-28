@@ -1,6 +1,6 @@
 # Securify — 11-Chapter Cinematic Video-Embedded Scroll Story
 
-> **Live Demo:** [https://knarayanareddy.github.io/WebsitedesignandPrompts/](https://knarayanareddy.github.io/WebsitedesignandPrompts/)
+> **Live Demo:** [https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/](https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/)
 
 A full-screen, 11-chapter cinematic scroll-story landing page template built for modern SaaS products. Each chapter is an immersive full-height viewport with a looping background video, fluid typography, and micro-interactions that guide the user through a narrative emotional arc:
 
