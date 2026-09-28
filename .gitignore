@@ -1,0 +1,31 @@
+# dependencies / build output (every template)
+node_modules/
+dist/
+dist-ssr/
+_site/
+
+# tooling caches
+.vite/
+.cache/
+*.tsbuildinfo
+
+# env & local overrides
+*.local
+.env
+.env.*
+!.env.example
+
+# logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
