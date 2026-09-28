@@ -10,7 +10,7 @@
 ## 🌐 Live Showcase
 
 Visit the deployed GitHub Pages site to experience the templates live in action:
-- **Securify (Dark Video Story):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/](https://knarayanareddy.github.io/WebsitedesignandPrompts/)
+- **Securify (Dark Video Story):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/](https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/)
 - **Aethera® (White-to-Night Haven):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/)
 - **Measured (Multi-Surface Wearable):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/)
 - **Ethan Vale (3D Spatial Sphere Archive):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/)
@@ -23,7 +23,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 
 | # | Template Name | Folder | Description | Tech Stack | Prompts & Docs | Live Preview |
 |---|---|---|---|---|---|---|
-| **01** | **Securify (Video-Embedded Scroll Story)** | [`videoembeddeddesign/`](./videoembeddeddesign/) | Full-screen 11-chapter cinematic storytelling landing page with synchronized video loops, fluid typography, and dark-mode minimalism. | React 19, Vite 8, Tailwind CSS v4, TypeScript | [Prompt Spec](./videoembeddeddesign/securify/ADAPTED_PROMPT.md) · [Build Log](./videoembeddeddesign/securify/BUILD_LOG.md) · [Video Picks](./videoembeddeddesign/video_picks.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/) |
+| **01** | **Securify (Video-Embedded Scroll Story)** | [`videoembeddeddesign/`](./videoembeddeddesign/) | Full-screen 11-chapter cinematic storytelling landing page with synchronized video loops, fluid typography, and dark-mode minimalism. | React 19, Vite 8, Tailwind CSS v4, TypeScript | [Prompt Spec](./videoembeddeddesign/securify/ADAPTED_PROMPT.md) · [Build Log](./videoembeddeddesign/securify/BUILD_LOG.md) · [Video Picks](./videoembeddeddesign/video_picks.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/) |
 | **02** | **Aethera® (White-to-Night Scroll Story)** | [`aetherascrollstory/`](./aetherascrollstory/) | Full-screen 8-chapter digital studio haven featuring self-hosted 1080p video loops, custom rAF fade loops, and white-to-night-to-white aesthetic. | React 18, Vite 6, Tailwind CSS v3, TypeScript | [Prompt Spec](./aetherascrollstory/ADAPTED_PROMPT.md) · [Build Log](./aetherascrollstory/BUILD_LOG.md) · [Video Picks](./aetherascrollstory/VIDEO_PICKS.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/) |
 | **03** | **Measured (Interactive Multi-Surface Wearable)** | [`measured/`](./measured/) | Luxury health wearable landing page across 5 interactive surfaces featuring hardware-accelerated spotlight mask reveals, live PPG optics simulation, and material customizer. | React 19, Vite 7, Tailwind CSS v4, TypeScript | [Prompt Spec](./measured/ADAPTED_PROMPT.md) · [Build Log](./measured/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/) |
 | **04** | **Ethan Vale (3D Spatial Sphere Archive)** | [`ethan-vale-archive/`](./ethan-vale-archive/) | Fine-art wildlife photography archive mathematically projected on an interactive 3D Fibonacci sphere with drag momentum, depth shading, and FLIP modal. | Vanilla HTML5, CSS3 3D, Vanilla ES6+ | [Prompt Spec](./ethan-vale-archive/ADAPTED_PROMPT.md) · [Build Log](./ethan-vale-archive/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/) |
@@ -82,9 +82,47 @@ Open `http://localhost:5173` to explore the design locally.
 
 ---
 
+## 🚀 How the showcase is published
+
+The live site is built from `main` by [`.github/workflows/deploy.yml`](./.github/workflows/deploy.yml),
+which runs `scripts/build-site.sh`:
+
+1. **Builds every app** (`npm ci` + `npm run build`) and publishes its `dist/` output.
+   Only already-static templates are copied as-is.
+2. **Replaces each published directory** (`rsync --delete`) so stale bundles and source
+   files from earlier revisions cannot survive a deploy.
+3. **Verifies the result** with `scripts/verify-site.mjs`, which fails the build if a
+   published page still points at a dev entry point such as `/src/main.tsx`, or if any
+   asset reference does not resolve.
+4. **Pushes `gh-pages`** as a single fresh commit containing exactly that assembled tree.
+
+Because asset paths are relative (`base: './'`), each template also works from any subpath,
+including a fork's Pages URL. The folder → URL mapping is explicit:
+
+| Repository folder | Published at |
+|---|---|
+| `videoembeddeddesign/securify/` | `/videoembeddeddesign/` |
+| `aetherascrollstory/` | `/aetherascrollstory/` |
+| `measured/` | `/measured/` |
+| `ethan-vale-archive/` | `/ethanvale/` |
+| `synapsex/` | `/synapsex/` |
+| `portfolio/` | `/portfolio/` |
+
+To reproduce a deploy locally:
+
+```bash
+bash scripts/build-site.sh                     # builds + assembles + verifies _site/
+python3 -m http.server 8080 --directory _site  # then open http://localhost:8080
+node scripts/check-assets.mjs                  # HEAD-check the hot-linked media
+```
+
+Deployment and code-quality status is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHECKLIST.md).
+
+---
+
 ## 📄 License & Attribution
 
-- Code templates and prompts are provided under the MIT License.
-- Stock videos and imagery are sourced from [Pexels](https://www.pexels.com/license/) (free for commercial use, no attribution required).
+- Code templates and prompts are provided under the [MIT License](./LICENSE).
+- **Media is not covered by that licence.** Photography and video are hot-linked from Pexels (free for commercial use, no attribution required), Unsplash, and a set of undocumented AI-generated reference clips on a third-party CDN. Per-template provenance, licences, and replacement steps are in [`ASSETS.md`](./ASSETS.md) — read it before publishing any template as your own site.
 
 

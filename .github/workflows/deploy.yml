@@ -1,61 +1,91 @@
 name: Deploy to GitHub Pages
 
+# Publishes BUILD OUTPUT (never source folders) to the gh-pages branch.
+#
+# The previous revision copied each template folder straight onto gh-pages. For
+# the Vite apps that meant shipping the dev-only entry point
+# `<script type="module" src="/src/main.tsx">`, which 404s on Pages and left the
+# live demos blank. Assembly now happens in scripts/build-site.sh, which builds
+# every app, replaces each published directory atomically, and verifies the
+# result with scripts/verify-site.mjs.
+#
+# Runs on pull requests too — build + verify only, no publish — so a regression
+# fails review instead of the live site.
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
-  group: "pages-deploy"
+  group: pages-deploy
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  site:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout main
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          fetch-depth: 0
+      - name: Checkout
+        uses: actions/checkout@v7
 
-      - name: Sync and Publish to gh-pages branch
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            aetherascrollstory/package-lock.json
+            measured/package-lock.json
+            portfolio/package-lock.json
+            synapsex/package-lock.json
+            videoembeddeddesign/securify/package-lock.json
+
+      # Installs, builds all five apps, assembles _site/, and runs verify-site.
+      # A failure here fails the pull request.
+      - name: Build and assemble the site tree
+        run: bash scripts/build-site.sh
+
+      # Non-blocking: reports which hot-linked media is still live. Media rots
+      # silently (nothing about it is in git), but a transient CDN blip must not
+      # fail a deploy — provenance and replacement steps live in ASSETS.md.
+      - name: Check hot-linked media (report only)
+        continue-on-error: true
+        run: node scripts/check-assets.mjs
+
+      - name: Publish to gh-pages
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euo pipefail
+          cd _site
+          touch .nojekyll
+
+          git init -q -b gh-pages .
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin gh-pages:gh-pages || git branch gh-pages
-          git worktree add ../gh-pages-site gh-pages
-
-          # Sync all template folders that contain index.html
-          find . -maxdepth 2 -name "index.html" -not -path "*/.*/*" | while read -r idx; do
-            dir=$(dirname "$idx")
-            if [ "$dir" != "." ]; then
-              echo "Syncing template: $dir"
-              mkdir -p "../gh-pages-site/$dir"
-              cp -r "$dir"/* "../gh-pages-site/$dir/"
-            fi
-          done
-
-          # Sync root index.html master showcase hub
-          if [ -f "index.html" ]; then
-            cp index.html ../gh-pages-site/
-          fi
-          touch ../gh-pages-site/.nojekyll
-
-          cd ../gh-pages-site
           git add -A
-          if git diff --staged --quiet; then
-            echo "gh-pages is already up to date."
-          else
-            git commit -m "chore(pages): automated zero-intervention live deployment [skip ci]"
-            git push origin gh-pages
-            echo "Successfully updated and pushed gh-pages."
+
+          remote_url="https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git remote add origin "$remote_url"
+
+          # Skip the push when the published tree already matches (e.g. a
+          # workflow_dispatch re-run), so we don't churn Pages builds.
+          if git fetch -q --depth=1 origin gh-pages 2>/dev/null; then
+            if [ "$(git rev-parse FETCH_HEAD^{tree})" = "$(git write-tree)" ]; then
+              echo "gh-pages is already up to date."
+              exit 0
+            fi
           fi
+
+          git commit -q -m "chore(pages): deploy ${GITHUB_SHA::7} [skip ci]"
+          # One fresh commit per deploy: the published tree is exactly the
+          # assembled output, with no stale bundles or source folders able to
+          # survive from an earlier revision.
+          git push --force origin gh-pages
+          echo "Published gh-pages from ${GITHUB_SHA::7}."
