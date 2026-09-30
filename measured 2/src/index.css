@@ -1,0 +1,236 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Instrument Serif", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-cormorant: "Cormorant Garamond", serif;
+  --font-grotesk: "Space Grotesk", "Inter", sans-serif;
+  --font-fraunces: "Fraunces", serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #000;
+}
+html.snap-domain {
+  scroll-snap-type: y proximity;
+}
+body {
+  margin: 0;
+  background: #000;
+  color: #fff;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+::selection {
+  background: rgba(255, 255, 255, 0.85);
+  color: #000;
+}
+
+/* ---------- Liquid glass (Measured design system) ---------- */
+.liquid-glass {
+  background: rgba(255, 255, 255, 0.02);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: none;
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.12) 25%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(255, 255, 255, 0.12) 75%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box exclude, linear-gradient(#fff 0 0);
+  pointer-events: none;
+}
+
+/* Typed so the gallery cards can transition the spotlight radius */
+@property --r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+@media (hover: none) {
+  .card .card-reveal {
+    --r: 210px !important;
+    --mx: 50% !important;
+    --my: 78% !important;
+  }
+}
+
+/* ---------- Spotlight reveal masks ---------- */
+.zone-fade {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--zt, 30%) + 12%));
+  mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--zt, 30%) + 12%));
+}
+.spot-mask {
+  /* --mx / --my / --r are written by the pointer engine on the parent section */
+  -webkit-mask-image: radial-gradient(
+    circle var(--r, 0px) at var(--mx, -4000px) var(--my, -4000px),
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.55) 66%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  mask-image: radial-gradient(
+    circle var(--r, 0px) at var(--mx, -4000px) var(--my, -4000px),
+    #000 0%,
+    #000 42%,
+    rgba(0, 0, 0, 0.55) 66%,
+    rgba(0, 0, 0, 0) 100%
+  );
+}
+
+/* ---------- Radar sweep (Meridian) ---------- */
+@property --ang {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes sweep {
+  to {
+    --ang: 360deg;
+  }
+}
+.radar-sweep {
+  animation: sweep 7s linear infinite;
+}
+.radar-mask {
+  -webkit-mask-image: conic-gradient(from var(--ang) at 50% 50%, transparent 0deg, transparent 150deg, rgba(0, 0, 0, 0.85) 358deg, #000 360deg);
+  mask-image: conic-gradient(from var(--ang) at 50% 50%, transparent 0deg, transparent 150deg, rgba(0, 0, 0, 0.85) 358deg, #000 360deg);
+  animation: sweep 7s linear infinite;
+}
+
+/* ---------- Decorative animation utilities (pausable) ---------- */
+@keyframes pulse-soft {
+  0%, 100% { opacity: 0.35; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1.04); }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes dash { to { stroke-dashoffset: -60; } }
+@keyframes scroll-x { to { transform: translateX(-50%); } }
+@keyframes ping-out {
+  0% { transform: scale(0.4); opacity: 0.9; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.15; } }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(9px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(4px); }
+}
+@keyframes jitter {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(2px, -1px); }
+  50% { transform: translate(-2px, 1px); }
+  75% { transform: translate(1px, 2px); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(-140deg); }
+  50% { transform: rotate(140deg); }
+}
+@keyframes wobble-y {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+@keyframes drift-x {
+  0% { transform: translateX(-4%); }
+  100% { transform: translateX(104%); }
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+.a-draw { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.6s ease forwards; }
+.a-swing { animation: swing 0.5s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.a-wobble { animation: wobble-y 4s ease-in-out infinite; }
+
+.a-pulse { animation: pulse-soft 2.6s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.a-spin { animation: spin 12s linear infinite; transform-box: fill-box; transform-origin: center; }
+.a-float { animation: float 5s ease-in-out infinite; }
+.a-dash { stroke-dasharray: 6 8; animation: dash 2s linear infinite; }
+.a-scroll { animation: scroll-x 6s linear infinite; }
+.a-ping { animation: ping-out 2.8s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+.a-blink { animation: blink 1.4s steps(2, end) infinite; }
+.a-rise { animation: rise 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.a-fade { animation: fade-in 0.8s ease both; }
+.a-shake { animation: shake 0.45s ease; }
+.a-jitter { animation: jitter 0.3s linear infinite; }
+
+/* Surfaces that are off-screen freeze all decorative motion */
+section[data-active="false"] *,
+section[data-active="false"] {
+  animation-play-state: paused !important;
+}
+
+/* Range inputs */
+input[type="range"].rng {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"].rng::-webkit-slider-runnable-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+}
+input[type="range"].rng::-moz-range-track {
+  height: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  border-radius: 2px;
+}
+input[type="range"].rng::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -8px;
+  border-radius: 999px;
+  background: var(--thumb, #fff);
+  border: 3px solid #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 0 18px var(--thumb, #fff);
+}
+input[type="range"].rng::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: var(--thumb, #fff);
+  border: 3px solid #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5), 0 0 18px var(--thumb, #fff);
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  html.snap-domain { scroll-snap-type: none; }
+  .a-pulse, .a-spin, .a-float, .a-dash, .a-scroll, .a-ping, .a-blink, .a-jitter, .radar-sweep {
+    animation: none !important;
+  }
+  .radar-mask { animation-duration: 40s; }
+}
