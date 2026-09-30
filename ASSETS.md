@@ -24,6 +24,7 @@ assumed (the outstanding work is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHE
 | SynapseX | nothing | 5 CloudFront `hf_` clips | `BackgroundVideo` swaps a failed clip for a gradient plate (poster-backed where available) — implemented |
 | Portfolio | nothing | 1 Mux HLS stream + 11 Unsplash photos (18 URLs with size variants) | `poster` frame stays behind the HLS element if the stream fails |
 | Apogee | `favicon.svg` (generated) + 3 generated band loops (`field`/`terrain`/`ascent`, 4.5 MB) + 3 posters | 1 CloudFront `hf_` clip (hero) + 1 hot-linked webfont (Suisse Intl via `db.onlinewebfonts.com`) | `onError` → CSS nebula plate; font falls back to the system sans stack (implemented) |
+| Jack | `favicon.svg` | User-specified Figma, Motionsites, CloudFront/Higgs, and Google Fonts assets | Design assets are hot-linked; remote reachability and reuse rights need review |
 
 `hf_…` files on `d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/` are
 AI-generated reference clips/stills (the `hf_YYYYMMDD_HHMMSS_<uuid>` naming is the
@@ -174,3 +175,15 @@ Notes
   being present, but a published site should not rely on it.
 - Run `node scripts/check-assets.mjs` before a release to see which hot-links are still live;
   add `--strict` in CI if you want a dead link to fail the build.
+
+## 8. Jack — `jack`
+
+| Asset | Source | Licence / provenance | In repo? |
+|---|---|---|---|
+| `public/favicon.svg` | Custom initial mark | Generated for this template | Yes |
+| Portrait + four decorative 3D PNGs | Exact Figma-hosted URLs supplied in the design prompt | Supplied by the user; ownership and reuse terms not independently verified | No — hot-linked |
+| 21 project-preview GIFs | `motionsites.ai/assets/hero-*-preview-*.gif`, exact URLs supplied in the design prompt | Supplied by the user; licensing/redistribution terms not independently verified | No — hot-linked |
+| Nine project portfolio images | Exact `images.higgs.ai` proxy URLs wrapping CloudFront PNGs supplied in the design prompt | Supplied by the user; availability and reuse terms not independently verified | No — hot-linked |
+| Kanit webfont | Google Fonts stylesheet in `index.html` | SIL Open Font License | No — hot-linked |
+
+All design images remain remote references as requested; no media was downloaded into the template. Their availability and usage rights should be checked before public deployment.

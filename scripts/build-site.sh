@@ -36,6 +36,7 @@ apps=(
   "measured:measured"
   "portfolio:portfolio"
   "synapsex:synapsex"
+  "jack:jack"
   "videoembeddeddesign/securify:videoembeddeddesign"
 )
 # published-slug : source-folder   (already static, copied verbatim)
@@ -56,11 +57,15 @@ for entry in "${apps[@]}"; do
     exit 1
   fi
 
-  echo "==> [$slug] install + build  ($src)"
-  if [ -f "$src/package-lock.json" ]; then
-    ( cd "$src" && npm ci )
+  if [ "${SKIP_INSTALL:-0}" = "1" ]; then
+    echo "==> [$slug] build only  ($src)"
   else
-    ( cd "$src" && npm install )
+    echo "==> [$slug] install + build  ($src)"
+    if [ -f "$src/package-lock.json" ]; then
+      ( cd "$src" && npm ci )
+    else
+      ( cd "$src" && npm install )
+    fi
   fi
   ( cd "$src" && npm run build )
 

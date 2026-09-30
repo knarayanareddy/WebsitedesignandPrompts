@@ -44,9 +44,10 @@ jobs:
             measured/package-lock.json
             portfolio/package-lock.json
             synapsex/package-lock.json
+            jack/package-lock.json
             videoembeddeddesign/securify/package-lock.json
 
-      # Installs, builds all five apps, assembles _site/, and runs verify-site.
+      # Installs, builds all seven apps, assembles _site/, and runs verify-site.
       # A failure here fails the pull request.
       - name: Build and assemble the site tree
         run: bash scripts/build-site.sh

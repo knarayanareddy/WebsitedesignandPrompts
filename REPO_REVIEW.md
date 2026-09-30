@@ -1,6 +1,6 @@
 # End-to-End Repo Review — how this repository is built
 
-**Reviewed:** 2026-09-30 · **Commit:** `af81ffe` (merge of PR #2, `main`) + the close-out pass of the same day
+**Reviewed:** 2026-09-30 · **Base:** `baf9266` + Jack portfolio integration pass
 **Method:** full source read of every template, the hub, the CI pipeline and all scripts; a
 fresh local run of the complete build/verify pipeline; route, audit and secret checks.
 This is the *current-state* review. The historical analysis of the pre-fix state is kept in
@@ -10,7 +10,7 @@ This is the *current-state* review. The historical analysis of the pre-fix state
 
 ## 1. What this repository is
 
-A **public template catalogue**: six production-quality demo websites, each shipped with the
+A **public template catalogue**: eight production-quality demo websites, each shipped with the
 prompt specification used to generate it (`ADAPTED_PROMPT.md`), an architecture write-up
 (`BUILD_LOG.md`), and media provenance notes — so a design can be reproduced or re-skinned by
 pointing a coding assistant at the prompt. Everything is published as a live GitHub Pages
@@ -27,13 +27,13 @@ WebsitedesignandPrompts/
 ├── aetherascrollstory/         # 02 Aethera   — React 18 · Vite 6 · Tailwind 3 (26 MB self-hosted video)
 ├── measured/                   # 03 Measured  — React 19 · Vite 7 · Tailwind 4 · oxlint
 ├── ethan-vale-archive/         # 04 Ethan Vale — 1,993-line single-file vanilla JS, zero deps
-├── synapsex/                   # 05 SynapseX  — React 18 · Vite 5 · Tailwind 3 · Framer Motion · Lenis
-└── portfolio/                  # 06 Portfolio — React 18 · Vite 5 · GSAP · Lenis · hls.js
+├── synapsex/                   # 05 SynapseX  — React 18 · Vite 6 · Tailwind 3 · Motion · Lenis
+├── portfolio/                  # 06 Portfolio — React 18 · Vite 6 · GSAP · Lenis · hls.js
+├── apogee/                     # 07 Apogee   — React 18 · Vite 6 · Tailwind 3
+└── jack/                      # 08 Jack — React 18 · Vite 6 · Tailwind 3 · Framer Motion
 ```
 
-~9,400 lines of web source + scripts, ~3,200 lines of docs, ~30 MB working tree (26 MB of that
-is Aethera's committed 1080p loops). The git history in this checkout is shallow (the PR #2
-merge commit only).
+The checkout is intentionally self-contained by template: the React/Vite apps build independently, while Ethan Vale is a standalone static page. Media is partly vendored and partly streamed; provenance is centralized in `ASSETS.md`.
 
 ## 2. The shared architecture pattern
 
@@ -56,8 +56,7 @@ is built the same way:
 4. **Relative asset bases everywhere.** Every `vite.config.ts` sets `base: './'`, so any build
    works from any subpath (a fork's Pages URL included). Dev servers set `host: true` +
    `allowedHosts: true` so sandbox/preview proxies work.
-5. **Strict TypeScript in 5 of 6 apps** (`strict`, `noUnusedLocals/Parameters`). Securify is the
-   exception (project-references config without `strict`) — tracked as checklist item C7.
+5. **Strict TypeScript in all seven React/Vite apps** (`strict`, with unused locals/parameters checked in the new Jack app); the exact compiler settings remain template-local.
 6. **Per-template docs trio** (`README.md`, `ADAPTED_PROMPT.md`, `BUILD_LOG.md`) plus root-level
    `ASSETS.md` recording every hot-linked media URL, its licence, and the fallback behaviour.
 
@@ -74,14 +73,14 @@ is built the same way:
 
 ## 3. How the site is built and published
 
-`deploy.yml` (push/PR/dispatch on `main`, Node 22, npm cache over 5 lockfiles):
+`deploy.yml` (push/PR/dispatch on `main`, Node 22, npm cache over seven app lockfiles):
 
-1. **`scripts/build-site.sh`** — installs (`npm ci`) and builds each of the 5 apps, then assembles
+1. **`scripts/build-site.sh`** — installs (`npm ci`) and builds each of the 7 apps, then assembles
    `_site/` using an explicit **slug map** (this is the fix for the old `find -maxdepth 2` bugs):
    | source | published at |
    |---|---|
    | `videoembeddeddesign/securify/` → `dist/` | `/videoembeddeddesign/` |
-   | `aetherascrollstory/`, `measured/`, `portfolio/`, `synapsex/` → `dist/` | `/<name>/` |
+   | `aetherascrollstory/`, `measured/`, `portfolio/`, `synapsex/`, `apogee/`, `jack/` → `dist/` | `/<name>/` |
    | `ethan-vale-archive/` (static, copied verbatim) | `/ethanvale/` |
    Each published directory is **replaced wholesale** (`rm -rf` + `cp -a`) — no stale bundles can
    survive a deploy — and the hub + `favicon.svg` + `.nojekyll` are copied in.
@@ -102,14 +101,14 @@ is now mechanically impossible.
 
 | Check | Result |
 |---|---|
-| `bash scripts/build-site.sh` (npm ci + build ×5 + assemble + verify) | ✅ clean — 91 files / 30 MB in `_site`, `verify-site: OK` |
-| All 7 published routes over HTTP (hub + 6 templates) | ✅ 200, hashed `./assets/*.js` entries, relative paths |
-| Type strictness | ✅ strict in all 6 (securify joined in the close-out pass) |
-| `npm audit` during builds | ✅ 0 vulnerabilities in all 5 apps after the close-out pass (was: 2 advisories in `synapsex`/`portfolio` via `esbuild ≤0.24.2` / `vite ≤6.4.2`) |
+| `SKIP_INSTALL=1 bash scripts/build-site.sh` (build ×7 + assemble + verify) | ✅ clean — 107 files / 36 MB in `_site`, all 8 published pages passed `verify-site` |
+| All 9 published routes over HTTP (hub + 8 templates) | ✅ 200, hashed `./assets/*.js` entries, relative paths |
+| Type strictness | ✅ strict in all 7 React/Vite apps |
+| `npm audit` during builds | ✅ 0 vulnerabilities in all 7 apps (was: 2 advisories in `synapsex`/`portfolio` via `esbuild ≤0.24.2` / `vite ≤6.4.2`) |
 | Secrets scan of sources | ✅ clean (only `secrets.GITHUB_TOKEN` in the workflow) |
 | `git status` after build | ✅ clean — `dist/`, `_site/` properly ignored |
-| `prefers-reduced-motion` coverage | ✅ all six templates handle it (portfolio/synapsex ported in the close-out pass) |
-| `npm audit` (all 5 apps, after close-out) | ✅ 0 vulnerabilities (portfolio/synapsex moved to Vite 6.4.3) |
+| `prefers-reduced-motion` coverage | ✅ the seven existing templates handle it (portfolio/synapsex ported in the close-out pass); Jack provides reduced-motion-aware reveal and scroll behavior |
+| `npm audit` (all 7 apps) | ✅ 0 vulnerabilities at the reviewed base revision |
 
 **Post-review close-out pass (2026-09-30):** every gap in `REVIEW_CHECKLIST.md` §C has been
 implemented and re-verified — reviewed fixes ported from commit `9061482` (reduced-motion,
@@ -151,3 +150,11 @@ node scripts/check-assets.mjs                       # HEAD-check hot-linked medi
 To adapt a template: edit its `src/data/*` (content), `index.css`/`tailwind.config.js` (design
 tokens), and the media URLs documented in [`ASSETS.md`](./ASSETS.md). The `ADAPTED_PROMPT.md`
 next to each app is the full spec to regenerate or re-skin the design with a coding assistant.
+
+---
+
+## Addendum — Jack portfolio template (2026-09-30)
+
+The eighth catalogue entry at `jack/` is a 3D creator portfolio built with React 18, TypeScript, Vite, Tailwind CSS v3, Framer Motion, and Lucide React. It includes the supplied Kanit typography, magnetic portrait, scroll-driven GIF marquee, animated biography, service list, and sticky-stack project gallery. The app uses a relative `base: './'` and includes its own package lock and prompt/build documentation.
+
+The integration points are the root showcase card, README catalog and live route, explicit Pages slug map, workflow npm cache path, and remote-media checker source. The design-brief media URLs are hot-linked and have not been independently availability-tested. The deploy script publishes the Vite output at `/<repo>/jack/`; `verify-site.mjs` checks the assembled route.

@@ -27,6 +27,7 @@ const SOURCES = [
   'measured/src',
   'portfolio/src',
   'synapsex/src',
+  'jack/src',
   'ethan-vale-archive/index.html',
 ];
 
