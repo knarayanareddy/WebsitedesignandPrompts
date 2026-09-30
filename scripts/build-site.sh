@@ -32,6 +32,7 @@ site_dir="${SITE_DIR:-_site}"
 # template-folder : published-slug
 apps=(
   "aetherascrollstory:aetherascrollstory"
+  "apogee:apogee"
   "measured:measured"
   "portfolio:portfolio"
   "synapsex:synapsex"

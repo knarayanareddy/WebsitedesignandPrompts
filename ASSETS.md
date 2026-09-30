@@ -23,6 +23,7 @@ assumed (the outstanding work is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHE
 | Ethan Vale | nothing (single HTML file) | 21 stills (`_min.webp` + `.png`), 1 film, 1 avatar — all CloudFront `hf_` | Film failure is handled; a failed still renders a labelled placeholder plate (implemented) |
 | SynapseX | nothing | 5 CloudFront `hf_` clips | `BackgroundVideo` swaps a failed clip for a gradient plate (poster-backed where available) — implemented |
 | Portfolio | nothing | 1 Mux HLS stream + 11 Unsplash photos (18 URLs with size variants) | `poster` frame stays behind the HLS element if the stream fails |
+| Apogee | `favicon.svg` (generated) | 1 CloudFront `hf_` clip (hero) + 1 hot-linked webfont (Suisse Intl via `db.onlinewebfonts.com`) | `onError` → CSS nebula plate; font falls back to the system sans stack (implemented) |
 
 `hf_…` files on `d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/` are
 AI-generated reference clips/stills (the `hf_YYYYMMDD_HHMMSS_<uuid>` naming is the
@@ -134,8 +135,30 @@ Notes
 
 - The Mux stream is attached lazily through `useHlsVideo` (hls.js with a native-HLS fallback
   for Safari); the `poster` frame stays visible if the stream fails. `prefers-reduced-motion`
-  is **not** consulted on this template yet (tracked in `REVIEW_CHECKLIST.md`).
+  disables smooth scrolling and heavy animation (implemented).
 - Social links in the footer point at the networks' home pages — placeholders to be replaced.
+
+---
+
+## 7. Apogee — `apogee`
+
+| Asset | Source | Licence | In repo? |
+|---|---|---|---|
+| Hero clip (`src/components/Hero.tsx` video `src`) | `https://d8j0ntlcm91z4.cloudfront.net/…/hf_20260813_092641_….mp4` (dark deep-blue/red nebula) | Undocumented (AI-generated reference) | No |
+| Suisse Intl webfont (`index.html` `<link>`) | `https://db.onlinewebfonts.com/c/13ab13418f633c1b0516fed6e30bedbc?family=Suisse+Int%27l` | **Undocumented** — Suisse Intl is a commercial typeface; this CDN copy's terms are unknown | No |
+| `public/favicon.svg` | Generated from the template's logo mark | Generated for this repo — reuse freely with the code | Yes |
+| Everything else | CSS/SVG only (glass surfaces, nebula gradients, charts) | MIT (code) | Yes |
+
+Notes
+
+- Fallbacks: the clip has an `onError` handler that swaps in a CSS nebula plate of the same
+  mood (deep blue/red radial gradients on `#080A19`), and the font stack falls back to
+  `-apple-system, BlinkMacSystemFont, sans-serif`. Neither failure can blank the page.
+- Before publishing as your own site: replace the clip (or keep the CSS plate — it is designed
+  to work alone) and license a real Suisse Intl webfont (or swap the stack to an open face such
+  as Inter, which is metrically close for this design).
+- `prefers-reduced-motion` pauses the ambient clip and resolves every entrance animation
+  instantly.
 
 ---
 

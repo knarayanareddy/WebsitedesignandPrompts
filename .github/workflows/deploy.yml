@@ -40,6 +40,7 @@ jobs:
           cache: npm
           cache-dependency-path: |
             aetherascrollstory/package-lock.json
+            apogee/package-lock.json
             measured/package-lock.json
             portfolio/package-lock.json
             synapsex/package-lock.json
