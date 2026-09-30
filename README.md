@@ -17,6 +17,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 - **Ethan Vale (3D Spatial Sphere Archive):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/)
 - **SynapseX (Neural-AI Interface):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/)
 - **Editorial Portfolio (Creative Engineer Showcase):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/)
+- **Jack (3D Creator Portfolio):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/](https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/)
 
 ---
 
@@ -31,6 +32,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | **05** | **SynapseX (Neural-AI Interface)** | [`synapsex/`](./synapsex/) | Futuristic cyberpunk neural-AI landing page featuring 3D cursor parallax, dynamic multi-stage scroll camera tilt, rolling telemetry counters, and magnetic hardware layer stacks. | React 18, Vite 6, Tailwind CSS v3, Framer Motion v12, TypeScript | [Prompt Spec](./synapsex/ADAPTED_PROMPT.md) · [Build Log](./synapsex/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/) |
 | **06** | **Editorial Portfolio (Michael Smith)** | [`portfolio/`](./portfolio/) | Awwwards-grade editorial dark portfolio featuring Instrument Serif typography, Lenis smooth inertia scrolling synced with GSAP ScrollTrigger, Mux HLS streaming, dynamic cursor spotlights with halftone textures, and a pinned dual-speed parallax gallery. | React 18, Vite 6, Tailwind CSS v3, GSAP 3, Lenis, Framer Motion v11, TypeScript | [Prompt Spec](./portfolio/ADAPTED_PROMPT.md) · [Build Log](./portfolio/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/) |
 | **07** | **Apogee (Glassmorphic Data-Intelligence)** | [`apogee/`](./apogee/) | Pixel-exact glassmorphic SaaS hero (32-bar revenue chart with staggered CSS keyframe timeline, glass nav pills, animated mobile menu) expanded into a full product story — trust strip, count-up metrics, capability cards, interactive forecast console, testimonial, CTA. | React 18, Vite 6, Tailwind CSS v3, TypeScript, lucide-react | [Prompt Spec](./apogee/ADAPTED_PROMPT.md) · [Build Log](./apogee/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/apogee/) |
+| **08** | **Jack (3D Creator Portfolio)** | [`jack/`](./jack/) | Dark editorial creator portfolio with magnetic portrait, scroll-driven dual marquee, character-reveal biography, five service rows, and sticky-stack 3D project cards. | React 18, Vite 6, Tailwind CSS v3, TypeScript, Framer Motion, Lucide React | [Prompt Spec](./jack/ADAPTED_PROMPT.md) · [Build Log](./jack/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -82,6 +84,10 @@ npm install && npm run dev
 # 7. To run Apogee:
 cd ../apogee
 npm install && npm run dev
+
+# 8. To run Jack:
+cd ../jack
+npm install && npm run dev
 ```
 
 Open `http://localhost:5173` to explore the design locally.
@@ -114,6 +120,7 @@ including a fork's Pages URL. The folder → URL mapping is explicit:
 | `ethan-vale-archive/` | `/ethanvale/` |
 | `synapsex/` | `/synapsex/` |
 | `portfolio/` | `/portfolio/` |
+| `jack/` | `/jack/` |
 
 To reproduce a deploy locally:
 
