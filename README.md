@@ -11,6 +11,7 @@
 
 Visit the deployed GitHub Pages site to experience the templates live in action:
 - **Securify (Dark Video Story):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/](https://knarayanareddy.github.io/WebsitedesignandPrompts/videoembeddeddesign/)
+- **Apogee (Glassmorphic Data-Intelligence):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/apogee/](https://knarayanareddy.github.io/WebsitedesignandPrompts/apogee/)
 - **Aethera® (White-to-Night Haven):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/)
 - **Measured (Multi-Surface Wearable):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/)
 - **Ethan Vale (3D Spatial Sphere Archive):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/)
@@ -27,8 +28,9 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | **02** | **Aethera® (White-to-Night Scroll Story)** | [`aetherascrollstory/`](./aetherascrollstory/) | Full-screen 8-chapter digital studio haven featuring self-hosted 1080p video loops, custom rAF fade loops, and white-to-night-to-white aesthetic. | React 18, Vite 6, Tailwind CSS v3, TypeScript | [Prompt Spec](./aetherascrollstory/ADAPTED_PROMPT.md) · [Build Log](./aetherascrollstory/BUILD_LOG.md) · [Video Picks](./aetherascrollstory/VIDEO_PICKS.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/aetherascrollstory/) |
 | **03** | **Measured (Interactive Multi-Surface Wearable)** | [`measured/`](./measured/) | Luxury health wearable landing page across 5 interactive surfaces featuring hardware-accelerated spotlight mask reveals, live PPG optics simulation, and material customizer. | React 19, Vite 7, Tailwind CSS v4, TypeScript | [Prompt Spec](./measured/ADAPTED_PROMPT.md) · [Build Log](./measured/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/measured/) |
 | **04** | **Ethan Vale (3D Spatial Sphere Archive)** | [`ethan-vale-archive/`](./ethan-vale-archive/) | Fine-art wildlife photography archive mathematically projected on an interactive 3D Fibonacci sphere with drag momentum, depth shading, and FLIP modal. | Vanilla HTML5, CSS3 3D, Vanilla ES6+ | [Prompt Spec](./ethan-vale-archive/ADAPTED_PROMPT.md) · [Build Log](./ethan-vale-archive/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/ethanvale/) |
-| **05** | **SynapseX (Neural-AI Interface)** | [`synapsex/`](./synapsex/) | Futuristic cyberpunk neural-AI landing page featuring 3D cursor parallax, dynamic multi-stage scroll camera tilt, rolling telemetry counters, and magnetic hardware layer stacks. | React 18, Vite 5, Tailwind CSS v3, Framer Motion v12, TypeScript | [Prompt Spec](./synapsex/ADAPTED_PROMPT.md) · [Build Log](./synapsex/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/) |
-| **06** | **Editorial Portfolio (Michael Smith)** | [`portfolio/`](./portfolio/) | Awwwards-grade editorial dark portfolio featuring Instrument Serif typography, Lenis smooth inertia scrolling synced with GSAP ScrollTrigger, Mux HLS streaming, dynamic cursor spotlights with halftone textures, and a pinned dual-speed parallax gallery. | React 18, Vite 5, Tailwind CSS v3, GSAP 3, Lenis, Framer Motion v11, TypeScript | [Prompt Spec](./portfolio/ADAPTED_PROMPT.md) · [Build Log](./portfolio/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/) |
+| **05** | **SynapseX (Neural-AI Interface)** | [`synapsex/`](./synapsex/) | Futuristic cyberpunk neural-AI landing page featuring 3D cursor parallax, dynamic multi-stage scroll camera tilt, rolling telemetry counters, and magnetic hardware layer stacks. | React 18, Vite 6, Tailwind CSS v3, Framer Motion v12, TypeScript | [Prompt Spec](./synapsex/ADAPTED_PROMPT.md) · [Build Log](./synapsex/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/) |
+| **06** | **Editorial Portfolio (Michael Smith)** | [`portfolio/`](./portfolio/) | Awwwards-grade editorial dark portfolio featuring Instrument Serif typography, Lenis smooth inertia scrolling synced with GSAP ScrollTrigger, Mux HLS streaming, dynamic cursor spotlights with halftone textures, and a pinned dual-speed parallax gallery. | React 18, Vite 6, Tailwind CSS v3, GSAP 3, Lenis, Framer Motion v11, TypeScript | [Prompt Spec](./portfolio/ADAPTED_PROMPT.md) · [Build Log](./portfolio/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/) |
+| **07** | **Apogee (Glassmorphic Data-Intelligence)** | [`apogee/`](./apogee/) | Pixel-exact glassmorphic SaaS hero (32-bar revenue chart with staggered CSS keyframe timeline, glass nav pills, animated mobile menu) expanded into a full product story — trust strip, count-up metrics, capability cards, interactive forecast console, testimonial, CTA. | React 18, Vite 6, Tailwind CSS v3, TypeScript, lucide-react | [Prompt Spec](./apogee/ADAPTED_PROMPT.md) · [Build Log](./apogee/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/apogee/) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -76,6 +78,10 @@ npm install && npm run dev
 # 6. To run Editorial Portfolio:
 cd ../portfolio
 npm install && npm run dev
+
+# 7. To run Apogee:
+cd ../apogee
+npm install && npm run dev
 ```
 
 Open `http://localhost:5173` to explore the design locally.
@@ -102,6 +108,7 @@ including a fork's Pages URL. The folder → URL mapping is explicit:
 | Repository folder | Published at |
 |---|---|
 | `videoembeddeddesign/securify/` | `/videoembeddeddesign/` |
+| `apogee/` | `/apogee/` |
 | `aetherascrollstory/` | `/aetherascrollstory/` |
 | `measured/` | `/measured/` |
 | `ethan-vale-archive/` | `/ethanvale/` |

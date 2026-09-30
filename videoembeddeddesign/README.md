@@ -26,9 +26,10 @@ videoembeddeddesign/
 │   │   ├── index.css       # Tailwind CSS v4, Readex Pro typography, smooth scroll
 │   │   └── main.tsx        # React entrypoint
 │   └── package.json        # Dependencies & build scripts
-├── video_picks.md          # Curated stock video analysis (Pexels 1080p links, framing, specs)
-└── video_search/           # Research, scraping scripts, and candidate frame extractions
+└── video_picks.md          # Curated stock video analysis (Pexels 1080p links, framing, specs)
 ```
+
+> Asset provenance and licences for this template (Pexels clips + the hotlinked hero reference clip) are listed in the repository-level [`ASSETS.md`](../ASSETS.md).
 
 ---
 
@@ -70,3 +71,4 @@ npm run build
 - **Styling:** Tailwind CSS v4 (`@tailwindcss/vite`)
 - **Typography:** Readex Pro via Google Fonts
 - **Linter:** Oxlint (0 errors, 0 warnings)
+- **Accessibility:** one `h1`/`h2` per chapter, keyboard-reachable mobile menu, `prefers-reduced-motion` disables autoplay/smooth-scroll, poster fallback when a clip fails to load

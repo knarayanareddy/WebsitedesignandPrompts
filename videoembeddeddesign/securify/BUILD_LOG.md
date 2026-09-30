@@ -12,7 +12,7 @@ A full-screen, 11-chapter scroll-story landing page for the (fictional) data-sec
 
 The visual arc mirrors the emotional arc: bright daylight energy → dark tension → trust → serene night (the page ends on a night-snowfall shot, the same mood family as the hero, which uses the original reference clip).
 
-Tech: **React 18 + TypeScript + Vite 8 + Tailwind CSS v4** (`@tailwindcss/vite`), Google font **Readex Pro**, zero other dependencies.
+Tech: **React 19 + TypeScript + Vite 8 + Tailwind CSS v4** (`@tailwindcss/vite`), Google font **Readex Pro**, zero other dependencies.
 
 ---
 
@@ -48,18 +48,19 @@ A `<header>` with `fixed top-0 left-0 right-0 z-40 px-6 md:px-10 pt-6` containin
   - The whole pill links to `#hero` (top of page).
 - Center pill (hidden on mobile): `hidden md:flex items-center gap-1 bg-neutral-900/90 backdrop-blur rounded-full px-3 py-2` with four anchor links: "platform" → `#watch`, "solutions" → `#scale`, "company" → `#proof`, "support" → `#calm` — each `text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full`.
 - Right button: "get started" → `#calm` — `bg-white text-black text-sm font-normal rounded-full px-6 py-3 hover:bg-neutral-200 transition-colors`.
+- Below `md`: a hamburger button opening a full-screen drawer with the same links (Escape closes, focus managed, scroll locked).
 
 ### Chapter shell (repeat for every chapter)
 
 - A `<section>` with `relative h-screen w-full overflow-hidden bg-black` and an `id` (listed per chapter).
 - Background `<video>`: `className="absolute inset-0 w-full h-full object-cover"`, `autoPlay loop muted playsInline`, `poster={chapter poster URL}`, `src={chapter video URL}`, `preload="metadata"` (except chapter 1, which uses `preload="auto"`).
-- Play/pause via IntersectionObserver: when a chapter is ≥35% in the viewport, call `video.play()`; otherwise `video.pause()`. If `prefers-reduced-motion: reduce`, never autoplay — show only the poster.
+- Play/pause via IntersectionObserver: when a chapter is ≥35% in the viewport, call `video.play()`; otherwise `video.pause()`. If `prefers-reduced-motion: reduce`, never autoplay (no `autoPlay` attribute on chapter 1 either) — show only the poster. If a clip fails to load, swap in the poster as an `<img>`.
 - Readability overlays (all pointer-events-none, monochrome only):
   - If the chapter has a `shade` (bright videos): an `absolute inset-0` div with that class (e.g. `bg-black/35`).
   - Always: `absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/70 to-transparent` (under the navbar) and `absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-black` (bleeds into the next chapter).
 - Kicker (chapters 2–11 only): `absolute left-6 md:left-10 top-24 md:top-28 flex items-center gap-3` — a `text-white/50 text-xs md:text-sm tracking-[0.3em]` label (e.g. "01 / in motion") followed by `h-px w-10 bg-white/40`.
 - Foreground wrapper: `relative z-10 h-full w-full` (rendered after overlays, above the video).
-- Headline words: each an `<h1>` with `hero-title absolute text-white font-medium` + the chapter's word-size class + its position class. All lowercase.
+- Headline: **one** heading per chapter — `<h1>` for chapter 1, `<h2>` for the rest — rendered with `display: contents` so that each word can be an absolutely positioned `<span>` (`hero-title absolute text-white font-medium` + the chapter's word-size class + its position class). All lowercase.
 - Paragraph (where defined): `absolute max-w-[240px] text-[15px] leading-snug text-white/90` + its position class (append `text-right` when right-aligned).
 - Stat block (where defined): an `absolute` wrapper with the stat's position class containing:
   - Row: `flex items-center gap-3` — either `[diagonal divider, number]` or `[number, diagonal divider]`, where the diagonal divider is `hidden md:block h-px w-24 bg-white/40 rotate-[20deg]` (or `rotate-[-20deg]`); for right-aligned stats use `justify-end flex-row-reverse` so the divider reads first.
@@ -153,8 +154,8 @@ A `fixed right-5 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-co
 - Stat (`right-6 md:right-10 bottom-24 md:bottom-28`, divider first, right-aligned): **+300k** / "downloads"
 
 **Chapter 11 — "calm" (the calm)** — night snowfall finale
-- Video: `https://videos.pexels.com/video-files/35552773/15063226_2560_1440_30fps.mp4` (4K source; consider re-encoding to 1080p before production)
-- Poster: `https://images.pexels.com/videos/35552773/black-effect-particle-slowmotion-35552773.jpeg?auto=compress&w=1600`
+- Video: `public/calm.mp4` — self-hosted seamless 15 s 1080p night-snowfall loop (generated for this repo; replaces the original 55.8 MB raw 1440p Pexels file — see §5)
+- Poster: `public/poster-calm.jpg` — frame extracted from the clip above
 - Shade: none · Kicker: "10 / the calm" · Word size: `text-[12vw] md:text-[11vw]`
 - Words: "quiet." `left-4 md:left-10 top-[26%]` · "safe." `right-4 md:right-10 top-[46%]` · "yours." `left-[18%] md:left-[28%] top-[66%]`
 - CTA block (`absolute left-1/2 -translate-x-1/2 bottom-28 w-full px-6 flex flex-col items-center gap-7`):
@@ -222,13 +223,16 @@ A `fixed right-5 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-co
 | 10 | momentum | `videos.pexels.com/video-files/11270206/11270206-hd_1920_1080_60fps.mp4` | 4K | 51 s | 60 | 35.9 MB |
 | 11 | calm | `videos.pexels.com/video-files/35552773/15063226_2560_1440_30fps.mp4` | 4K | 82 s | 30 | 55.8 MB |
 
+> **Update (2026-09-30):** chapter 11 no longer ships this upstream file — it was replaced by the
+> self-hosted generated loop `public/calm.mp4` (see §5). The row is kept as the sourcing record.
+
 **Curation (not just links — actually watching):** all 9 landscape candidates were downloaded to the workspace and a frame was extracted at ~40 % of each duration and visually reviewed. Two candidates dropped as **portrait 9:16** (unusable for a 16:9 web background). The final order was chosen so the *camera language* tracks the story: board-level low angles (closest to the reference's framing) land on the watch/control chapters, the most panoramic shot carries the scale claim, POV carries speed, and the night shot book-ends the page.
 
 ## 5. Optimization — why it works the way it does
 
 **Video weight**
-- 1080p tier everywhere possible (4K sources downsampled by Pexels' own transcodes) — background video never needs more. The finale only exists as a 1440p file upstream, so it stays 1440p (flagged for re-encoding below).
-- Videos are **streamed from Pexels' CDN, not hosted** — the GitHub Pages site itself is < 300 KB. Zero hosting cost, global CDN edge caching.
+- 1080p tier everywhere possible (4K sources downsampled by Pexels' own transcodes) — background video never needs more. The finale used to be the exception (a raw 82 s 1440p file); it is now a self-hosted 15 s 1080p loop (`public/calm.mp4`, 1.2 MB) — see the recipe below.
+- Videos are **streamed from Pexels' CDN, not hosted** (except the finale) — the GitHub Pages site itself stays small. Zero hosting cost, global CDN edge caching.
 
 **Playback (the behavior you'll notice: a still poster for a moment, then motion)**
 - Chapters 2–11 use `preload="metadata"` + a `poster` image (Pexels thumbnails; the hero's poster is a frame extracted from the reference itself). Nothing downloads until needed.
@@ -246,13 +250,23 @@ A `fixed right-5 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-co
 - No client-side router → no SPA 404 fallback issues on a static host.
 - Verified: `npm run build` → `dist/index.html` references only `./assets/*`; `dist/poster-hero.jpg` present.
 
-**Recommended production trims (optional, before/after deploy):**
+**Production trim (done for the finale):**
 
 ```bash
 # finale: 82s 1440p (55.8 MB) → ~12s 1080p (~5–8 MB)
 ffmpeg -i in.mp4 -t 12 -vf "scale=1920:1080" -c:v libx264 -crf 23 -preset slow -an -movflags +faststart out.mp4
 # same one-liner works for any of the long clips; keep 8–15 s
 ```
+
+The shipped `public/calm.mp4` meets this spec (15 s, 1920×1080, H.264 CRF 23, no audio,
+`+faststart`) but is a **generated seamless night-snowfall loop** rather than a re-encode of the
+Pexels pick — the build environment could not reach `videos.pexels.com` to fetch the original.
+It is 1.2 MB vs 55.8 MB and cannot rot. Provenance: generated for this repo (reuse freely with
+the code). The generator is checked in as `tools/generate-calm-loop.py`
+(`pip install pillow numpy`, then `python tools/generate-calm-loop.py <ffmpeg> <out.mp4>`).
+The original pick and its URL are preserved in `videoembeddeddesign/video_picks.md`
+if you prefer the real footage — run the recipe above on it and swap the `calm` chapter's
+`video`/`poster` entries in `src/App.tsx`.
 
 ## 6. Architecture (for the agent touching the code)
 
@@ -261,13 +275,14 @@ index.html                  — Readex Pro via Google Fonts, #root
 vite.config.ts              — react + tailwindcss plugins, base: './', dev host 0.0.0.0
 public/poster-hero.jpg      — still extracted from the reference video
 src/index.css               — Tailwind v4 import + globals (.hero-title, scroll-cue keyframes, reduced-motion)
-src/main.tsx                — standard React 18 entry
+src/main.tsx                — standard React 19 entry (createRoot + StrictMode)
 src/App.tsx                 — the entire app:
     CHAPTERS: Chapter[]     — data-driven story (id, kicker, video, poster, shade, wordSize,
                               words[], para, paraCls, stat{value,label,cls,divider,align}, cta)
     useInView(threshold)    — IntersectionObserver hook (drives both playback + active dot)
-    usePrefersReducedMotion — one-time matchMedia check
+    usePrefersReducedMotion — matchMedia check that also tracks live changes
     <Navbar/>               — fixed pill nav (logo SVG from the original prompt, 4 section links, CTA)
+                              + hamburger/full-screen drawer below `md` (Escape closes, focus managed)
     <Dots/>                 — fixed right-rail progress dots (lg and up)
     <Scene/>                — one chapter: video + overlays + kicker + words + para + stat (+CTA/footer on finale)
     <StatBlock/> <CTA/> <Footer/> <Logo/>
@@ -275,15 +290,26 @@ src/App.tsx                 — the entire app:
 
 Everything presentational is data in `CHAPTERS` — to add/reorder/rewrite a chapter you edit the array, not components.
 
-## 7. Deploying to GitHub Pages (instructions for the next agent)
+## 7. Deploying to GitHub Pages
 
-The repo is **already deployment-ready**: `package-lock.json` is present (so `npm ci` works), and a GitHub Actions workflow is included.
+Deployment is handled **once, at the repository root**, for all templates:
+`.github/workflows/deploy.yml` builds every app (`npm ci && npm run build`) on each push and
+pull request, assembles them into one static tree and — on pushes to `main` — publishes that
+tree to the `gh-pages` branch, which GitHub Pages serves. Securify is the root of that site:
 
-1. **Create the repo** (e.g. `github.com/<you>/securify`) and push the *entire project folder* — including `public/`, `.github/`, `package-lock.json`, and the config files. **Do not push `node_modules/`** (it's already in `.gitignore`; it also isn't part of the workspace snapshot — the workflow reinstalls it).
-2. **In repo Settings → Pages → Build and deployment → Source: select "GitHub Actions".** (If "Deploy from a branch" is the only visible option, use the manual path in step 4 instead.)
-3. **Push to `main`** — the included workflow (`.github/workflows/deploy.yml`) runs `npm ci && npm run build` and deploys `dist/` to GitHub Pages via the official `actions/deploy-pages` action. The site goes live at **`https://<you>.github.io/securify/`** (or `https://<you>.github.io/` if the repo is a user-site named `<you>.github.io` — no config change needed, thanks to the relative base).
-4. **Manual fallback** (no Actions): locally run `npm ci && npm run build`, then push `dist/` contents to a `gh-pages` branch and set Pages source to that branch.
-5. **Verify:** open the site URL, scroll all 11 chapters, confirm each video starts when its chapter fills the screen (a poster frame for a second is normal), and check that `./assets/*` load (no 404s in devtools).
+| Path on the Pages site | Source |
+|---|---|
+| `/` | `videoembeddeddesign/securify/dist` (this app) |
+| `/aetherascrollstory/`, `/measured/`, `/synapsex/`, `/portfolio/` | the other Vite apps |
+| `/ethanvale/` | `ethan-vale-archive/index.html` (no build step) |
+
+Nothing app-specific is required beyond `base: './'` (relative asset URLs) and a committed
+`package-lock.json` (so `npm ci` is reproducible) — both are in place.
+
+**Deploying this app on its own** (e.g. you copied only this folder into a new repo): run
+`npm ci && npm run build` and publish `dist/` with any static host or a `gh-pages` branch; the
+relative base means it works at `https://<you>.github.io/`, `https://<you>.github.io/<repo>/`
+or a custom domain without configuration.
 
 **Local checks** (any agent should run these first):
 
@@ -296,11 +322,12 @@ npm run build      # → dist/  (production artifact; must succeed with zero TS 
 ## 8. Licensing
 
 - **Pexels License** — all Pexels videos in this repo may be used **free for commercial purposes, without attribution** (nice-to-have credits: the per-video Pexels pages, e.g. `pexels.com/video/6943040/`). Full terms: https://www.pexels.com/license/
-- **Hero video** — the user's own file (served from their own CloudFront bucket), used with the owner's permission.
+- **Hero video** — the original reference clip (AI-generated, served from a CloudFront bucket that is *not* part of this repository). It is used with the owner's permission but is **not** covered by the repo's MIT licence and may stop resolving at any time; the app falls back to the poster if it does. To make the template fully self-contained, place your own clip in `public/` and change `HERO_VIDEO` in `src/App.tsx`. See the root `ASSETS.md`.
 
 ## 9. Known limitations / next steps
 
 1. **Two heavy clips:** hero (22.9 MB, 7 s — acceptable) and finale (55.8 MB, 82 s @ 1440p — should be trimmed/re-encoded per the ffmpeg recipe before real traffic).
 2. Pexels CDN URLs are the stable canonical links, but if one ever 404s, re-resolve it from the video's Pexels page (section 4 describes the method).
 3. The two CTA buttons ("get started", "talk to us") are `href="#"` placeholders.
+5. The hero clip is hotlinked from a third-party CDN (see §8); self-host it before relying on the template in production.
 4. All stats (+65k, +1.5b, 99.99%, …) are marketing placeholders from the original prompt.

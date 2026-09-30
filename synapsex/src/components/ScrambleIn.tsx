@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { prefersReducedMotion } from '../lib/motion';
 
 const GLYPHS =
   'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+~|}{[]:;?><';
@@ -36,6 +37,12 @@ export default function ScrambleIn({ text, delay, triggered, className }: Scramb
 
   useEffect(() => {
     if (!triggered) return;
+
+    // Reduced motion: no glyph churn, just show the final text.
+    if (prefersReducedMotion()) {
+      setDisplay(text);
+      return;
+    }
 
     const total = text.length;
     const startFrame = Math.ceil((delay * 1000) / FRAME_MS);

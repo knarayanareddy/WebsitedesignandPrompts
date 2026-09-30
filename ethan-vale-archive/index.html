@@ -221,6 +221,38 @@ body.revealed .card figure img {
   opacity: 1;
 }
 
+/* KEYBOARD FOCUS (cards, grid tiles) */
+.card:focus-visible,
+.rows figure:focus-visible {
+  outline: 2px solid rgba(244,242,239,.85);
+  outline-offset: 3px;
+}
+.card:focus-visible figure { transform: scale(1.045); }
+
+/* MISSING ASSET PLACEHOLDER — a titled plate instead of a broken image */
+.card figure.missing img,
+.rows figure.missing img { visibility: hidden; }
+.card figure.missing::before,
+.rows figure.missing::before {
+  content: attr(data-title);
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 8%;
+  text-align: center;
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(11px, 1.1vw, 15px);
+  line-height: 1.3;
+  color: rgba(244,242,239,.55);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.06), rgba(255,255,255,0) 60%),
+    #0d0d0d;
+}
+.card figure.missing img { opacity: 0; }
+#avatar.missing { visibility: hidden; }
+
 /* VIGNETTE */
 .vig {
   position: fixed;
@@ -1089,7 +1121,7 @@ body.gridview #stage {
 </div>
 
 <!-- Lightbox -->
-<div id="lit">
+<div id="lit" role="dialog" aria-modal="true" aria-labelledby="litTitle" aria-hidden="true">
   <div class="scrim"></div>
   <div class="plate">
     <div class="shot">
@@ -1114,9 +1146,20 @@ body.gridview #stage {
 'use strict';
 
 /* ── DATA ── */
-const CDN = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/';
-const FILM_URL = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260922_195107_ed3f055a-3a13-4a71-b743-e10310454246.mp4';
-const AVATAR_ID = 'hf_20260922_194417_a455843c-d8db-461c-8ef6-74a325d2472c';
+/*
+ * ASSETS. Every still, the intro film and the avatar are loaded from
+ * ASSET_BASE. The default points at the third-party CDN that hosts the
+ * original AI-generated demo set — it is NOT part of this repository and may
+ * stop resolving at any time (see ../ASSETS.md). To self-host, copy the files
+ * next to this page and set ASSET_BASE = './images/'. Expected files per shot:
+ *   <id>_min.webp  (thumbnail, ~760px wide)   <id>.png  (full-resolution)
+ * A failed image never leaves a broken frame: the card shows a titled placeholder.
+ */
+const ASSET_BASE = 'https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/';
+const FILM_URL   = ASSET_BASE + 'hf_20260922_195107_ed3f055a-3a13-4a71-b743-e10310454246.mp4';
+const AVATAR_ID  = 'hf_20260922_194417_a455843c-d8db-461c-8ef6-74a325d2472c';
+const thumbUrl   = id => ASSET_BASE + id + '_min.webp';
+const fullUrl    = id => ASSET_BASE + id + '.png';
 
 const SHOTS = [
   { id:'hf_20260922_194349_26ffdbfd-ac5e-49e9-a07d-c06d3f7cb4cb', title:'Before the Dust Settled', place:'South Africa · Limpopo Province', note:'Wildlife photography is rarely about pressing the shutter. Most of the work happens earlier — waiting, staying still, and accepting that nature decides if the frame exists. This encounter lasted less than a minute.' },
@@ -1195,49 +1238,32 @@ for(let i = 0; i < N; i++){
   unitVecs.push({x, y, z});
 }
 
-/* ── BLOB URLS FOR DECODED IMAGES ── */
-const blobUrls = new Array(N).fill(null);
-let avatarBlobUrl = null;
-
 /* ── CARD ELEMENTS ── */
 const cards = [];
 const cardImgs = [];
+const gridImgs = [];
+const stillState = new Array(N).fill('pending'); // pending | ready | failed
 
-function getCardDecodeMax(){
-  const w = window.innerWidth;
-  if(w <= 380) return 420;
-  if(w <= 640) return 520;
-  if(w <= 900) return 640;
-  return 760;
+/*
+ * Preload + decode a still off the main paint path. Image.decode() resolves
+ * once the bitmap is ready, so the fade-in never shows a half-painted frame.
+ * (The previous canvas re-encode step was dropped: it needed CORS headers,
+ * doubled memory, and the _min.webp files are already web-sized.)
+ */
+function preloadImage(url){
+  const img = new Image();
+  img.decoding = 'async';
+  img.src = url;
+  const decoded = typeof img.decode === 'function'
+    ? img.decode()
+    : new Promise((res, rej) => { img.onload = res; img.onerror = rej; });
+  return decoded.then(() => img);
 }
 
-function decodeImage(url, maxW, callback){
-  const probe = new Image();
-  probe.crossOrigin = 'anonymous';
-  probe.onload = function(){
-    try {
-      const cap = maxW;
-      const scale = Math.min(1, cap / probe.naturalWidth);
-      const cw = Math.round(probe.naturalWidth * scale);
-      const ch = Math.round(probe.naturalHeight * scale);
-      const canvas = document.createElement('canvas');
-      canvas.width  = cw;
-      canvas.height = ch;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(probe, 0, 0, cw, ch);
-      canvas.toBlob(blob => {
-        if(blob){
-          callback(URL.createObjectURL(blob));
-        } else {
-          callback(url);
-        }
-      }, 'image/webp', 0.88);
-    } catch(e){
-      callback(url);
-    }
-  };
-  probe.onerror = function(){ callback(url); };
-  probe.src = url;
+/* Titled placeholder used when a still cannot be fetched. */
+function markFailed(el, title){
+  el.classList.add('missing');
+  el.setAttribute('data-title', title);
 }
 
 /* ── LAYOUT ── */
@@ -1245,8 +1271,7 @@ function computeLayout(){
   const W = window.innerWidth;
   const H = window.innerHeight;
 
-  // perspective
-  let persp;
+  // perspective (cached for tick(); mirrored to CSS for the 3D container)
   if(W <= 380) persp = 620;
   else if(W <= 640) persp = 760;
   else if(W <= 900) persp = 920;
@@ -1293,21 +1318,33 @@ function computeLayout(){
 }
 
 /* ── BUILD CARDS ── */
+function activateOnKey(el, handler){
+  el.addEventListener('keydown', e => {
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      handler(e);
+    }
+  });
+}
+
 function buildCards(){
   for(let i = 0; i < N; i++){
     const shot = SHOTS[i];
     const card = document.createElement('div');
     card.className = 'card' + (shot.tall ? ' tall' : '');
     card.dataset.idx = i;
+    // Keyboard access: each card is a button that opens the lightbox.
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', shot.title + ' — ' + shot.place + '. Open photo');
+    activateOnKey(card, () => openLit(i, card));
     const fig = document.createElement('figure');
     const img = document.createElement('img');
-    img.alt = shot.title;
-    if(blobUrls[i]){
-      img.src = blobUrls[i];
-      img.classList.add('in');
-    } else {
-      img.src = CDN + shot.id + '_min.webp';
-    }
+    img.alt = '';
+    img.decoding = 'async';
+    img.src = thumbUrl(shot.id);
+    if(stillState[i] === 'ready') img.classList.add('in');
+    img.addEventListener('error', () => markFailed(fig, shot.title));
     fig.appendChild(img);
     card.appendChild(fig);
     orb.appendChild(card);
@@ -1315,24 +1352,26 @@ function buildCards(){
     cardImgs.push(img);
   }
 
-  // Build grid
+  // Build grid (opened through the delegated click/keyboard handler below)
   for(let i = 0; i < N; i++){
     const shot = SHOTS[i];
     const fig = document.createElement('figure');
     fig.dataset.idx = i;
+    fig.setAttribute('role', 'button');
+    fig.setAttribute('tabindex', '0');
+    fig.setAttribute('aria-label', shot.title + ' — ' + shot.place + '. Open photo');
     const img = document.createElement('img');
-    img.alt = shot.title;
-    if(blobUrls[i]){
-      img.src = blobUrls[i];
-    } else {
-      img.src = CDN + shot.id + '_min.webp';
-    }
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.src = thumbUrl(shot.id);
+    img.addEventListener('error', () => markFailed(fig, shot.title));
     const cap = document.createElement('figcaption');
     cap.textContent = shot.title;
     fig.appendChild(img);
     fig.appendChild(cap);
     gridRows.appendChild(fig);
-    fig.addEventListener('click', () => openLit(i, fig));
+    gridImgs.push(img);
   }
 }
 
@@ -1360,6 +1399,10 @@ function rotateUnitVec(u, syDeg, sxDeg){
 
 const cardOpacities = new Array(N).fill(-1);
 const cardDs = new Array(N).fill(-1);
+
+// Last values written to the DOM — lets tick() skip frames where nothing moved.
+let persp = 1150;                // cached in computeLayout() (was read via getComputedStyle every frame)
+let lastSx = NaN, lastSy = NaN, lastCamZ = NaN, lastP = NaN, lastLit = null, lastR = NaN, lastPersp = NaN;
 
 function tick(){
   rafId = requestAnimationFrame(tick);
@@ -1390,9 +1433,16 @@ function tick(){
 
   camZTarget = p * Math.min(64, R * 0.12);
   camZ += (camZTarget - camZ) * 0.075;
+  if(Math.abs(camZTarget - camZ) < 0.01) camZ = camZTarget; // settle instead of lerping forever
 
   const sx = tilt + dragY;
   const sy = spin + dragX;
+
+  // Idle frame: nothing changed since the last write, so skip all DOM work.
+  if(sx === lastSx && sy === lastSy && camZ === lastCamZ && p === lastP && litOpen === lastLit && R === lastR && persp === lastPersp){
+    return;
+  }
+  lastSx = sx; lastSy = sy; lastCamZ = camZ; lastP = p; lastLit = litOpen; lastR = R; lastPersp = persp;
 
   world.style.transform = `translateZ(${camZ}px) rotateY(${sy}deg) rotateX(${sx}deg)`;
 
@@ -1401,7 +1451,6 @@ function tick(){
   headline.style.opacity = Math.max(0, 1 - p * 0.55);
 
   // per-card depth shading
-  const persp = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--persp')) || 1150;
   const near = persp * 0.66;
 
   for(let i = 0; i < N; i++){
@@ -1578,6 +1627,8 @@ window.addEventListener('scroll', () => {
 
 /* ── LIGHTBOX ── */
 let litToken = 0;
+let litReturnFocus = null;
+const litCloseBtn = litEl.querySelector('[data-close]');
 
 function openLit(idx, sourceEl){
   if(litOpen) return;
@@ -1585,9 +1636,11 @@ function openLit(idx, sourceEl){
   litOpen = true;
   const shot = SHOTS[idx];
 
-  // set content immediately with existing image
-  const src = blobUrls[idx] || (CDN + shot.id + '_min.webp');
-  litImg.src = src;
+  // remember where focus came from so it can be restored on close
+  litReturnFocus = (sourceEl && typeof sourceEl.focus === 'function') ? sourceEl : document.activeElement;
+
+  // set content immediately with the (already decoded) thumbnail
+  litImg.src = thumbUrl(shot.id);
   litImg.alt = shot.title;
   litTitle.textContent = shot.title;
   litWhere.textContent = shot.place;
@@ -1615,6 +1668,8 @@ function openLit(idx, sourceEl){
   plate.style.opacity    = '0';
 
   document.body.classList.add('lit');
+  litEl.inert = false;
+  litEl.setAttribute('aria-hidden', 'false');
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
@@ -1624,15 +1679,18 @@ function openLit(idx, sourceEl){
     });
   });
 
-  // load full res
+  // move focus into the dialog once it is interactive
+  setTimeout(() => { if(litOpen) litCloseBtn.focus(); }, 60);
+
+  // load full res (if it fails the thumbnail simply stays)
   const fullImg = new Image();
-  fullImg.crossOrigin = 'anonymous';
+  fullImg.decoding = 'async';
   fullImg.onload = () => {
     if(litToken === myToken){
       litImg.src = fullImg.src;
     }
   };
-  fullImg.src = CDN + shot.id + '.png';
+  fullImg.src = fullUrl(shot.id);
 }
 
 function closeLit(){
@@ -1642,11 +1700,20 @@ function closeLit(){
   litOpen = false;
   document.body.style.overflow = '';
 
+  // hand focus back to the element that opened the dialog (or its sphere card
+  // if it was a grid tile and the grid has since been dismissed)
+  let back = litReturnFocus;
+  litReturnFocus = null;
+  if(back && back.closest && back.closest('#grid') && !gridView) back = cards[closingIdx] || gridBtn;
+  if(back && document.contains(back)) back.focus({preventScroll: true});
+
   // find source for FLIP back
   const sourceEl = cards[closingIdx] || null;
   const plateRect = plate.getBoundingClientRect();
 
   document.body.classList.remove('lit');
+  litEl.inert = true;
+  litEl.setAttribute('aria-hidden', 'true');
 
   if(sourceEl){
     const srcRect = sourceEl.getBoundingClientRect();
@@ -1664,8 +1731,16 @@ function closeLit(){
   }
 }
 
-litEl.querySelector('[data-close]').addEventListener('click', closeLit);
+litCloseBtn.addEventListener('click', closeLit);
 scrim.addEventListener('click', closeLit);
+
+// keep Tab inside the open lightbox (it has a single focusable control)
+litEl.addEventListener('keydown', e => {
+  if(e.key === 'Tab' && litOpen){
+    e.preventDefault();
+    litCloseBtn.focus();
+  }
+});
 
 /* ── MENU ── */
 function openMenu(){
@@ -1701,27 +1776,49 @@ menuEl.querySelectorAll('a').forEach(a => {
 });
 
 /* ── GRID ── */
+// Only the visible view is reachable by keyboard / assistive tech: the hidden
+// one is made inert (plus aria-hidden for browsers without inert support).
+function setViewInert(el, inert){
+  el.inert = inert;
+  el.setAttribute('aria-hidden', inert ? 'true' : 'false');
+}
 function openGrid(){
   gridView = true;
   document.body.classList.add('gridview');
   gridBtn.setAttribute('aria-label', 'Close grid view');
+  gridBtn.setAttribute('aria-expanded', 'true');
+  setViewInert(gridEl, false);
+  setViewInert(stage, true);
 }
 
 function closeGrid(){
   gridView = false;
   document.body.classList.remove('gridview');
   gridBtn.setAttribute('aria-label', 'Toggle grid view');
+  gridBtn.setAttribute('aria-expanded', 'false');
+  setViewInert(gridEl, true);
+  setViewInert(stage, false);
 }
+setViewInert(gridEl, true); // the grid starts hidden
+litEl.inert = true;          // so does the lightbox (its Close button leaves the tab order)
 
 gridBtn.addEventListener('click', () => gridView ? closeGrid() : openGrid());
 
+function openFromGrid(fig){
+  const idx = parseInt(fig.dataset.idx, 10);
+  if(isNaN(idx)) return;
+  // FLIP out of the grid tile, then dismiss the grid underneath the lightbox.
+  openLit(idx, fig);
+  closeGrid();
+}
 gridRows.addEventListener('click', e => {
   const fig = e.target.closest('figure[data-idx]');
-  if(fig){
-    const idx = parseInt(fig.dataset.idx, 10);
-    closeGrid();
-    setTimeout(() => openLit(idx, cards[idx]), 50);
-  }
+  if(fig) openFromGrid(fig);
+});
+gridRows.addEventListener('keydown', e => {
+  if(e.key !== 'Enter' && e.key !== ' ') return;
+  const fig = e.target.closest('figure[data-idx]');
+  if(fig){ e.preventDefault(); openFromGrid(fig); }
 });
 
 /* ── KEYBOARD ── */
@@ -1915,31 +2012,22 @@ function onReveal(){
 
 /* ── IMAGE PRELOAD + DECODE ── */
 function preloadAll(){
-  const decodeMax = getCardDecodeMax();
+  // Avatar (falls back to initials via CSS if it cannot load)
+  avatarEl.addEventListener('error', () => { avatarEl.classList.add('missing'); }, {once: true});
+  avatarEl.src = thumbUrl(AVATAR_ID);
 
-  // Avatar
-  decodeImage(CDN + AVATAR_ID + '_min.webp', 160, blob => {
-    avatarEl.src = blob;
-    avatarBlobUrl = blob;
-  });
-
-  // Stills
+  // Stills — decode each thumbnail, then fade the card in. A failure still
+  // counts as "loaded" so the splash never waits on a dead URL.
   for(let i = 0; i < N; i++){
-    const url = CDN + SHOTS[i].id + '_min.webp';
     (function(idx){
-      decodeImage(url, decodeMax, blob => {
-        blobUrls[idx] = blob;
-        // update card img if already created
-        if(cardImgs[idx]){
-          cardImgs[idx].src = blob;
-          cardImgs[idx].classList.add('in');
-        }
-        // update grid img
-        const gridFigs = gridRows.querySelectorAll('figure');
-        if(gridFigs[idx]){
-          const gImg = gridFigs[idx].querySelector('img');
-          if(gImg) gImg.src = blob;
-        }
+      preloadImage(thumbUrl(SHOTS[idx].id)).then(() => {
+        stillState[idx] = 'ready';
+      }, () => {
+        // decode() can also reject for reasons other than a dead URL; the
+        // card's own <img error> handler paints the placeholder in that case.
+        stillState[idx] = 'failed';
+      }).then(() => {
+        if(cardImgs[idx]) cardImgs[idx].classList.add('in');
         onAssetLoaded();
       });
     })(i);
@@ -1962,9 +2050,6 @@ function preloadAll(){
 
 /* ── INIT ── */
 function init(){
-  // Set avatar placeholder
-  avatarEl.src = CDN + AVATAR_ID + '_min.webp';
-
   // Build empty card divs first
   buildCards();
 

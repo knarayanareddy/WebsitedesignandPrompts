@@ -1,16 +1,13 @@
 import { useEffect, useRef } from 'react';
-import type { MouseEvent } from 'react';
 import { gsap } from '../lib/gsap';
 import { useHlsVideo } from '../lib/useHlsVideo';
+import { POSTER_SRC, VIDEO_SRC } from '../lib/media';
+import { usePrefersReducedMotion } from '../lib/motion';
 
 interface SocialLink {
   readonly label: string;
   readonly href: string;
 }
-
-const VIDEO_SRC = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
-const POSTER_SRC =
-  'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop';
 
 const TICKER_TEXT = 'BUILDING THE FUTURE • CRAFTING EXPERIENCES • ';
 
@@ -24,11 +21,12 @@ const SOCIALS: readonly SocialLink[] = [
 export default function Footer(): JSX.Element {
   const videoRef = useHlsVideo(VIDEO_SRC);
   const tickerRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
-  /* Infinite marquee: xPercent -50 over 30s, seamless loop */
+  /* Infinite marquee: xPercent -50 over 30s, seamless loop (static under reduced motion) */
   useEffect(() => {
     const ticker: HTMLDivElement | null = tickerRef.current;
-    if (!ticker) return;
+    if (!ticker || reducedMotion) return;
 
     const tween = gsap.to(ticker, {
       xPercent: -50,
@@ -40,12 +38,7 @@ export default function Footer(): JSX.Element {
     return () => {
       tween.kill();
     };
-  }, []);
-
-  const handleEmailClick = (event: MouseEvent<HTMLAnchorElement>): void => {
-    event.preventDefault();
-    window.location.href = 'mailto:hello@michaelsmith.com';
-  };
+  }, [reducedMotion]);
 
   const tickerHalf: number[] = [0, 1, 2];
 
@@ -56,11 +49,12 @@ export default function Footer(): JSX.Element {
         ref={videoRef}
         className="absolute inset-0 h-full w-full invert object-cover"
         poster={POSTER_SRC}
-        autoPlay
         muted
         loop
         playsInline
+        preload="none"
         aria-hidden="true"
+        tabIndex={-1}
       />
       <div className="absolute inset-0 bg-black/75" />
 
@@ -90,7 +84,6 @@ export default function Footer(): JSX.Element {
         </h2>
         <a
           href="mailto:hello@michaelsmith.com"
-          onClick={handleEmailClick}
           className="gradient-ring-hover group/email inline-flex items-center gap-3 rounded-full bg-surface/60 px-8 py-4 text-sm text-text-primary backdrop-blur-md transition-colors hover:bg-surface md:text-base"
         >
           <span>hello@michaelsmith.com</span>

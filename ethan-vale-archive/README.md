@@ -49,7 +49,10 @@ A bottom-right toggle morphs the UI between the **interactive 3D orbital sphere*
 | **Grid Button** | Bottom-Right Click | Toggles between 3D Spherical Orbit and 2D Editorial Grid |
 | **Scroll / Wheel** | Vertical Scroll | 16vh camera dolly forward zoom |
 | **Touchscreen** | Horizontal Swipe | Rotates 3D sphere (auto-discriminates vertical page scroll) |
+| **Keyboard** | `Tab` / `Enter` / `Space` | Every sphere card and grid tile is a focusable button (visible focus ring); `Enter`/`Space` opens the lightbox, focus moves to **Close** and returns to the card on dismiss |
 | **Keyboard** | `Escape` Key | Closes lightbox modal, menu, or grid view |
+
+> **Assets are hosted off-repo.** All stills, the intro film and the avatar are loaded from the `ASSET_BASE` URL at the top of the script (a third-party CloudFront bucket, see [`../ASSETS.md`](../ASSETS.md)). Missing images degrade to a titled placeholder instead of a broken frame. To self-host, drop `<id>_min.webp` + `<id>.png` files in `./images/` and set `ASSET_BASE = './images/'`.
 
 ---
 

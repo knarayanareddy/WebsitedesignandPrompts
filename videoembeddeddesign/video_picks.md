@@ -77,6 +77,10 @@ All from **Pexels** — free for commercial use, no attribution required (Pexels
 - **Page:** https://www.pexels.com/video/serene-snowfall-slow-motion-at-night-35552773/
 - **Specs:** 4K source, 1:22, 30 fps, 16:9
 - **Why:** Slow snowflakes on a dark night background — the closest thing to your reference's *night* mood in free stock. Heavy file; trim/re-encode to ~10 s 1080p for web use.
+- **Status:** *not shipped.* The `calm` finale now uses a generated seamless night-snowfall loop
+  (`securify/public/calm.mp4`, 15 s 1080p, 1.2 MB) with the same mood. If you want the real
+  footage anyway, run the ffmpeg recipe in `securify/BUILD_LOG.md` §5 on the download above and
+  swap the `calm` chapter entries in `securify/src/App.tsx`.
 
 ---
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import BackgroundVideo from './BackgroundVideo';
 import type { MouseEvent as ReactMouseEvent } from 'react';
 import { motion } from 'framer-motion';
 import { Brain, RefreshCw, TrendingUp, Waves } from 'lucide-react';
@@ -80,17 +81,7 @@ export default function Technology() {
   return (
     <section id="technology" className="relative h-[100dvh] overflow-hidden bg-black">
       {/* Video #4 - adaptive technology */}
-      <video
-        src={TECH_VIDEO}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-        tabIndex={-1}
-      />
+      <BackgroundVideo src={TECH_VIDEO} className="absolute inset-0 h-full w-full object-cover" />
 
       <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
       <div

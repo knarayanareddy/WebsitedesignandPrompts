@@ -1,7 +1,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import type { MouseEvent } from 'react';
+import type { KeyboardEvent as ReactKeyboardEvent, MouseEvent } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { gsap } from '../lib/gsap';
+import { usePrefersReducedMotion } from '../lib/motion';
 
 interface ExplorationItem {
   readonly id: number;
@@ -83,10 +84,16 @@ export default function Explorations(): JSX.Element {
   const stageRef = useRef<HTMLDivElement>(null);
   const columnOneRef = useRef<HTMLDivElement>(null);
   const columnTwoRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
   const [activeItem, setActiveItem] = useState<ExplorationItem | null>(null);
+  const reducedMotion = usePrefersReducedMotion();
 
-  /* Pinned stage + dual-speed parallax columns */
+  /* Pinned stage + dual-speed parallax columns (skipped under reduced motion,
+     where the section renders as a plain grid instead) */
   useLayoutEffect(() => {
+    if (reducedMotion) return;
+
     const section: HTMLDivElement | null = sectionRef.current;
     const stage: HTMLDivElement | null = stageRef.current;
     const columnOne: HTMLDivElement | null = columnOneRef.current;
@@ -133,20 +140,34 @@ export default function Explorations(): JSX.Element {
     });
 
     return () => ctx.revert();
-  }, []);
+  }, [reducedMotion]);
 
-  /* Esc closes the lightbox */
+  /* Lightbox focus management: remember the opener, move focus to Close,
+     keep Tab inside the dialog, Esc closes, focus returns on close. */
   useEffect(() => {
     if (activeItem === null) return;
+
+    returnFocusRef.current = document.activeElement as HTMLElement | null;
+    const focusId: number = window.setTimeout(() => closeButtonRef.current?.focus(), 50);
 
     const handleKeyDown = (event: KeyboardEvent): void => {
       if (event.key === 'Escape') {
         setActiveItem(null);
+      } else if (event.key === 'Tab') {
+        // The dialog has a single focusable control; keep focus on it.
+        event.preventDefault();
+        closeButtonRef.current?.focus();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    return () => {
+      window.clearTimeout(focusId);
+      window.removeEventListener('keydown', handleKeyDown);
+      const opener: HTMLElement | null = returnFocusRef.current;
+      returnFocusRef.current = null;
+      if (opener && document.contains(opener)) opener.focus({ preventScroll: true });
+    };
   }, [activeItem]);
 
   const closeLightbox = (): void => setActiveItem(null);
@@ -154,9 +175,30 @@ export default function Explorations(): JSX.Element {
   const columnOneItems: readonly ExplorationItem[] = ITEMS.slice(0, 3);
   const columnTwoItems: readonly ExplorationItem[] = ITEMS.slice(3, 6);
 
+  const heading: JSX.Element = (
+    <h2 className="text-center font-display text-5xl italic text-text-primary md:text-7xl">
+      Visual <span className="font-sans font-normal not-italic">playground</span>
+    </h2>
+  );
+
   return (
-    <section id="explorations" ref={sectionRef} className="relative min-h-[260vh]">
-      <div ref={stageRef} className="relative h-screen w-full overflow-hidden">
+    <section
+      id="explorations"
+      ref={sectionRef}
+      className={reducedMotion ? 'relative' : 'relative min-h-[260vh]'}
+    >
+      {reducedMotion ? (
+        /* Reduced motion: no pin, no scrub — a plain two-column grid. */
+        <div className="mx-auto max-w-[1240px] px-6 py-24">
+          <div className="mb-12">{heading}</div>
+          <div className="grid grid-cols-2 gap-6 md:gap-8">
+            {ITEMS.map((item: ExplorationItem) => (
+              <ExplorationCard key={item.id} item={item} onSelect={setActiveItem} />
+            ))}
+          </div>
+        </div>
+      ) : (
+      <div ref={stageRef} className="relative h-svh w-full overflow-hidden">
         {/* Dual parallax columns */}
         <div className="absolute inset-0 flex items-center justify-center gap-6 px-6 md:gap-10 md:px-16">
           <div ref={columnOneRef} className="flex w-1/2 max-w-[420px] flex-col gap-6 md:gap-8">
@@ -174,12 +216,11 @@ export default function Explorations(): JSX.Element {
         {/* Pinned center title */}
         <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center px-6">
           <div className="rounded-full border border-stroke bg-bg/70 px-8 py-5 backdrop-blur-xl">
-            <h2 className="text-center font-display text-5xl italic text-text-primary md:text-7xl">
-              Visual <span className="font-sans font-normal not-italic">playground</span>
-            </h2>
+            {heading}
           </div>
         </div>
       </div>
+      )}
 
       {/* Lightbox modal */}
       <AnimatePresence>
@@ -191,6 +232,9 @@ export default function Explorations(): JSX.Element {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
             onClick={closeLightbox}
+            onKeyDown={(event: ReactKeyboardEvent<HTMLDivElement>) => {
+              if (event.key === 'Escape') closeLightbox();
+            }}
             role="dialog"
             aria-modal="true"
             aria-label={activeItem.title}
@@ -213,10 +257,11 @@ export default function Explorations(): JSX.Element {
                   {activeItem.title}
                 </h3>
                 <button
+                  ref={closeButtonRef}
                   type="button"
                   onClick={closeLightbox}
                   aria-label="Close lightbox"
-                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-stroke bg-surface text-text-primary transition-all hover:scale-105 hover:border-white/40"
+                  className="grid h-11 w-11 shrink-0 place-items-center rounded-full border border-stroke bg-surface text-text-primary transition-all hover:scale-105 hover:border-white/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue"
                 >
                   ✕
                 </button>

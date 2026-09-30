@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import BackgroundVideo from './BackgroundVideo';
 import AnimatedCounter from './AnimatedCounter';
 
 const METRICS_VIDEO =
@@ -40,17 +41,7 @@ export default function Metrics() {
       className="relative flex min-h-screen items-center overflow-hidden bg-black"
     >
       {/* Video #3 - metrics */}
-      <video
-        src={METRICS_VIDEO}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-        tabIndex={-1}
-      />
+      <BackgroundVideo src={METRICS_VIDEO} className="absolute inset-0 h-full w-full object-cover" />
 
       <div className="absolute inset-0 bg-black/50" aria-hidden="true" />
 

@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton+SC&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-
+/* Fonts (Anton SC, Space Mono) are linked from index.html with preconnect
+   hints instead of a render-blocking @import here. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -133,4 +133,19 @@ html.lenis body {
   white-space: nowrap;
   user-select: none;
   pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Reduced motion: decorative loops are disabled; layout/opacity fades remain
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .column-flicker:hover .glitch-scanlines,
+  .feature-card:hover .feature-icon,
+  .scanline,
+  [class*='animate-'] {
+    animation: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }

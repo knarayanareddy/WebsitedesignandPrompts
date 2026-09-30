@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import BackgroundVideo from './BackgroundVideo';
 import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 
 const CINEMATIC_VIDEO =
@@ -27,17 +28,7 @@ export default function CinematicText() {
       className="relative h-[100dvh] overflow-hidden bg-black"
     >
       {/* Video #2 - cinematic text (autoplay, muted, loop) */}
-      <video
-        src={CINEMATIC_VIDEO}
-        className="absolute inset-0 h-full w-full object-cover"
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        aria-hidden="true"
-        tabIndex={-1}
-      />
+      <BackgroundVideo src={CINEMATIC_VIDEO} className="absolute inset-0 h-full w-full object-cover" />
 
       <div className="absolute inset-0 bg-black/45" aria-hidden="true" />
 

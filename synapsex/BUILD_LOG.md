@@ -2,7 +2,7 @@
 
 > **Template:** 05 — SynapseX Neural-AI Interface Landing Page  
 > **Status:** Production Gold Standard  
-> **Stack:** React 18, Vite 5, Tailwind CSS v3, TypeScript, Framer Motion v12, Lenis  
+> **Stack:** React 18, Vite 6, Tailwind CSS v3, TypeScript, Framer Motion v12, Lenis  
 > **Aesthetic:** High-Tech Cyberpunk, Monospace Brutalism, Kinetic Physics  
 
 ---
@@ -28,7 +28,7 @@ Binding an HTML5 video's `currentTime` directly to mouse coordinates is notoriou
 
 #### The Solution: Hybrid Ambient Playback + Parallax Time-Warp
 In SynapseX:
-- The video loops ambiently at native 60 FPS (`autoPlay muted loop playsInline`).
+- The video loops ambiently (`muted loop playsInline`) through the shared `BackgroundVideo` component: playback starts when the section is on screen and pauses when it scrolls away, stays paused under `prefers-reduced-motion`, and swaps to a neutral plate if the CDN source fails.
 - Normalized cursor coordinates `(mouseX, mouseY) ∈ [-1, 1]` are piped through Framer Motion springs (`stiffness: 150, damping: 20`).
 - The hero typography and giant `"TRANSCENDENCE"` watermark calculate depth-separated translations:
   ```typescript
@@ -37,7 +37,14 @@ In SynapseX:
   const rotateY = useTransform(smoothX, (v) => v * 8);
   const rotateX = useTransform(smoothY, (v) => v * -8);
   ```
-- **Cursor Time-Warp:** Measuring the velocity $\Delta d / \Delta t$ of the pointer smoothly modulates `video.playbackRate` between `1.0x` and `1.6x`, easing back to `1.0x` when the mouse rests.
+- **Cursor Time-Warp:** Measuring the velocity $\Delta d / \Delta t$ of the pointer smoothly modulates `video.playbackRate` between `1.0x` and `1.6x`, easing back to `1.0x` when the mouse rests. The easing loop is started by pointer movement and stops itself once the rate settles back at `1.0x` (no permanent per-frame `playbackRate` writes); it is disabled entirely under reduced motion.
+
+### 2.1.1 Background video policy (`BackgroundVideo.tsx`)
+All five clips (hero, cinematic text, metrics, technology, footer) render through one component so the rules live in one place:
+- `IntersectionObserver` (threshold 0.05) calls `play()` when a clip enters the viewport and `pause()` when it leaves — at most one or two clips decode at any time instead of five for the whole session.
+- `preload="metadata"` everywhere except the hero (`eager` → `preload="auto"`), so below-the-fold clips only fetch headers until needed.
+- `prefers-reduced-motion: reduce` keeps every clip paused on its first frame / poster, and `main.tsx` skips Lenis smooth scrolling while `<MotionConfig reducedMotion="user">` strips framer-motion transforms; scramble text and counters render their final values immediately.
+- `onError` swaps the `<video>` for a radial-gradient plate (or the `poster` if provided), so a dead CloudFront URL never leaves an empty section. The clips are third-party hosted and not part of this repo — see `../ASSETS.md`.
 
 ---
 
@@ -115,3 +122,6 @@ When hovering over cards, Lucide icons trigger an interactive pulse-spin micro-a
 | **Heading Structure** | 1 `<h1>` for Hero | Single `<h1>`, semantic `<h2>` | ✅ WCAG AAA |
 | **Frame Rate** | Locked 60 FPS | Smooth GPU composition | ✅ Passed |
 | **Responsive Viewports** | Mobile to 4K Ultrawide | Fluid clamps (`clamp(2.75rem,8.5vw,7rem)`) | ✅ Passed |
+| **Offscreen media** | Only visible clips decode | IntersectionObserver-gated `play()`/`pause()` | ✅ Passed |
+| **Reduced motion** | Honour OS setting | Videos paused, Lenis off, `MotionConfig reducedMotion="user"`, CSS loops disabled | ✅ Passed |
+| **Fonts** | Non-blocking | `<link rel="preconnect">` + stylesheet link in `index.html` (no CSS `@import`) | ✅ Passed |

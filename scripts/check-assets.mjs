@@ -23,6 +23,7 @@ const CONCURRENCY = 6;
 const SOURCES = [
   'videoembeddeddesign/securify/src',
   'aetherascrollstory/src',
+  'apogee/src',
   'measured/src',
   'portfolio/src',
   'synapsex/src',
