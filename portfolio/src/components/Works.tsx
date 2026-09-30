@@ -8,6 +8,14 @@ interface Project {
   readonly description: string;
   readonly image: string;
   readonly span: string;
+  /**
+   * Case-study URL. When set, the whole card renders as a real, keyboard-
+   * focusable link with the "View —" hover pill. Leave it out for projects
+   * without a public write-up: the card is then a plain, non-interactive tile
+   * instead of a fake button. Fill these in when adapting the template, e.g.
+   * href: '/work/automotive-motion' or an external URL.
+   */
+  readonly href?: string;
 }
 
 interface MouseGlow {
@@ -52,8 +60,9 @@ interface ProjectCardProps {
 
 function ProjectCard({ project }: ProjectCardProps): JSX.Element {
   const [glow, setGlow] = useState<MouseGlow | null>(null);
+  const isLink: boolean = typeof project.href === 'string' && project.href.length > 0;
 
-  const handleMouseMove = (event: MouseEvent<HTMLDivElement>): void => {
+  const handleMouseMove = (event: MouseEvent<HTMLElement>): void => {
     const rect: DOMRect = event.currentTarget.getBoundingClientRect();
     setGlow({ x: event.clientX - rect.left, y: event.clientY - rect.top });
   };
@@ -62,9 +71,11 @@ function ProjectCard({ project }: ProjectCardProps): JSX.Element {
     setGlow(null);
   };
 
-  return (
+  const isExternal: boolean = isLink && /^https?:\/\//.test(project.href as string);
+
+  const card: JSX.Element = (
     <article
-      className={`group relative h-[380px] cursor-pointer overflow-hidden rounded-3xl border border-stroke bg-surface ${project.span}`}
+      className="group relative h-[380px] overflow-hidden rounded-3xl border border-stroke bg-surface"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -104,24 +115,48 @@ function ProjectCard({ project }: ProjectCardProps): JSX.Element {
       {/* Bottom shade for legibility */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-44 bg-gradient-to-t from-black/75 via-black/35 to-transparent" />
 
-      {/* Hover dark wash */}
-      <div className="pointer-events-none absolute inset-0 bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100" />
+      {isLink ? (
+        <>
+          {/* Hover / focus dark wash */}
+          <div className="pointer-events-none absolute inset-0 bg-black/40 opacity-0 backdrop-blur-sm transition-opacity duration-500 group-hover:opacity-100 group-focus-visible:opacity-100" />
 
-      {/* Title + description */}
-      <div className="absolute inset-x-0 bottom-0 z-10 p-6 opacity-100 transition-all duration-500 group-hover:-translate-y-3 group-hover:opacity-0">
-        <h3 className="mb-1.5 font-display text-2xl italic text-text-primary md:text-3xl">
-          {project.title}
-        </h3>
-        <p className="max-w-sm text-sm text-muted">{project.description}</p>
-      </div>
+          {/* Title + description */}
+          <div className="absolute inset-x-0 bottom-0 z-10 p-6 opacity-100 transition-all duration-500 group-hover:-translate-y-3 group-hover:opacity-0 group-focus-visible:-translate-y-3 group-focus-visible:opacity-0">
+            <h3 className="mb-1.5 font-display text-2xl italic text-text-primary md:text-3xl">
+              {project.title}
+            </h3>
+            <p className="max-w-sm text-sm text-muted">{project.description}</p>
+          </div>
 
-      {/* Hover pill */}
-      <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 translate-y-[170%] opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100">
-        <span className="gradient-ring inline-flex whitespace-nowrap rounded-full bg-bg/85 px-6 py-3 text-sm text-text-primary backdrop-blur-md">
-          View — {project.title}
-        </span>
-      </div>
+          {/* Hover / focus pill */}
+          <div className="absolute bottom-6 left-1/2 z-20 -translate-x-1/2 translate-y-[170%] opacity-0 transition-all duration-500 ease-out group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+            <span className="gradient-ring inline-flex whitespace-nowrap rounded-full bg-bg/85 px-6 py-3 text-sm text-text-primary backdrop-blur-md">
+              View — {project.title}
+            </span>
+          </div>
+        </>
+      ) : (
+        <div className="absolute inset-x-0 bottom-0 z-10 p-6">
+          <h3 className="mb-1.5 font-display text-2xl italic text-text-primary md:text-3xl">
+            {project.title}
+          </h3>
+          <p className="max-w-sm text-sm text-muted">{project.description}</p>
+        </div>
+      )}
     </article>
+  );
+
+  if (!isLink) return card;
+
+  return (
+    <a
+      href={project.href}
+      className="group block rounded-3xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue focus-visible:ring-offset-4 focus-visible:ring-offset-bg"
+      aria-label={`View case study — ${project.title}`}
+      {...(isExternal ? { target: '_blank', rel: 'noreferrer' } : {})}
+    >
+      {card}
+    </a>
   );
 }
 

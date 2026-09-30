@@ -124,7 +124,7 @@ function LayerCard({ layer, active, onActivate, delay }: LayerCardProps) {
         {/* Sweeping cyan/white laser scanline on active cards */}
         {active && (
           <span
-            className="pointer-events-none absolute inset-x-0 h-px opacity-40"
+            className="scanline pointer-events-none absolute inset-x-0 h-px opacity-40"
             style={{
               background:
                 'linear-gradient(90deg, transparent, #22d3ee 30%, #ffffff 50%, #22d3ee 70%, transparent)',

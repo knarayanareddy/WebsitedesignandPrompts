@@ -5,6 +5,18 @@ import ProgressDots from './components/ProgressDots'
 import VideoLoop from './components/VideoLoop'
 import { ALL_IDS, CHAPTERS, HERO } from './data/chapters'
 
+/**
+ * Hero layout constants (values from the original spec):
+ *  - the video layer starts HERO_VIDEO_TOP_PX below the top of the viewport so
+ *    the headline sits on plain white;
+ *  - the copy block's top padding is 8rem minus HERO_COPY_LIFT_PX so the
+ *    headline overlaps the video's top edge.
+ */
+const HERO_VIDEO_TOP_PX = 300
+const HERO_COPY_LIFT_PX = 75
+const HERO_COPY_PADDING_TOP = `calc(8rem - ${HERO_COPY_LIFT_PX}px)`
+const HERO_COPY_PADDING_BOTTOM = '10rem'
+
 export default function App() {
   const [active, setActive] = useState<string>(HERO.id)
 
@@ -27,30 +39,30 @@ export default function App() {
 
   return (
     <div className="relative w-full overflow-hidden bg-white">
-      <Navbar />
+      <Navbar active={active} />
       <ProgressDots ids={ALL_IDS} active={active} />
 
       {/* ---------------- Chapter 0 — the statement (hero) ---------------- */}
       <section
         id={HERO.id}
-        className={`relative min-h-screen w-full overflow-hidden bg-white ${active === HERO.id ? 'is-active' : ''}`}
+        className={`relative min-h-svh w-full overflow-hidden bg-white ${active === HERO.id ? 'is-active' : ''}`}
       >
         {/* Background video layer, positioned per spec: top 300px, pinned to sides/bottom */}
         <VideoLoop
           eager
           src={HERO.video}
           poster={HERO.poster}
-          style={{ top: '300px', right: 0, bottom: 0, left: 0 }}
+          style={{ top: HERO_VIDEO_TOP_PX, right: 0, bottom: 0, left: 0 }}
         />
         {/* Gradient blends the video into the white page, top and bottom */}
         <div
           className="pointer-events-none absolute z-[1] bg-gradient-to-b from-white via-transparent to-white"
-          style={{ top: '300px', right: 0, bottom: 0, left: 0 }}
+          style={{ top: HERO_VIDEO_TOP_PX, right: 0, bottom: 0, left: 0 }}
         />
 
         <div
           className="relative z-10 flex flex-col items-center justify-center px-6 text-center"
-          style={{ paddingTop: 'calc(8rem - 75px)', paddingBottom: '10rem' }}
+          style={{ paddingTop: HERO_COPY_PADDING_TOP, paddingBottom: HERO_COPY_PADDING_BOTTOM }}
         >
           <h1 className="hero-title animate-fade-rise max-w-7xl font-display text-5xl font-normal text-black sm:text-7xl md:text-8xl">
             Beyond <em className="italic text-[#6F6F6F]">silence,</em> we build{' '}

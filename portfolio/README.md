@@ -31,7 +31,11 @@ A 260vh pinned stage featuring two asynchronous vertical columns (`1.2x` and `0.
 An asymmetric 4-project showcase combining print-inspired 4px radial halftone dot overlays with real-time cursor spotlight glows and animated hover pill badges.
 
 ### 4. Mux HLS Streaming Video Loops
-Hardware-accelerated HTTP Live Streaming (`.m3u8`) with automatic Safari fallback and negative-inversion background treatment in the footer.
+Hardware-accelerated HTTP Live Streaming (`.m3u8`) with native-HLS-first playback (Safari) and hls.js elsewhere, attached lazily when each section nears the viewport and paused offscreen; the footer applies a negative-inversion treatment. The stream and poster live in `src/lib/media.ts` and are third-party hosted — swap them for your own before shipping (see [`../ASSETS.md`](../ASSETS.md)).
+
+### Accessibility & motion
+- Honors `prefers-reduced-motion`: native scrolling instead of Lenis, `MotionConfig reducedMotion="user"`, static parallax grid, static marquee, no role cycling, videos stay on their poster.
+- Mobile navigation menu below `md`, lightbox focus management (focus to Close, Tab trapped, focus restored), and Works / Journal cards that are real links whenever a `href` is supplied.
 
 ### 5. Infinite GSAP Marquee Ticker
 A seamless `-50%` marquee ticker loop paired with a live pulsing availability indicator (`"Available for Q4 contracts"`).
@@ -71,28 +75,30 @@ portfolio/
 ├── BUILD_LOG.md             # In-depth architectural & performance engineering notes
 ├── README.md                # Template documentation & quickstart
 ├── index.html               # Entry HTML with Instrument Serif & Inter fonts + SVG favicon
-├── package.json             # React 18, Vite 5, GSAP, Lenis, Framer Motion, HLS.js
+├── package.json             # React 18, Vite 6, GSAP, Lenis, Framer Motion, HLS.js
 ├── tailwind.config.js       # HSL color system, typography, gradient ring styles
 ├── tsconfig.json            # Strict TypeScript configuration
 ├── vite.config.ts           # Relative base ('./') + manual vendor chunking
 ├── public/
 │   └── favicon.svg          # Custom SVG monogram favicon
 └── src/
-    ├── App.tsx              # Lenis smooth-scroll setup, preloader gating, layout
-    ├── index.css            # Design tokens, halftone utilities, keyframe animations
-    ├── main.tsx             # React DOM entry point
+    ├── App.tsx              # Lenis (or native) scroll setup, preloader gating, layout
+    ├── index.css            # Design tokens, halftone utilities, keyframes, reduced-motion overrides
+    ├── main.tsx             # React DOM entry point + MotionConfig
     ├── vite-env.d.ts        # Vite client types
     ├── components/
-    │   ├── LoadingScreen.tsx # 000-100 rAF counter & rotating word preloader
-    │   ├── Navbar.tsx        # Floating glass pill navbar with Lenis programmatic scroll
+    │   ├── LoadingScreen.tsx # Asset-aware 000-100 counter & rotating word preloader
+    │   ├── Navbar.tsx        # Floating glass pill navbar + mobile disclosure menu
     │   ├── Hero.tsx          # Full-viewport HLS video showcase & role cycler
-    │   ├── Works.tsx         # Asymmetric halftone grid with mouse-follow glow
-    │   ├── Explorations.tsx  # Dual-speed pinned parallax stage & lightbox modal
-    │   ├── Journal.tsx       # Editorial writings with hover arrows
+    │   ├── Works.tsx         # Asymmetric halftone grid with mouse-follow glow (linkable cards)
+    │   ├── Explorations.tsx  # Dual-speed pinned parallax stage & focus-managed lightbox
+    │   ├── Journal.tsx       # Editorial writings (linkable rows)
     │   ├── Stats.tsx         # Impact metrics in Instrument Serif
     │   ├── Footer.tsx        # Infinite marquee ticker, inverted video & email CTA
     │   └── Reveal.tsx        # Viewport reveal wrapper with Framer Motion
     └── lib/
         ├── gsap.ts           # GSAP & ScrollTrigger registration
-        └── useHlsVideo.ts    # Cross-platform HLS video player hook
+        ├── media.ts          # Shared stream + poster URLs (third-party hosted)
+        ├── motion.ts         # prefers-reduced-motion helpers (sync + hook)
+        └── useHlsVideo.ts    # Lazy, viewport-gated cross-platform HLS hook
 ```

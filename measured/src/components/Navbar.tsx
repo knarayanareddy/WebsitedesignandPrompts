@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import { Logo } from './Logo';
+
+const FOCUSABLE =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
 const LINKS = [
   { label: 'Device', href: '#hero' },
@@ -12,25 +15,43 @@ const LINKS = [
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
+  const openBtnRef = useRef<HTMLButtonElement | null>(null);
+  const closeBtnRef = useRef<HTMLButtonElement | null>(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
 
-  // body scroll lock while the drawer is open
+  // While the drawer is open: lock scroll, move focus inside, trap Tab, close on
+  // Escape, and hand focus back to the hamburger when it closes.
   useEffect(() => {
     if (!open) return;
     const prev = document.documentElement.style.overflow;
     document.documentElement.style.overflow = 'hidden';
-    return () => {
-      document.documentElement.style.overflow = prev;
-    };
-  }, [open]);
+    closeBtnRef.current?.focus();
 
-  // close on Escape
-  useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setOpen(false);
+      if (e.key === 'Escape') {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== 'Tab' || !drawerRef.current) return;
+      const nodes = Array.from(drawerRef.current.querySelectorAll<HTMLElement>(FOCUSABLE));
+      if (nodes.length === 0) return;
+      const first = nodes[0];
+      const last = nodes[nodes.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
-  }, []);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      document.documentElement.style.overflow = prev;
+      openBtnRef.current?.focus();
+    };
+  }, [open]);
 
   // close if resized up to desktop
   useEffect(() => {
@@ -76,10 +97,12 @@ export function Navbar() {
 
           {/* mobile hamburger */}
           <button
+            ref={openBtnRef}
             type="button"
             onClick={() => setOpen(true)}
             aria-label="Open menu"
             aria-expanded={open}
+            aria-controls="mobile-menu"
             className="liquid-glass flex h-11 w-11 items-center justify-center rounded-full md:hidden"
           >
             <span aria-hidden className="relative block h-3 w-5">
@@ -93,6 +116,8 @@ export function Navbar() {
       {/* fullscreen drawer */}
       {open && (
         <div
+          ref={drawerRef}
+          id="mobile-menu"
           role="dialog"
           aria-modal="true"
           aria-label="Menu"
@@ -103,6 +128,7 @@ export function Navbar() {
               <Logo />
             </a>
             <button
+              ref={closeBtnRef}
               type="button"
               onClick={() => setOpen(false)}
               aria-label="Close menu"

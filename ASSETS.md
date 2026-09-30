@@ -17,11 +17,11 @@ assumed (the outstanding work is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHE
 
 | Template | Committed in repo | Hot-linked (third-party) | Behaviour when a hot-link fails |
 |---|---|---|---|
-| Securify | `poster-hero.jpg` (150 KB) | 1 CloudFront `hf_` clip (hero) + 10 Pexels clips + 10 Pexels posters | Browser keeps showing the chapter's `poster` (no explicit `onError` handler) |
-| Aethera | 8 MP4 loops (~24.5 MB) + 8 posters | 1 CloudFront `hf_` clip (used only as the source reference for `01-silence.mp4`) | Poster is shown under `prefers-reduced-motion`; a failed clip leaves the fade wrapper at `opacity: 0` (**gap**) |
+| Securify | `poster-hero.jpg` (150 KB), `calm.mp4` + `poster-calm.jpg` (1.2 MB, generated finale) | 1 CloudFront `hf_` clip (hero) + 10 Pexels clips + 10 Pexels posters | `onError` → the chapter's poster is swapped in as an `<img>` (implemented) |
+| Aethera | 8 MP4 loops (~24.5 MB) + 8 posters | 1 CloudFront `hf_` clip (used only as the source reference for `01-silence.mp4`) | Poster is shown under `prefers-reduced-motion`; a failed clip or refused autoplay reveals the poster at full opacity (implemented) |
 | Measured | 5 JPGs in `public/img/` | 1 CloudFront `hf_` clip + 1 `images.higgs.ai` still (hero) | `onError` → local `hero-base.jpg` / static reveal art (implemented) |
-| Ethan Vale | nothing (single HTML file) | 21 stills (`_min.webp` + `.png`), 1 film, 1 avatar — all CloudFront `hf_` | Film failure is handled; a failed still renders an empty plate (**gap**) |
-| SynapseX | nothing | 5 CloudFront `hf_` clips | No handler — the video area stays empty (**gap**) |
+| Ethan Vale | nothing (single HTML file) | 21 stills (`_min.webp` + `.png`), 1 film, 1 avatar — all CloudFront `hf_` | Film failure is handled; a failed still renders a labelled placeholder plate (implemented) |
+| SynapseX | nothing | 5 CloudFront `hf_` clips | `BackgroundVideo` swaps a failed clip for a gradient plate (poster-backed where available) — implemented |
 | Portfolio | nothing | 1 Mux HLS stream + 11 Unsplash photos (18 URLs with size variants) | `poster` frame stays behind the HLS element if the stream fails |
 
 `hf_…` files on `d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/` are
@@ -35,17 +35,19 @@ ownership and licence are **undocumented**, so treat them as placeholders only.
 
 | Asset | Source | Licence | In repo? |
 |---|---|---|---|
-| Hero clip (chapter 0, `REF_VIDEO` in `src/App.tsx`) | `https://d8j0ntlcm91z4.cloudfront.net/…/hf_20260418_063509_….mp4` | Undocumented (AI-generated reference) | No |
+| Hero clip (chapter 0, `HERO_VIDEO` in `src/App.tsx`) | `https://d8j0ntlcm91z4.cloudfront.net/…/hf_20260418_063509_….mp4` | Undocumented (AI-generated reference) | No |
 | Hero poster `public/poster-hero.jpg` | Frame extracted from the hero clip | Same as above | Yes |
 | Chapters 1–10 video + poster | Pexels (`videos.pexels.com`, `images.pexels.com`) — IDs and pages listed in `securify/BUILD_LOG.md` §4 and `videoembeddeddesign/video_picks.md` | [Pexels License](https://www.pexels.com/license/) (free for commercial use, no attribution required) | No — streamed from Pexels' CDN |
+| Finale clip `public/calm.mp4` + `public/poster-calm.jpg` | **Generated for this repo** — a seamless 15 s 1080p night-snowfall loop (soft bokeh particles on a night gradient), replacing the original Pexels pick ("Serene Snowfall Slow-Motion at Night", a 55.8 MB raw 1440p file). Generator: `securify/tools/generate-calm-loop.py`; encoding spec in `BUILD_LOG.md` §5 | Generated for this repo — reuse freely with the code | Yes (1.2 MB + 36 KB) |
 
 Notes
 
-- The chapter-11 finale is a 1440p/30 fps upstream file (URL contains `2560_1440`), far heavier
-  than the rest of the set. `BUILD_LOG.md` §5 carries the ffmpeg recipe to trim/re-encode it to
-  1080p and self-host; that work is still outstanding.
-- Fallback today: each `<video>` has a `poster`, so a failed CDN request shows a still frame.
-  There is no explicit `onError` path (tracked in `REVIEW_CHECKLIST.md`).
+- The finale used to be streamed raw from Pexels at 1440p/82 s. It is now a generated,
+  self-hosted loop, so that chapter cannot rot and costs 1.2 MB instead of 55.8 MB. To swap the
+  original footage back, follow the ffmpeg recipe in `BUILD_LOG.md` §5 (the Pexels URL and page
+  are recorded in `videoembeddeddesign/video_picks.md`).
+- Fallback today: each `<video>` has a `poster`, and if a clip fails to load (`onError`) the
+  poster is rendered as an `<img>` so the chapter never collapses to a black band (implemented).
 
 ## 2. Aethera — `aetherascrollstory`
 
@@ -62,8 +64,8 @@ Notes
   catalogue grows, the options are Git LFS (history rewrite + CI `lfs: true`) or external
   hosting with the `video` paths in `chapters.ts` pointed at a CDN.
 - Fallback today: `prefers-reduced-motion` shows posters and never autoplays. A clip that fails
-  to load leaves the rAF fade wrapper at `opacity: 0`, so the chapter can appear blank
-  (tracked in `REVIEW_CHECKLIST.md`).
+  to load (or playback that is refused by the browser) reveals the poster at full opacity
+  instead of leaving the fade wrapper at `opacity: 0` (implemented).
 
 ## 3. Measured — `measured`
 
@@ -103,8 +105,8 @@ Notes
   # then set: const CDN = './images/';
   ```
 
-- Fallback today: film errors are handled; a still that fails to load renders an empty plate
-  (tracked in `REVIEW_CHECKLIST.md`).
+- Fallback today: film errors are handled; a still that fails to load swaps its card to a
+  labelled placeholder plate (implemented).
 - `scripts/check-assets.mjs` HEAD-checks every remote URL this repo depends on.
 
 ## 5. SynapseX — `synapsex`
@@ -116,8 +118,9 @@ Notes
 
 Notes
 
-- Fallback today: none — a failed clip leaves an empty area behind the content (tracked in
-  `REVIEW_CHECKLIST.md`).
+- Fallback today: `BackgroundVideo` pauses playback under `prefers-reduced-motion` and swaps a
+  failed clip for a gradient plate (poster-backed where available), so a dead CDN link never
+  leaves an empty area behind the content (implemented).
 
 ## 6. Editorial Portfolio — `portfolio`
 

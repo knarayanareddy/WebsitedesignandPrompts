@@ -21,6 +21,9 @@ type Props = {
  *  - on "ended": opacity 0, wait 100ms, reset currentTime = 0, play() again
  *  - only plays while >= 35% visible (IntersectionObserver)
  *  - prefers-reduced-motion: never autoplays, shows the poster at full opacity
+ *  - if playback is refused (autoplay policy, Low Power Mode, Data Saver) or the
+ *    file fails to load, the poster is revealed at full opacity instead of
+ *    leaving the chapter blank
  */
 export default function VideoLoop({ src, poster, eager = false, className = '', style }: Props) {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -35,15 +38,30 @@ export default function VideoLoop({ src, poster, eager = false, className = '', 
     const setOpacity = (o: number) => {
       wrap.style.opacity = String(o)
     }
+    // "Poster mode": whatever happens, make sure something is visible.
+    const showPoster = () => setOpacity(1)
 
     if (reduced) {
-      setOpacity(1)
+      showPoster()
       video.pause()
       return
     }
 
     let raf = 0
     let resetTimer: number | undefined
+    let hasPlayed = false
+
+    const tryPlay = () => {
+      video.play().then(
+        () => {
+          hasPlayed = true
+        },
+        () => {
+          // Autoplay refused — keep the poster visible rather than a blank layer.
+          showPoster()
+        },
+      )
+    }
 
     // Continuously monitor currentTime/duration and drive the fade envelope.
     const tick = () => {
@@ -64,16 +82,26 @@ export default function VideoLoop({ src, poster, eager = false, className = '', 
       setOpacity(0)
       resetTimer = window.setTimeout(() => {
         video.currentTime = 0
-        void video.play().catch(() => undefined)
+        tryPlay()
       }, RESET_DELAY_MS)
     }
+    // Network/decode failure: the poster is all we have, so show it.
+    const onError = () => {
+      showPoster()
+    }
+    // Paused before it ever played (e.g. browser refused without rejecting): show the poster.
+    const onPause = () => {
+      if (!hasPlayed) showPoster()
+    }
     video.addEventListener('ended', onEnded)
+    video.addEventListener('error', onError)
+    video.addEventListener('pause', onPause)
 
     // Bounded scroll cost: only the visible chapter plays.
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
-          if (entry.isIntersecting) void video.play().catch(() => undefined)
+          if (entry.isIntersecting) tryPlay()
           else video.pause()
         }
       },
@@ -85,6 +113,8 @@ export default function VideoLoop({ src, poster, eager = false, className = '', 
       cancelAnimationFrame(raf)
       window.clearTimeout(resetTimer)
       video.removeEventListener('ended', onEnded)
+      video.removeEventListener('error', onError)
+      video.removeEventListener('pause', onPause)
       observer.disconnect()
     }
   }, [])

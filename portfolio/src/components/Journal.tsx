@@ -4,6 +4,12 @@ interface Article {
   readonly title: string;
   readonly readTime: string;
   readonly date: string;
+  /**
+   * Article URL. Rows with an href render as real links (keyboard-focusable,
+   * with the arrow affordance); rows without one are plain list items. Fill
+   * these in when adapting the template.
+   */
+  readonly href?: string;
 }
 
 const ARTICLES: readonly Article[] = [
@@ -39,28 +45,57 @@ export default function Journal(): JSX.Element {
         </h2>
       </Reveal>
 
-      <div>
-        {ARTICLES.map((article: Article, index: number) => (
-          <Reveal key={article.title} delay={index * 0.06}>
-            <article className="group mb-4 flex cursor-pointer flex-col justify-between rounded-2xl border border-stroke bg-surface/40 p-5 transition-all hover:border-white/20 hover:bg-surface sm:flex-row sm:items-center md:rounded-full md:p-6">
-              <h3 className="text-base font-medium text-text-primary transition-transform duration-300 group-hover:translate-x-1 md:text-lg">
+      <ul className="list-none p-0">
+        {ARTICLES.map((article: Article, index: number) => {
+          const isLink: boolean = typeof article.href === 'string' && article.href.length > 0;
+          const row: JSX.Element = (
+            <article
+              className={`group mb-4 flex flex-col justify-between rounded-2xl border border-stroke bg-surface/40 p-5 transition-all sm:flex-row sm:items-center md:rounded-full md:p-6 ${
+                isLink ? 'hover:border-white/20 hover:bg-surface' : ''
+              }`}
+            >
+              <h3
+                className={`text-base font-medium text-text-primary md:text-lg ${
+                  isLink ? 'transition-transform duration-300 group-hover:translate-x-1' : ''
+                }`}
+              >
                 {article.title}
               </h3>
               <div className="mt-3 flex shrink-0 items-center gap-4 text-sm text-muted sm:mt-0">
                 <span>{article.readTime}</span>
                 <span aria-hidden="true" className="h-1 w-1 rounded-full bg-muted" />
                 <span>{article.date}</span>
-                <span
-                  aria-hidden="true"
-                  className="grid h-9 w-9 place-items-center rounded-full border border-stroke text-text-primary transition-all duration-300 group-hover:border-transparent group-hover:bg-text-primary group-hover:text-bg"
-                >
-                  ↗
-                </span>
+                {isLink && (
+                  <span
+                    aria-hidden="true"
+                    className="grid h-9 w-9 place-items-center rounded-full border border-stroke text-text-primary transition-all duration-300 group-hover:border-transparent group-hover:bg-text-primary group-hover:text-bg group-focus-visible:bg-text-primary group-focus-visible:text-bg"
+                  >
+                    ↗
+                  </span>
+                )}
               </div>
             </article>
-          </Reveal>
-        ))}
-      </div>
+          );
+
+          return (
+            <li key={article.title}>
+              <Reveal delay={index * 0.06}>
+                {isLink ? (
+                  <a
+                    href={article.href}
+                    className="group block rounded-2xl focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-blue md:rounded-full"
+                    aria-label={`Read — ${article.title}`}
+                  >
+                    {row}
+                  </a>
+                ) : (
+                  row
+                )}
+              </Reveal>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

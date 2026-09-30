@@ -1,7 +1,7 @@
 # Adapted AI Prompt: Editorial Dark Portfolio
 
 > **Prompt Category:** Creative Technologist / Design Engineer / Editorial Portfolio / Interactive Showcase  
-> **Tech Stack:** React 18, TypeScript, Vite 5, Tailwind CSS v3, GSAP 3 (ScrollTrigger), Lenis, Framer Motion 11, HLS.js  
+> **Tech Stack:** React 18, TypeScript, Vite 6, Tailwind CSS v3, GSAP 3 (ScrollTrigger), Lenis, Framer Motion 11, HLS.js  
 > **Aesthetic:** Dark Editorial Minimalism, Instrument Serif (italic) + Inter, Halftone Spotlights, Dual-Speed Pinned Parallax, Inverted Mux Video Marquee
 
 ---
@@ -78,7 +78,7 @@ Build a high-end, Awwwards-grade single-page editorial dark portfolio landing pa
 ## Key Component Specifications
 
 ### 1. `LoadingScreen.tsx` (Preloader)
-- Numerical counter animating from `000` to `100` via `requestAnimationFrame` over 2700ms.
+- Numerical counter animating from `000` to `100` via `requestAnimationFrame`. Progress eases toward 90% while webfonts and the hero poster are loading, completes once they are ready (minimum 1000ms on screen) and is forced to 100% at 2700ms.
 - Rotating word switcher (`Design` → `Create` → `Inspire`) cycling every 900ms via `AnimatePresence`.
 - Glowing accent gradient progress bar scaling across the bottom (`scaleX(${progress})`).
 - 400ms fade-out transition triggering the application ready state.
@@ -86,11 +86,12 @@ Build a high-end, Awwwards-grade single-page editorial dark portfolio landing pa
 ### 2. `Navbar.tsx` (Floating Capsule)
 - Floating frosted glass capsule (`bg-surface/80 border-white/10 backdrop-blur-md`).
 - Logo badge with glowing animated gradient ring on hover.
-- Navigation links (`Home`, `Work`, `Journal`, `Explorations`) triggering smooth programmatic scroll via `lenis.scrollTo()`.
+- Navigation links (`Home`, `Work`, `Journal`, `Explorations`) triggering smooth programmatic scroll via `lenis.scrollTo()` (native `scrollIntoView` under reduced motion).
+- Below `md`, a hamburger button (`aria-expanded`, `aria-controls`) discloses the same links in a panel; Escape closes it and returns focus.
 - "Say Hi ↗" button with gradient border highlight.
 
 ### 3. `Hero.tsx` (Full-Viewport Cinematic Showcase)
-- Fullscreen HLS video background with dark gradient bottom scrim (`bg-gradient-to-t from-bg to-transparent`).
+- Fullscreen HLS video background with dark gradient bottom scrim (`bg-gradient-to-t from-bg to-transparent`). `useHlsVideo(source, { eager })` must prefer native HLS (`canPlayType`), attach lazily when the element nears the viewport, pause offscreen, never attach under `prefers-reduced-motion`, and keep the poster on fatal errors. Use `h-svh`, not `h-screen`.
 - Massive display title: `Michael Smith` in `font-display` (Instrument Serif italic) at `text-6xl md:text-9xl`.
 - Cycling role tagline: `"A [Creative | Fullstack | Founder | Scholar] lives in Chicago."` animating vertically every 2.2s.
 - Dual action pills: `See Works` (filled) and `Reach out` (outlined).
@@ -104,6 +105,7 @@ Build a high-end, Awwwards-grade single-page editorial dark portfolio landing pa
   - Halftone dot texture overlay (`mix-blend-multiply` with 4px circular dot pattern).
   - Cursor-tracking ambient spotlight glow (`radial-gradient(500px circle at ${glow.x}px ${glow.y}px, rgba(137,170,204,0.12), transparent 40%)`).
   - Dark blur wash on hover with smooth upward pill reveal (`View — [Project Title]`).
+  - Each project has an optional `href`; when present the whole card is a real `<a>` (focus-visible ring, pill also shows on focus), otherwise a plain non-interactive tile (no `cursor-pointer`).
 
 ### 5. `Explorations.tsx` (Dual-Speed Pinned Parallax Gallery)
 - Pinned stage (`min-h-[260vh]`) locked via GSAP ScrollTrigger (`pin: stage, scrub: true`).
@@ -111,10 +113,11 @@ Build a high-end, Awwwards-grade single-page editorial dark portfolio landing pa
   - Column 1 (Left, 3 items) travels at `1.2x` scroll speed.
   - Column 2 (Right, 3 items) travels at `0.8x` scroll speed.
 - Floating center glass badge: `"Visual playground"` (`bg-bg/70 backdrop-blur-xl border-stroke`).
-- Click-to-expand Lightbox Modal with spring scaling, Esc key listener, and backdrop blur.
+- Click-to-expand Lightbox Modal with spring scaling, Esc key listener, and backdrop blur. Move focus to the Close button on open, keep Tab inside, and return focus to the opener on close.
+- Under reduced motion skip the pin/scrub and render the six cards as a plain two-column grid under the heading.
 
 ### 6. `Journal.tsx` (Editorial Writing List)
-- Elegant pill-shaped article rows with hover translations (`group-hover:translate-x-1`) and circular arrow buttons that invert color on hover (`group-hover:bg-text-primary group-hover:text-bg`).
+- Elegant pill-shaped article rows with hover translations (`group-hover:translate-x-1`) and circular arrow buttons that invert color on hover (`group-hover:bg-text-primary group-hover:text-bg`). Rows take an optional `href`; linked rows render as `<a>` inside a `<ul>`, unlinked rows show no arrow.
 
 ### 7. `Stats.tsx` (Impact Metrics)
 - Minimalist 3-column metrics (`12+ Years`, `84+ Shipments`, `99.4% Client Satisfaction`) rendered in large serif numbers with `Reveal` scroll animations.
@@ -123,5 +126,6 @@ Build a high-end, Awwwards-grade single-page editorial dark portfolio landing pa
 - Fullscreen inverted HLS background video loop (`filter: invert(1)`).
 - Infinite GSAP marquee ticker moving seamlessly across the viewport at `-50%` translation over 30s.
 - Live pulsing green availability badge (`"Available for Q4 contracts"`).
-- Direct email link with magnetic arrow micro-interaction.
+- Direct email link with magnetic arrow micro-interaction (a plain `mailto:` anchor, no JavaScript handler).
+- Global: wrap the app in `<MotionConfig reducedMotion="user">`; skip Lenis and the marquee tween, stop the role/word cyclers and disable CSS keyframe loops when `prefers-reduced-motion` is set.
 ```

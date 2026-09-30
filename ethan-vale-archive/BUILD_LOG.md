@@ -151,12 +151,20 @@ The interface includes a bottom-right grid toggle (`#gridBtn`) switching between
 
 ---
 
-## 8. Memory Management & Texture Downscaling
+## 8. Image Loading & Failure Handling
 
-High-resolution photography can easily cause mobile browser tabs to crash due to GPU texture memory exhaustion (VRAM limits).
-- Ethan Vale intercepts each image during the initial splash screen using `decodeImage()`.
-- An Offscreen/DOM canvas downscales raw images to the maximum display dimension required for the user's viewport breakpoint (`420px` mobile, `520px` tablet, `760px` desktop).
-- The scaled canvas exports an in-memory WebP blob (`URL.createObjectURL(blob)`), reducing VRAM usage by over **82%** while preserving pristine retina crispness.
+- Thumbnails (`<id>_min.webp`) are preloaded during the splash with `Image.decode()` (`preloadImage()`), so a card only fades in once its bitmap is fully decoded — no half-painted frames.
+- The earlier canvas re-encode/blob-URL pipeline was removed in the review pass: it required CORS headers on the CDN, doubled peak memory during the splash and re-compressed already web-sized WebP files. The `_min.webp` files are used directly; the browser's own decoder handles downscaling.
+- Every `<img>` has an `error` handler. A still that fails to load marks its `<figure>` as `.missing`, which paints a titled placeholder plate (`::before { content: attr(data-title) }`) in both the sphere and the grid. A failed load still advances the splash progress bar, so the intro can never hang on a dead URL.
+- All URLs derive from a single `ASSET_BASE` constant (`thumbUrl(id)` / `fullUrl(id)`), which is the one line to change when self-hosting.
+
+### Render loop hygiene
+- The CSS perspective value is cached in `computeLayout()` instead of being read through `getComputedStyle()` on every animation frame.
+- `tick()` short-circuits when nothing has changed (rotation, camera dolly, scroll progress, lightbox state, radius, perspective), so an idle page performs zero style writes per frame. The camera dolly snaps to its target once within 0.01 px instead of lerping forever.
+
+### Keyboard access
+- Sphere cards and grid tiles are `role="button"` + `tabindex="0"` with `aria-label`s; `Enter`/`Space` opens the lightbox. A `:focus-visible` outline is drawn for keyboard users only.
+- The lightbox moves focus to its Close button, traps `Tab` while open, and returns focus to the originating card (or the sphere card when the grid tile has since been dismissed).
 
 ---
 
@@ -167,6 +175,6 @@ High-resolution photography can easily cause mobile browser tabs to crash due to
 | **External Dependencies** | 0 libraries (pure Vanilla HTML5/CSS/JS) | ✅ Verified |
 | **Bundle Size** | ~51 KB total codebase | ✅ Verified |
 | **Frame Rate** | 60–120 FPS on Apple Silicon / Mobile | ✅ Verified |
-| **Accessibility** | 1 `<h1>` (Headline), 1 `<h2>` (Modal Title), full ARIA controls | ✅ WCAG AAA |
-| **Subpath Compatibility** | 100% relative CDN URLs, zero hardcoded root paths | ✅ GitHub Pages Ready |
+| **Accessibility** | 1 `<h1>` (Headline), 1 `<h2>` (Modal Title), ARIA-labelled controls, keyboard-operable cards + lightbox focus management | ✅ Reviewed (not formally audited) |
+| **Subpath Compatibility** | Absolute CDN URLs behind one `ASSET_BASE` constant, zero root-relative paths | ✅ GitHub Pages Ready |
 | **Mobile Gestures** | Touch disambiguation (1.15x vertical scroll vs 3D drag) | ✅ Verified |

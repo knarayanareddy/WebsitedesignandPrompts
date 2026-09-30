@@ -27,18 +27,21 @@ A `<header>` with `fixed top-0 left-0 right-0 z-40 px-6 md:px-10 pt-6` containin
   - The whole pill links to `#hero` (top of page).
 - Center pill (hidden on mobile): `hidden md:flex items-center gap-1 bg-neutral-900/90 backdrop-blur rounded-full px-3 py-2` with four anchor links: "platform" → `#watch`, "solutions" → `#scale`, "company" → `#proof`, "support" → `#calm` — each `text-neutral-300 hover:text-white transition-colors text-sm px-5 py-2 rounded-full`.
 - Right button: "get started" → `#calm` — `bg-white text-black text-sm font-normal rounded-full px-6 py-3 hover:bg-neutral-200 transition-colors`.
+- Below `md`, add a round hamburger button (`aria-expanded`, `aria-controls`) that opens a full-screen black drawer (`role="dialog" aria-modal`) listing the same four links plus "get started". Escape closes it, page scroll is locked while open, focus moves to the close button on open and returns to the hamburger on close.
 
 ## Chapter shell (repeat for every chapter)
 
 - A `<section>` with `relative h-screen w-full overflow-hidden bg-black` and an `id` (listed per chapter).
 - Background `<video>`: `className="absolute inset-0 w-full h-full object-cover"`, `autoPlay loop muted playsInline`, `poster={chapter poster URL}`, `src={chapter video URL}`, `preload="metadata"` (except chapter 1, which uses `preload="auto"`).
-- Play/pause via IntersectionObserver: when a chapter is ≥35% in the viewport, call `video.play()`; otherwise `video.pause()`. If `prefers-reduced-motion: reduce`, never autoplay — show only the poster.
+- Play/pause via IntersectionObserver: when a chapter is ≥35% in the viewport, call `video.play()`; otherwise `video.pause()`. If `prefers-reduced-motion: reduce`, never autoplay (the `autoPlay` attribute must also be omitted on chapter 1) — show only the poster, and keep listening for changes to the media query.
+- If a clip fails to load (`onError`), swap the `<video>` for an `<img>` of the poster so the chapter never renders as a black band.
+- Use `h-svh` (small viewport height) rather than `h-screen` so mobile browser chrome does not cause layout jumps.
 - Readability overlays (all pointer-events-none, monochrome only):
   - If the chapter has a `shade` (bright videos): an `absolute inset-0` div with that class (e.g. `bg-black/35`).
   - Always: `absolute top-0 left-0 right-0 h-28 bg-gradient-to-b from-black/70 to-transparent` (under the navbar) and `absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent to-black` (bleeds into the next chapter).
 - Kicker (chapters 2–11 only): `absolute left-6 md:left-10 top-24 md:top-28 flex items-center gap-3` — a `text-white/50 text-xs md:text-sm tracking-[0.3em]` label (e.g. "01 / in motion") followed by `h-px w-10 bg-white/40`.
 - Foreground wrapper: `relative z-10 h-full w-full` (rendered after overlays, above the video).
-- Headline words: each an `<h1>` with `hero-title absolute text-white font-medium` + the chapter's word-size class + its position class. All lowercase.
+- Headline: **one** heading per chapter — `<h1>` for chapter 1, `<h2>` for the rest — rendered with `display: contents` so that each word can be an absolutely positioned `<span>` (`hero-title absolute text-white font-medium` + the chapter's word-size class + its position class). Screen readers hear one heading ("protect your data"); sighted users see the scattered words. All lowercase.
 - Paragraph (where defined): `absolute max-w-[240px] text-[15px] leading-snug text-white/90` + its position class (append `text-right` when right-aligned).
 - Stat block (where defined): an `absolute` wrapper with the stat's position class containing:
   - Row: `flex items-center gap-3` — either `[diagonal divider, number]` or `[number, diagonal divider]`, where the diagonal divider is `hidden md:block h-px w-24 bg-white/40 rotate-[20deg]` (or `rotate-[-20deg]`); for right-aligned stats use `justify-end flex-row-reverse` so the divider reads first.
@@ -135,8 +138,8 @@ A `fixed right-5 md:right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-co
 - Stat (`right-6 md:right-10 bottom-24 md:bottom-28`, divider first, right-aligned): **+300k** / "downloads"
 
 ### Chapter 11 — "calm" (the calm) — night snowfall finale
-- **Video:** `https://videos.pexels.com/video-files/35552773/15063226_2560_1440_30fps.mp4` (4K source; consider re-encoding to 1080p before production)
-- **Poster:** `https://images.pexels.com/videos/35552773/black-effect-particle-slowmotion-35552773.jpeg?auto=compress&w=1600`
+- **Video:** `calm.mp4` (in `public/`) — a self-hosted seamless 15 s 1080p night-snowfall loop (soft bokeh particles on a dark night gradient). Originally a 55.8 MB raw 1440p Pexels clip ("Serene Snowfall Slow-Motion at Night"); re-encoded/replaced per the recipe in `BUILD_LOG.md` §5.
+- **Poster:** `poster-calm.jpg` (in `public/`) — frame extracted from the clip above.
 - **Shade:** none (dark) · **Kicker:** "10 / the calm" · **Word size:** `text-[12vw] md:text-[11vw]`
 - Words: "quiet." — `left-4 md:left-10 top-[26%]` · "safe." — `right-4 md:right-10 top-[46%]` · "yours." — `left-[18%] md:left-[28%] top-[66%]`
 - CTA block (`absolute left-1/2 -translate-x-1/2 bottom-28 w-full px-6 flex flex-col items-center gap-7`):

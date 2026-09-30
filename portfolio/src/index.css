@@ -168,3 +168,21 @@ html.lenis body {
 .lenis.lenis-stopped {
   overflow: hidden;
 }
+
+/* ---------------------------------- */
+/* Reduced motion                     */
+/* ---------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .animate-scroll-down,
+  .animate-role-fade-in,
+  .animate-gradient-shift,
+  .animate-ping,
+  .gradient-ring::before,
+  .gradient-ring-hover::before {
+    animation: none !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

@@ -1,4 +1,5 @@
 import type Lenis from 'lenis';
+import { prefersReducedMotion } from './motion';
 
 let lenisInstance: Lenis | null = null;
 
@@ -14,7 +15,7 @@ export function scrollToId(id: string): void {
   if (lenisInstance) {
     lenisInstance.scrollTo(el, { offset: -96 });
   } else {
-    el.scrollIntoView({ behavior: 'smooth' });
+    el.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
   }
 }
 
@@ -23,6 +24,6 @@ export function scrollToTop(): void {
   if (lenisInstance) {
     lenisInstance.scrollTo(0);
   } else {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
   }
 }

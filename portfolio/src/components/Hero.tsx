@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { useHlsVideo } from '../lib/useHlsVideo';
+import { POSTER_SRC, VIDEO_SRC } from '../lib/media';
+import { usePrefersReducedMotion } from '../lib/motion';
 import Navbar from './Navbar';
 
 interface HeroProps {
@@ -8,42 +10,42 @@ interface HeroProps {
   readonly onNavigate: (target: string) => void;
 }
 
-const VIDEO_SRC = 'https://stream.mux.com/Aa02T7oM1wH5Mk5EEVDYhbZ1ChcdhRsS2m1NYyx4Ua1g.m3u8';
-const POSTER_SRC =
-  'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1920&auto=format&fit=crop';
-
 const ROLES: readonly string[] = ['Creative', 'Fullstack', 'Founder', 'Scholar'];
 const ROLE_INTERVAL_MS = 2200;
 
 const EASE_OUT: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 export default function Hero({ ready, onNavigate }: HeroProps): JSX.Element {
-  const videoRef = useHlsVideo(VIDEO_SRC);
+  const videoRef = useHlsVideo(VIDEO_SRC, { eager: true });
+  const reducedMotion = usePrefersReducedMotion();
   const [roleIndex, setRoleIndex] = useState<number>(0);
 
-  /* Cycle through roles every 2.2s */
+  /* Cycle through roles every 2.2s (static under prefers-reduced-motion) */
   useEffect(() => {
+    if (reducedMotion) return;
     const intervalId: number = window.setInterval(() => {
       setRoleIndex((prev: number) => (prev + 1) % ROLES.length);
     }, ROLE_INTERVAL_MS);
     return () => window.clearInterval(intervalId);
-  }, []);
+  }, [reducedMotion]);
 
   return (
     <section
       id="home"
-      className="relative flex h-screen min-h-[700px] flex-col justify-between overflow-hidden"
+      className="relative flex h-svh min-h-[700px] flex-col justify-between overflow-hidden"
     >
-      {/* Background HLS video */}
+      {/* Background HLS video — attached/played by useHlsVideo; poster stays if
+          the stream fails or the user prefers reduced motion */}
       <video
         ref={videoRef}
         className="absolute inset-0 h-full w-full object-cover"
         poster={POSTER_SRC}
-        autoPlay
         muted
         loop
         playsInline
+        preload="none"
         aria-hidden="true"
+        tabIndex={-1}
       />
 
       {/* Overlays */}
