@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useMemo, useRef, useState, type RefObject } from 'react';
 import { Check } from 'lucide-react';
 import Reveal from './Reveal';
+import { useTilt } from '@/lib/pointer';
 
 type Range = 'today' | 'm30' | 'ytd';
 
@@ -10,27 +11,37 @@ const RANGES: { id: Range; label: string }[] = [
   { id: 'ytd', label: 'YTD' },
 ];
 
-/** Hand-tuned SVG curves in a 520×220 viewBox — one per range. */
-const SERIES: Record<Range, { line: string; amount: string; delta: string; caption: string }> = {
-  today: {
-    line: 'M 0 160 C 60 150, 90 120, 140 118 S 220 130, 260 100 S 340 60, 400 52 S 480 40, 520 28',
-    amount: '$14.2M',
-    delta: '+2.1%',
-    caption: 'projected revenue · vs. yesterday',
-  },
-  m30: {
-    line: 'M 0 175 C 70 168, 110 150, 160 142 S 240 128, 300 118 S 380 90, 440 70 S 500 55, 520 48',
-    amount: '$312.4M',
-    delta: '+11.8%',
-    caption: 'projected revenue · vs. previous 30 days',
-  },
-  ytd: {
-    line: 'M 0 185 C 80 180, 130 170, 190 150 S 280 120, 330 110 S 420 80, 470 60 S 510 50, 520 42',
-    amount: '$4.2B',
-    delta: '+32.4%',
-    caption: 'projected revenue · vs. previous year',
-  },
+/** Baseline curve family per range; sliders bend these live. */
+const SERIES: Record<
+  Range,
+  { start: number; gain: number; curve: number; phase: number; amount: number; unit: string; baseDelta: number; caption: string }
+> = {
+  today: { start: 160, gain: 132, curve: 0.85, phase: 0.4, amount: 14.2, unit: 'M', baseDelta: 2.1, caption: 'projected revenue · vs. yesterday' },
+  m30: { start: 175, gain: 128, curve: 0.9, phase: 1.7, amount: 312.4, unit: 'M', baseDelta: 11.8, caption: 'projected revenue · vs. previous 30 days' },
+  ytd: { start: 185, gain: 145, curve: 1.1, phase: 3.1, amount: 4.2, unit: 'B', baseDelta: 32.4, caption: 'projected revenue · vs. previous year' },
 };
+
+const DEFAULT_GROWTH = 12;
+const DEFAULT_VOL = 18;
+
+function buildPath(range: Range, growth: number, vol: number): string {
+  const cfg = SERIES[range];
+  const pts: string[] = [];
+  for (let x = 0; x <= 520; x += 13) {
+    const u = x / 520;
+    let y = cfg.start - cfg.gain * Math.pow(u, cfg.curve);
+    y -= (growth - DEFAULT_GROWTH) * 2.2 * Math.pow(u, 1.15);
+    y += Math.sin(u * 9.4 + cfg.phase) * vol * 0.55 + Math.sin(u * 21 + cfg.phase * 2) * vol * 0.22;
+    y = Math.min(206, Math.max(14, y));
+    pts.push(`${x} ${y.toFixed(1)}`);
+  }
+  return `M ${pts.join(' L ')}`;
+}
+
+function formatAmount(base: number, unit: string, growth: number): string {
+  const scaled = base * (1 + (growth - DEFAULT_GROWTH) * 0.014);
+  return `$${scaled.toFixed(1)}${unit}`;
+}
 
 const BULLETS = [
   'Live ensemble forecasts, refreshed every 60 seconds',
@@ -38,9 +49,58 @@ const BULLETS = [
   'Export-ready narratives for every stakeholder',
 ];
 
+function Slider({
+  label,
+  value,
+  min,
+  max,
+  step,
+  format,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  format: (v: number) => string;
+  onChange: (v: number) => void;
+}) {
+  return (
+    <label className="block">
+      <span className="flex items-baseline justify-between">
+        <span className="text-white/70 text-[12px] sm:text-[13px] font-[450] tracking-[0.06em]">
+          {label}
+        </span>
+        <span className="text-white text-[13px] sm:text-[14px] font-[450] tabular-nums">
+          {format(value)}
+        </span>
+      </span>
+      <input
+        type="range"
+        className="apogee-range mt-3"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => onChange(Number(e.target.value))}
+      />
+    </label>
+  );
+}
+
 export default function Console() {
   const [range, setRange] = useState<Range>('today');
-  const series = SERIES[range];
+  const [growth, setGrowth] = useState(DEFAULT_GROWTH);
+  const [vol, setVol] = useState(DEFAULT_VOL);
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  useTilt(panelRef as RefObject<HTMLElement | null>, 1.6);
+
+  const cfg = SERIES[range];
+  const path = useMemo(() => buildPath(range, growth, vol), [range, growth, vol]);
+  const amount = formatAmount(cfg.amount, cfg.unit, growth);
+  const delta = `${(cfg.baseDelta + (growth - DEFAULT_GROWTH) * 0.75).toFixed(1)}%`;
+  const dirty = growth !== DEFAULT_GROWTH || vol !== DEFAULT_VOL;
 
   return (
     <section className="relative w-full">
@@ -56,8 +116,8 @@ export default function Console() {
                 From raw signal to confident decision
               </h2>
               <p className="text-white/60 text-[15px] sm:text-[17px] font-[450] leading-[1.55] mt-5 sm:mt-6">
-                Apogee folds ingestion, reasoning and scenario planning into one surface. Watch
-                the model think, adjust the assumptions, ship the call.
+                Apogee folds ingestion, reasoning and scenario planning into one surface. This
+                one is live — move the assumptions and watch the forecast answer.
               </p>
             </Reveal>
             <div className="flex flex-col gap-4 mt-7 sm:mt-8">
@@ -76,9 +136,12 @@ export default function Console() {
             </div>
           </div>
 
-          {/* Console panel — the RevenueCard language, expanded */}
+          {/* Console panel — the RevenueCard language, now interactive */}
           <Reveal delay={120} className="w-full">
-            <div className="w-full rounded-[24px] sm:rounded-[33px] bg-[rgba(17,16,15,0.35)] backdrop-blur-[20px] border border-white/[0.06] p-5 sm:p-8">
+            <div
+              ref={panelRef}
+              className="tilt tilt-glow w-full rounded-[24px] sm:rounded-[33px] bg-[rgba(17,16,15,0.35)] backdrop-blur-[20px] border border-white/[0.06] p-5 sm:p-8"
+            >
               {/* Header row: tabs + live badge */}
               <div className="flex items-center justify-between gap-4">
                 <div className="flex items-center gap-1 bg-white/[0.05] rounded-[11px] p-1">
@@ -108,14 +171,14 @@ export default function Console() {
 
               {/* Headline metric */}
               <div className="flex items-baseline gap-[10px] mt-6 sm:mt-8">
-                <p className="text-white text-[28px] sm:text-[40px] font-[450] leading-[1]">
-                  {series.amount}
+                <p className="text-white text-[28px] sm:text-[40px] font-[450] leading-[1] tabular-nums">
+                  {amount}
                 </p>
-                <span className="px-[6px] py-[7px] bg-white/20 rounded-[6px] text-white text-[12px] sm:text-[14px] font-[450] leading-[14px]">
-                  {series.delta}
+                <span className="px-[6px] py-[7px] bg-white/20 rounded-[6px] text-white text-[12px] sm:text-[14px] font-[450] leading-[14px] tabular-nums">
+                  +{delta}
                 </span>
                 <p className="text-white/60 text-[12px] sm:text-[14px] font-[450] leading-[14px] opacity-70">
-                  {series.caption}
+                  {cfg.caption}
                 </p>
               </div>
 
@@ -134,7 +197,6 @@ export default function Console() {
                     </linearGradient>
                   </defs>
 
-                  {/* horizontal gridlines (the card's grid language, rotated) */}
                   {[0, 1, 2, 3, 4].map((i) => (
                     <line
                       key={i}
@@ -147,10 +209,11 @@ export default function Console() {
                     />
                   ))}
 
-                  <path key={`${range}-area`} d={`${series.line} L 520 220 L 0 220 Z`} fill="url(#apogeeArea)" />
+                  <path d={`${path} L 520 220 L 0 220 Z`} fill="url(#apogeeArea)" />
+                  {/* key={range} replays the line-draw per tab; slider moves update `d` live */}
                   <path
                     key={range}
-                    d={series.line}
+                    d={path}
                     pathLength={1}
                     fill="none"
                     stroke="white"
@@ -172,6 +235,46 @@ export default function Console() {
                     {label}
                   </span>
                 ))}
+              </div>
+
+              {/* Assumption sliders — the panel's interactive core */}
+              <div className="mt-6 sm:mt-8 pt-6 border-t border-white/[0.06] grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+                <Slider
+                  label="Market growth"
+                  value={growth}
+                  min={-5}
+                  max={25}
+                  step={0.5}
+                  format={(v) => `${v > 0 ? '+' : ''}${v.toFixed(1)}%`}
+                  onChange={setGrowth}
+                />
+                <Slider
+                  label="Volatility"
+                  value={vol}
+                  min={0}
+                  max={60}
+                  step={1}
+                  format={(v) => v.toFixed(0)}
+                  onChange={setVol}
+                />
+              </div>
+
+              <div className="flex items-center justify-between mt-5">
+                <p className="text-white/35 text-[11px] sm:text-[12px] font-[450] leading-[1.4]">
+                  Drag the assumptions — the forecast recomputes instantly
+                </p>
+                {dirty && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setGrowth(DEFAULT_GROWTH);
+                      setVol(DEFAULT_VOL);
+                    }}
+                    className="text-white/55 text-[12px] font-[450] px-3 py-1.5 rounded-[8px] border border-white/[0.1] hover:text-white hover:border-white/25 transition-colors"
+                  >
+                    Reset
+                  </button>
+                )}
               </div>
             </div>
           </Reveal>

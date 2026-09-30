@@ -23,7 +23,7 @@ assumed (the outstanding work is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHE
 | Ethan Vale | nothing (single HTML file) | 21 stills (`_min.webp` + `.png`), 1 film, 1 avatar — all CloudFront `hf_` | Film failure is handled; a failed still renders a labelled placeholder plate (implemented) |
 | SynapseX | nothing | 5 CloudFront `hf_` clips | `BackgroundVideo` swaps a failed clip for a gradient plate (poster-backed where available) — implemented |
 | Portfolio | nothing | 1 Mux HLS stream + 11 Unsplash photos (18 URLs with size variants) | `poster` frame stays behind the HLS element if the stream fails |
-| Apogee | `favicon.svg` (generated) | 1 CloudFront `hf_` clip (hero) + 1 hot-linked webfont (Suisse Intl via `db.onlinewebfonts.com`) | `onError` → CSS nebula plate; font falls back to the system sans stack (implemented) |
+| Apogee | `favicon.svg` (generated) + 3 generated band loops (`field`/`terrain`/`ascent`, 4.5 MB) + 3 posters | 1 CloudFront `hf_` clip (hero) + 1 hot-linked webfont (Suisse Intl via `db.onlinewebfonts.com`) | `onError` → CSS nebula plate; font falls back to the system sans stack (implemented) |
 
 `hf_…` files on `d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/` are
 AI-generated reference clips/stills (the `hf_YYYYMMDD_HHMMSS_<uuid>` naming is the
@@ -147,6 +147,7 @@ Notes
 | Hero clip (`src/components/Hero.tsx` video `src`) | `https://d8j0ntlcm91z4.cloudfront.net/…/hf_20260813_092641_….mp4` (dark deep-blue/red nebula) | Undocumented (AI-generated reference) | No |
 | Suisse Intl webfont (`index.html` `<link>`) | `https://db.onlinewebfonts.com/c/13ab13418f633c1b0516fed6e30bedbc?family=Suisse+Int%27l` | **Undocumented** — Suisse Intl is a commercial typeface; this CDN copy's terms are unknown | No |
 | `public/favicon.svg` | Generated from the template's logo mark | Generated for this repo — reuse freely with the code | Yes |
+| `public/videos/{field,terrain,ascent}.mp4` + `public/posters/poster-*.jpg` | Generated procedurally by `tools/generate-bands.py` (PIL/numpy → ffmpeg) for the sections below the hero | Generated for this repo — original work, reuse freely with the code | Yes |
 | Everything else | CSS/SVG only (glass surfaces, nebula gradients, charts) | MIT (code) | Yes |
 
 Notes

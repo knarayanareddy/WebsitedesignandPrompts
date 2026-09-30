@@ -92,6 +92,85 @@ body {
   animation: pulse-dot 2.4s ease-in-out infinite;
 }
 
+/* ---- interactive layers (tilt/glow cards, marquee, sliders) ---- */
+
+.tilt {
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.tilt-glow {
+  position: relative;
+}
+.tilt-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.10),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.tilt-glow:hover::before {
+  opacity: 1;
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-slide 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee-slide {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* Console assumption sliders */
+.apogee-range {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  outline: none;
+  cursor: pointer;
+}
+.apogee-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e9e9e9;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  cursor: grab;
+}
+.apogee-range::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e9e9e9;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  cursor: grab;
+}
+.apogee-range:focus-visible {
+  box-shadow: 0 0 0 3px rgba(233, 233, 233, 0.35);
+}
+
 /* Reduced motion: resolve every animation instantly, show everything. */
 @media (prefers-reduced-motion: reduce) {
   .reveal {
@@ -116,5 +195,18 @@ body {
   }
   .pulse-dot {
     animation: none;
+  }
+  .marquee-track {
+    animation: none;
+    transform: none;
+    flex-wrap: wrap;
+    width: auto;
+    justify-content: center;
+  }
+  .tilt {
+    transform: none;
+  }
+  .tilt-glow::before {
+    display: none;
   }
 }

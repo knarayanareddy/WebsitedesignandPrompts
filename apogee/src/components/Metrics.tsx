@@ -1,5 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, type RefObject } from 'react';
 import Reveal from './Reveal';
+import AmbientVideo from '@/lib/AmbientVideo';
+import { useTilt } from '@/lib/pointer';
 
 type Stat = {
   prefix?: string;
@@ -78,10 +80,41 @@ function Counter({ stat }: { stat: Stat }) {
   );
 }
 
+function StatCell({ stat, delay }: { stat: Stat; delay: number }) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  useTilt(ref as RefObject<HTMLElement | null>, 3);
+  return (
+    <Reveal delay={delay}>
+      <div
+        ref={ref}
+        className="tilt tilt-glow h-full rounded-[24px] bg-[rgba(17,16,15,0.35)] backdrop-blur-[20px] border border-white/[0.06] p-6 sm:p-8"
+      >
+        <p className="text-white text-[32px] sm:text-[46px] lg:text-[52px] font-[450] leading-[1] tracking-[-0.02em]">
+          <Counter stat={stat} />
+        </p>
+        <p className="text-white/60 text-[13px] sm:text-[15px] font-[450] leading-[1.45] mt-3 sm:mt-4">
+          {stat.label}
+        </p>
+      </div>
+    </Reveal>
+  );
+}
+
+/** Full-bleed "data field" band — the numbers, floating on glass over video. */
 export default function Metrics() {
   return (
-    <section className="relative w-full">
-      <div className="max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] py-20 sm:py-24">
+    <section className="relative w-full overflow-hidden">
+      <AmbientVideo
+        src="./videos/field.mp4"
+        poster="./posters/poster-field.jpg"
+        fallback="radial-gradient(ellipse 70% 60% at 50% 40%, rgba(41,56,140,0.45), transparent 70%), #080A19"
+      />
+      {/* legibility scrim + edge fades into the page */}
+      <div className="absolute inset-0 bg-[#080A19]/55" />
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080A19] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#080A19] to-transparent" />
+
+      <div className="relative max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] py-24 sm:py-32">
         <Reveal>
           <p className="text-white/50 text-[11px] sm:text-[12px] font-[450] tracking-[0.28em] uppercase">
             The numbers
@@ -91,18 +124,9 @@ export default function Metrics() {
           </h2>
         </Reveal>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-10 sm:gap-x-10 mt-12 sm:mt-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16">
           {STATS.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 90}>
-              <div className="border-t border-white/[0.08] pt-6 sm:pt-8">
-                <p className="text-white text-[36px] sm:text-[52px] lg:text-[60px] font-[450] leading-[1] tracking-[-0.02em]">
-                  <Counter stat={stat} />
-                </p>
-                <p className="text-white/50 text-[13px] sm:text-[15px] font-[450] leading-[1.45] mt-3 sm:mt-4 max-w-[220px]">
-                  {stat.label}
-                </p>
-              </div>
-            </Reveal>
+            <StatCell key={stat.label} stat={stat} delay={i * 90} />
           ))}
         </div>
       </div>

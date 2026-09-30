@@ -278,36 +278,59 @@ Same design language (`#080A19`, glass at `rgba(17,16,15,0.35)` + `backdrop-blur
 `font-[450]`, radius scale, `white/80`-family text). Sections in order:
 
 1. **Trust strip** — hairline `border-y border-white/[0.06]` band; eyebrow
-   `tracking-[0.28em] uppercase` "Trusted by data teams at"; six wordmarks
+   `tracking-[0.28em] uppercase` "Trusted by data teams at"; wordmarks
    (NORTHWIND · VERTEX LABS · HELIOGRAPH · ATLAS FREIGHT · KINETIC · MERIDIAN) at
-   `white/35`, `tracking-[0.12em]`.
+   `white/35`, `tracking-[0.12em]`, duplicated into a seamless CSS **marquee**
+   (~48s linear loop, pauses for reduced motion / wraps static).
 2. **The numbers** — eyebrow "The numbers"; h2 "Signal, at the scale your business runs";
    four stats on `border-t border-white/[0.08]` cells: `$4.2B` forecast volume daily ·
    `99.98%` uptime · `12ms` median query latency · `340+` production models. Numbers count up
    over 1.4s (rAF, cubic ease-out) when scrolled into view; instant under reduced motion.
+   The whole band sits on a full-bleed **ambient video layer** ("field": slow-drifting network
+   nodes, self-hosted loop + poster + CSS-gradient fallback), and each stat cell **tilts at the
+   pointer** (perspective 1000px, ≤3.5°, pointer-only).
 3. **Platform** — eyebrow "Platform"; h2 "Advanced reasoning, end to end"; six glass cards
    (`rounded-[24px]`, hover border lift) in 1/2/3 columns: Predictive Models, Anomaly
    Detection, Scenario Planning, Data Fabric, Model Governance, Real-time Signals — each with a
    `w-11 h-11 rounded-[12px]` icon chip (lucide: TrendingUp, Radar, Layers, Database,
-   ShieldCheck, Zap).
+   ShieldCheck, Zap). A **cursor spotlight** (large soft radial gradient following the pointer)
+   sweeps the section, and each card **tilts + tracks a glow** at the pointer.
 4. **Forecast console** — copy column ("From raw signal to confident decision" + three
    check bullets) beside a wide glass panel that reuses the card grammar: range tabs
    Today/30D/YTD (pill group, `aria-pressed`), "Live" pulse dot, headline metric + delta badge
    (the card's badge classes), SVG chart (`pathLength=1` line-draw on reveal, area gradient,
    gridlines), and the card's exact axis row (`10:00…16:00, 16:00`, dimming at i ≥ 3).
    Switching tabs swaps the curve/amount/delta (path remounts so the draw replays).
-5. **Quote** — hairline-bounded editorial blockquote (fictional customer: Maya Ortiz, CFO,
-   Northwind Logistics) with monogram avatar.
+   **Two assumption sliders** sit below a hairline inside the panel — "Market growth"
+   (−5…+25%, default +12%) and "Volatility" (0…60, default 18) — and the forecast curve
+   (41 computed points), projected amount and delta recompute on every input event, with a
+   "Reset" affordance when the assumptions drift from default. The panel itself tilts at the
+   pointer. Sliders use `input[type=range]` with custom `.apogee-range` styling (white/10
+   track, white/55 thumb).
+5. **Quote** — editorial blockquote (fictional customer: Maya Ortiz, CFO,
+   Northwind Logistics) with monogram avatar, over a full-bleed **ambient video band**
+   ("terrain": low wireframe horizon drifting laterally) darkened with `#080A19/62` plus
+   top/bottom fade gradients.
 6. **CTA** — "Reach your apogee." + "Put advanced reasoning systems to work on the data that
-   matters most." + the hero's two buttons verbatim, over a nebula-tone radial glow
-   (the same blue/red family as the hero clip). Caption: "No credit card required · SOC 2
-   Type II · Deployed in your region".
-7. **Footer** — brand block (logo + wordmark + hero subhead) and four link columns
-   (Product/Company/Resources/Legal), bottom bar "© 2026 Apogee Systems." / "Built for the
-   unknown."
+   matters most." + the hero's two buttons verbatim, over the **"ascent" video loop** (rising
+   light streaks) under the same blue/red radial glow family as the hero clip. Buttons
+   **tilt at the pointer**. Caption: "No credit card required · SOC 2 Type II · Deployed in
+   your region".
+7. **Footer** — a "Built for the unknown" **marquee strip** (`tracking-[0.22em]` uppercase,
+   hairline-bounded), then the brand block (logo + wordmark + hero subhead) and four link
+   columns (Product/Company/Resources/Legal), bottom bar "© 2026 Apogee Systems." / "Built
+   for the unknown."
+
+**Band media:** the three loops (`field`/`terrain`/`ascent`) are generated procedurally
+(`tools/generate-bands.py`) on-palette and self-hosted — 1920×1080, 30 fps, seamless 15 s
+H.264 — with poster frames; any dark navy loop of matching mood can replace them at the same
+paths. Every video layer respects reduced motion (poster still + no parallax) and falls back
+to a CSS gradient if the file is missing.
 
 **Expansion animation language:** scroll reveals use a `.reveal` wrapper (IntersectionObserver
-adds `.is-visible`; 0.8s `cubic-bezier(0.16, 1, 0.3, 1)`, 24px rise, optional delay) — the hero
+adds `.is-visible`; 0.8s `cubic-bezier(0.16, 1, 0.3, 1)`, 24px rise, optional delay); video
+layers parallax gently on scroll (rAF, transform only); pointer interactions (marquee aside)
+are gated on fine pointers and disabled entirely under reduced motion — the hero
 keeps its own pure-CSS timeline. `prefers-reduced-motion: reduce` resolves every animation
 instantly and pauses the hero video (repo accessibility standard).
 

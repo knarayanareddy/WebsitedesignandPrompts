@@ -104,6 +104,33 @@ src/components/SiteFooter.tsx   — footer
   duplicated `16:00`, `.00` span, `font-[450]`, visibility-toggled menu, cross-faded icons,
   CTA paddings `px-5 sm:px-[27px]`, card padding asymmetry.
 
-## 8. Licensing
+## 8. Band media & interactive layer (second pass)
+
+The first full-page pass shipped the hero's fidelity but the sections below read as quiet
+static type. This pass (working-tree, then committed separately) adds two device families
+without touching the hero:
+
+- **Ambient band video** — `public/videos/{field,terrain,ascent}.mp4` (1920×1080, 30 fps,
+  seamless 15 s H.264 loops) with `public/posters/poster-*.jpg` stills. These are **generated
+  procedurally** — `tools/generate-bands.py` renders per-frame with PIL/numpy and pipes into
+  ffmpeg — so they are original, license-clean, and on-palette (`#080A19` field, cyan
+  `#48E6E0`/blue `#29388C` accents). Motion is built from integer cycle counts so every loop
+  is seamless. `src/lib/AmbientVideo.tsx` layers them: poster → video (`object-fit: cover`),
+  scroll parallax (rAF, transform only), reduced-motion pause + no parallax, `onError` → CSS
+  gradient fallback (matches the hero clip's fallback pattern).
+- **Pointer interactivity** — `src/lib/pointer.ts` exposes `useTilt(ref, maxDeg)` and
+  `useSpotlight(ref)`; both write CSS custom properties (`--rx/--ry/--mx/--my`) and are gated
+  on `(hover:hover) and (pointer:fine)` + no reduced motion. CSS additions in
+  `src/index.css` (marked block): `.tilt`/`.tilt-glow`, `.marquee`, `.apogee-range`, and the
+  reduced-motion fallbacks (marquee wraps static, tilt transforms off).
+- **Assumption sliders** — the forecast console's sliders recompute the SVG path from 41
+  points per input event (deterministic growth/volatility math in `Console.tsx`); the
+  line-draw animation replays only on tab change (key remount), so dragging a slider updates
+  `d` in place.
+
+Band loop sizes: `field` 1.4 MB, `ascent` 658 KB, `terrain` 2.6 MB (~4.5 MB total) — deliberate
+CRF 25/26; regenerate at a lower CRF for production if needed.
+
+## 9. Licensing
 
 Code: MIT (repository licence). **Media and fonts are not covered** — see `../ASSETS.md`.

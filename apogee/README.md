@@ -22,13 +22,13 @@ product story. GitHub Pages ready (`base: './'`).
 | # | Section | What it does |
 |---|---------|--------------|
 | 0 | **Hero** | Full-viewport nebula video, glass nav pills, headline *“Elevate your essential data to new heights”*, and the **Revenue Growth** card — 32 bars (last 4 dimmed as “projected”), 5 gridlines, and a `1100ms + i×30ms` bar-grow stagger |
-| 1 | **Trust strip** | Hairline band of fictional customer wordmarks |
-| 2 | **The numbers** | Four rAF count-up stats (`$4.2B`, `99.98%`, `12ms`, `340+`) |
-| 3 | **Platform** | Six glass capability cards (Predictive Models → Real-time Signals) |
-| 4 | **Forecast console** | The card language, expanded: range tabs (Today/30D/YTD), live badge, SVG line-draw chart, the card's axis styling |
-| 5 | **Quote** | Editorial customer testimonial (monogram attribution) |
-| 6 | **CTA** | “Reach your apogee.” over a nebula-tone glow, hero button pair |
-| 7 | **Footer** | Brand block + Product/Company/Resources/Legal columns |
+| 1 | **Trust strip** | Hairline band of fictional customer wordmarks, **marqueeing** continuously (wraps static for reduced motion) |
+| 2 | **The numbers** | Four rAF count-up stats (`$4.2B`, `99.98%`, `12ms`, `340+`) on a full-bleed **“field” video band** of flowing network nodes, each stat cell cursor-tilting at the pointer |
+| 3 | **Platform** | Six glass capability cards (Predictive Models → Real-time Signals) with a **cursor spotlight** sweeping the section and per-card tilt/glow |
+| 4 | **Forecast console** | The card language, expanded: range tabs (Today/30D/YTD), live badge, SVG line-draw chart, the card's axis styling — **plus two assumption sliders (Market growth, Volatility) that recompute the curve, projected amount and delta instantly** |
+| 5 | **Quote** | Editorial customer testimonial (monogram attribution) over a full-bleed **“terrain” video band** (wireframe horizon) |
+| 6 | **CTA** | “Reach your apogee.” over the **“ascent” video loop** (rising light streaks), hero button pair with pointer-tilt |
+| 7 | **Footer** | **“Built for the unknown” marquee strip** + brand block + Product/Company/Resources/Legal columns |
 
 Design system: `#080A19` canvas · white/`white/80` type · glass surfaces at
 `rgba(17,16,15,0.35)` with `backdrop-blur-[20px]` · `#E9E9E9` buttons · `font-[450]` everywhere
@@ -86,3 +86,12 @@ any `/<repo>/` prefix.
 loads from `db.onlinewebfonts.com` — both are **undocumented third-party assets**; read
 [`../ASSETS.md`](../ASSETS.md) before publishing this as your own site. A failed clip falls
 back to the CSS nebula plate; the font falls back to the system sans stack.
+
+**Band media (replaceable):** the sections below the hero carry ambient loops from
+`public/videos/` (`field`, `terrain`, `ascent` — 15 s H.264 loops, posters in `public/posters/`).
+These were generated procedurally for the template (`tools/generate-bands.py`, see
+`BUILD_LOG.md` §8), so nothing is license-encumbered. Each has a CSS-gradient fallback and a
+reduced-motion still; swap in stock loops of matching mood without touching markup. Interactive
+layers (marquee, pointer-tilt/glow cards, cursor spotlight, console sliders) are plain CSS +
+small hooks in `src/lib/pointer.ts` / `src/lib/AmbientVideo.tsx`; all opt out under
+`prefers-reduced-motion` and for non-fine pointers.

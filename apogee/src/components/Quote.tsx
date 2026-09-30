@@ -1,9 +1,20 @@
 import Reveal from './Reveal';
+import AmbientVideo from '@/lib/AmbientVideo';
 
+/** Full-bleed "terrain" band — the horizon you forecast, behind the customer voice. */
 export default function Quote() {
   return (
-    <section className="relative w-full border-y border-white/[0.06]">
-      <div className="max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] py-20 sm:py-28">
+    <section className="relative w-full overflow-hidden">
+      <AmbientVideo
+        src="./videos/terrain.mp4"
+        poster="./posters/poster-terrain.jpg"
+        fallback="radial-gradient(ellipse 80% 50% at 50% 28%, rgba(41,56,140,0.5), transparent 70%), #080A19"
+      />
+      <div className="absolute inset-0 bg-[#080A19]/62" />
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#080A19] to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#080A19] to-transparent" />
+
+      <div className="relative max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] py-24 sm:py-32">
         <Reveal>
           <p className="text-white/25 text-[48px] sm:text-[64px] font-normal leading-[0.6] select-none">
             &ldquo;

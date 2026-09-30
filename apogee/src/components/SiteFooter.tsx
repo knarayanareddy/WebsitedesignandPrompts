@@ -7,7 +7,25 @@ const COLUMNS: { title: string; links: string[] }[] = [
 
 export default function SiteFooter() {
   return (
-    <footer className="relative w-full border-t border-white/[0.06]">
+    <footer className="relative w-full">
+      {/* signature strip */}
+      <div className="marquee border-y border-white/[0.06] py-5 sm:py-6">
+        <div className="marquee-track">
+          {[0, 1].map((copy) => (
+            <div key={copy} className="flex items-center" aria-hidden={copy === 1}>
+              {Array.from({ length: 4 }).map((_, i) => (
+                <span key={`${copy}-${i}`} className="flex items-center">
+                  <span className="text-white/30 text-[13px] sm:text-[15px] font-[450] tracking-[0.22em] uppercase whitespace-nowrap">
+                    Built for the unknown
+                  </span>
+                  <span className="w-1 h-1 rounded-full bg-white/20 mx-8 sm:mx-12" />
+                </span>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
       <div className="max-w-[1800px] mx-auto px-5 sm:px-8 md:px-[82px] pt-16 sm:pt-20 pb-10">
         <div className="flex flex-col lg:flex-row lg:justify-between gap-12">
           {/* Brand block */}
