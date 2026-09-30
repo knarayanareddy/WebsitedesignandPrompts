@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  font-family: "Inter Tight", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #1b1b1b;
+}
+
+body {
+  margin: 0;
+  background: #1b1b1b;
+  color: #fff;
+  font-family: "Inter Tight", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  font-family: "Inter Tight", sans-serif;
+}
+
+::selection {
+  background: #de7d4d;
+  color: #000;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  height: 20px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+input[type="range"]::-moz-range-track {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 14px;
+  width: 14px;
+  margin-top: -6.5px;
+  border-radius: 1px;
+  background: var(--thumb, #fff);
+  border: none;
+}
+input[type="range"]::-moz-range-thumb {
+  height: 14px;
+  width: 14px;
+  border-radius: 1px;
+  background: var(--thumb, #fff);
+  border: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 40s linear infinite;
+}
