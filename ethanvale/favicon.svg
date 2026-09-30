@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="14" fill="#050505"/>
+  <circle cx="32" cy="32" r="25" stroke="rgba(244,242,239,0.25)" stroke-width="1.5" fill="none"/>
+  <circle cx="32" cy="32" r="17" stroke="rgba(244,242,239,0.5)" stroke-width="1.5" fill="none"/>
+  <text x="32" y="38" font-family="'Playfair Display', 'Times New Roman', Georgia, serif" font-size="20" font-weight="500" fill="#f4f2ef" text-anchor="middle" letter-spacing="1">EV</text>
+</svg>
