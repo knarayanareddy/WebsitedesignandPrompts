@@ -18,6 +18,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 - **SynapseX (Neural-AI Interface):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/](https://knarayanareddy.github.io/WebsitedesignandPrompts/synapsex/)
 - **Editorial Portfolio (Creative Engineer Showcase):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/)
 - **Jack (3D Creator Portfolio):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/](https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/)
+- **One Thread (3D WebGL Spline Flight):** [https://kiranreddy.nl](https://kiranreddy.nl)
 
 ---
 
@@ -33,6 +34,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | **06** | **Editorial Portfolio (Michael Smith)** | [`portfolio/`](./portfolio/) | Awwwards-grade editorial dark portfolio featuring Instrument Serif typography, Lenis smooth inertia scrolling synced with GSAP ScrollTrigger, Mux HLS streaming, dynamic cursor spotlights with halftone textures, and a pinned dual-speed parallax gallery. | React 18, Vite 6, Tailwind CSS v3, GSAP 3, Lenis, Framer Motion v11, TypeScript | [Prompt Spec](./portfolio/ADAPTED_PROMPT.md) · [Build Log](./portfolio/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/portfolio/) |
 | **07** | **Apogee (Glassmorphic Data-Intelligence)** | [`apogee/`](./apogee/) | Pixel-exact glassmorphic SaaS hero (32-bar revenue chart with staggered CSS keyframe timeline, glass nav pills, animated mobile menu) expanded into a full product story — trust strip, count-up metrics, capability cards, interactive forecast console, testimonial, CTA. | React 18, Vite 6, Tailwind CSS v3, TypeScript, lucide-react | [Prompt Spec](./apogee/ADAPTED_PROMPT.md) · [Build Log](./apogee/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/apogee/) |
 | **08** | **Jack (3D Creator Portfolio)** | [`jack/`](./jack/) | Dark editorial creator portfolio with magnetic portrait, scroll-driven dual marquee, character-reveal biography, five service rows, and sticky-stack 3D project cards. | React 18, Vite 6, Tailwind CSS v3, TypeScript, Framer Motion, Lucide React | [Prompt Spec](./jack/ADAPTED_PROMPT.md) · [Build Log](./jack/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/jack/) |
+| **09** | **One Thread (3D WebGL Spline Flight)** | [`onethread/`](./onethread/) | Full-screen 3D WebGL camera spline flight portfolio inspired by ysuriadesign.co. Features continuous Catmull-Rom flight, GLSL post-processing (anamorphic streaks, bloom, CoC bokeh), Web Audio synthesizer, and 3D work modal. | Three.js r186, WebGL 2.0, Web Audio API, Vite 6, TypeScript | [Prompt Spec](./onethread/ADAPTED_PROMPT.md) · [Build Log](./onethread/BUILD_LOG.md) | [Live Demo](https://kiranreddy.nl) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -87,6 +89,10 @@ npm install && npm run dev
 
 # 8. To run Jack:
 cd ../jack
+npm install && npm run dev
+
+# 9. To run One Thread (3D WebGL Flight):
+cd ../onethread
 npm install && npm run dev
 ```
 

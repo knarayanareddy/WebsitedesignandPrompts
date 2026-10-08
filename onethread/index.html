@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en" class="gate">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Kiran Reddy — Systems Builder &amp; Founder</title>
+    <meta name="description" content="Kiran Reddy — a systems builder and venture creator. AI agents, autonomous protocols, 3D spatial web architectures, and physical ventures from Delft." />
+    <meta name="theme-color" content="#000000" />
+    <link rel="icon" href="data:," />
+    <link rel="preload" href="/fonts/geist-latin-var.woff" as="font" type="font/woff" crossorigin />
+    <link rel="stylesheet" crossorigin href="/assets/style.css">
+  </head>
+  <body>
+    <canvas id="gl" aria-hidden="true"></canvas>
+    <div id="scroll" aria-hidden="true"></div>
+
+    <footer class="footer" id="footer">
+      <div class="ft-bar">
+        <div class="ft-l">
+          <p class="ft-kick mono"><span class="ft-dot" aria-hidden="true"></span>Open for new work &amp; ventures · 2026</p>
+          <h2 class="ft-title">Let’s build <em>what’s next.</em></h2>
+        </div>
+        <div class="ft-r">
+          <a class="ft-mail" href="mailto:kiran@kiranreddy.nl?subject=Project%20enquiry">kiran@kiranreddy.nl<span aria-hidden="true">→</span></a>
+          <nav class="ft-links mono" aria-label="Elsewhere">
+            <a href="https://vouwfiets.kiranreddy.nl" target="_blank" rel="noopener">Vouwloods Delft ↗</a>
+            <a href="/multiverse" target="_blank" rel="noopener">3D Multiverse ↗</a>
+            <a href="https://github.com/knarayanareddy" target="_blank" rel="noopener">GitHub ↗</a>
+          </nav>
+        </div>
+        <div class="ft-base mono">
+          <span>© 2026 Kiran Reddy · Delft, NL</span>
+          <button class="ft-again mono" data-jump="0">Begin again ↑</button>
+        </div>
+      </div>
+    </footer>
+
+    <main id="ui">
+      <header class="top">
+        <a class="mark" href="#" data-jump="0" aria-label="One Thread — back to start">
+          <span class="mark-pic" aria-hidden="true"><b>KR</b></span>
+          <span class="mark-word">Kiran&nbsp;Reddy</span>
+        </a>
+        <div class="counter mono" aria-live="polite"><span id="count-now">00</span><span class="counter-sep">/</span><span>06</span></div>
+        <div class="top-r">
+          <button class="sound-btn mono" id="sound-btn" aria-pressed="false" aria-label="Sound">Sound <span>off</span></button>
+          <button class="index-btn mono" id="index-btn" aria-expanded="false" aria-controls="index">Index</button>
+        </div>
+      </header>
+
+      <section class="intro" id="intro">
+        <p class="intro-kicker mono">Systems, autonomous agents and ventures · Delft 2026</p>
+        <h1 class="intro-title">Kiran Reddy — systems, AI and code, by one person.</h1>
+        <p class="intro-now"><i aria-hidden="true"></i>Building ventures &amp; showroom at <a href="https://vouwfiets.kiranreddy.nl" target="_blank" rel="noopener">Vouwloods Delft</a></p>
+      </section>
+
+      <section class="chapter" id="chapter" aria-live="polite">
+        <div class="ch-meta mono"><span class="ch-num" id="ch-num">01</span><span class="ch-rule"></span><span class="ch-kicker">Chapter</span></div>
+        <h2 class="ch-title" id="ch-title"></h2>
+        <p class="ch-line" id="ch-line"></p>
+        <dl class="ch-stats" id="ch-stats"></dl>
+      </section>
+
+      <div class="work-labels" id="work-labels"></div>
+      <div class="frame-tags" id="frame-tags" aria-hidden="true"></div>
+
+      <section class="finale" id="finale">
+        <p class="finale-kicker mono">Systems Engineer · AI Builder · Founder</p>
+        <h2 class="finale-title">One person. <em>One thread.</em></h2>
+      </section>
+
+      <nav class="rail" id="rail" aria-label="Chapters"></nav>
+
+      <div class="scroll-cue mono" id="cue"><span>Scroll</span><i></i></div>
+
+      <nav class="index open" id="index">
+        <ol id="index-list"></ol>
+      </nav>
+    </main>
+
+    <div class="work-modal" id="work-modal" role="dialog" aria-modal="true" aria-labelledby="wm-title" aria-hidden="true">
+      <div class="wm-backdrop" data-close></div>
+      <article class="wm-glass">
+        <header class="wm-head">
+          <h3 class="wm-title" id="wm-title"></h3>
+          <p class="wm-desc" id="wm-desc"></p>
+          <button class="wm-close" data-close aria-label="Close"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+        </header>
+        <div class="wm-stage" id="wm-stage"></div>
+        <footer class="wm-foot">
+          <div class="wm-thumbs" id="wm-thumbs"></div>
+          <nav class="wm-nav" aria-label="Media"><button id="wm-prev" aria-label="Previous">←</button><button id="wm-next" aria-label="Next">→</button></nav>
+        </footer>
+      </article>
+    </div>
+
+    <div id="loader">
+      <div class="loader-inner">
+        <p class="mono loader-k">Tying the thread</p>
+        <div class="loader-bar"><i id="loader-fill"></i></div>
+        <p class="mono loader-p" id="loader-p">000</p>
+        <div class="loader-enter">
+          <button class="enter-btn on" data-enter="sound">Enter with sound</button>
+          <button class="enter-btn" data-enter="mute">Enter muted</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="cursor" aria-hidden="true"><i class="c-dot"></i><i class="c-ring"></i></div>
+
+    <script type="module" src="/assets/engine.js"></script>
+  </body>
+</html>
