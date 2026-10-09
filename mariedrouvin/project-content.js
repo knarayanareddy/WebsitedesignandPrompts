@@ -1075,7 +1075,15 @@ const portfolioProjects = [
 
 const localizeType = (type) => localeBundle.types?.[type] || type;
 const localizeStatus = (status) => localeBundle.statuses?.[status] || status;
-const siteAssetUrl = (source) => source?.startsWith("assets/") ? `/${source}` : source;
+function siteAssetUrl(source) {
+  if (!source || typeof source !== "string") return source;
+  if (source.startsWith("http://") || source.startsWith("https://") || source.startsWith("data:")) return source;
+  const clean = source.replace(/^(\.\.\/|\.\/|\/)+/, "");
+  const isFrench = document.documentElement.lang.startsWith("fr") || window.location.pathname.includes("/fr");
+  const prefix = isFrench ? "../" : "./";
+  return clean.startsWith("assets/") ? `${prefix}${clean}` : `${prefix}assets/${clean}`;
+}
+window.siteAssetUrl = siteAssetUrl;
 const dateFormatter = new Intl.DateTimeFormat(portfolioLocale === "fr" ? "fr-FR" : "en-GB", {
   month: "long",
   year: "numeric",
@@ -1143,15 +1151,14 @@ const graphicMedia = {
 
 
 const caseStudyIds = ["open-yale-course-notebooks", "taste-archive", "round-music-widget"];
-const caseStudyPath = (projectId, language = portfolioLocale) => `${language === "fr" ? "/fr" : ""}/projects/${projectId}/`;
-const projectHref = (project) => caseStudyIds.includes(project.id) ? caseStudyPath(project.id) : (project.href.startsWith("#") ? `#project-${project.id}` : project.href);
+const projectHref = (project) => project.href.startsWith("http") ? project.href : "#projects";
 const escapeHtml = (value = "") => String(value).replace(/[&<>"']/g, (character) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[character]);
 
 function projectMediaMarkup(project) {
   const { media } = project;
   if (!media) return "";
   if (media.src) {
-    return `<div class="project-media project-media--${media.shape}${media.contain ? " project-media--contain" : ""}${media.position === "top" ? " project-media--top" : ""}"><img src="${escapeHtml(media.src)}" alt="${escapeHtml(media.alt)}" loading="lazy" decoding="async"></div>`;
+    return `<div class="project-media project-media--${media.shape}${media.contain ? " project-media--contain" : ""}${media.position === "top" ? " project-media--top" : ""}"><img src="${escapeHtml(siteAssetUrl(media.src))}" alt="${escapeHtml(media.alt)}" loading="lazy" decoding="async"></div>`;
   }
   if (media.graphic === "workflows") {
     return `<div class="project-media project-media--${media.shape} project-media--graphic project-graphic--workflows"><ol class="graphic-workflows" aria-hidden="true">${project.components.map((component) => `<li>${component.title}</li>`).join("")}</ol></div>`;

@@ -1,3 +1,13 @@
+const siteAssetUrl = window.siteAssetUrl || ((source) => {
+  if (!source || typeof source !== "string") return source;
+  if (source.startsWith("http://") || source.startsWith("https://") || source.startsWith("data:")) return source;
+  const clean = source.replace(/^(\.\.\/|\.\/|\/)+/, "");
+  const isFrench = document.documentElement.lang.startsWith("fr") || window.location.pathname.includes("/fr");
+  const prefix = isFrench ? "../" : "./";
+  return clean.startsWith("assets/") ? `${prefix}${clean}` : `${prefix}assets/${clean}`;
+});
+window.siteAssetUrl = siteAssetUrl;
+
 const cardsView = document.querySelector("#cardsView");
 const indexYearView = document.querySelector("#indexYearView");
 const indexTypeView = document.querySelector("#indexTypeView");
@@ -340,14 +350,14 @@ const projectEnhancements = {
 
 portfolioProjects.forEach((project) => {
   const defaultGallery = project.media?.src
-    ? [{ src: project.media.src, alt: project.media.alt }]
+    ? [{ src: siteAssetUrl(project.media.src), alt: project.media.alt }]
     : [];
   projectEnhancements[project.id] = {
     type: project.typeLabel || project.types.map(localizeType).join(" + "),
     date: project.dateLabel || formatProjectDate(project.date),
     status: localizeStatus(project.status),
     tags: project.types.map(localizeType),
-    gallery: project.gallery || defaultGallery,
+    gallery: (project.gallery || defaultGallery).map((item) => ({ ...item, src: siteAssetUrl(item.src) })),
     components: project.components || [],
     story: project.story || [],
     storyCopy: project.storyCopy || [],
@@ -360,6 +370,15 @@ portfolioProjects.forEach((project) => {
       ? [{ label: project.linkLabel || localeUi.openProject || "Open project", href: project.href }]
       : [])
   };
+});
+
+Object.values(projectEnhancements).forEach((enhancement) => {
+  if (enhancement.gallery) {
+    enhancement.gallery = enhancement.gallery.map((item) => ({
+      ...item,
+      src: siteAssetUrl(item.src)
+    }));
+  }
 });
 
 const drawerLayer = document.querySelector("#projectDrawerLayer");
@@ -484,7 +503,7 @@ function setupCardCarousels() {
 
       gallery.forEach((image, index) => {
         const slide = document.createElement("img");
-        slide.src = image.src;
+        slide.src = siteAssetUrl(image.src);
         slide.alt = index === 0 ? image.alt || `${title} - ${localeUi.projectImage || "project image"}` : "";
         slide.loading = index === 0 ? "eager" : "lazy";
         slide.decoding = "async";
@@ -651,7 +670,7 @@ function renderProjectDrawer(details) {
     }
 
     const projectImage = document.createElement("img");
-    projectImage.src = image.src;
+    projectImage.src = siteAssetUrl(image.src);
     projectImage.alt = image.alt || `${details.title} - ${localeUi.projectImage || "project image"} ${index + 1}`;
     projectImage.loading = index === 0 ? "eager" : "lazy";
     projectImage.decoding = "async";
