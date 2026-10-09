@@ -40,6 +40,7 @@ apps=(
   "videoembeddeddesign/securify:videoembeddeddesign"
   "brunosimon:brunosimon"
   "senbuzy:senbuzy"
+  "portfolio-console:portfolio-console"
 )
 # published-slug : source-folder   (already static, copied verbatim)
 statics=(
