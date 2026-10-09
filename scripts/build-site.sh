@@ -38,6 +38,8 @@ apps=(
   "synapsex:synapsex"
   "jack:jack"
   "videoembeddeddesign/securify:videoembeddeddesign"
+  "brunosimon:brunosimon"
+  "senbuzy:senbuzy"
 )
 # published-slug : source-folder   (already static, copied verbatim)
 statics=(

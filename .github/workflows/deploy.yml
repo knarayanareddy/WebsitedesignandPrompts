@@ -46,6 +46,8 @@ jobs:
             synapsex/package-lock.json
             jack/package-lock.json
             videoembeddeddesign/securify/package-lock.json
+            brunosimon/package-lock.json
+            senbuzy/package-lock.json
 
       # Installs, builds all seven apps, assembles _site/, and runs verify-site.
       # A failure here fails the pull request.
