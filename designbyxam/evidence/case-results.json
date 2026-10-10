@@ -1,0 +1,83 @@
+{
+  "case": "Samuel Idowu / designbyxam photographic editorial portfolio",
+  "reference_site": "https://samuelidowu.com/",
+  "reference_post": "https://x.com/designbyxam/status/2107519830521720984/video/1",
+  "evidence_kind": "Recorded private local-copy verification; original frontend/media are not published in this kit",
+  "recorded_test_start_utc": "2026-10-10T12:10:30.177Z",
+  "acquired_files": 182,
+  "acquired_bytes": 18632135,
+  "file_extensions": {
+    ".html": 1,
+    ".jpg": 1,
+    ".js": 1,
+    ".json": 1,
+    ".mp4": 1,
+    ".webp": 176,
+    ".woff2": 1
+  },
+  "source_local_build_path_and_hash_parity": true,
+  "browser_test_results": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "retries": 0,
+    "browser": "Chromium"
+  },
+  "matched_screenshot_states": [
+    {
+      "name": "about-desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "dpr": 1,
+      "reduced_motion": true,
+      "png_bytes_identical": true,
+      "sha256": "55082eff799b968ae719c9b8ed2d41f2323116afb0a9ce8f5714bfc13c5e962a"
+    },
+    {
+      "name": "about-mobile",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "dpr": 1,
+      "reduced_motion": true,
+      "png_bytes_identical": true,
+      "sha256": "50103fa0f1d3692e8cca6cae9fc44e5f641a8e80ebba06c61bd7f482c74b7a66"
+    },
+    {
+      "name": "projects",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "dpr": 1,
+      "reduced_motion": true,
+      "png_bytes_identical": true,
+      "sha256": "e9cf1dee077374af2a21e43dcd9c977c3ed948b1ceb983d73862c6bda15a5416"
+    }
+  ],
+  "preserved_gallery_quirk": {
+    "input": "ArrowRight on focused photo scrubber",
+    "reference_from": 1,
+    "reference_to": 3,
+    "local_from": 1,
+    "local_to": 3
+  },
+  "verified_webgl_objects": [
+    "The Bible",
+    "The Soundcore Q45",
+    "My M1 Max"
+  ],
+  "limits": [
+    "Current live site, not historical reference-video version.",
+    "Exact PNG comparisons cover three static matched states, not all temporal frames.",
+    "No complete soundtrack/audio/video timing assessment.",
+    "External Google Fonts/Vimeo dependencies preserved.",
+    "Remote editing/messaging backend not cloned.",
+    "Safari/Firefox/physical phone and production audits not established.",
+    "The new public documentation/helpers are not the copied private website."
+  ]
+}

@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "example_only": true,
+  "lane": "fresh-independent-build",
+  "reference": {
+    "supplied_url": "https://example.com/reference",
+    "resolved_site_url": null,
+    "observed_version": null,
+    "video_decoded": false,
+    "unknowns": []
+  },
+  "target": {
+    "writable_folder": "YOUR_PROJECT",
+    "publication": "local-only",
+    "allowed_changes": []
+  },
+  "assets": {
+    "core_portrait": "REPLACE_WITH_APPROVED_ASSET",
+    "shadow": "REPLACE_WITH_APPROVED_SHADOW",
+    "reuse_scope": "unresolved",
+    "substitutions_approved": false
+  },
+  "states": [
+    {
+      "id": "about-desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 800
+      },
+      "dpr": 1,
+      "route": "#about",
+      "scroll_y": 0,
+      "reduced_motion": true,
+      "readiness": [
+        "approved public configuration applied",
+        "fonts ready",
+        "visible portrait and shadow decoded"
+      ],
+      "expected": [
+        "approved actual photograph",
+        "measured phrase layout"
+      ],
+      "verification": [
+        "matched screenshot",
+        "real input where relevant"
+      ]
+    }
+  ],
+  "gates": {
+    "visual": false,
+    "behavioral": false,
+    "asset_provenance": false,
+    "byte_parity_required": false,
+    "backend_actions_allowed": false,
+    "public_release_allowed": false
+  }
+}
