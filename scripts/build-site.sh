@@ -52,6 +52,7 @@ statics=(
   "expa:expa"
   "vitaliiradov:vitaliiradov"
   "meliketurgut:meliketurgut"
+  "ysuriadesign:ysuriadesign"
 )
 
 echo "==> assembling $site_dir from $(git rev-parse --short HEAD 2>/dev/null || echo 'working tree')"
