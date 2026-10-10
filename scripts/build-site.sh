@@ -50,6 +50,7 @@ statics=(
   "bizarro:bizarro"
   "designbyxam:designbyxam/site"
   "expa:expa"
+  "vitaliiradov:vitaliiradov"
 )
 
 echo "==> assembling $site_dir from $(git rev-parse --short HEAD 2>/dev/null || echo 'working tree')"
