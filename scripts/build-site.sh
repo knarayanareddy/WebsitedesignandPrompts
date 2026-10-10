@@ -47,6 +47,7 @@ statics=(
   "ethanvale:ethan-vale-archive"
   "mariedrouvin:mariedrouvin"
   "bbdo:bbdo"
+  "bizarro:bizarro"
 )
 
 echo "==> assembling $site_dir from $(git rev-parse --short HEAD 2>/dev/null || echo 'working tree')"

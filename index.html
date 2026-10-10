@@ -542,9 +542,9 @@
     <!-- Controls Bar -->
     <div class="controls-bar">
       <div class="filter-tabs" id="filterTabs">
-        <button class="filter-btn active" data-filter="all">All Templates (13)</button>
-        <button class="filter-btn" data-filter="interactive">Interactive & 3D (7)</button>
-        <button class="filter-btn" data-filter="editorial">Editorial & Portfolio (4)</button>
+        <button class="filter-btn active" data-filter="all">All Templates (14)</button>
+        <button class="filter-btn" data-filter="interactive">Interactive & 3D (8)</button>
+        <button class="filter-btn" data-filter="editorial">Editorial & Portfolio (5)</button>
         <button class="filter-btn" data-filter="cinematic">Cinematic Video (2)</button>
         <button class="filter-btn" data-filter="product">Product & SaaS (1)</button>
       </div>
@@ -1131,6 +1131,143 @@
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
             </a>
             <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/bbdo/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 14: Luis Bizarro 3D Cassette Projects Archive -->
+      <article class="card" data-category="interactive editorial" data-title="Luis Bizarro 3D Cassette Projects Archive">
+        <div class="card-banner">
+          <div class="card-banner-graphic">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg, #05070a 0%, #0d1117 50%, #161b22 100%);">
+              <!-- Cybernetic subtle grid lines -->
+              <defs>
+                <pattern id="bizarroGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+                </pattern>
+                <linearGradient id="cassetteBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2a2e35"/>
+                  <stop offset="50%" stop-color="#181a1f"/>
+                  <stop offset="100%" stop-color="#0c0d10"/>
+                </linearGradient>
+                <linearGradient id="tapeWindow" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#141820" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#0a0c10" stop-opacity="0.95"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="200" fill="url(#bizarroGrid)"/>
+
+              <!-- Ambient spotlight glow -->
+              <circle cx="200" cy="100" r="90" fill="#38bdf8" opacity="0.08" filter="blur(35px)"/>
+              <circle cx="290" cy="70" r="60" fill="#6366f1" opacity="0.07" filter="blur(25px)"/>
+
+              <!-- Stack of Cassettes (Back / Perspective) -->
+              <g opacity="0.35" transform="translate(0, 36) scale(0.95) translate(10, 0)">
+                <rect x="90" y="45" width="220" height="110" rx="8" fill="#121418" stroke="#333842" stroke-width="1.2"/>
+              </g>
+
+              <!-- Main Hero Cassette Tape -->
+              <g id="cassette-hero">
+                <!-- Outer Body Shell -->
+                <rect x="85" y="40" width="230" height="118" rx="9" fill="url(#cassetteBody)" stroke="#4a5260" stroke-width="1.5" filter="drop-shadow(0 14px 28px rgba(0,0,0,0.6))"/>
+                
+                <!-- Screw details in 4 corners -->
+                <circle cx="94" cy="48" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="306" cy="48" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="94" cy="150" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="306" cy="150" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+
+                <!-- Label Sticker Area -->
+                <rect x="100" y="52" width="200" height="72" rx="4" fill="#E8EDF2" stroke="#BAC4D0" stroke-width="1"/>
+                <!-- Label Header Band -->
+                <rect x="100" y="52" width="200" height="14" rx="3" fill="#D32F2F"/>
+                <text x="108" y="62" fill="#FFFFFF" font-family="'Courier New', monospace" font-size="8" font-weight="900" letter-spacing="1">SONY HF 90</text>
+                <text x="270" y="62" fill="#FFFFFF" font-family="'Courier New', monospace" font-size="8" font-weight="800">SIDE A</text>
+
+                <!-- Project Written Label -->
+                <text x="108" y="77" fill="#1E293B" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700">XBOX MUSEUM (2021)</text>
+
+                <!-- Center Viewing Window -->
+                <rect x="125" y="84" width="150" height="34" rx="5" fill="url(#tapeWindow)" stroke="#64748B" stroke-width="1"/>
+
+                <!-- Left Spool & Teeth -->
+                <circle cx="155" cy="101" r="12" fill="#F8FAFC" stroke="#475569" stroke-width="1"/>
+                <circle cx="155" cy="101" r="6" fill="#0F172A"/>
+                <circle cx="155" cy="101" r="1.5" fill="#94A3B8"/>
+
+                <!-- Right Spool & Teeth -->
+                <circle cx="245" cy="101" r="12" fill="#F8FAFC" stroke="#475569" stroke-width="1"/>
+                <circle cx="245" cy="101" r="6" fill="#0F172A"/>
+                <circle cx="245" cy="101" r="1.5" fill="#94A3B8"/>
+
+                <!-- Magnetic Tape connecting spools -->
+                <rect x="167" y="99" width="66" height="4" fill="#3E2723"/>
+
+                <!-- Bottom Trapezoid head zone -->
+                <polygon points="120,158 135,142 265,142 280,158" fill="#14171C" stroke="#333842" stroke-width="1"/>
+                <circle cx="150" cy="150" r="3" fill="#0A0C0E"/>
+                <circle cx="250" cy="150" r="3" fill="#0A0C0E"/>
+              </g>
+
+              <!-- Dynamic Screen HUD Tracker Overlay -->
+              <!-- Crosshair Reticle -->
+              <g id="tracker-hud" transform="translate(245, 101)">
+                <!-- Target Reticle Ring -->
+                <circle cx="0" cy="0" r="22" fill="none" stroke="#38BDF8" stroke-width="1.2" stroke-dasharray="3 3"/>
+                <circle cx="0" cy="0" r="4" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+                <!-- Crosshair ticks -->
+                <line x1="-28" y1="0" x2="-23" y2="0" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="23" y1="0" x2="28" y2="0" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="0" y1="-28" x2="0" y2="-23" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="0" y1="23" x2="0" y2="28" stroke="#38BDF8" stroke-width="1.5"/>
+              </g>
+
+              <!-- HUD Floating Coordinate Box -->
+              <g transform="translate(265, 32)">
+                <rect x="0" y="0" width="105" height="42" rx="4" fill="#0B1320" fill-opacity="0.85" stroke="#38BDF8" stroke-width="1"/>
+                <text x="8" y="14" fill="#38BDF8" font-family="'Courier New', monospace" font-size="8" font-weight="700">TRACK: CASSETTE_08</text>
+                <text x="8" y="26" fill="#E2E8F0" font-family="'Courier New', monospace" font-size="7.5">POS: [412, 184]</text>
+                <text x="8" y="36" fill="#94A3B8" font-family="'Courier New', monospace" font-size="7">FPS: 60 · RAYCAST OK</text>
+              </g>
+
+              <!-- Sound Equalizer Bars Indicator -->
+              <g transform="translate(25, 160)">
+                <rect x="0" y="10" width="2.5" height="10" rx="1" fill="#38BDF8"/>
+                <rect x="5" y="4" width="2.5" height="16" rx="1" fill="#38BDF8"/>
+                <rect x="10" y="12" width="2.5" height="8" rx="1" fill="#38BDF8"/>
+                <rect x="15" y="2" width="2.5" height="18" rx="1" fill="#38BDF8"/>
+                <text x="24" y="17" fill="#64748B" font-family="'Courier New', monospace" font-size="7.5">AUDIO SYNTH: ON</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Three.js r186</span>
+            <span class="badge-tag">WebGL 2.0</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Luis Bizarro 3D Projects Archive</h2>
+            <div class="card-meta">bizarro/ · Creative Technologist Archive</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Luis Bizarro's creative technology projects archive. Features a procedural 3D Sony cassette tape tower rendered in Three.js r186 with WebGL 2.0, dynamic screen-space raycasting HUD tracker with live coordinates and hovering micro-video previews, smooth inertial wheel physics navigation, and a zero-asset procedural Web Audio synthesizer.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Three.js r186</span>
+            <span class="tech-pill">Procedural 3D</span>
+            <span class="tech-pill">WebGL 2.0</span>
+            <span class="tech-pill">Screen Raycast HUD</span>
+            <span class="tech-pill">Web Audio Synth</span>
+            <span class="tech-pill">Inter Typography</span>
+          </div>
+          <div class="card-actions">
+            <a href="./bizarro/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/bizarro/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
           </div>
         </div>
       </article>
