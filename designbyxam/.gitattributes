@@ -1,0 +1,2 @@
+# Preserve the reference front end and asset bytes across checkout platforms.
+site/** -text

@@ -542,9 +542,9 @@
     <!-- Controls Bar -->
     <div class="controls-bar">
       <div class="filter-tabs" id="filterTabs">
-        <button class="filter-btn active" data-filter="all">All Templates (14)</button>
-        <button class="filter-btn" data-filter="interactive">Interactive & 3D (8)</button>
-        <button class="filter-btn" data-filter="editorial">Editorial & Portfolio (5)</button>
+        <button class="filter-btn active" data-filter="all">All Templates (15)</button>
+        <button class="filter-btn" data-filter="interactive">Interactive & 3D (9)</button>
+        <button class="filter-btn" data-filter="editorial">Editorial & Portfolio (6)</button>
         <button class="filter-btn" data-filter="cinematic">Cinematic Video (2)</button>
         <button class="filter-btn" data-filter="product">Product & SaaS (1)</button>
       </div>
@@ -556,7 +556,7 @@
 
       <noscript>
         <p class="nojs-note">
-          JavaScript is off, so the filter buttons and search box are inactive. All ten
+          JavaScript is off, so the filter buttons and search box are inactive. All
           templates below are listed and linked regardless — each demo needs JavaScript too.
         </p>
       </noscript>
@@ -1272,6 +1272,24 @@
         </div>
       </article>
 
+      <!-- Card 15: DesignByXam Photographic Editorial Portfolio -->
+      <article class="card" data-category="interactive editorial" data-title="DesignByXam Samuel Idowu photographic editorial portfolio">
+        <div class="card-banner" style="background:#fff;overflow:hidden;">
+          <div class="card-banner-graphic" style="position:relative;background:#fff;width:100%;height:100%;">
+            <span aria-hidden="true" style="position:absolute;left:6%;top:10%;font:600 44px Arial,sans-serif;color:#e9e9e9;letter-spacing:-2px;">A Brand<br>Designer</span>
+            <img src="./designbyxam/ab/sh1.webp" alt="" aria-hidden="true" loading="lazy" style="position:absolute;width:55%;height:50%;object-fit:contain;left:40%;top:48%;">
+            <img src="./designbyxam/ab/p1.webp" alt="Samuel Idowu photographed in the reference portfolio" loading="lazy" style="position:absolute;left:43%;top:8%;height:100%;width:27%;object-fit:contain;object-position:top;">
+            <span aria-hidden="true" style="position:absolute;right:7%;bottom:9%;font:600 31px Arial,sans-serif;color:#000;letter-spacing:-1px;">Artist<br>Heart</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header"><h2 class="card-title">DesignByXam — Samuel Idowu</h2><div class="card-meta">designbyxam/ · Photographic Editorial Portfolio</div></div>
+          <p class="card-desc">Reference rendition retaining the original photographic cut-outs, cast shadows, typography, five views, poster archive, photo gallery and real Three.js object viewers. Original work by Samuel Idowu, with an exhaustive process and prompt guide.</p>
+          <div class="tech-stack-row"><span class="tech-pill">DOM / CSS</span><span class="tech-pill">Original Photography</span><span class="tech-pill">Three.js / WebGL</span><span class="tech-pill">Responsive</span></div>
+          <div class="card-actions"><a href="./designbyxam/#about" class="btn-launch">Launch Live Demo ↗</a><a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/designbyxam/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a></div>
+        </div>
+      </article>
+
     </div>
 
     <!-- Footer -->
@@ -1292,6 +1310,8 @@
     const filterBtns = document.querySelectorAll('.filter-btn');
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.card');
+
+    filterBtns.forEach(button => { const name=button.textContent.replace(/\s*\(\d+\)$/, ''); const count=button.dataset.filter==='all'?cards.length:[...cards].filter(card=>card.dataset.category.split(' ').includes(button.dataset.filter)).length; button.textContent=`${name} (${count})`; });
 
     let currentFilter = 'all';
     let currentSearch = '';

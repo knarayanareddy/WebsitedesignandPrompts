@@ -1,5 +1,7 @@
 # Technical Guide — DesignByXam portfolio case study
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 ## 1. Scope, evidence, and the implementation boundary
 
 This chapter documents a completed **private, unchanged local copy** of the public portfolio at `https://samuelidowu.com`. It is an implementation and QA guide for understanding the observed front end and for designing a separate, independently authored implementation. It is not source code, a deployment recipe for the original, or permission to publish the original work. The captured front-end tree was kept byte-for-byte intact; an unexposed original source repository was not recovered. Source photographs, posters, shadows, textures, fonts, JavaScript, CSS, HTML, and video are intentionally not reproduced in this documentation pack.

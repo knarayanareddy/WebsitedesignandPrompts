@@ -24,6 +24,7 @@ assumed (the outstanding work is tracked in [`REVIEW_CHECKLIST.md`](./REVIEW_CHE
 | SynapseX | nothing | 5 CloudFront `hf_` clips | `BackgroundVideo` swaps a failed clip for a gradient plate (poster-backed where available) — implemented |
 | Portfolio | nothing | 1 Mux HLS stream + 11 Unsplash photos (18 URLs with size variants) | `poster` frame stays behind the HLS element if the stream fails |
 | Apogee | `favicon.svg` (generated) + 3 generated band loops (`field`/`terrain`/`ascent`, 4.5 MB) + 3 posters | 1 CloudFront `hf_` clip (hero) + 1 hot-linked webfont (Suisse Intl via `db.onlinewebfonts.com`) | `onError` → CSS nebula plate; font falls back to the system sans stack (implemented) |
+| DesignByXam | Original published front end and linked photography/shadows/posters/gallery/font/vendor assets, retained for the explicitly requested reference rendition | Original Google Fonts and Vimeo integrations | Original behavior retained; remote editing backend is not hosted on Pages |
 | Jack | `favicon.svg` | User-specified Figma, Motionsites, CloudFront/Higgs, and Google Fonts assets | Design assets are hot-linked; remote reachability and reuse rights need review |
 
 `hf_…` files on `d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/` are
@@ -32,6 +33,10 @@ generator's). They were used as design references when the templates were built;
 ownership and licence are **undocumented**, so treat them as placeholders only.
 
 ---
+
+## DesignByXam reference-rendition notice
+
+The follow-up request explicitly asked for a live github.io rendition of Samuel Idowu's portfolio (https://samuelidowu.com/). The original front end and linked imagery are under `designbyxam/site/`, with provenance/hashes in `designbyxam/evidence/pages-assets.json`; source attribution is retained. These third-party files are **not covered by this repository's MIT grant** and no additional ownership/redistribution license is asserted. Review rights before further reuse or commercial publication. New helper/server/test/documentation code is kept separate from the unchanged reference front end. See [the deployment record](designbyxam/DEPLOYMENT.md).
 
 ## 1. Securify — `videoembeddeddesign/securify`
 

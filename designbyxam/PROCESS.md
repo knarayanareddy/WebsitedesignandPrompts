@@ -1,5 +1,7 @@
 # Process — Building a Photographic Editorial Portfolio Without Losing Fidelity
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 This is a reproducible production method, not a claim that a video can reveal all source code. It covers discovery, design reconstruction, original-site creation, authorized exact-copy work, tests and publication. For a copy-ready specification use [ADAPTED_PROMPT.md](ADAPTED_PROMPT.md); for low-level implementation use [TECHNICAL_GUIDE.md](TECHNICAL_GUIDE.md).
 
 ## 1. Define the job before choosing the stack

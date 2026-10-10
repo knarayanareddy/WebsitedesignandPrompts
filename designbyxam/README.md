@@ -4,7 +4,18 @@ A detailed, evidence-backed guide to creating a portfolio in the visual and inte
 
 Reference video: [the supplied X post](https://x.com/designbyxam/status/2107519830521720984/video/1). Documentation structure follows this repository's [Apogee kit](../apogee/README.md): an adapted build prompt, an implementation/build record, and a navigable overview, expanded here into a full process and validation manual.
 
-> **This folder is a documentation/prompt/tooling kit, not a ready-to-run copy of the author's site and not a newly deployed GitHub Pages demo.** The third-party photographs, personal gallery, website HTML/CSS/JavaScript, and bundled Three.js library from the private local copy are deliberately not redistributed here. Use your own or appropriately licensed assets for a new public implementation.
+> **Now includes the requested live rendition:** [GitHub Pages demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/designbyxam/#about). The deployable original front end is in [`site/`](site/), alongside this exhaustive process/prompt kit. See [DEPLOYMENT.md](DEPLOYMENT.md) for hosting, verification and provenance. Original work remains Samuel Idowu's; the repository license does not grant third-party asset rights.
+
+## Run the rendition
+
+```bash
+npm ci --include=dev
+npm run build
+npm test
+npm run dev
+```
+
+Local preview mirrors the Pages subpath: `http://127.0.0.1:4174/WebsitedesignandPrompts/designbyxam/#about`. If Chromium is absent, run `npx --no-install playwright install chromium` after dependency installation. The shared repository deploy script publishes only `site/`, not the documentation or test/dependency files.
 
 ## Read in this order
 
@@ -71,4 +82,4 @@ Do not run a new site's acquisition or publishing step merely because a prompt m
 
 ## Public-repository boundary
 
-Included: newly written documentation, prompts, small independently authored helper programs, synthetic fixture tests, portable templates and a compact factual evidence summary. Excluded: the copied author's site, downloaded media, original portraits/shadows/posters, personal gallery images, bundled vendor files, credentials, cookies, signed URLs, local build/dependency trees and screenshots reproducing third-party artwork. This folder itself is the deliverable; no unrelated template or deployment configuration is changed.
+The initial publication contained documentation only. The follow-up explicitly requested a github.io rendition, so `site/` now contains the original front end and linked imagery/vendor files, with original attribution retained. No ownership or additional license is asserted. Credentials, cookies, signed URLs, dependency/build caches and test screenshots remain excluded. The deployment integration is documented in [DEPLOYMENT.md](DEPLOYMENT.md); original historical case evidence is kept distinct from the new Pages validation.

@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 REPO=ROOT.parent
 REQUIRED=['README.md','PROCESS.md','ADAPTED_PROMPT.md','TECHNICAL_GUIDE.md','VALIDATION.md','BUILD_LOG.md','ASSETS_AND_RIGHTS.md','references/SOURCES.md','evidence/case-results.json','templates/reconstruction-contract.example.json','templates/asset-manifest.example.json','templates/acceptance-matrix.md','tools/inventory.py','tools/verify_tree.py','tools/compare_png.py','tools/test_tools.py']
-IGNORE={'.test-work','__pycache__'}
-ALLOWED={'.md','.json','.py'}
+IGNORE={'.test-work','__pycache__','node_modules','dist','test-results','playwright-report','site'}
+ALLOWED={'.md','.json','.py','.mjs'}
 SECRETS=[re.compile(r'gh[pousr]_[A-Za-z0-9]{20,}'),re.compile(r'sk-[A-Za-z0-9]{24,}'),re.compile(r'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----')]
 
 
@@ -36,7 +36,7 @@ def main():
         relative=path.relative_to(ROOT)
         if set(relative.parts)&IGNORE or not path.is_file():continue
         files.append(relative.as_posix())
-        if path.name!='.gitignore' and path.suffix not in ALLOWED:errors.append('Unapproved public file type: '+str(relative))
+        if path.name not in {'.gitignore','.gitattributes'} and path.suffix not in ALLOWED:errors.append('Unapproved public file type: '+str(relative))
         if path.is_symlink():errors.append('Unexpected symlink: '+str(relative));continue
         text=path.read_text(encoding='utf8')
         if any(pattern.search(text) for pattern in SECRETS):errors.append('Potential credential material: '+str(relative))

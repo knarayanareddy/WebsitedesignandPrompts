@@ -1,0 +1,15 @@
+{
+  "name": "designbyxam-pages-rendition",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node tools/serve-site.mjs",
+    "build": "node tools/build-site.mjs",
+    "test": "playwright test",
+    "check:docs": "python3 tools/test_tools.py && python3 tools/validate_docs.py"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.64.0"
+  }
+}

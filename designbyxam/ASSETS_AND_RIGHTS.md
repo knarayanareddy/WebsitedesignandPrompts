@@ -1,5 +1,7 @@
 # Assets, Photography, Shadows and Publication Scope
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 Read the repository-wide [asset policy](../ASSETS.md) and [license](../LICENSE) as well as this chapter. A code/prompt license does not automatically cover photographs, posters, personal gallery media, a vendor bundle or a commercial typeface.
 
 ## 1. Photography is the design, not a replaceable garnish

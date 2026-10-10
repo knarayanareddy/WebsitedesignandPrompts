@@ -1,5 +1,7 @@
 # Build Log — From a Visually Wrong Approximation to an Unchanged Local Reference
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 This is a decision/evidence record. It explains what was tried, what failed, what changed, and what the successful experiment actually proved. It is not a fictional story that an assistant created the author's website from scratch.
 
 ## 1. Brief and references

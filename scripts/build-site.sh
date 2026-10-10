@@ -48,6 +48,7 @@ statics=(
   "mariedrouvin:mariedrouvin"
   "bbdo:bbdo"
   "bizarro:bizarro"
+  "designbyxam:designbyxam/site"
 )
 
 echo "==> assembling $site_dir from $(git rev-parse --short HEAD 2>/dev/null || echo 'working tree')"
@@ -107,5 +108,6 @@ touch "$site_dir/.nojekyll"
 
 echo "==> verifying $site_dir"
 node scripts/verify-site.mjs "$site_dir"
+python3 scripts/verify-designbyxam-site.py "$site_dir/designbyxam"
 
 echo "==> done: $(find "$site_dir" -type f | wc -l | tr -d ' ') files, $(du -sh "$site_dir" | cut -f1)"

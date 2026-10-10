@@ -1,5 +1,7 @@
 # Validation Guide — evidence, coverage, and limits
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 ## 1. Validation objective
 
 This chapter explains how to validate a close **private, local, unchanged copy** of the current DesignByXam case-study source and how to design a similarly rigorous QA process for a separately authored site. The evidence summarized here comes from the recorded original-copy validation run. The guide does not claim that this documentation pack is an application, that a public site was deployed, or that third-party source or media may be redistributed.

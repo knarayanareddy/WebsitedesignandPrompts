@@ -2,3 +2,7 @@ __pycache__/
 *.pyc
 .test-work/
 verification-output.json
+node_modules/
+dist/
+test-results/
+playwright-report/

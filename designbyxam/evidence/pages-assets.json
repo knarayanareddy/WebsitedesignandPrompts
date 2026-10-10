@@ -1,0 +1,1311 @@
+{
+  "scope": "User-requested public reference rendition; original attribution and frontend bytes retained; third-party rights not granted by repository license",
+  "reference": "https://samuelidowu.com/",
+  "serving_slug": "designbyxam",
+  "file_count": 186,
+  "original_frontend_unchanged": true,
+  "files": [
+    {
+      "path": "index.html",
+      "bytes": 291950,
+      "sha256": "5623d6fd18a1b88f0e7949863ac1e6ff5ce58091b71e3c12bbcd56a2f50c96ff",
+      "source": "https://samuelidowu.com/",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/edits.json",
+      "bytes": 3847,
+      "sha256": "2b226382ccf7928b77723c99cab2628e092cbce8e0647f18f160046e7265dba3",
+      "source": "https://samuelidowu.com/site/edits.json",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b1.webp",
+      "bytes": 57828,
+      "sha256": "8f68cd1946064cd3d7dd48bd2ab5ebe56e15b123b61b542cdb0c55098fc86f3c",
+      "source": "https://samuelidowu.com/ab/b1.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b2.webp",
+      "bytes": 224362,
+      "sha256": "26c6f71e248f4e59f0f8929eac86a8b93ed9484456ab6bdaf93dcfd63dd13258",
+      "source": "https://samuelidowu.com/ab/b2.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b3.webp",
+      "bytes": 241842,
+      "sha256": "cfd028821e58fab16c252d53e693bc47d990ec53788ede9112f9f97521658a0f",
+      "source": "https://samuelidowu.com/ab/b3.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b4.webp",
+      "bytes": 174766,
+      "sha256": "352f9c5e52ef50bd8e4ffd35ae2e48a17f4da00c7169063398d4d71df12b16bd",
+      "source": "https://samuelidowu.com/ab/b4.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b5.webp",
+      "bytes": 79572,
+      "sha256": "d4789a248bb10c84ea517acb1a80ea40b4e9f71c85ebf323eda2e7183c108a76",
+      "source": "https://samuelidowu.com/ab/b5.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b6-poster.jpg",
+      "bytes": 83669,
+      "sha256": "802fe71c1e893148d1c05aae5ba90ac6e5b2dace62a3d54bf3a304f7271335d0",
+      "source": "https://samuelidowu.com/ab/b6-poster.jpg",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b6.mp4",
+      "bytes": 1204399,
+      "sha256": "9749b99ebd174cdf5a5701518fec7502f029360c6efd08048574ac96c2219504",
+      "source": "https://samuelidowu.com/ab/b6.mp4",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/b7.webp",
+      "bytes": 194876,
+      "sha256": "ae4d274ef4aeeee7d91af0f0fa4a672ae0474ca3b729c85289530442e38c2cbb",
+      "source": "https://samuelidowu.com/ab/b7.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l1.webp",
+      "bytes": 20288,
+      "sha256": "77ba5d3944abf67885ec903c96428b05f690c4e4fc3c9d7407c3e727525dc99c",
+      "source": "https://samuelidowu.com/ab/l1.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l2.webp",
+      "bytes": 47452,
+      "sha256": "9c6eb0a7a960f76a4e0514a6a0b481c653c70e00e57f38298484c6f0c1c953d3",
+      "source": "https://samuelidowu.com/ab/l2.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l3-back.webp",
+      "bytes": 94864,
+      "sha256": "512f6aef9f5f76908961a1c780d82d7c18f3994fbbdc6f6297af398b7b66ebe1",
+      "source": "https://samuelidowu.com/ab/l3-back.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l3.webp",
+      "bytes": 31820,
+      "sha256": "4903ace2a3961602c29d9aed0374fbedfae311b70e62a3a140320c6c0f622a83",
+      "source": "https://samuelidowu.com/ab/l3.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l4.webp",
+      "bytes": 27068,
+      "sha256": "e858b6439b6959ef8ddfb41d23e70bc907426ba9314c0fc07703081c91a26709",
+      "source": "https://samuelidowu.com/ab/l4.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/l5.webp",
+      "bytes": 10504,
+      "sha256": "c022362ce362ae297dd3eb916eeb5b23f070b236f0b3f75c2ac8bfe7af378e03",
+      "source": "https://samuelidowu.com/ab/l5.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/p1.webp",
+      "bytes": 49814,
+      "sha256": "9abdc7afc3d3d93e21d0aa673303562bfd7cb227bf7e0166f139eb2010d09eeb",
+      "source": "https://samuelidowu.com/ab/p1.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/p2.webp",
+      "bytes": 53244,
+      "sha256": "8ee340aa320969f91908d3a146ff879a1878322d330a8f100b03d722384330f7",
+      "source": "https://samuelidowu.com/ab/p2.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/p3.webp",
+      "bytes": 49532,
+      "sha256": "551c5ae3a14b4062f245ca8c180d778ce4bdea54d8dfbe84ea4f7095f304b4f3",
+      "source": "https://samuelidowu.com/ab/p3.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/p4.webp",
+      "bytes": 61686,
+      "sha256": "c51f2ab46c0538d1fe395bcd9dc3e06dce52645ac1dc2e8fbd45e9dbf390ee81",
+      "source": "https://samuelidowu.com/ab/p4.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/sh1.webp",
+      "bytes": 10864,
+      "sha256": "8a5fc0ca8654ecce670c9e2a3efa0eb2a9aa320de0ca272384a38e7c197324c5",
+      "source": "https://samuelidowu.com/ab/sh1.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/sh2.webp",
+      "bytes": 14474,
+      "sha256": "44df5df7b06e5a5fb514be9a8aae27fdea16335fb73a867b6a7f4decb8ce1fda",
+      "source": "https://samuelidowu.com/ab/sh2.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/sh3.webp",
+      "bytes": 7160,
+      "sha256": "b3db495d408fab59b01ebdd7fdd08141d3956e861efb07901d6eb90c421264b7",
+      "source": "https://samuelidowu.com/ab/sh3.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "ab/sh4.webp",
+      "bytes": 16084,
+      "sha256": "8cd43c642787f12beb434990835c77e9c9ef86761148d28d25959ce9059ab288",
+      "source": "https://samuelidowu.com/ab/sh4.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "fonts/Butler-Medium.woff2",
+      "bytes": 19576,
+      "sha256": "9b66ab14f97579e25ac956c0e03d0de8054febc56f8cac944b84a9a3f7606281",
+      "source": "https://samuelidowu.com/fonts/Butler-Medium.woff2",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p01.webp",
+      "bytes": 154044,
+      "sha256": "0c93b23ac3311c44a432385f8eaee2d2b8f60054c7907d253cf6bfacbd536763",
+      "source": "https://samuelidowu.com/hq/p01.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p02.webp",
+      "bytes": 177186,
+      "sha256": "28ea9d22b7fff298e2ba0a3f588ebd0666dc6599e3083c3228846e8a2e1ef49b",
+      "source": "https://samuelidowu.com/hq/p02.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p03.webp",
+      "bytes": 234418,
+      "sha256": "944190fbe789c86e2619cbd440bd8dbabb7e9f5b7acc99677fb7994cb8d0ebe5",
+      "source": "https://samuelidowu.com/hq/p03.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p04.webp",
+      "bytes": 243126,
+      "sha256": "fc07bc104556cf1ca9f07eac79fc4cb97cd57e45428a6aab00a6452bd2efc995",
+      "source": "https://samuelidowu.com/hq/p04.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p05.webp",
+      "bytes": 52656,
+      "sha256": "4d1e1cab354f792a5a8af9123f868a755f26088e541c0a01d3da69188cbb586b",
+      "source": "https://samuelidowu.com/hq/p05.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p06.webp",
+      "bytes": 54304,
+      "sha256": "76bef86b06a7c5233d74915d529d215c7ccc518cead8cf3cb1f6249bf724004b",
+      "source": "https://samuelidowu.com/hq/p06.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p07.webp",
+      "bytes": 11710,
+      "sha256": "ed640bff28081c7e791d80b40fbe5f6fdae92fccfb2d5964731feb2079977018",
+      "source": "https://samuelidowu.com/hq/p07.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p08.webp",
+      "bytes": 185164,
+      "sha256": "b65c3544bf3fd58e7929b8129f9ed5934f26accb4f594899228835e00bf5275d",
+      "source": "https://samuelidowu.com/hq/p08.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p09.webp",
+      "bytes": 264754,
+      "sha256": "088dbf7542ac7f3763dfe37ed3b79ac89eda7b94e8fcf17179c21b3fdf1432b8",
+      "source": "https://samuelidowu.com/hq/p09.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p10.webp",
+      "bytes": 261472,
+      "sha256": "75d88643fd38cc6bd98176984830f0960e846c9b8e66fd584f6376a196c12933",
+      "source": "https://samuelidowu.com/hq/p10.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p11.webp",
+      "bytes": 36616,
+      "sha256": "2bfb4692cafaae0c2613fa0a42d486ccb34b1da41141429e37cc810a9a339f67",
+      "source": "https://samuelidowu.com/hq/p11.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p12.webp",
+      "bytes": 490358,
+      "sha256": "dc3a412bc890e05d75108993916303958835ac2a67777dfb50f7b79664d0abfc",
+      "source": "https://samuelidowu.com/hq/p12.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p13.webp",
+      "bytes": 704380,
+      "sha256": "2cc391e0b7c5057739377d71747b6a91908b67648005c8fd39348852356d094e",
+      "source": "https://samuelidowu.com/hq/p13.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p14.webp",
+      "bytes": 66380,
+      "sha256": "45512b0ded5bd6877b4a5b37e5c69e91e69f6c4e2091062a507c0d853964319c",
+      "source": "https://samuelidowu.com/hq/p14.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p15.webp",
+      "bytes": 500428,
+      "sha256": "8158434274d3bbd0d55e11bef419da4d4c09705e002257cb85f78fb78a731651",
+      "source": "https://samuelidowu.com/hq/p15.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p16.webp",
+      "bytes": 112482,
+      "sha256": "425f8c51bec131ab030e6cc6536be8196e3002f38773f9629702b01731ed68e8",
+      "source": "https://samuelidowu.com/hq/p16.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p17.webp",
+      "bytes": 166320,
+      "sha256": "5636da7a78e2df2eed87f6f4a6dc5d2e89deca891fccbfd2bc423bc894a741ba",
+      "source": "https://samuelidowu.com/hq/p17.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p18.webp",
+      "bytes": 390654,
+      "sha256": "ff9bed597c039f6433d57109ee1317e3e4d1cd6036cbfeed6407b7e22c19e660",
+      "source": "https://samuelidowu.com/hq/p18.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p19.webp",
+      "bytes": 30936,
+      "sha256": "722a5c32e05a0d30042e726bab40587939f40948b068078526fd7d92dc833938",
+      "source": "https://samuelidowu.com/hq/p19.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p20.webp",
+      "bytes": 92878,
+      "sha256": "ea8587598be1694a92be9317f69149c381ee3f8b92625ebcc91a055847b9ddce",
+      "source": "https://samuelidowu.com/hq/p20.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p21.webp",
+      "bytes": 49510,
+      "sha256": "35fee7a123bb92d1b61285e05620abe57e4fa09f9b23294e12137dafaf9f71c2",
+      "source": "https://samuelidowu.com/hq/p21.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p22.webp",
+      "bytes": 40820,
+      "sha256": "ff452f94810201d3cb6c8856029d4cd25742fce20eab1275f79978349c61a39c",
+      "source": "https://samuelidowu.com/hq/p22.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p23.webp",
+      "bytes": 28476,
+      "sha256": "541850d44ebf1a2d83375cd58aad7cf27d496d5b24c8c592465b12b4518ff33e",
+      "source": "https://samuelidowu.com/hq/p23.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p24.webp",
+      "bytes": 299850,
+      "sha256": "9a3ce9562321667ca3d7cc2e123e75d275c5a673949ffda5cee4513f34011754",
+      "source": "https://samuelidowu.com/hq/p24.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p25.webp",
+      "bytes": 318748,
+      "sha256": "40a21e63bed4423f7c3334e3e24881e3ffbd08fa9daf7af9f5a41084da4bfb30",
+      "source": "https://samuelidowu.com/hq/p25.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p26.webp",
+      "bytes": 304952,
+      "sha256": "74f18939044c0bd55ee4b182272a62a7940d6c648b43f64e6b9d06e1eab4768c",
+      "source": "https://samuelidowu.com/hq/p26.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p27.webp",
+      "bytes": 110624,
+      "sha256": "dcfb7350dd6c4105e02b07796a5a7b482a7eaae5a3d20fdfafe5630e159d26e0",
+      "source": "https://samuelidowu.com/hq/p27.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p28.webp",
+      "bytes": 298676,
+      "sha256": "a6baa7eb5e1140ccfdf33948f193f1508c3b0aaba711ca78c132bcc07ffdc369",
+      "source": "https://samuelidowu.com/hq/p28.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p29.webp",
+      "bytes": 141580,
+      "sha256": "95c7c3756cc1fd787b0450cb5f2e9557b76a4f6aa4a566a63775d4cb123c0870",
+      "source": "https://samuelidowu.com/hq/p29.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p30.webp",
+      "bytes": 232444,
+      "sha256": "22b056d83529419caf38cf5fd5baf99add62090199f86b60ef88a1c313dd95da",
+      "source": "https://samuelidowu.com/hq/p30.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p31.webp",
+      "bytes": 524514,
+      "sha256": "9203ad6b8e7c170f2beaba56be6dd8e3133722779f6fdeda23192ca849ccecc3",
+      "source": "https://samuelidowu.com/hq/p31.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p32.webp",
+      "bytes": 166642,
+      "sha256": "31c202c7757a93798b178f74639a1d93ebb2ce6a3894953e0920911250202c7f",
+      "source": "https://samuelidowu.com/hq/p32.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p33.webp",
+      "bytes": 167070,
+      "sha256": "01d296b6900b831faf96bba45fbe654a7d05f85548d5ed29f46d06cdee51f02a",
+      "source": "https://samuelidowu.com/hq/p33.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p34.webp",
+      "bytes": 229390,
+      "sha256": "4cbb3439d9abb21c2b54eaaab63e6972ed2be5304d8e514134ea0d134d30eb6e",
+      "source": "https://samuelidowu.com/hq/p34.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p35.webp",
+      "bytes": 48370,
+      "sha256": "44b09e0a1e1b1d1c9a6fa4d68bcb9e45f7bf70805d8b13c84b44a91301208e19",
+      "source": "https://samuelidowu.com/hq/p35.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p36.webp",
+      "bytes": 100958,
+      "sha256": "bbab67c984cfa1de6a1a96eb76fdb1f282a6087a5bc7813c1c408f4b95cd9a6c",
+      "source": "https://samuelidowu.com/hq/p36.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p37.webp",
+      "bytes": 93332,
+      "sha256": "841aea6c2291ebebe7b3c60ad13af0cd7de75e4d85599686769616e841a45e59",
+      "source": "https://samuelidowu.com/hq/p37.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p38.webp",
+      "bytes": 12732,
+      "sha256": "7400a8e62b189bdbc50e3e0ba31ba84ae0d04856e9b3548fb6c9d1aee83aa55e",
+      "source": "https://samuelidowu.com/hq/p38.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p39.webp",
+      "bytes": 24286,
+      "sha256": "5b32054b94ea6eba56483a35b2aebe3149cccfb36f3cbb81c560224314b82b53",
+      "source": "https://samuelidowu.com/hq/p39.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p40.webp",
+      "bytes": 463486,
+      "sha256": "f8135991b071ece703f897f80ed69c93dfe52172c00548b5f3b5cf7e7a5c5aaf",
+      "source": "https://samuelidowu.com/hq/p40.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p41.webp",
+      "bytes": 262480,
+      "sha256": "c08badb9587dc87ac9c47e6adddf9bb9bc5d6a22a5abe5c9237c83f58b91283e",
+      "source": "https://samuelidowu.com/hq/p41.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p42.webp",
+      "bytes": 182078,
+      "sha256": "9698ae4fa95b644f3f7cc4ed9b9771155e6983ca46c8e7711a50b161137cbc63",
+      "source": "https://samuelidowu.com/hq/p42.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p43.webp",
+      "bytes": 287692,
+      "sha256": "d6381b9bc62282523e39c9cce96c5d20b0ebf3e6a4db02028f2a68bc18f5b5b8",
+      "source": "https://samuelidowu.com/hq/p43.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p44.webp",
+      "bytes": 50194,
+      "sha256": "daa89732e3feb2d995158615f78058faeea74f212996a945c6dc2d5aaa84d44c",
+      "source": "https://samuelidowu.com/hq/p44.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p45.webp",
+      "bytes": 74266,
+      "sha256": "afb4760e130b370095e0e72e07cb9a47474ef3bd6d83fa974b845e05f2c545bf",
+      "source": "https://samuelidowu.com/hq/p45.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p46.webp",
+      "bytes": 52412,
+      "sha256": "49dbfd9b42fc9787e7268f3fd16ca46179da4eb14a9fc9dc00a0a2e19871d381",
+      "source": "https://samuelidowu.com/hq/p46.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p47.webp",
+      "bytes": 140966,
+      "sha256": "a4043603dedbfe449ac623767279f42275aa07bd042c3980ec740be3b8b7d391",
+      "source": "https://samuelidowu.com/hq/p47.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p48.webp",
+      "bytes": 85700,
+      "sha256": "e252a5cc31fd6ccc539149f5332f88a1f594af26b4d34d33de4a7937b977ea64",
+      "source": "https://samuelidowu.com/hq/p48.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p49.webp",
+      "bytes": 203682,
+      "sha256": "7f5983fa4c3f3b89bf7da4a62768624eb9912d5e52322b2214643ba9149aca78",
+      "source": "https://samuelidowu.com/hq/p49.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p50.webp",
+      "bytes": 240712,
+      "sha256": "20418d1a3e7b77180fa8fb75690ed00d0a3721a13a2a62c3af11063ca2465048",
+      "source": "https://samuelidowu.com/hq/p50.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p51.webp",
+      "bytes": 197870,
+      "sha256": "2f7ef160989c0303df5f6e9bdbacc5065ccbbd99f8bfffc63fce8cf704de0bd9",
+      "source": "https://samuelidowu.com/hq/p51.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p52.webp",
+      "bytes": 144466,
+      "sha256": "9ad014490528e06ad0b42275cb3a9650c9c808443211e593084f2c3459a09a87",
+      "source": "https://samuelidowu.com/hq/p52.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p53.webp",
+      "bytes": 93870,
+      "sha256": "fceb7f165b0f9a401739e87a265f61f447cc36e9d6f90a71ae2f1ee7c457aa88",
+      "source": "https://samuelidowu.com/hq/p53.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p54.webp",
+      "bytes": 110738,
+      "sha256": "dacc3c8fc1a754e4247cd3a079f0d646d5f5d2dbeef316b940fc508141db36e4",
+      "source": "https://samuelidowu.com/hq/p54.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p55.webp",
+      "bytes": 212612,
+      "sha256": "d374e2f66df558f8ad2d8844b9a409004533834376a99a509deb35cd67bb8c68",
+      "source": "https://samuelidowu.com/hq/p55.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p56.webp",
+      "bytes": 127290,
+      "sha256": "d3912c6620e39ee8417efede6adf246b08bcbb1fe2edb18300891e68d195b876",
+      "source": "https://samuelidowu.com/hq/p56.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p57.webp",
+      "bytes": 143614,
+      "sha256": "6ac1c80caf3f4346336e6397d396ba461a0716977fbe6c8676d3bbd3a1937ef6",
+      "source": "https://samuelidowu.com/hq/p57.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p58.webp",
+      "bytes": 195926,
+      "sha256": "b11bfe2233b5d629f9dc99a924e4683a5ea55a661d7aa89402a53eed2280f29b",
+      "source": "https://samuelidowu.com/hq/p58.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p59.webp",
+      "bytes": 115992,
+      "sha256": "9a12573daa328a59f60b4eb9400285f2cbd4ea832f59607979c10bcd489d76a0",
+      "source": "https://samuelidowu.com/hq/p59.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p60.webp",
+      "bytes": 66254,
+      "sha256": "19191d1aa6c34b6c61b1134c3aafb9765aa6442a518e7cdbfcdc15e818f45ff3",
+      "source": "https://samuelidowu.com/hq/p60.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p61.webp",
+      "bytes": 93078,
+      "sha256": "ce8b8690fc44bae32fff88f9b6794c5441ec2f3bed87c8358430252a52e0696b",
+      "source": "https://samuelidowu.com/hq/p61.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p62.webp",
+      "bytes": 108530,
+      "sha256": "d83a00f5e65b2d8850de00115bbaffc9f2abed8c8ea87b72bbc26c7b05c7247b",
+      "source": "https://samuelidowu.com/hq/p62.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p63.webp",
+      "bytes": 254572,
+      "sha256": "5b80ee0e725f5b5e8292954da1949f99245224a65a5bbbe5d3240b1f5e7f8ad2",
+      "source": "https://samuelidowu.com/hq/p63.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "hq/p64.webp",
+      "bytes": 163602,
+      "sha256": "8ad180d23f36e9fa1936aa63d464026c6c1be4043c69fd323e17154aed53d827",
+      "source": "https://samuelidowu.com/hq/p64.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "img/me-cast.webp",
+      "bytes": 3940,
+      "sha256": "3a122fd702c3722fdd51e3ca2caf36d942e43629bdb27871b166151d1340eef6",
+      "source": "https://samuelidowu.com/img/me-cast.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "img/me-group.webp",
+      "bytes": 46242,
+      "sha256": "b7b3cc221ccfda2b9befdc5fe33b0af2cc09369b39f3c86ab167e340626e7f50",
+      "source": "https://samuelidowu.com/img/me-group.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "img/me.webp",
+      "bytes": 36992,
+      "sha256": "a1ca8bed625d3d3adfe8a04a2e6cbce1eb1f1fedd26383898548c1a67a3880e4",
+      "source": "https://samuelidowu.com/img/me.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "img/rock-burn.webp",
+      "bytes": 20944,
+      "sha256": "00a7694145e0c991807b05cbeafb2a5b2cb5d6c7611dff3679da0da717006fc4",
+      "source": "https://samuelidowu.com/img/rock-burn.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "img/rock.webp",
+      "bytes": 22164,
+      "sha256": "c43d778d290f3a7277d1f5b3fbee7bd3e175601ed579edf55152ff5c2f7c4d38",
+      "source": "https://samuelidowu.com/img/rock.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "lib/three.min.js",
+      "bytes": 669884,
+      "sha256": "170c6789f43217c96b3170f4b42fafe135de7f7cd48497a4218f9757ee1d49fa",
+      "source": "https://samuelidowu.com/lib/three.min.js",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/biyabot-800.webp",
+      "bytes": 32062,
+      "sha256": "f2dfa7627fc9ff3953d88356388543f0b81fd64e685b3b56e591d92d25c9a122",
+      "source": "https://samuelidowu.com/pj/biyabot-800.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/biyabot.webp",
+      "bytes": 71518,
+      "sha256": "8904976f691331d3dc3f2d5b26d2300e5eb3db081a7c6660d12612ce3a265a46",
+      "source": "https://samuelidowu.com/pj/biyabot.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/fridayaway-800.webp",
+      "bytes": 9584,
+      "sha256": "aa354ca326bc8d91414f729f2c26e7589cbd082b62a59628ea57ddbeca27c62e",
+      "source": "https://samuelidowu.com/pj/fridayaway-800.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/fridayaway.webp",
+      "bytes": 20584,
+      "sha256": "42982e0ca13b555b4907d4d140e8e700732599d64ffc55bcd7ff1831887c7e4b",
+      "source": "https://samuelidowu.com/pj/fridayaway.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/geppetto-800.webp",
+      "bytes": 64826,
+      "sha256": "509e1fdcb32923664beebbadcf82588dce69767ce792c964c16ffcc76d03cb4a",
+      "source": "https://samuelidowu.com/pj/geppetto-800.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/geppetto.webp",
+      "bytes": 213202,
+      "sha256": "b9a31ff2e5edb289795fa0da231d26a88f7e9bccb30bf97679a803b2f6287479",
+      "source": "https://samuelidowu.com/pj/geppetto.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/pelp-800.webp",
+      "bytes": 44340,
+      "sha256": "0a886d7eb6a82320e7756395f9a344a4cb1692f964ee1d5986a00ce6030eecac",
+      "source": "https://samuelidowu.com/pj/pelp-800.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/pelp.webp",
+      "bytes": 206378,
+      "sha256": "8af01f679df6b1a23aa0db85a58d9a1f7718999640caa8bc42474bbf0a7bbcad",
+      "source": "https://samuelidowu.com/pj/pelp.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-1028395180.webp",
+      "bytes": 39560,
+      "sha256": "994485a77a735a47ac99b57a5b33b27dda5ef6a158f0eb0aca733cf60b282c70",
+      "source": "https://samuelidowu.com/pj/v-1028395180.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-1048540388.webp",
+      "bytes": 25024,
+      "sha256": "1a4192792e31288e5400877f779a5b958f201e5b2f41ae52349bbf50b1e73438",
+      "source": "https://samuelidowu.com/pj/v-1048540388.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-1109613015.webp",
+      "bytes": 45736,
+      "sha256": "b173dfaadb3373984169b7d5694a42686dff9989af2624274d74d9007f62ba26",
+      "source": "https://samuelidowu.com/pj/v-1109613015.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-1109616274.webp",
+      "bytes": 48696,
+      "sha256": "643307df3eb8473d627aba54643ae75615a6c3c2349b684469584d54fb305168",
+      "source": "https://samuelidowu.com/pj/v-1109616274.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-1109620578.webp",
+      "bytes": 14044,
+      "sha256": "da90cabf4967bd13869e9b14c265f37764fb4e19099d58955ae076e6223f4a14",
+      "source": "https://samuelidowu.com/pj/v-1109620578.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-877879012.webp",
+      "bytes": 14678,
+      "sha256": "9912336bca386e05e7ca416f34ba400034e9eb38a2b0ef18edf6a8a9c18d7612",
+      "source": "https://samuelidowu.com/pj/v-877879012.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/v-946134935.webp",
+      "bytes": 10416,
+      "sha256": "463c55de569e81b67ffbaf843250973f7b9b990e34f7266f67fa80f098103edb",
+      "source": "https://samuelidowu.com/pj/v-946134935.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/westernpremium.webp",
+      "bytes": 6200,
+      "sha256": "246e0af85c9de00076b483dd3fbf9fd46d96af6f0300f2150e36e5925ecba394",
+      "source": "https://samuelidowu.com/pj/westernpremium.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/wewire-800.webp",
+      "bytes": 48270,
+      "sha256": "1951014ff5333ef31b686778690a4a9cb3bb0a3b5dcab5d955f34cf68d228bf1",
+      "source": "https://samuelidowu.com/pj/wewire-800.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "pj/wewire.webp",
+      "bytes": 121824,
+      "sha256": "f901a392d96954be4909879bc0842c573311b8e75cde3223b95d9cc5a8500980",
+      "source": "https://samuelidowu.com/pj/wewire.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/musmysudvnpd.webp",
+      "bytes": 20460,
+      "sha256": "3d32b0b4ff407e8583a4290f8568ecb28fa0ed0947c40f9283305438c9c9bf48",
+      "source": "https://samuelidowu.com/site/u/musmysudvnpd.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/musmyyqh8d56.webp",
+      "bytes": 65136,
+      "sha256": "62084b695f1d6749f3633e0f0063c2546a01e62bfd7bfadb451f15044af3dfbf",
+      "source": "https://samuelidowu.com/site/u/musmyyqh8d56.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/musmz2smgtrk.webp",
+      "bytes": 200108,
+      "sha256": "2f4ab3414a369b9501b6c728f6b5bd96931019b1e41b4b3680108191b547afdf",
+      "source": "https://samuelidowu.com/site/u/musmz2smgtrk.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/musn4dkfz48i.webp",
+      "bytes": 26410,
+      "sha256": "ab3f16ebfd51a05abe05c95ccea4b53c8e1af0317f10daf6b20056abdab34cff",
+      "source": "https://samuelidowu.com/site/u/musn4dkfz48i.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/musn4w0fx1je.webp",
+      "bytes": 206596,
+      "sha256": "bbb1b96edc4e3c9cbc788358ff63b6e0c569b9caf5a42cebc8814d00166f0510",
+      "source": "https://samuelidowu.com/site/u/musn4w0fx1je.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "site/u/mut07clh2ljm.webp",
+      "bytes": 114774,
+      "sha256": "8d8e4108864e96709e8ccec52b969d32e40b8011b3e190b160677badf1aba142",
+      "source": "https://samuelidowu.com/site/u/mut07clh2ljm.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p02.webp",
+      "bytes": 33318,
+      "sha256": "9e9624dde9773f123573ac0e69f83bf791e6d356b09aa010fd77a80a03ac02cd",
+      "source": "https://samuelidowu.com/t/p02.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p03.webp",
+      "bytes": 7190,
+      "sha256": "115593360ff26ae0d0f80cf92fba94b3de7e6f24dc2f1a779247b208db2f7c60",
+      "source": "https://samuelidowu.com/t/p03.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p04.webp",
+      "bytes": 19472,
+      "sha256": "73d9fafc87a648a052ec00b99c39d80a0be5775fdf9e3678865063e95b2556fe",
+      "source": "https://samuelidowu.com/t/p04.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p05.webp",
+      "bytes": 13532,
+      "sha256": "9ab9cc1184555cb68d91482d5b26c5cc1f61e7782447ed54ab909276dd69a3fe",
+      "source": "https://samuelidowu.com/t/p05.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p06.webp",
+      "bytes": 10838,
+      "sha256": "6247e1872fca4d1828769c84cfd940db2e9d77a9ca1c2764ab381b84d48e10bd",
+      "source": "https://samuelidowu.com/t/p06.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p07.webp",
+      "bytes": 2876,
+      "sha256": "72761cfb5d5309d300a45c621f0378c7ecb9475f372073cd9c4888f7aca2d68e",
+      "source": "https://samuelidowu.com/t/p07.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p08.webp",
+      "bytes": 22944,
+      "sha256": "03c9f899aa58520e16fa1d8d1f7cc75dad1f79a96d0766466f5a676b59279f87",
+      "source": "https://samuelidowu.com/t/p08.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p09.webp",
+      "bytes": 5038,
+      "sha256": "cef4d9d3d58e3f7d6741a727ff6cbbc9b4183c2880ae66389f65c6b0238762d2",
+      "source": "https://samuelidowu.com/t/p09.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p10.webp",
+      "bytes": 12048,
+      "sha256": "57b93524bf49c510c43075776ec38918acef9d6d720ddb53638eb65fc4beae3b",
+      "source": "https://samuelidowu.com/t/p10.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p11.webp",
+      "bytes": 9224,
+      "sha256": "4862d43dc899131d37f889232644c876efc9fca95ef2eb00be86ace84bc42a0d",
+      "source": "https://samuelidowu.com/t/p11.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p12.webp",
+      "bytes": 29404,
+      "sha256": "db691c83c3e6badd767f594ca6704036c9c5af7de49eaca7cdee07d4294207a8",
+      "source": "https://samuelidowu.com/t/p12.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p13.webp",
+      "bytes": 71134,
+      "sha256": "f5d377280a7c7d8aa76bdc58f0553d750414d8494a2bd963d76f16713665f58f",
+      "source": "https://samuelidowu.com/t/p13.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p14.webp",
+      "bytes": 17168,
+      "sha256": "264b1b25c7f816a623d6fc24e91c794907b95c04f7107b95c8c4d36855094c4f",
+      "source": "https://samuelidowu.com/t/p14.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p15.webp",
+      "bytes": 49328,
+      "sha256": "bfa559c7ac023c0ba06f6e81757ba0e8e5fe8f73d236058061f6a11ab8c3aefc",
+      "source": "https://samuelidowu.com/t/p15.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p16.webp",
+      "bytes": 19634,
+      "sha256": "8f4b56e1394f008fabd62594d6caf556f824cc3f507f5df6eb6c3464946307ed",
+      "source": "https://samuelidowu.com/t/p16.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p17.webp",
+      "bytes": 16102,
+      "sha256": "066e1313834da8d9045a39139f60b7acd3d187b0c6d3ca3684031949dbc64f30",
+      "source": "https://samuelidowu.com/t/p17.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p18.webp",
+      "bytes": 21568,
+      "sha256": "2109af999bb101dd1f54f207994f9ccacfa53c34639632eeb18067586c293696",
+      "source": "https://samuelidowu.com/t/p18.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p19.webp",
+      "bytes": 7842,
+      "sha256": "19d1d30d1d7c5155bf97071d0e7f0cb1ef5506346356e57d8999716f8464b60c",
+      "source": "https://samuelidowu.com/t/p19.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p20.webp",
+      "bytes": 18672,
+      "sha256": "1ae276779194d7dfd3482096d13a0bdf3b515b65e49a5fe6e1f4d88cf4e222c5",
+      "source": "https://samuelidowu.com/t/p20.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p21.webp",
+      "bytes": 13454,
+      "sha256": "a363563e7de4e03334a1083786cdcfd2bcb40ba2b453b51a39b5eee6c44bf17f",
+      "source": "https://samuelidowu.com/t/p21.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p22.webp",
+      "bytes": 9932,
+      "sha256": "fe4638492c48423cda928aa8001dc8127ac39b70fdd5c89eb01a126f2a7ae569",
+      "source": "https://samuelidowu.com/t/p22.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p23.webp",
+      "bytes": 7152,
+      "sha256": "2ae33e59c81354bc7012b9cc8a3b5e0c15296c9b2a7bab4b136bbe8c4dd263ea",
+      "source": "https://samuelidowu.com/t/p23.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p24.webp",
+      "bytes": 33816,
+      "sha256": "61d5a03b4e3594ee0d439b6e5e4e555e612c528588f773a5defa9e09b32f1d39",
+      "source": "https://samuelidowu.com/t/p24.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p25.webp",
+      "bytes": 37842,
+      "sha256": "492a70a51a46fe43d5b58c2c4471f225298eaa2b1701b74bb683fc685e0e2c82",
+      "source": "https://samuelidowu.com/t/p25.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p26.webp",
+      "bytes": 7848,
+      "sha256": "66218d42e1f0a5a87046ab5fa5507fb2d84a6c4f1085e97786930d15dd45a4b5",
+      "source": "https://samuelidowu.com/t/p26.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p27.webp",
+      "bytes": 3236,
+      "sha256": "0f2ea57a2e76aa5ebae091cb603f9bd57d26ebf7c4ed83ad0a14d5c9a130cc8c",
+      "source": "https://samuelidowu.com/t/p27.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p28.webp",
+      "bytes": 22110,
+      "sha256": "15ca8fc16be0c87bef7db6f5a4e4a0119015dcbb8bdc571baa24dd2cd1f662a8",
+      "source": "https://samuelidowu.com/t/p28.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p29.webp",
+      "bytes": 20422,
+      "sha256": "5c8b787e9d76f592681810b1f02df0be8b149b3af4d7b71558682d96cb1334fd",
+      "source": "https://samuelidowu.com/t/p29.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p30.webp",
+      "bytes": 10808,
+      "sha256": "321693845cb7b15693b62fe6edb79eb22a9b8ed409be1b947ab945cb49d12829",
+      "source": "https://samuelidowu.com/t/p30.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p31.webp",
+      "bytes": 56148,
+      "sha256": "ad67e0d57879f683ef6ff8fcb0a76fc6b1000031c3e35e3920be20579cb241ba",
+      "source": "https://samuelidowu.com/t/p31.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p32.webp",
+      "bytes": 33266,
+      "sha256": "87f128b7ca121cd29ef62679bb28e9115ee6d56e5b7650f5b2dcb25266c59cf1",
+      "source": "https://samuelidowu.com/t/p32.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p33.webp",
+      "bytes": 12810,
+      "sha256": "c245c2279f90d03bcca7cccec580cb80d34d3653b8bc0453bc543699221de7c1",
+      "source": "https://samuelidowu.com/t/p33.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p34.webp",
+      "bytes": 29586,
+      "sha256": "e1c3f40859455a370186f040fb53b9285c2271bf66a697fe56fecd69dab6ee85",
+      "source": "https://samuelidowu.com/t/p34.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p35.webp",
+      "bytes": 9960,
+      "sha256": "15da267251f59619c2e8ecbf017382c8ee8b3b0ee10836f52d4353f4f07139df",
+      "source": "https://samuelidowu.com/t/p35.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p36.webp",
+      "bytes": 25868,
+      "sha256": "b310471e8eab6593d4308efa92cac4fdf0a9cb0a8fc1df375b2e6fcafb6e470d",
+      "source": "https://samuelidowu.com/t/p36.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p37.webp",
+      "bytes": 21400,
+      "sha256": "c0c96d72f896948f83aad00b3e6a3e52f3ea561ce153c80b5b0c015564d21933",
+      "source": "https://samuelidowu.com/t/p37.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p38.webp",
+      "bytes": 2766,
+      "sha256": "ea7806ad166313843648b036c989de5cacaec7296aa8b87d27c45d5f6d9f2498",
+      "source": "https://samuelidowu.com/t/p38.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p39.webp",
+      "bytes": 6066,
+      "sha256": "7fab1f95466ea0e1af4fb1f4648bb391296f0ccf3bba34cb81b63bc136a69ba8",
+      "source": "https://samuelidowu.com/t/p39.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p40.webp",
+      "bytes": 90784,
+      "sha256": "b419b3620795444500edb907a962b6fa810bb88a4cb767c3181b5bfbda554bc5",
+      "source": "https://samuelidowu.com/t/p40.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p41.webp",
+      "bytes": 66340,
+      "sha256": "4faf9684d339b516cbf9b7e6a462733621306dfd168436c8247b4230035872bb",
+      "source": "https://samuelidowu.com/t/p41.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p42.webp",
+      "bytes": 32634,
+      "sha256": "074fee683cd87a4f898fef85ec79be3ba03b0112b00962900baa95cfa3c2a3df",
+      "source": "https://samuelidowu.com/t/p42.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p43.webp",
+      "bytes": 46096,
+      "sha256": "b99d26e99c67d0340ac4306506c84ae04916b35ace33632479d71100af2fb0bb",
+      "source": "https://samuelidowu.com/t/p43.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p44.webp",
+      "bytes": 11636,
+      "sha256": "162c47032b5fb89a1eb48b6fb909f0db2207dd8590115b74d8e12800adb36ecf",
+      "source": "https://samuelidowu.com/t/p44.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p45.webp",
+      "bytes": 12326,
+      "sha256": "d909dfc61159579dba0d4cb1c4b099d72845f447dc7a3d75cd8ef8999c87af82",
+      "source": "https://samuelidowu.com/t/p45.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p46.webp",
+      "bytes": 10326,
+      "sha256": "c32580ece2353ab0f81f2b25621483a51c740e97e8892ff6e1684f3353bf0422",
+      "source": "https://samuelidowu.com/t/p46.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p47.webp",
+      "bytes": 39958,
+      "sha256": "b13de1dfb251c9b069e11c0345a4f18823a08510ee729ed9fc496b284fb1a330",
+      "source": "https://samuelidowu.com/t/p47.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p48.webp",
+      "bytes": 24056,
+      "sha256": "81d6887f6aba535d9a3b56ab4019ff08046b15025d138220ff9dee1a286c0ced",
+      "source": "https://samuelidowu.com/t/p48.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p49.webp",
+      "bytes": 31458,
+      "sha256": "c048f59ce3826b841003b99724ed062e0438aea3f1df46f046a24553ff873b11",
+      "source": "https://samuelidowu.com/t/p49.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p50.webp",
+      "bytes": 41900,
+      "sha256": "68e1bbe833ae3b1875d5c8290595f4693755560f6930345c556483fe07272998",
+      "source": "https://samuelidowu.com/t/p50.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p51.webp",
+      "bytes": 30502,
+      "sha256": "363474e6c43ac297aade73e92b2a3b3d21b8840c741ef405170d43ee57aa6d38",
+      "source": "https://samuelidowu.com/t/p51.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p52.webp",
+      "bytes": 28412,
+      "sha256": "2e47ce32a99a389637d3a60d3eef80ce36f108ccf008d373bc1ae11341491c2c",
+      "source": "https://samuelidowu.com/t/p52.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p53.webp",
+      "bytes": 27938,
+      "sha256": "ee39dcc9b2ea6587e977aaac250020ff2b8ebb691de8b35f07aed008d3e6badc",
+      "source": "https://samuelidowu.com/t/p53.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p54.webp",
+      "bytes": 32414,
+      "sha256": "2636e34e5d451403c31db14ce73da01bab40c7144009c62d7096494dc5a70264",
+      "source": "https://samuelidowu.com/t/p54.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p55.webp",
+      "bytes": 37700,
+      "sha256": "92b627629f884950e90168a9a159494bdec2d78c50983f3579c0d3f738e1ab5d",
+      "source": "https://samuelidowu.com/t/p55.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p56.webp",
+      "bytes": 33054,
+      "sha256": "1ed93dc264f4fb0a57b0242d5d4062d2745daada50d0c523fce09d11a11736ee",
+      "source": "https://samuelidowu.com/t/p56.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p57.webp",
+      "bytes": 33922,
+      "sha256": "b27c107fadbaa13bd7d058772fb3c2b0a6469dee124af185453bf308c3f74e7d",
+      "source": "https://samuelidowu.com/t/p57.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p58.webp",
+      "bytes": 44642,
+      "sha256": "2a5fca0ccf5e9802c05b6d6f13883fde05573dd703580cac35acb2bb01f93f48",
+      "source": "https://samuelidowu.com/t/p58.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p59.webp",
+      "bytes": 25620,
+      "sha256": "87af4c2fc266683fea923024b6adf953e61c56bba5eac53e5ec2520faba05270",
+      "source": "https://samuelidowu.com/t/p59.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p60.webp",
+      "bytes": 24620,
+      "sha256": "f1aba7f11e659f919efff68d9768c1050c1a370b3a8441c37b200b42238ae8c4",
+      "source": "https://samuelidowu.com/t/p60.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p61.webp",
+      "bytes": 28572,
+      "sha256": "4f34b5815f6bb2913c138c7f1d34be3f45ec7b877d228b0e8887c5171b7cd269",
+      "source": "https://samuelidowu.com/t/p61.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p62.webp",
+      "bytes": 31618,
+      "sha256": "59818b5f0917a3dd4c212a5cfa932af07148188fdd7b86be8747d26398608dfe",
+      "source": "https://samuelidowu.com/t/p62.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p63.webp",
+      "bytes": 11126,
+      "sha256": "c60aaed737db3b909315294eb4b452357b143130f31c36c1a1b9876246f5a015",
+      "source": "https://samuelidowu.com/t/p63.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "t/p64.webp",
+      "bytes": 45204,
+      "sha256": "da6e6c662e926dd0bce3f7b37dc667919538c2c7952e12b266b1085ece1fc5e1",
+      "source": "https://samuelidowu.com/t/p64.webp",
+      "origin": "verified-local-copy"
+    },
+    {
+      "path": "favicon.ico",
+      "bytes": 5518,
+      "sha256": "667e5e9ff93f0bc42548af51b2cd0254e0bcee7d44697d5cfb06d35b808b30ec",
+      "source": "https://samuelidowu.com/favicon.ico",
+      "origin": "original-linked-icon"
+    },
+    {
+      "path": "favicon-32.png",
+      "bytes": 913,
+      "sha256": "2ef832d67c9432d2ce710fcfea6fd2a8ebc1386065a63b1f50a95818a28c79ed",
+      "source": "https://samuelidowu.com/favicon-32.png",
+      "origin": "original-linked-icon"
+    },
+    {
+      "path": "favicon-192.png",
+      "bytes": 14860,
+      "sha256": "6ed210f7cec627671fafd3447fd9747949c6886a22c237d0143d2eec2ccf3e95",
+      "source": "https://samuelidowu.com/favicon-192.png",
+      "origin": "original-linked-icon"
+    },
+    {
+      "path": "apple-touch-icon.png",
+      "bytes": 10540,
+      "sha256": "02f511f62d0ad7ddc3a8f29f6dd4d2077648df996708eccc24a423e1381d8fe1",
+      "source": "https://samuelidowu.com/apple-touch-icon.png",
+      "origin": "original-linked-icon"
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 # Adapted Prompt — Photographic Editorial Portfolio With Real Object Viewers
 
+> **Deployment follow-up:** the later request adds an actual Pages rendition in `site/`; see [DEPLOYMENT.md](DEPLOYMENT.md). Statements below describing a documentation-only publication or private-copy scope refer to the earlier recorded stage, not the new deployment. Third-party ownership/rights are not changed by publishing this reference rendition.
+
 This is the copy-ready specification for a coding/design assistant. Like [Apogee's prompt](../apogee/ADAPTED_PROMPT.md), it makes fidelity constraints and implementation details explicit. Unlike Apogee, this folder does not bundle a runnable third-party website. Fill the input contract first. **Do not treat all observed values as universal responsive rules, and do not treat this prompt as a license to acquire or publish another person's assets.**
 
 ## Part A — Master prompt
