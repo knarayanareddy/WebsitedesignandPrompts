@@ -206,6 +206,226 @@
       margin: 0 auto 2.2rem;
     }
 
+    /* ==========================================================================
+       Daryl Fig 0.1 Editorial Blueprint Reel
+       ========================================================================== */
+    .reel-section {
+      margin: 0 0 4.5rem;
+      width: 100%;
+    }
+
+    .fig {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .fig-bullet {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      box-shadow: 0 0 10px var(--accent-lime);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    .grid9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.75);
+    }
+
+    @media (max-width: 1024px) {
+      .grid9 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid9 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .grid9 > .shot:last-child {
+        grid-column: 2 / 3;
+      }
+    }
+
+    .shot {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 9;
+      background: #0A0C10;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .shot video,
+    .shot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 0;
+      opacity: 1;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s;
+    }
+
+    a.shot:hover video,
+    a.shot:hover img {
+      transform: scale(1.04);
+    }
+
+    a.shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0.12;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    a.shot:hover::after {
+      opacity: 0;
+    }
+
+    .shotload {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(10, 12, 16, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      overflow: hidden;
+      transition: opacity 0.2s;
+    }
+
+    .shotload b {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: #F3F4F6;
+    }
+
+    .shotload::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40%;
+      left: -40%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      animation: shotSweep 2.2s cubic-bezier(0.4, 0, 0.3, 1) infinite;
+    }
+
+    @keyframes shotSweep {
+      0% { left: -40%; }
+      100% { left: 140%; }
+    }
+
+    .shotmeta {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(10, 12, 16, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      max-width: calc(100% - 92px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .xcell:hover .shotmeta {
+      background: rgba(10, 12, 16, 0.94);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .shottitle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .shotcat {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: #9CA3AF;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .xcell .shotout {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 3;
+      padding: 4px 9px;
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: #0A0C10;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1), transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    a.xcell:hover .shotout {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fignote {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
     /* Controls Bar: Filters & Search */
     .controls-bar {
       display: flex;
@@ -537,6 +757,185 @@
       <p>
         A curated archive of production-ready website templates, design systems, and generative prompt specifications — ready to explore live with zero paywalls.
       </p>
+    </section>
+
+    <!-- Fig 0.1 Reel Section (Adapted from imdaryl.com) -->
+    <section id="reel" class="reel-section">
+      <p class="fig" data-fig="0.1"><span class="fig-bullet"></span>Fig 0.1 · Nineteen pieces. Each cell is one thing I made.</p>
+      <div class="grid9" id="reelGrid">
+        <a class="shot xcell ready" href="./apogee/" title="Apogee — Data-Intelligence SaaS">
+          <video src="./assets/previews/apogee.mp4" poster="./assets/previews/apogee.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>01</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Apogee</span>
+            <span class="shotcat">Data-Intelligence SaaS</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./jack/" title="Jack — 3D Creator Portfolio">
+          <video src="./assets/previews/jack.mp4" poster="./assets/previews/jack.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>02</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Jack</span>
+            <span class="shotcat">3D Creator Portfolio</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./synapsex/" title="SynapseX — Neural-AI Canvas">
+          <video src="./assets/previews/synapsex.mp4" poster="./assets/previews/synapsex.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>03</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">SynapseX</span>
+            <span class="shotcat">Neural-AI Canvas</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./ethanvale/" title="Ethan Vale — Spatial Archive">
+          <video src="./assets/previews/ethanvale.mp4" poster="./assets/previews/ethanvale.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>04</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Ethan Vale</span>
+            <span class="shotcat">Spatial Archive</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./portfolio/" title="Editorial Portfolio — Creative Director Archive">
+          <video src="./assets/previews/portfolio.mp4" poster="./assets/previews/portfolio.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>05</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Editorial Portfolio</span>
+            <span class="shotcat">Creative Director</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./aetherascrollstory/" title="Aethera® — Scroll Storytelling">
+          <video src="./assets/previews/aetherascrollstory.mp4" poster="./assets/previews/aetherascrollstory.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>06</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Aethera®</span>
+            <span class="shotcat">Scroll Storytelling</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./measured/" title="Measured — Interactive Wearable">
+          <video src="./assets/previews/measured.mp4" poster="./assets/previews/measured.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>07</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Measured</span>
+            <span class="shotcat">Interactive Wearable</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./videoembeddeddesign/" title="Securify — Cinematic Storytelling">
+          <video src="./assets/previews/videoembeddeddesign.mp4" poster="./assets/previews/videoembeddeddesign.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>08</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Securify</span>
+            <span class="shotcat">Cinematic Video</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./brunosimon/" title="Bruno Simon — 3D Physics Toy Car">
+          <video src="./assets/previews/brunosimon.mp4" poster="./assets/previews/brunosimon.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>09</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Bruno Simon</span>
+            <span class="shotcat">3D Physics Toy Car</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./senbuzy/" title="Senbuzy — 3D Claymation Avatar">
+          <video src="./assets/previews/senbuzy.mp4" poster="./assets/previews/senbuzy.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>10</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Senbuzy</span>
+            <span class="shotcat">3D Clay Avatar</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./portfolio-console/" title="The Portfolio Console — Retro Hardware Terminal">
+          <video src="./assets/previews/portfolio-console.mp4" poster="./assets/previews/portfolio-console.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>11</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Portfolio Console</span>
+            <span class="shotcat">Retro Handheld</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./mariedrouvin/" title="Marie Drouvin — Botanical Design Portfolio">
+          <video src="./assets/previews/mariedrouvin.mp4" poster="./assets/previews/mariedrouvin.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>12</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Marie Drouvin</span>
+            <span class="shotcat">Botanical Design</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./bbdo/" title="BBDO Germany — Creative Agency">
+          <video src="./assets/previews/bbdo.mp4" poster="./assets/previews/bbdo.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>13</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">BBDO Germany</span>
+            <span class="shotcat">Creative Agency</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./bizarro/" title="Luis Bizarro — 3D Audio Cassette Archive">
+          <video src="./assets/previews/bizarro.mp4" poster="./assets/previews/bizarro.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>14</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Luis Bizarro</span>
+            <span class="shotcat">3D Audio Archive</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./designbyxam/" title="DesignByXam — Photographic Editorial Portfolio">
+          <video src="./assets/previews/designbyxam.mp4" poster="./assets/previews/designbyxam.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>15</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">DesignByXam</span>
+            <span class="shotcat">Editorial Design</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./expa/" title="Expa — Global Company Studio">
+          <video src="./assets/previews/expa.mp4" poster="./assets/previews/expa.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>16</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Expa</span>
+            <span class="shotcat">Global Studio</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./vitaliiradov/" title="Vitalii Radov — Digital Designer & Framer Developer">
+          <video src="./assets/previews/vitaliiradov.mp4" poster="./assets/previews/vitaliiradov.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>17</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Vitalii Radov</span>
+            <span class="shotcat">Digital Designer</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./meliketurgut/" title="Melike Turgut — Tactile 3D Gummy Portfolio">
+          <video src="./assets/previews/meliketurgut.mp4" poster="./assets/previews/meliketurgut.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>18</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Melike Turgut</span>
+            <span class="shotcat">Tactile 3D Gummy</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./ysuriadesign/" title="Yogi Suria — Neoclassical 3D & Web3">
+          <video src="./assets/previews/ysuriadesign.mp4" poster="./assets/previews/ysuriadesign.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>19</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Yogi Suria</span>
+            <span class="shotcat">Neoclassical 3D</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+      </div>
+      <p class="fignote">Live interactive builds from the archive · Hover to preview, click any cell to launch full experience</p>
     </section>
 
     <!-- Controls Bar -->
@@ -1971,6 +2370,23 @@
       currentSearch = e.target.value.trim().toLowerCase();
       applyFilters();
     });
+
+    // Smart IntersectionObserver to control playback of Fig 0.1 reel videos
+    const reelVideos = document.querySelectorAll('.grid9 video');
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reelVideos.forEach(v => videoObserver.observe(v));
+    }
   </script>
 </body>
 </html>

@@ -108,6 +108,9 @@ cp index.html "$site_dir/index.html"
 if [ -f favicon.svg ]; then
   cp favicon.svg "$site_dir/favicon.svg"
 fi
+if [ -d assets ]; then
+  replace_dir assets "$site_dir/assets"
+fi
 touch "$site_dir/.nojekyll"
 
 echo "==> verifying $site_dir"
