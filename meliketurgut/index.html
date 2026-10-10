@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <script>
+    history.scrollRestoration="manual";
+    document.documentElement.dataset.cornerArrival='pending';
+    setTimeout(()=>delete document.documentElement.dataset.cornerArrival,4000);
+    if(/^#chapter-0[1-8]$/.test(location.hash)){
+      document.documentElement.dataset.chapterArrival='pending';
+      window.addEventListener('error',event=>{
+        if(event.target===window||event.target?.tagName==='SCRIPT')delete document.documentElement.dataset.chapterArrival;
+      },true);
+    }
+  </script>
+  <style>html[data-chapter-arrival="pending"] #home{visibility:hidden}</style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#eaece5">
+  <meta name="description" content="A few things that made me, me. Melike Turgut’s collection of eight little worlds.">
+  <link rel="canonical" href="https://meliketurgut.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://meliketurgut.com/">
+  <meta property="og:site_name" content="Melike Turgut">
+  <meta property="og:title" content="me · like | Melike Turgut">
+  <meta property="og:description" content="A few things that made me, me. Melike Turgut’s collection of eight little worlds.">
+  <meta property="og:image" content="./assets/social-preview-v2.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="The words me and like with eight colorful glossy gummies arranged between them.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="me · like | Melike Turgut">
+  <meta name="twitter:description" content="A few things that made me, me. Melike Turgut’s collection of eight little worlds.">
+  <meta name="twitter:image" content="./assets/social-preview-v2.png">
+  <meta name="twitter:image:alt" content="The words me and like with eight colorful glossy gummies arranged between them.">
+  <title>me · like — Melike Turgut</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%23eaece5'/%3E%3Ctext x='7' y='34' font-family='Arial,sans-serif' font-size='35' fill='%2340400c'%3Em%3C/text%3E%3C/svg%3E">
+  <link rel="preload" href="./assets/agrandir-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/agrandir-tight-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/pp-editorial-new-ultralight.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/belmonte-ballpoint-cursive.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="./assets/gummy-handles-v2.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./plot-slider.css">
+  <link rel="stylesheet" href="./corner-copy.css">
+  <link rel="preload" href="./assets/charm-geometry.json" as="fetch" crossorigin>
+  <!-- runtime:start -->
+  <link rel="modulepreload" href="./runtime/shared-V2IRLJJJ.js">
+  <link rel="modulepreload" href="./runtime/shared-CRYHICZT.js">
+  <link rel="modulepreload" href="./runtime/shared-SZP6EUTZ.js">
+  <link rel="modulepreload" href="./runtime/shared-DK6JVP6K.js">
+  <script src="./runtime/app-VONZPQSA.js" type="module"></script>
+  <!-- runtime:end -->
+  <link rel="stylesheet" href="./secret-note.css">
+</head>
+<body>
+  <div class="browser-top-color" aria-hidden="true"></div>
+  <main id="home" class="home" tabindex="-1">
+    <div id="intro-name" class="intro-name" aria-hidden="true"><span class="word" style="--ink-width:1.353"><svg viewBox="50 -700 1353 900" focusable="false" aria-hidden="true"><path transform="scale(1,-1)" d="M50 0H126V281C126 383 183 455 279 455C356 455 401 409 401 331V0H477V281C477 383 534 455 630 455C706 455 751 409 751 331V0H828V336C828 455 763 525 653 525C578 525 508 494 463 423H462C436 488 382 525 302 525C221 525 155 490 125 431H124L116 505H50ZM1162 -20C1275 -20 1370 37 1403 118L1337 145C1309 90 1242 49 1163 49C1054 49 973 122 962 227H1387C1388 237 1388 248 1388 257C1386 413 1289 525 1141 525C991 525 883 413 883 258C883 97 1001 -20 1162 -20ZM963 294C977 390 1046 455 1140 455C1232 455 1297 397 1307 294Z"/></svg></span><span class="word" style="--ink-width:1.222"><svg viewBox="50 -700 1222 900" focusable="false" aria-hidden="true"><path transform="scale(1,-1)" d="M50 0H126V735H50ZM252 603C285 603 309 625 309 659C309 692 285 714 252 714C218 714 196 692 196 659C196 625 218 603 252 603ZM213 0H289V505H213ZM379 0H455V175L528 251L696 0H788L580 306L771 505H670L456 277H455V735H379ZM1031 -20C1144 -20 1239 37 1272 118L1206 145C1178 90 1111 49 1032 49C923 49 842 122 831 227H1256C1257 237 1257 248 1257 257C1255 413 1158 525 1010 525C860 525 752 413 752 258C752 97 870 -20 1031 -20ZM832 294C846 390 915 455 1009 455C1101 455 1166 397 1176 294Z"/></svg></span></div>
+    <header class="masthead" data-corner-copy>
+      <button id="open-about" class="home-identity home-about" type="button" aria-haspopup="dialog" aria-controls="about" aria-expanded="false" aria-label="About Melike Turgut">
+        <span>MELIKE TURGUT</span>
+        <span class="home-location about-link"><span class="home-link-label">ABOUT</span><span id="home-chapter-label" class="home-chapter-label" aria-hidden="true"></span></span>
+      </button>
+      <button id="open-about-role" class="home-role home-about" type="button" aria-haspopup="dialog" aria-controls="about" aria-expanded="false" aria-label="About Melike Turgut">
+        <span>PRODUCT DESIGNER</span>
+        <span class="home-location home-role-location" aria-hidden="true"><span class="home-role-city">NEW YORK</span><span class="home-role-about">ABOUT</span></span>
+      </button>
+    </header>
+    <div class="collection-viewport" id="collection-viewport" tabindex="-1">
+      <div class="collection" aria-label="Melike: eight chapters between me and like">
+        <span class="word" aria-hidden="true">me</span>
+        <ol class="charms" id="charms" aria-label="Eight little worlds"></ol>
+        <span class="word" aria-hidden="true">like</span>
+      </div>
+    </div>
+    <footer class="footnote" data-corner-copy>
+      <div class="home-introduction">
+        <p>I spent the last 15 years designing products<br class="home-copy-break"> people love to click, tap, share, and come back to.<br class="home-copy-break"> Along the way were these 8 chapters.</p>
+        <p id="home-load-error" role="status" hidden></p>
+      </div>
+    </footer>
+    <nav class="home-socials" data-corner-copy aria-label="Social profiles and email">
+        <button id="open-about-mobile" class="about-button" type="button" aria-haspopup="dialog" aria-controls="about" aria-expanded="false">ABOUT</button>
+        <button id="copy-email" class="email-button" type="button" data-email="meliketurgut@gmail.com" aria-label="Copy email address" title="Copy meliketurgut@gmail.com">EMAIL</button>
+        <a class="arena-link" href="https://www.are.na/melike/channels?sort=UPDATED_AT" target="_blank" rel="noopener noreferrer" aria-label="Are.na" title="Are.na">
+          <span aria-hidden="true">✶✶</span>
+        </a>
+        <a href="https://www.linkedin.com/in/meliketurgut/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LINKEDIN</a>
+        <a href="https://x.com/me____likex" target="_blank" rel="noopener noreferrer" aria-label="X">X</a>
+        <span id="email-status" class="visually-hidden" role="status" aria-live="polite"></span>
+    </nav>
+  </main>
+  <dialog id="world" class="world editorial-layout" aria-labelledby="world-title">
+    <div class="chapter-exit-cursor" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <button id="close-world" class="close-world" aria-label="Close chapter"><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/></svg></button>
+    <section class="chapter-stage" aria-label="Browse chapters">
+      <button class="chapter-back-home" tabindex="-1" aria-label="Back home"></button>
+      <div class="chapter-prev chapter-neighbor" aria-label="Previous chapter"></div>
+      <div class="chapter-hero"></div>
+      <div class="chapter-label"><p class="chapter-company"></p></div>
+      <div class="chapter-next chapter-neighbor" aria-label="Next chapter"></div>
+    </section>
+    <section class="story-sheet" tabindex="-1" aria-label="Chapter story">
+      <header class="story-header"><button class="sheet-handle" aria-label="Expand reading sheet" aria-expanded="false"><span></span></button></header>
+      <article class="story-body" tabindex="0" aria-label="Scroll chapter story">
+        <h1 id="world-title" class="story-years"></h1>
+        <div class="story-facts-wrap">
+          <dl class="story-facts">
+            <div><dt>The Premise</dt><dd>Details to come.</dd></div>
+            <div><dt>The Reality</dt><dd>Details to come.</dd></div>
+          </dl>
+          <dl class="story-facts plot-reference" aria-hidden="true" inert>
+            <div><dt>The Premise</dt><dd data-plot-ref="premise"></dd></div>
+            <div><dt>The Reality</dt><dd data-plot-ref="reality"></dd></div>
+          </dl>
+        </div>
+        <section class="story-plot">
+          <h2>The Plot</h2>
+          <p class="sample-label">Story placeholder</p>
+          <p>This chapter’s story is still being written.</p>
+          <figure><div class="story-image-placeholder">Work and images to come.</div></figure>
+        </section>
+      </article>
+    </section>
+  </dialog>
+  <dialog id="about" class="world editorial-layout about-world sheet-expanded" aria-labelledby="about-title">
+    <div class="about-backdrop" aria-hidden="true"></div>
+    <div class="chapter-exit-cursor" aria-hidden="true"><span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+    <button class="chapter-back-home" type="button" tabindex="-1" aria-label="Back home"></button>
+    <button class="close-world" type="button" aria-label="Close about" autofocus><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"/></svg></button>
+    <section class="story-sheet" aria-label="About Melike">
+      <article class="story-body" tabindex="0" aria-label="Scroll about Melike">
+        <h1 id="about-title">Hi, I’m<br>Melike</h1>
+        <div class="story-plot plot-copy">
+          <p>This site tells the story of my 8 full-time roles, but leaves out a few side quests along the way—like the 5 years I spent as an adjunct professor at <a href="https://sva.design/instructors/melike-turgut/" target="_blank" rel="noopener noreferrer">SVA</a>, teaching interaction design to undergrad seniors while working at Squarespace and later at Instagram.</p>
+          <p>Over the years I held many roles, but at heart I’m just a designer, a maker of things big and small, and, most importantly, a joy to be around. Before I ultimately planted myself in Brooklyn, New York, I spent my childhood in a small Turkish beach town called Fethiye.</p>
+          <p>On a personal note, I’m a firm believer in common sense, a user of public transportation, and a lover of old buildings and new movies. I studied graphic design because of my love of basic decomposition of shapes, and also because I was very good at drawing in kindergarten.</p>
+          <p>These days, I’m most excited about where design and technology come together to spark more playful, memorable, and human experiences. I love working with teams who share that curiosity and push ideas further than any one of us could alone.</p>
+        </div>
+        <p class="about-credit">This site uses fonts from Pangram&nbsp;Pangram, my all-time favorite foundry.</p>
+      </article>
+    </section>
+  </dialog>
+  <noscript><p class="no-js">This little collection comes alive with JavaScript.</p></noscript>
+</body>
+</html>

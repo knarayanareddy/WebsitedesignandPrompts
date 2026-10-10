@@ -1,0 +1,1709 @@
+		/* Remove all rounded corners globally */
+		* { border-radius: 0 !important; }
+
+		/* Hero heading — small, bottom-right */
+		.framer-1669zf9 {
+			position: absolute !important;
+			bottom: 32px !important;
+			right: 32px !important;
+			left: auto !important;
+			top: auto !important;
+			width: auto !important;
+			transform: none !important;
+		}
+		.framer-styles-preset-jytx1s {
+			font-size: clamp(18px, 2.2vw, 32px) !important;
+			line-height: 1.15 !important;
+			white-space: nowrap !important;
+		}
+		:root {
+			--token-dd717713-1068-4647-927d-6880fa80e969: #0052FF !important;
+		}
+		body {
+			--token-dd717713-1068-4647-927d-6880fa80e969: #0052FF !important;
+		}
+		[data-framer-name="Default"][data-border="true"],
+		[data-framer-name="Mobile-close"][data-border="true"] {
+			border-color: #0052FF !important;
+		}
+		[data-framer-name="line"] {
+			background-color: #0052FF !important;
+		}
+		@font-face {
+			font-family: 'Gellix';
+			src: url('./Gellix-TRIAL-Regular.otf') format('opentype');
+			font-weight: 400;
+			font-style: normal;
+			font-display: swap;
+		}
+		@font-face {
+			font-family: 'FK Raster Sharp';
+			src: url('./FKRasterRomanCompactTrial-Sharp.otf') format('opentype');
+			font-weight: 400;
+			font-style: normal;
+			font-display: swap;
+		}
+		/* Main typography override */
+		.framer-text, body {
+			font-family: 'Gellix', sans-serif !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+		}
+		/* Display / H1–H4 only — FK Raster Sharp (+ all inner spans to beat the * Geist rule) */
+		h1, h2, h3, h4,
+		h1 *, h2 *, h3 *, h4 *,
+		.framer-styles-preset-jytx1s, .framer-styles-preset-jytx1s *,
+		.framer-styles-preset-12jszw2, .framer-styles-preset-12jszw2 *,
+		.framer-styles-preset-11yf05u, .framer-styles-preset-11yf05u *,
+		.framer-styles-preset-1v8q4nq, .framer-styles-preset-1v8q4nq * {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+			font-kerning: normal !important;
+			font-feature-settings: "kern" 1, "liga" 1 !important;
+			letter-spacing: 0.012em !important;
+		}
+		/* H5, H6 and all body presets — Gellix */
+		h5, h6,
+		.framer-styles-preset-18pmrus,
+		.framer-styles-preset-dmqhz9,
+		.framer-styles-preset-1akis4n,
+		.framer-styles-preset-1r1ct5n,
+		.framer-styles-preset-1c9by3v {
+			font-family: 'Gellix', sans-serif !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+		}
+		/* About section explicit font targets */
+		.stoik-about-heading-font,
+		.stoik-about-number-font {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+			font-kerning: normal !important;
+			font-feature-settings: "kern" 1, "liga" 1 !important;
+		}
+		.stoik-about-heading-font { letter-spacing: 0.014em !important; }
+		.stoik-about-number-font { letter-spacing: 0.012em !important; }
+		/* Stat numbers (07, 23, 270+) — FK Raster Sharp */
+		[data-framer-name="section-about"] .framer-3YqHF,
+		[data-framer-name="section-about"] .framer-3YqHF * {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+		}
+		/* Force FK Raster in Section 2 (About) — h1–h4 only */
+		[data-framer-name="section-about"] h1,
+		[data-framer-name="section-about"] h2,
+		[data-framer-name="section-about"] h3,
+		[data-framer-name="section-about"] h4,
+		[data-framer-name="section-about"] h1 *,
+		[data-framer-name="section-about"] h2 *,
+		[data-framer-name="section-about"] h3 *,
+		[data-framer-name="section-about"] h4 * {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+			font-kerning: normal !important;
+			font-feature-settings: "kern" 1, "liga" 1 !important;
+			letter-spacing: 0.014em !important;
+		}
+		.stoik-accent-asterisk {
+			color: #165dff !important;
+			font-family: 'Gellix', 'Inter', sans-serif !important;
+			font-weight: 600 !important;
+			letter-spacing: 0 !important;
+			text-shadow: none !important;
+			-webkit-text-stroke: 0 !important;
+		}
+		/* Hero heading: top-right (replaces top quote button) */
+		[data-framer-name="section-hero"] {
+			position: relative !important;
+		}
+		/* Header cleanup */
+		a[data-framer-name="logo"] {
+			display: none !important;
+		}
+		[data-framer-name="nav-wrapper"] a .framer-text,
+		[data-framer-name="nav-wrapper"] a,
+		[data-framer-name="nav-wrapper"] p {
+			color: #000 !important;
+		}
+		/* Nav square brackets */
+		[data-framer-name="nav-wrapper"] a p::before {
+			content: '[ ';
+			font-family: 'Gellix', sans-serif !important;
+			letter-spacing: 0;
+		}
+		[data-framer-name="nav-wrapper"] a p::after {
+			content: ' ]';
+			font-family: 'Gellix', sans-serif !important;
+			letter-spacing: 0;
+		}
+		[data-framer-name="services holder"] {
+			display: none !important;
+		}
+		/* One-pager nav: hide ALL template nav links (Home / About / Project /
+		   Contact). The social icons in .stoik-header-socials replace nav. */
+		[data-framer-name="nav-wrapper"] a[href*="./about"],
+		[data-framer-name="nav-wrapper"] a[href*="./projects"],
+		[data-framer-name="nav-wrapper"] a[href*="./project"],
+		[data-framer-name="nav-wrapper"] a[href*="./contact"],
+		[data-framer-name="nav-wrapper"] a[href="./"],
+		[data-framer-name="nav-wrapper"] a[href="./index"] {
+			display: none !important;
+		}
+		/* Also drop the <p> paragraph that wraps the Home link, otherwise its
+		   empty bracket pseudo-elements would still take up space. */
+		[data-framer-name="nav-wrapper"] p:has(> a[href="./"]),
+		[data-framer-name="nav-wrapper"] p:has(> a[href="./index"]) {
+			display: none !important;
+		}
+		/* Testimonial cards (formerly team) — hide social icons + the join-our-team
+		   Apply Now CTA. The quote, name, and role all live INSIDE the image
+		   container as a dark overlay (.stoik-test-card). */
+		[data-framer-name="section-team"] [data-framer-name="social-icon-wrapper"] { display: none !important; }
+		[data-framer-name="section-team"] a[href*="apply" i],
+		[data-framer-name="section-team"] [data-framer-name="apply"] { display: none !important; }
+		[data-framer-name="section-team"] [data-framer-name="image-container"] {
+			position: relative !important;
+		}
+		[data-framer-name="section-team"] [data-framer-name="image-container"] img {
+			object-fit: cover !important;
+		}
+		.stoik-test-card {
+			position: absolute;
+			left: 0; right: 0; bottom: 0;
+			padding: 14px 16px;
+			background: rgba(10, 10, 10, 0.86);
+			backdrop-filter: blur(10px);
+			-webkit-backdrop-filter: blur(10px);
+			color: #fff;
+			font-family: 'Gilroy', 'Manrope', sans-serif;
+			pointer-events: none;
+			border-bottom-left-radius: inherit;
+			border-bottom-right-radius: inherit;
+			box-sizing: border-box;
+		}
+		.stoik-test-quote-in {
+			font-size: 12px;
+			line-height: 1.45;
+			color: rgba(255, 255, 255, 0.92);
+			margin: 0 0 10px;
+			letter-spacing: -0.005em;
+		}
+		.stoik-test-meta {
+			border-top: 1px solid rgba(255, 255, 255, 0.16);
+			padding-top: 8px;
+			display: flex;
+			flex-direction: column;
+			gap: 1px;
+		}
+		.stoik-test-name {
+			font-size: 11.5px;
+			font-weight: 600;
+			margin: 0;
+			letter-spacing: -0.005em;
+			color: #fff;
+		}
+		.stoik-test-role {
+			font-size: 10px;
+			font-weight: 500;
+			margin: 0;
+			color: rgba(255, 255, 255, 0.6);
+			letter-spacing: 0.02em;
+			text-transform: uppercase;
+		}
+		/* White info bar (project title + tags) — hidden completely. The
+		   project info now lives inside the image as a dark overlay panel
+		   (.stoik-project-info), so this header would just duplicate it. */
+		[data-framer-name="Project-wrapper"] [data-framer-name="info"] {
+			display: none !important;
+		}
+		/* Tiny scale-down so the entire card fits comfortably
+		   within the viewport on Mac-sized screens. */
+		[data-framer-name="Project-wrapper"] > * {
+			--stoik-card-scale: clamp(0.86, 0.96, 1);
+		}
+		/* With the info bar gone, image card grows to occupy the freed space
+		   so the overall project card height stays the same. */
+		[data-framer-name="Project-wrapper"] [data-framer-name="image"] {
+			max-height: 72vh !important;
+			max-width: 84vw !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+		}
+		[data-framer-name="Project-wrapper"] > * {
+			max-width: 86vw !important;
+			margin-left: auto !important;
+			margin-right: auto !important;
+		}
+		[data-framer-name="Project-wrapper"] [data-framer-name="Title"] {
+			text-align: right !important;
+			justify-content: flex-end !important;
+		}
+		[data-framer-name="Project-wrapper"] [data-framer-name="Title"] * {
+			text-align: right !important;
+		}
+		/* Project card tilt — applied via JS scroll driver */
+		[data-framer-name="Project-wrapper"] > * {
+			transform-origin: center 30% !important;
+			will-change: transform, filter !important;
+			transition: transform 80ms linear, filter 80ms linear, opacity 80ms linear !important;
+			/* Lock the card vertically centered when sticky: equal space above
+			   and below. Card max-height is 72vh → leftover 28vh, halved = 14vh. */
+			top: calc((100vh - 72vh) / 2) !important;
+		}
+		/* Stop the tilted card from being clipped at the wrapper's top edge */
+		[data-framer-name="Project-wrapper"],
+		[data-framer-name="Project-wrapper"] > *,
+		[data-framer-name="section-projects"],
+		[data-framer-name="section-projects"] [data-framer-name="container"] {
+			overflow: visible !important;
+		}
+
+		/* Hero "stoik agency ®" display heading — center-left, responsive */
+		.stoik-hero-display {
+			position: absolute;
+			left: clamp(20px, 4vw, 96px);
+			top: 50%;
+			transform: translateY(-50%);
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif;
+			font-weight: 400;
+			/* Slightly smaller so it doesn't dominate the hero */
+			font-size: clamp(34px, 5.4vw, 110px);
+			line-height: 0.92;
+			letter-spacing: 0.005em;
+			color: rgba(0, 0, 0, 0.92);
+			margin: 0;
+			pointer-events: none;
+			z-index: 4;
+			text-align: left;
+			max-width: min(46vw, 640px);
+		}
+		.stoik-hero-display sup {
+			font-size: 0.32em;
+			vertical-align: super;
+			font-weight: 400;
+			margin-left: 0.08em;
+		}
+		[data-framer-name="section-hero"] [data-framer-name="heading"] {
+			position: absolute !important;
+			left: clamp(16px, 2.4vw, 36px) !important;
+			top: clamp(16px, 2.2vw, 30px) !important;
+			right: auto !important;
+			bottom: auto !important;
+			width: min(30vw, 380px) !important;
+			max-width: calc(100vw - 32px) !important;
+			z-index: 5 !important;
+			display: flex !important;
+			justify-content: flex-end !important;
+			transform: none !important;
+			overflow: visible !important;
+		}
+		[data-framer-name="section-hero"] [data-framer-name="heading"] h1 {
+			font-size: clamp(20px, 2vw, 30px) !important;
+			line-height: 0.92 !important;
+			text-align: left !important;
+			letter-spacing: 0.012em !important;
+			-webkit-text-stroke: 0 transparent !important;
+			text-stroke: 0 transparent !important;
+			text-shadow: none !important;
+			transform: none !important;
+			white-space: normal !important;
+		}
+		@media (max-width: 809px) {
+			[data-framer-name="section-hero"] [data-framer-name="heading"] {
+				left: 12px !important;
+				top: 12px !important;
+				width: min(52vw, 220px) !important;
+			}
+			[data-framer-name="section-hero"] [data-framer-name="heading"] h1 {
+				font-size: clamp(20px, 5vw, 32px) !important;
+			}
+		}
+		/* Remove Framer badge */
+		#__framer-badge-container,
+		#framer-badge-container {
+			display: none !important;
+			visibility: hidden !important;
+			pointer-events: none !important;
+		}
+		a[href*="framer.com"][aria-label*="Create a free website"],
+		a[href*="framer.com"][title*="Create a free website"] {
+			display: none !important;
+			visibility: hidden !important;
+		}
+		/* Hero custom remap */
+		.stoik-hide {
+			display: none !important;
+		}
+		.stoik-heading-top {
+			display: flex !important;
+			position: absolute !important;
+			left: clamp(16px, 2.4vw, 36px) !important;
+			top: clamp(16px, 2.2vw, 30px) !important;
+			right: auto !important;
+			bottom: auto !important;
+			z-index: 5 !important;
+			transition: none;
+		}
+		.stoik-heading-top h1,
+		.stoik-heading-top h1 * {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(20px, 2vw, 30px) !important;
+			line-height: 1.08 !important;
+			letter-spacing: 0.012em !important;
+			white-space: normal !important;
+			max-width: 12ch !important;
+		}
+		/* Nav-logo state after scrolling past hero — same size, just repositioned fixed */
+		.stoik-heading-top.stoik-nav-mode {
+			position: fixed !important;
+			top: clamp(10px, 1.2vh, 18px) !important;
+			left: clamp(16px, 2.4vw, 36px) !important;
+			z-index: 2147483100 !important;
+		}
+		.stoik-heading-top.stoik-nav-mode h1,
+		.stoik-heading-top.stoik-nav-mode h1 * {
+			font-size: clamp(14px, 1.5vw, 22px) !important;
+			line-height: 1.05 !important;
+		}
+		.stoik-hero-card {
+			position: fixed !important;
+			right: clamp(22px, 2.8vw, 44px) !important;
+			/* Default: center-right (while hero is in view).
+			   Smoothly animates to top-right once the hero scrolls past. */
+			top: 50% !important;
+			bottom: auto !important;
+			transform: translateY(-50%) !important;
+			transition: top 0.45s cubic-bezier(0.65, 0, 0.35, 1),
+				transform 0.45s cubic-bezier(0.65, 0, 0.35, 1) !important;
+			z-index: 2147483000 !important;
+			width: clamp(260px, 22vw, 360px) !important;
+			max-width: calc(100vw - 32px) !important;
+			pointer-events: auto !important;
+		}
+		.stoik-hero-card.stoik-card-pinned-top {
+			top: clamp(14px, 1.6vh, 24px) !important;
+			transform: none !important;
+		}
+		.stoik-hero-card .framer-64hzh7 {
+			display: flex !important;
+			flex-direction: row !important;
+			gap: 10px !important;
+			padding: 8px !important;
+			/* Glassmorphic white — translucent fill + backdrop blur */
+			background: rgba(255, 255, 255, 0.62) !important;
+			-webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+			backdrop-filter: blur(18px) saturate(140%) !important;
+			border: 1px solid rgba(255, 255, 255, 0.55) !important;
+			box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08) !important;
+			align-items: stretch !important;
+			min-height: 0 !important;
+			overflow: visible !important;
+		}
+		.stoik-yogi-avatar {
+			width: clamp(80px, 7vw, 110px) !important;
+			height: clamp(80px, 7vw, 110px) !important;
+			max-height: clamp(80px, 7vw, 110px) !important;
+			min-height: clamp(80px, 7vw, 110px) !important;
+			aspect-ratio: 1 / 1 !important;
+			align-self: stretch !important;
+			object-fit: cover !important;
+			object-position: center !important;
+			display: block !important;
+			flex: 0 0 clamp(80px, 7vw, 110px) !important;
+			background: #000 !important;
+		}
+		.stoik-cta-content {
+			display: flex !important;
+			flex-direction: column !important;
+			justify-content: flex-start !important;
+			align-items: flex-start !important;
+			flex: 1 1 auto !important;
+			gap: 4px !important;
+			min-height: 0 !important;
+			position: relative !important;
+			z-index: 2 !important;
+		}
+		.stoik-cta-button {
+			position: relative !important;
+			z-index: 2 !important;
+		}
+		.stoik-yogi-avatar {
+			position: relative !important;
+			z-index: 1 !important;
+		}
+		.stoik-cta-title {
+			margin: 0 !important;
+			color: rgba(0, 0, 0, 0.92) !important;
+			font-family: 'Gellix', sans-serif !important;
+			font-size: 18px !important;
+			line-height: 1.02 !important;
+			letter-spacing: 0.01em !important;
+			text-shadow: none !important;
+		}
+		.stoik-cta-role {
+			margin: 0 !important;
+			color: rgba(0, 0, 0, 0.55) !important;
+			font-family: 'Gellix', sans-serif !important;
+			font-size: 9px !important;
+			line-height: 1.15 !important;
+			letter-spacing: 0.06em !important;
+			text-transform: uppercase !important;
+			text-shadow: none !important;
+		}
+		.stoik-cta-button {
+			margin-top: 3px !important;
+			width: auto !important;
+			max-width: 100% !important;
+			display: inline-flex !important;
+			align-self: flex-start !important;
+			align-items: center !important;
+			justify-content: space-between !important;
+			gap: 10px !important;
+			padding: 6px 10px !important;
+			background: #0052FF !important;
+			color: #fff !important;
+			font-family: 'Gellix', sans-serif !important;
+			font-size: 11px !important;
+			font-weight: 500 !important;
+			line-height: 1.12 !important;
+			letter-spacing: 0.01em !important;
+			text-decoration: none !important;
+			white-space: nowrap !important;
+			overflow: hidden !important;
+			clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%) !important;
+		}
+		.stoik-cta-arrow {
+			flex: 0 0 auto !important;
+			font-size: 14px !important;
+			line-height: 1 !important;
+		}
+		/* Wrap holding the two CTA buttons (Mail me + DM) side by side */
+		.stoik-cta-actions {
+			display: inline-flex !important;
+			gap: 6px !important;
+			align-items: center !important;
+			margin-top: 3px !important;
+			position: relative !important;
+			z-index: 2 !important;
+		}
+		.stoik-cta-actions .stoik-cta-button {
+			margin-top: 0 !important;
+		}
+		/* "DM" button (Telegram) — secondary look: dark fill, white icon */
+		.stoik-cta-button.is-tg {
+			background: #0a0a0a !important;
+			color: #fff !important;
+			padding: 6px 10px !important;
+			gap: 6px !important;
+		}
+		.stoik-cta-button.is-tg:hover { background: #1f1f1f !important; }
+		.stoik-cta-button .stoik-cta-icon {
+			width: 12px !important;
+			height: 12px !important;
+			flex: 0 0 auto !important;
+			display: inline-flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+		}
+		.stoik-cta-button .stoik-cta-icon svg {
+			width: 100% !important;
+			height: 100% !important;
+			fill: currentColor !important;
+		}
+		/* Header social icons — sit right next to the [Home] nav link.
+		   align-self: center keeps them vertically lined up with the
+		   Home text inside the nav-wrapper's flex row. */
+		.stoik-header-socials {
+			display: inline-flex !important;
+			gap: 6px !important;
+			align-items: center !important;
+			align-self: center !important;
+			margin-left: 8px !important;
+		}
+		.stoik-header-socials a {
+			width: 44px !important;
+			height: 44px !important;
+			display: inline-flex !important;
+			align-items: center !important;
+			justify-content: center !important;
+			color: rgba(10, 10, 10, 0.78) !important;
+			border-radius: 0 !important;
+			text-decoration: none !important;
+			transition: color 160ms ease;
+		}
+		.stoik-header-socials a:hover {
+			color: #0a0a0a !important;
+		}
+		.stoik-header-socials svg {
+			width: 28px;
+			height: 28px;
+			fill: currentColor;
+			display: block;
+		}
+		@media (max-width: 540px) {
+			.stoik-header-socials { gap: 4px !important; margin-left: 6px !important; }
+			.stoik-header-socials a { width: 38px !important; height: 38px !important; }
+			.stoik-header-socials svg { width: 24px; height: 24px; }
+		}
+		/* CTA card needs to clip the oversized floral watermark. */
+		.framer-64hzh7:has(.stoik-cta-floral),
+		.stoik-cta-floral-clip {
+			overflow: hidden !important;
+		}
+		/* Decorative floral watermark in bottom-right of CTA card.
+		   Anchored to the card corner, slightly oversized + offset so it
+		   reads as a clipped detail (the card's overflow trims it).
+		   A faint shimmer band sweeps across via animated mask-image. */
+		.stoik-cta-floral {
+			position: absolute !important;
+			right: -6px !important;
+			bottom: -38px !important;
+			width: 122px !important;
+			height: 122px !important;
+			pointer-events: none !important;
+			opacity: 0.14 !important;
+			z-index: 0 !important;
+			background: url('cta-floral.svg') center / contain no-repeat;
+			-webkit-mask: linear-gradient(110deg,
+				rgba(0,0,0,0.55) 0%,
+				rgba(0,0,0,0.55) 38%,
+				rgba(0,0,0,1)    50%,
+				rgba(0,0,0,0.55) 62%,
+				rgba(0,0,0,0.55) 100%) 0 0 / 240% 100%;
+			        mask: linear-gradient(110deg,
+				rgba(0,0,0,0.55) 0%,
+				rgba(0,0,0,0.55) 38%,
+				rgba(0,0,0,1)    50%,
+				rgba(0,0,0,0.55) 62%,
+				rgba(0,0,0,0.55) 100%) 0 0 / 240% 100%;
+			animation: stoikFloralShimmer 5200ms linear infinite;
+		}
+		@keyframes stoikFloralShimmer {
+			0%   { -webkit-mask-position: 240% 0; mask-position: 240% 0; }
+			100% { -webkit-mask-position: -140% 0; mask-position: -140% 0; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.stoik-cta-floral { animation: none; }
+		}
+		.stoik-hero-card .framer-b71hkz {
+			grid-column: 2 !important;
+			display: flex !important;
+			flex-direction: column !important;
+			gap: 8px !important;
+			justify-content: flex-start !important;
+			align-items: stretch !important;
+			min-height: 152px !important;
+		}
+		.stoik-hero-card .framer-b71hkz .framer-text {
+			font-family: 'Gellix', sans-serif !important;
+			color: #fff !important;
+			text-shadow: none !important;
+			background: transparent !important;
+			letter-spacing: 0.01em !important;
+			line-height: 1.2 !important;
+		}
+		.stoik-hero-card .framer-b71hkz .framer-1d88fja .framer-text {
+			font-size: 44px !important;
+			line-height: 1.02 !important;
+			letter-spacing: 0.01em !important;
+		}
+		.stoik-hero-card .framer-b71hkz .framer-1d88fja,
+		.stoik-hero-card .framer-b71hkz .framer-1f7u6v2,
+		.stoik-hero-card .framer-b71hkz .framer-1d88fja .framer-text,
+		.stoik-hero-card .framer-b71hkz .framer-1f7u6v2 .framer-text {
+			transform: none !important;
+		}
+		.stoik-hero-card .framer-b71hkz .framer-1f7u6v2 .framer-text {
+			color: rgba(255, 255, 255, 0.62) !important;
+			font-size: 13px !important;
+			line-height: 1.15 !important;
+		}
+		.stoik-hero-card .framer-17r6v9q {
+			margin-top: 8px !important;
+			width: 100% !important;
+			max-width: 100% !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: space-between !important;
+			background: #252525 !important;
+			padding: 11px 14px !important;
+			text-decoration: none !important;
+			box-sizing: border-box !important;
+			align-self: stretch !important;
+			gap: 10px !important;
+			overflow: hidden !important;
+		}
+		.stoik-hero-card .framer-17r6v9q > div,
+		.stoik-hero-card .framer-17r6v9q .framer-T1tAr,
+		.stoik-hero-card .framer-17r6v9q .framer-1a6no4c,
+		.stoik-hero-card .framer-17r6v9q .framer-1et8oxr,
+		.stoik-hero-card .framer-17r6v9q .framer-7lqk4p {
+			background: transparent !important;
+			transform: none !important;
+			top: auto !important;
+		}
+		.stoik-hero-card .framer-17r6v9q .framer-text {
+			font-family: 'Gellix', sans-serif !important;
+			color: #fff !important;
+			font-size: 17px !important;
+			font-weight: 500 !important;
+			white-space: nowrap !important;
+			text-shadow: none !important;
+			background: transparent !important;
+			line-height: 1.12 !important;
+		}
+		.stoik-hero-card .framer-1f7u6v2 .framer-text {
+			letter-spacing: 0.06em !important;
+			text-transform: uppercase !important;
+			font-size: 12px !important;
+			opacity: 0.72 !important;
+		}
+		.stoik-hero-card .framer-17r6v9q .framer-cqucy6-container {
+			flex: 1 1 auto !important;
+			min-width: 0 !important;
+			width: auto !important;
+		}
+		.stoik-hero-card .framer-17r6v9q .framer-1sntexv {
+			width: 16px !important;
+			height: 16px !important;
+			display: block !important;
+			flex: 0 0 auto !important;
+			background: transparent !important;
+			clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%) !important;
+		}
+		.stoik-hero-card .framer-17r6v9q .framer-1sntexv img {
+			display: none !important;
+		}
+		.stoik-hero-card .framer-17r6v9q .framer-1sntexv::before {
+			content: "→";
+			display: block;
+			color: #fff;
+			font-size: 16px;
+			line-height: 16px;
+			text-align: center;
+		}
+		.stoik-ticker-strip {
+			position: absolute;
+			left: 20px;
+			right: 20px;
+			bottom: 20px;
+			height: 56px;
+			background: rgba(255, 255, 255, 0.2);
+			backdrop-filter: blur(12px);
+			-webkit-backdrop-filter: blur(12px);
+			overflow: hidden;
+			border: 1px solid rgba(255, 255, 255, 0.35);
+			z-index: 5;
+		}
+		.stoik-ticker-track {
+			display: flex;
+			align-items: center;
+			gap: 48px;
+			white-space: nowrap;
+			min-width: max-content;
+			height: 100%;
+			padding: 0 28px;
+			animation: stoikTicker 18s linear infinite;
+			color: #111;
+			font-weight: 500;
+		}
+		.stoik-ticker-item {
+			letter-spacing: 0.04em;
+			font-size: 14px;
+		}
+		.stoik-carousel-overlay {
+			position: absolute;
+			left: -8vw;
+			right: -8vw;
+			top: auto;
+			bottom: 0;
+			height: clamp(260px, 36vh, 420px);
+			pointer-events: none;
+			z-index: 0;
+			overflow: hidden;
+			transform-origin: center center;
+			animation: stoikCarouselBreath 2s ease-in-out infinite alternate;
+			mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+			-webkit-mask-image: linear-gradient(to right, transparent, #000 9%, #000 91%, transparent);
+		}
+		.stoik-carousel-row {
+			position: absolute;
+			left: 0;
+			right: 0;
+			height: calc(50% - 6px);
+			overflow: hidden;
+		}
+		.stoik-carousel-row.is-top { top: 0; }
+		.stoik-carousel-row.is-bottom { bottom: 0; }
+		.stoik-carousel-track {
+			display: flex;
+			gap: 18px;
+			width: max-content;
+			animation: stoikCarouselRight 130s linear infinite;
+			will-change: transform;
+		}
+		.stoik-carousel-row.is-bottom .stoik-carousel-track {
+			animation-name: stoikCarouselRight;
+		}
+		.stoik-carousel-card {
+			--card-w: clamp(220px, 22vw, 360px);
+			width: var(--card-w);
+			height: calc(var(--card-w) * 9 / 16);
+			min-height: calc(var(--card-w) * 9 / 16);
+			max-height: calc(var(--card-w) * 9 / 16);
+			aspect-ratio: 16 / 9;
+			border: none;
+			border-radius: 0;
+			clip-path: polygon(0 0, calc(100% - 28px) 0, 100% 28px, 100% 100%, 0 100%);
+			background: transparent;
+			padding: 0;
+			box-shadow: none;
+			flex: 0 0 var(--card-w);
+			box-sizing: border-box;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.stoik-carousel-card img,
+		.stoik-carousel-card video {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			display: block;
+			background: rgba(10, 10, 10, 0.06);
+			transform: scale(1.02);
+			transform-origin: center center;
+		}
+		/* Skeleton shimmer — applied to any <img>/<video> until its
+		   load event fires. Removed via JS so once loaded the bg sits
+		   under the painted media content. */
+		img.stoik-media-shimmer,
+		video.stoik-media-shimmer {
+			background-image: linear-gradient(
+				100deg,
+				rgba(10, 10, 10, 0.05) 0%,
+				rgba(10, 10, 10, 0.05) 30%,
+				rgba(10, 10, 10, 0.16) 50%,
+				rgba(10, 10, 10, 0.05) 70%,
+				rgba(10, 10, 10, 0.05) 100%
+			);
+			background-size: 240% 100%;
+			background-repeat: no-repeat;
+			background-position: 240% 0;
+			animation: stoikMediaShimmer 1500ms linear infinite;
+		}
+		@keyframes stoikMediaShimmer {
+			0%   { background-position: 240% 0; }
+			100% { background-position: -140% 0; }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			img.stoik-media-shimmer,
+			video.stoik-media-shimmer { animation: none; }
+		}
+		/* Placeholder noop block to keep the next selector below intact */
+		.stoik-carousel-card-noop {
+			display: none;
+		}
+		/* About section: word-by-word reveal + stagger cards */
+		.stoik-about-word {
+			display: inline-block;
+			opacity: 0;
+			filter: blur(5px);
+			transform: translateY(8px);
+			transition: opacity 420ms ease, filter 420ms ease, transform 420ms ease;
+			will-change: opacity, filter, transform;
+		}
+		.stoik-about-words-ready .stoik-about-word {
+			opacity: 1;
+			filter: blur(0);
+			transform: translateY(0);
+		}
+		.stoik-about-card-stagger {
+			opacity: 0;
+			transform: translateY(34px);
+			transition: opacity 520ms ease, transform 520ms ease;
+			will-change: opacity, transform;
+		}
+		.stoik-about-cards-ready .stoik-about-card-stagger {
+			opacity: 1;
+			transform: translateY(0);
+		}
+		/* Blue accent square — 90° physical rotation every 2s, staggered.
+		   Each 2s cycle: ~0.7s of smooth rotation (square morphs through
+		   diamond and back to square), then ~1.3s pause at each snap. */
+		.stoik-rot-square {
+			animation: stoik-rot-square-anim 8s cubic-bezier(0.85, 0, 0.18, 1) infinite;
+			animation-delay: var(--stoik-rot-delay, 0s);
+			transform-origin: center center;
+			will-change: transform;
+		}
+		/* Push the three nav buttons (Home / About / Project) to the right
+		   side of the header — smaller text and more spacing between them. */
+		nav [data-framer-name="left-content"] {
+			flex: 1 1 auto !important;
+			display: flex !important;
+			align-items: center !important;
+			justify-content: flex-end !important;
+		}
+		nav [data-framer-name="left-content"] [data-framer-name="nav-wrapper"] {
+			margin-left: auto !important;
+			gap: clamp(28px, 3.2vw, 56px) !important;
+			display: flex !important;
+		}
+		nav [data-framer-name="nav-wrapper"] a,
+		nav [data-framer-name="nav-wrapper"] a *,
+		nav [data-framer-name="nav-wrapper"] .framer-text {
+			font-size: clamp(11px, 0.82vw, 13px) !important;
+			letter-spacing: 0.02em !important;
+		}
+		nav [data-framer-name="nav-wrapper"] > * {
+			margin: 0 !important;
+		}
+		/* Tighten the link padding so the buttons sit on the same vertical
+		   baseline as the Stoik logo at top-left (instead of being noticeably
+		   taller / pushed lower by their own padding). */
+		nav [data-framer-name="nav-wrapper"] a {
+			padding: 4px 12px !important;
+			line-height: 1 !important;
+			display: inline-flex !important;
+			align-items: center !important;
+		}
+		@keyframes stoik-rot-square-anim {
+			0%   { transform: rotate(0deg); }
+			9%   { transform: rotate(90deg); }
+			25%  { transform: rotate(90deg); }
+			34%  { transform: rotate(180deg); }
+			50%  { transform: rotate(180deg); }
+			59%  { transform: rotate(270deg); }
+			75%  { transform: rotate(270deg); }
+			84%  { transform: rotate(360deg); }
+			100% { transform: rotate(360deg); }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.stoik-rot-square { animation: none; }
+		}
+		/* ── Services: scroll-lock wheel layout ── */
+		.stoik-solutions-custom {
+			position: relative;
+			/* tall track for the scroll-lock — shortened 1.5× from 2800 */
+			height: calc(100vh + 1870px);
+		}
+		.stoik-sol-sticky {
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: flex-start;
+			overflow: visible;
+			padding: 0 clamp(24px, 4vw, 80px);
+			gap: clamp(24px, 3vw, 56px);
+		}
+		.stoik-sol-v2-left {
+			flex-shrink: 0;
+			width: clamp(220px, 22%, 420px);
+		}
+		.stoik-sol-v2-heading {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(52px, 8.5vw, 124px) !important;
+			line-height: 0.92 !important;
+			letter-spacing: 0.008em !important;
+			color: #0d0d0f;
+			margin: 0;
+		}
+		.stoik-sol-v2-list {
+			flex: 0 0 auto;
+			display: flex;
+			flex-direction: column;
+			gap: clamp(18px, 1.8vw, 32px);
+			width: auto;
+			padding-left: clamp(160px, 16vw, 360px);
+			align-self: center;
+			position: relative;
+			z-index: 2;
+		}
+		.stoik-sol-v2-item {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(16px, 1.4vw, 26px) !important;
+			line-height: 1.35 !important;
+			letter-spacing: 0.012em !important;
+			color: rgba(0,0,0,0.22);
+			cursor: default;
+			transition: color 420ms ease, transform 420ms ease;
+			transform: translateX(0);
+			margin: 0;
+			white-space: nowrap;
+		}
+		.stoik-sol-v2-item.active {
+			color: rgba(0,0,0,0.92);
+			transform: translateX(10px);
+		}
+		/* Wheel — absolutely positioned, pushed far past the right edge so the
+		   heading + subheading columns own the visible content area */
+		.stoik-sol-wheel-wrap {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			/* Hard right shift — anchor the wheel WELL past the viewport's
+			   right edge so the leftmost (active) image clears the subhead
+			   column completely. Dial JS recomputes its radius to keep the
+			   tick ring in the heading/subhead gap regardless. */
+			--wheel-size: clamp(560px, 64vw, 1200px);
+			--wheel-push: clamp(180px, 22vw, 480px);
+			width: var(--wheel-size);
+			height: var(--wheel-size);
+			right: calc(var(--wheel-size) / -2 - var(--wheel-push));
+			pointer-events: none;
+			z-index: 1;
+		}
+		.stoik-sol-wheel {
+			width: 100%;
+			height: 100%;
+			position: relative;
+			will-change: transform;
+			/* Tight tracking — short transition smooths each scroll tick */
+			transition: transform 140ms cubic-bezier(0.32, 0.62, 0.18, 1);
+		}
+		.stoik-sol-wheel-img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			width: clamp(130px, 11vw, 200px);
+			height: clamp(96px, 8.2vw, 150px);
+			will-change: transform, filter;
+			/* Filter on the OUTER wrapper softens the chamfered shape edges
+			   (the clip-path on the inner is rendered first, then this blur
+			   applies to the whole result — including those edges). */
+			filter: grayscale(1) blur(5px) brightness(0.78);
+			transition: filter 480ms ease,
+				transform 140ms cubic-bezier(0.32, 0.62, 0.18, 1);
+		}
+		.stoik-sol-wheel-img.active {
+			filter: grayscale(0) blur(0) brightness(1);
+		}
+		.stoik-sol-wheel-img-inner {
+			position: absolute;
+			inset: 0;
+			clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+			overflow: hidden;
+		}
+		.stoik-sol-wheel-img img,
+		.stoik-sol-wheel-img video {
+			width: 100%; height: 100%; object-fit: cover; display: block;
+			pointer-events: none;
+			user-select: none;
+			-webkit-user-drag: none;
+		}
+		/* progress dots removed */
+		.stoik-sol-dots { display: none !important; }
+
+		/* Tactile rotating dial — tick lines only, expanded well beyond
+		   the wheel so the ring reaches back between the heading columns. */
+		.stoik-sol-dial {
+			position: absolute;
+			/* Defaults — JS overwrites these so the tick ring lands
+			   exactly between the Solution heading and the subheading list. */
+			top: -50%;
+			left: -50%;
+			right: -50%;
+			bottom: -50%;
+			pointer-events: none;
+			transform: scale(0);
+			transform-origin: center;
+			opacity: 0;
+			transition: transform 1.1s cubic-bezier(0.34, 1.4, 0.64, 1), opacity 700ms ease;
+			will-change: transform, opacity;
+		}
+		.stoik-sol-dial.in-view {
+			transform: scale(1);
+			opacity: 1;
+		}
+		.stoik-sol-dial-rot {
+			position: absolute;
+			inset: 0;
+			will-change: transform;
+			/* Same tight tracking as the image wheel */
+			transition: transform 140ms cubic-bezier(0.32, 0.62, 0.18, 1);
+		}
+		.stoik-sol-dial svg {
+			width: 100%;
+			height: 100%;
+			display: block;
+			overflow: visible;
+		}
+		.stoik-sol-dial .tick {
+			stroke: rgba(0, 0, 0, 0.22);
+			stroke-linecap: round;
+			stroke-width: 1.1;
+		}
+		.stoik-sol-dial .tick.major {
+			stroke: rgba(0, 0, 0, 0.55);
+			stroke-width: 1.6;
+		}
+		/* hide old Framer elements */
+		.stoik-sol-row, .stoik-sol-body, .stoik-sol-grid,
+		.stoik-sol-copy, .stoik-sol-tags, .stoik-sol-media,
+		.stoik-sol-hide { display: none !important; }
+		.framer-17j27lq { display: none !important; }
+		.heading-cards {
+			font-family: inherit !important;
+			font-size: clamp(24px, 2.7vw, 42px);
+			letter-spacing: 0.004em;
+			line-height: 1.04;
+			color: rgba(0, 0, 0, 0.94);
+		}
+		.heading-clients-say {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(34px, 3.4vw, 56px);
+			letter-spacing: 0.004em;
+			line-height: 1.04;
+			-webkit-text-stroke: 0 !important;
+			text-rendering: geometricPrecision;
+			font-smooth: always;
+		}
+		.stoik-sol-hide {
+			display: none !important;
+		}
+		.stoik-process-split {
+			position: relative;
+			min-height: auto;
+			margin-top: clamp(22px, 2.8vw, 40px);
+		}
+		.stoik-process-stage {
+			position: relative;
+			top: auto;
+			min-height: auto;
+			display: block;
+		}
+		.stoik-process-two-boxes {
+			display: grid;
+			grid-template-columns: 1fr 1fr; /* equal-size cards */
+			gap: clamp(16px, 2vw, 28px);
+			align-items: stretch;
+		}
+		.stoik-process-box {
+			border: 1px solid rgba(0, 0, 0, 0.1);
+			background: #ffffff;
+			padding: clamp(18px, 2vw, 28px);
+			display: grid;
+			gap: 12px;
+			min-height: clamp(320px, 35vw, 430px);
+			clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 0 100%);
+		}
+		/* New static-copy card layout (replaces slider) */
+		.stoik-pbox {
+			grid-template-rows: auto auto auto 1fr;
+			gap: clamp(10px, 1.2vw, 18px);
+		}
+		.stoik-pbox-copy {
+			font-family: 'Gellix', 'Inter', sans-serif !important;
+			font-size: clamp(14px, 1.05vw, 17px);
+			line-height: 1.55;
+			color: rgba(0, 0, 0, 0.78);
+			margin: 0;
+		}
+		.stoik-pbox-video {
+			width: 100%;
+			min-height: clamp(140px, 14vw, 220px);
+			height: 100%;
+			object-fit: cover;
+			display: block;
+			margin-top: clamp(8px, 1vw, 14px);
+			background: rgba(0, 0, 0, 0.04);
+			filter: saturate(0);
+		}
+		.stoik-pbox-media-label {
+			position: relative;
+			z-index: 2;
+			font-size: 11px;
+			font-weight: 500;
+			letter-spacing: 0.12em;
+			text-transform: uppercase;
+			color: rgba(0, 0, 0, 0.55);
+			padding: 10px 12px;
+			background: rgba(255, 255, 255, 0.85);
+			margin: 10px;
+		}
+		/* Spectrum visual for "Just bring it" card — animated bars */
+		.stoik-pbox-media--alt {
+			background: rgba(0, 0, 0, 0.02);
+		}
+		.stoik-pbox-spectrum {
+			position: absolute;
+			inset: 0;
+			display: grid;
+			grid-template-columns: repeat(8, 1fr);
+			gap: 6px;
+			padding: clamp(20px, 2vw, 36px);
+			align-items: end;
+		}
+		.stoik-pbox-spectrum span {
+			background: #0a0a0a;
+			height: 30%;
+			animation: stoik-pbox-bar 1.6s ease-in-out infinite;
+			transform-origin: bottom;
+		}
+		.stoik-pbox-spectrum span:nth-child(1) { animation-delay: 0.00s; height: 35%; }
+		.stoik-pbox-spectrum span:nth-child(2) { animation-delay: 0.12s; height: 70%; }
+		.stoik-pbox-spectrum span:nth-child(3) { animation-delay: 0.05s; height: 50%; }
+		.stoik-pbox-spectrum span:nth-child(4) { animation-delay: 0.22s; height: 85%; }
+		.stoik-pbox-spectrum span:nth-child(5) { animation-delay: 0.30s; height: 45%; }
+		.stoik-pbox-spectrum span:nth-child(6) { animation-delay: 0.18s; height: 65%; }
+		.stoik-pbox-spectrum span:nth-child(7) { animation-delay: 0.40s; height: 75%; }
+		.stoik-pbox-spectrum span:nth-child(8) { animation-delay: 0.10s; height: 40%; }
+		@keyframes stoik-pbox-bar {
+			0%, 100% { transform: scaleY(0.65); }
+			50%      { transform: scaleY(1); }
+		}
+		@media (prefers-reduced-motion: reduce) {
+			.stoik-pbox-spectrum span { animation: none; }
+		}
+		.stoik-process-approach-chip {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: fit-content;
+			padding: 8px 12px;
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			border: 1px solid rgba(0, 0, 0, 0.15);
+			background: rgba(255, 255, 255, 0.6);
+			color: rgba(0, 0, 0, 0.72);
+		}
+		.stoik-process-label {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(28px, 3vw, 42px);
+			letter-spacing: 0.012em;
+			text-transform: uppercase;
+			margin: 0 0 14px;
+			color: #1d1d1d;
+		}
+		.stoik-process-slider-shell {
+			overflow: hidden;
+			position: relative;
+			border: 1px solid rgba(0, 0, 0, 0.09);
+			background: rgba(255, 255, 255, 0.84);
+			min-height: clamp(190px, 22vw, 260px);
+		}
+		.stoik-process-slider-track {
+			display: flex;
+			width: 100%;
+			transition: transform 580ms cubic-bezier(0.22, 0.61, 0.36, 1);
+			will-change: transform;
+		}
+		.stoik-process-slide {
+			flex: 0 0 100%;
+			padding: clamp(16px, 1.8vw, 22px);
+			display: grid;
+			align-content: start;
+			gap: 10px;
+		}
+		.stoik-process-slider-wrap {
+			display: grid;
+			gap: 8px;
+			margin-top: auto;
+			max-width: 320px;
+		}
+		.stoik-process-slider-hint {
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: rgba(0, 0, 0, 0.56);
+			margin: 0;
+		}
+		.stoik-process-slider {
+			width: 100%;
+			accent-color: #0052ff;
+			cursor: ew-resize;
+		}
+		.stoik-process-step {
+			font-size: 12px;
+			letter-spacing: 0.09em;
+			color: rgba(0, 0, 0, 0.56);
+			margin: 0;
+			text-transform: uppercase;
+		}
+		.stoik-process-title {
+			font-family: 'FK Raster Sharp', 'Gellix', sans-serif !important;
+			font-weight: 400 !important;
+			font-size: clamp(24px, 2.2vw, 34px);
+			line-height: 1.06;
+			letter-spacing: 0.012em;
+			margin: 0;
+			color: #0d0d0f;
+		}
+		/* Arrow navigation */
+		.stoik-process-arrows {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			margin-top: auto;
+		}
+		.stoik-process-arrow {
+			width: 36px;
+			height: 36px;
+			border: 1px solid rgba(0,0,0,0.18);
+			background: #fff;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			font-size: 15px;
+			color: #0d0d0f;
+			transition: background 180ms ease, border-color 180ms ease;
+			user-select: none;
+			flex-shrink: 0;
+		}
+		.stoik-process-arrow:hover {
+			background: #0d0d0f;
+			border-color: #0d0d0f;
+			color: #fff;
+		}
+		.stoik-process-arrow:disabled,
+		.stoik-process-arrow[disabled] {
+			opacity: 0.3;
+			cursor: default;
+		}
+		.stoik-process-counter {
+			font-family: 'Gellix', sans-serif;
+			font-size: 11px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			color: rgba(0,0,0,0.5);
+		}
+		.stoik-process-copy {
+			font-size: clamp(14px, 1.04vw, 18px);
+			line-height: 1.45;
+			color: rgba(0, 0, 0, 0.74);
+			margin: 0;
+		}
+		.stoik-process-timeline {
+			width: fit-content;
+			padding: 7px 12px;
+			font-size: 11px;
+			color: #0f0f10;
+			border: 1px solid rgba(0, 0, 0, 0.13);
+			background: rgba(255, 255, 255, 0.75);
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+		}
+		.stoik-bringit-copy {
+			font-size: clamp(16px, 1.1vw, 20px);
+			line-height: 1.45;
+			color: rgba(0, 0, 0, 0.78);
+			margin: 0;
+		}
+		.stoik-bringit-illustration {
+			margin-top: auto;
+			min-height: clamp(120px, 14vw, 170px);
+			border: 1px dashed rgba(0, 0, 0, 0.16);
+			display: grid;
+			place-items: center;
+			color: rgba(0, 0, 0, 0.5);
+			font-size: 12px;
+			letter-spacing: 0.08em;
+			text-transform: uppercase;
+			background: linear-gradient(160deg, rgba(255,255,255,0.8), rgba(240,240,240,0.62));
+		}
+		.stoik-bringit-points {
+			display: grid;
+			gap: 10px;
+			margin: 2px 0 0;
+		}
+		.stoik-bringit-point {
+			margin: 0;
+			font-size: clamp(13px, 0.95vw, 16px);
+			color: rgba(0, 0, 0, 0.68);
+			padding-left: 14px;
+			position: relative;
+		}
+		.stoik-bringit-point::before {
+			content: "*";
+			color: #0052ff;
+			position: absolute;
+			left: 0;
+			top: 0;
+			font-weight: 600;
+		}
+		.stoik-process-hide {
+			display: none !important;
+		}
+		.stoik-vertical-brand {
+			position: fixed;
+			right: -0.42em;
+			top: 50%;
+			transform: translateY(-50%);
+			font-family: 'FK Raster Sharp', sans-serif !important;
+			font-size: clamp(160px, 20vw, 340px);
+			line-height: 0.84;
+			letter-spacing: 0.01em;
+			color: rgba(0, 0, 0, 0.12);
+			text-transform: uppercase;
+			pointer-events: none;
+			z-index: 3;
+			writing-mode: vertical-rl;
+		}
+		@keyframes stoikTicker {
+			from { transform: translateX(0); }
+			to { transform: translateX(-50%); }
+		}
+		@keyframes stoikCarouselLeft {
+			from { transform: translate3d(0, 0, 0); }
+			to { transform: translate3d(-50%, 0, 0); }
+		}
+		@keyframes stoikCarouselRight {
+			from { transform: translate3d(-50%, 0, 0); }
+			to { transform: translate3d(0, 0, 0); }
+		}
+		@keyframes stoikCarouselBreath {
+			from { transform: scale(1); }
+			to { transform: scale(1.045); }
+		}
+		@media (max-width: 809px) {
+			.stoik-heading-top {
+				display: flex !important;
+			}
+			.stoik-heading-top h1,
+			.stoik-heading-top h1 * {
+				font-size: clamp(36px, 10vw, 56px) !important;
+			}
+			.stoik-heading-top.stoik-nav-mode h1,
+			.stoik-heading-top.stoik-nav-mode h1 * {
+				font-size: 13px !important;
+			}
+			.stoik-hero-card {
+				right: 12px !important;
+				top: 50% !important;
+				bottom: auto !important;
+				transform: translateY(-50%) !important;
+				width: min(80vw, 266px) !important;
+			}
+			.stoik-hero-card .framer-64hzh7 {
+				gap: 6px !important;
+				padding: 6px !important;
+				min-height: 0 !important;
+			}
+			.stoik-yogi-avatar {
+				width: 44px !important;
+				height: 100% !important;
+				flex-basis: 44px !important;
+			}
+			.stoik-cta-content {
+				min-height: 0 !important;
+				gap: 3px !important;
+			}
+			.stoik-cta-title {
+				font-size: 13px !important;
+				line-height: 1.04 !important;
+			}
+			.stoik-cta-role {
+				font-size: 7px !important;
+			}
+			.stoik-cta-button {
+				font-size: 10px !important;
+				padding: 5px 9px !important;
+			}
+			.stoik-cta-arrow {
+				font-size: 16px !important;
+			}
+			.stoik-ticker-strip {
+				left: 10px;
+				right: 10px;
+				bottom: 10px;
+				height: 46px;
+			}
+			.stoik-ticker-item {
+				font-size: 12px;
+			}
+			.stoik-carousel-overlay {
+				top: auto;
+				bottom: 0;
+				height: clamp(160px, 28vh, 230px);
+				left: -16vw;
+				right: -16vw;
+			}
+			.stoik-carousel-track {
+				gap: 10px;
+				animation-duration: 24s;
+			}
+			.stoik-carousel-card {
+				--card-w: clamp(180px, 38vw, 260px);
+				width: var(--card-w);
+				height: calc(var(--card-w) * 9 / 16);
+				min-height: calc(var(--card-w) * 9 / 16);
+				max-height: calc(var(--card-w) * 9 / 16);
+				aspect-ratio: 16 / 9;
+				padding: 0;
+				border-radius: 0;
+				flex: 0 0 var(--card-w);
+			}
+			.stoik-process-split {
+				min-height: auto;
+				margin-top: 18px;
+			}
+			.stoik-process-stage {
+				position: relative;
+				top: auto;
+				min-height: auto;
+			}
+			.stoik-process-two-boxes {
+				grid-template-columns: 1fr;
+				gap: 12px;
+			}
+			.stoik-process-box {
+				min-height: auto;
+			}
+			.stoik-process-slider-shell {
+				min-height: 184px;
+			}
+			.stoik-process-title {
+				font-size: clamp(20px, 6vw, 28px);
+			}
+			.stoik-sol-title {
+				font-size: clamp(22px, 6.4vw, 32px);
+			}
+			.stoik-sol-grid {
+				grid-template-columns: 1fr;
+				gap: 12px;
+			}
+			.stoik-sol-copy {
+				font-size: clamp(16px, 4.2vw, 20px);
+			}
+			.stoik-vertical-brand {
+				font-size: clamp(104px, 26vw, 180px);
+				right: -0.44em;
+			}
+		}
+		@media (min-width: 810px) {
+			[data-framer-name="left-content"] {
+				justify-content: flex-end !important;
+				width: 100% !important;
+			}
+			[data-framer-name="nav-wrapper"] {
+				margin-left: auto !important;
+			}
+		}
+		/* Simple container grid (behind content) */
+		.stoik-main-grid {
+			position: relative !important;
+			isolation: isolate;
+		}
+		.stoik-main-grid::before {
+			content: "";
+			position: absolute;
+			pointer-events: none;
+			z-index: 0;
+			background-image:
+				repeating-linear-gradient(
+					to right,
+					rgba(0, 0, 0, 0.18) 0 1px,
+					transparent 1px calc((100% - (var(--stoik-grid-cols, 6) - 1) * var(--stoik-grid-gutter, 14px)) / var(--stoik-grid-cols, 6) + var(--stoik-grid-gutter, 14px))
+				);
+			left: var(--stoik-grid-left, 24px);
+			right: var(--stoik-grid-right, 24px);
+			top: 0;
+			bottom: 0;
+			opacity: 0.22;
+		}
+		.stoik-main-grid > * {
+			position: relative;
+			z-index: 1;
+		}
+
+
+		/* Project card — hide cursor when hovering image */
+
+
+		/* ──────────────────────────────────────────────────────────────────
+		   MOBILE LAYOUT (≤810px) — overrides for narrow viewports.
+		   Framer's mobile breakpoint is ≤809.98px; we mirror it here.
+		   ────────────────────────────────────────────────────────────────── */
+		@media (max-width: 810px) {
+
+			/* ── Loading screen ── */
+			.stoik-loader-logo {
+				font-size: clamp(64px, 18vw, 110px) !important;
+			}
+			.stoik-loader-bar {
+				width: clamp(180px, 56vw, 260px) !important;
+				top: calc(50vh + clamp(60px, 14vw, 100px)) !important;
+			}
+
+			/* ── Hero "Stoik Agency®" display heading ── */
+			.stoik-hero-display {
+				font-size: clamp(34px, 11vw, 78px) !important;
+				left: clamp(16px, 5vw, 32px) !important;
+				max-width: calc(100vw - 32px) !important;
+				/* keep top-aligned, not centered, so it doesn't crash with bust */
+				top: clamp(80px, 14vh, 140px) !important;
+				transform: none !important;
+			}
+
+			/* ── Solutions section: kill the giant scroll-lock + wheel on mobile.
+			   Replace with a clean static list of services. ── */
+			.stoik-solutions-custom {
+				height: auto !important;
+				min-height: 0 !important;
+				padding: clamp(40px, 9vw, 80px) clamp(20px, 5vw, 32px) !important;
+			}
+			.stoik-sol-sticky {
+				position: static !important;
+				height: auto !important;
+				min-height: 0 !important;
+				display: flex !important;
+				flex-direction: column !important;
+				align-items: flex-start !important;
+				gap: clamp(20px, 5vw, 36px) !important;
+				padding: 0 !important;
+				overflow: visible !important;
+			}
+			.stoik-sol-v2-left {
+				width: auto !important;
+			}
+			.stoik-sol-v2-heading {
+				font-size: clamp(48px, 14vw, 88px) !important;
+				margin: 0 !important;
+			}
+			.stoik-sol-v2-list {
+				width: 100% !important;
+				padding-left: 0 !important;
+				gap: clamp(10px, 2.5vw, 16px) !important;
+				align-self: stretch !important;
+			}
+			.stoik-sol-v2-item {
+				font-size: clamp(18px, 4.6vw, 28px) !important;
+				color: rgba(0, 0, 0, 0.86) !important;
+				transform: none !important;
+				white-space: normal !important;
+			}
+			.stoik-sol-v2-item.active {
+				transform: none !important;
+				color: rgba(0, 0, 0, 0.92) !important;
+			}
+			/* hide the rotating wheel + dial on mobile (no room) */
+			.stoik-sol-wheel-wrap,
+			.stoik-sol-dial,
+			.stoik-sol-wheel,
+			.stoik-sol-dots {
+				display: none !important;
+			}
+
+			/* ── Approach cards: stack vertically on mobile ── */
+			.stoik-process-two-boxes {
+				grid-template-columns: 1fr !important;
+				gap: clamp(14px, 3.5vw, 24px) !important;
+			}
+			.stoik-process-box {
+				min-height: clamp(280px, 60vw, 380px) !important;
+				padding: clamp(16px, 4vw, 22px) !important;
+			}
+			.stoik-process-label {
+				font-size: clamp(26px, 6.5vw, 36px) !important;
+			}
+			.stoik-pbox-copy {
+				font-size: clamp(13px, 3.6vw, 16px) !important;
+				line-height: 1.5 !important;
+			}
+			/* approach 1 video — drop the desktop scale/translate transforms */
+			.stoik-process-two-boxes > .stoik-process-box:first-child .stoik-pbox-video {
+				transform: none !important;
+			}
+
+			/* ── Project tilt cards: lighten on mobile (tilt feels heavy on a small screen) ── */
+			[data-framer-name="Project-wrapper"] [data-framer-name="image"] {
+				max-height: 76vh !important;
+			}
+			/* Re-center sticky lock for mobile's slightly taller cards */
+			[data-framer-name="Project-wrapper"] > * {
+				top: calc((100vh - 76vh) / 2) !important;
+			}
+
+			/* ── Talk-to-Yogi card: Framer hides hero-card-wrapper on mobile,
+			   but if it ever shows make sure it doesn't crash with the menu ── */
+			.stoik-hero-card {
+				width: clamp(220px, 64vw, 300px) !important;
+				right: clamp(12px, 3vw, 20px) !important;
+				top: clamp(56px, 8vh, 80px) !important;
+				transform: none !important;
+			}
+			.stoik-hero-card.stoik-card-pinned-top {
+				top: clamp(12px, 2vh, 20px) !important;
+			}
+
+			/* ── Spline 3D bust: Framer's hero-image element handles sizing,
+			   but make sure our injected viewer doesn't bleed into next section ── */
+			[data-framer-name="section-hero"] spline-viewer {
+				width: clamp(280px, 90vw, 600px) !important;
+				height: clamp(300px, 60vh, 540px) !important;
+				bottom: clamp(20px, 4vh, 60px) !important;
+			}
+
+			/* ── Header nav: when hamburger isn't shown, ensure logo + nav-wrapper
+			   don't crash ── */
+			nav [data-framer-name="nav-wrapper"] {
+				gap: clamp(14px, 4vw, 24px) !important;
+			}
+
+			/* ── Hide decorative items that look weird on mobile ── */
+			.stoik-rot-square {
+				/* Keep them but cap size so they don't dominate ── */
+				max-width: 14px !important;
+				max-height: 14px !important;
+			}
+
+		}
+
+		/* Extra-narrow phones (≤420px) ── */
+		@media (max-width: 420px) {
+			.stoik-sol-v2-heading {
+				font-size: clamp(40px, 13vw, 60px) !important;
+			}
+			.stoik-loader-logo {
+				font-size: clamp(56px, 16vw, 88px) !important;
+			}
+			.stoik-hero-display {
+				font-size: clamp(28px, 9vw, 56px) !important;
+			}
+			.stoik-cta-title {
+				font-size: 14px !important;
+			}
+		}
+
+		/* ─────────────────────────────────────────────────────────────
+		   Global Geist override — replaces every typeface in the site
+		   with Geist (Geist Mono for code/mono spans). Preview pass.
+		   ───────────────────────────────────────────────────────────── */
+		html, body,
+		html *, body *,
+		[class*="framer-"],
+		.stoik-hero-display, .stoik-hero-display *,
+		.stoik-sol-v2-heading, .stoik-sol-v2-heading *,
+		.stoik-loader-logo, .stoik-loader-logo *,
+		.stoik-cta-title, .stoik-cta-title *,
+		.tt-name, .tt-handle, .tt-text,
+		.framer-text, h1, h2, h3, h4, h5, h6, p, span, a, li, button, input, textarea, select, label {
+			font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+		}
+		code, kbd, pre, samp, tt,
+		.framer-text[style*="Fragment Mono"],
+		[style*="Fragment Mono"], [style*="font-family: \"Fragment Mono\""] {
+			font-family: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, monospace !important;
+		}

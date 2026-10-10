@@ -1,0 +1,712 @@
+[
+  {
+    "success": true,
+    "relPath": "style.css",
+    "size": 33245
+  },
+  {
+    "success": true,
+    "relPath": "plot-slider.css",
+    "size": 6233
+  },
+  {
+    "success": true,
+    "relPath": "corner-copy.css",
+    "size": 2568
+  },
+  {
+    "success": true,
+    "relPath": "secret-note.css",
+    "size": 2016
+  },
+  {
+    "success": true,
+    "relPath": "runtime/app-VONZPQSA.js",
+    "size": 135289
+  },
+  {
+    "success": true,
+    "relPath": "runtime/shared-V2IRLJJJ.js",
+    "size": 129
+  },
+  {
+    "success": true,
+    "relPath": "runtime/shared-CRYHICZT.js",
+    "size": 9103
+  },
+  {
+    "success": true,
+    "relPath": "runtime/shared-SZP6EUTZ.js",
+    "size": 875
+  },
+  {
+    "success": true,
+    "relPath": "runtime/shared-DK6JVP6K.js",
+    "size": 544708
+  },
+  {
+    "success": true,
+    "relPath": "assets/agrandir-regular.woff2",
+    "size": 26304
+  },
+  {
+    "success": true,
+    "relPath": "assets/agrandir-tight-regular.woff2",
+    "size": 26504
+  },
+  {
+    "success": true,
+    "relPath": "assets/pp-editorial-new-ultralight.woff2",
+    "size": 34700
+  },
+  {
+    "success": true,
+    "relPath": "assets/belmonte-ballpoint-cursive.woff2",
+    "size": 159456
+  },
+  {
+    "success": true,
+    "relPath": "assets/charm-geometry.json",
+    "size": 82139
+  },
+  {
+    "success": true,
+    "relPath": "assets/bow-candy-outline.json",
+    "size": 9679
+  },
+  {
+    "success": true,
+    "relPath": "assets/flower-candy-outline.json",
+    "size": 10126
+  },
+  {
+    "success": true,
+    "relPath": "assets/bean-candy-outline.json",
+    "size": 8867
+  },
+  {
+    "success": true,
+    "relPath": "assets/pretzel-candy-outline.json",
+    "size": 10609
+  },
+  {
+    "success": true,
+    "relPath": "assets/squiggle-candy-outline.json",
+    "size": 9355
+  },
+  {
+    "success": true,
+    "relPath": "assets/heart-candy-outline.json",
+    "size": 7811
+  },
+  {
+    "success": true,
+    "relPath": "assets/pebble-candy-outline.json",
+    "size": 7529
+  },
+  {
+    "success": true,
+    "relPath": "assets/clover-candy-outline.json",
+    "size": 9236
+  },
+  {
+    "success": true,
+    "relPath": "assets/gummy-handles-v2.webp",
+    "size": 18318
+  },
+  {
+    "success": true,
+    "relPath": "assets/sheet-shadow.png",
+    "size": 37220
+  },
+  {
+    "success": true,
+    "relPath": "assets/social-preview-v2.png",
+    "size": 191626
+  },
+  {
+    "success": true,
+    "relPath": "assets/bow-candy-render.webp",
+    "size": 1254600
+  },
+  {
+    "success": true,
+    "relPath": "assets/bow-candy-render-384.webp",
+    "size": 131852
+  },
+  {
+    "success": true,
+    "relPath": "assets/bow-candy-render-640.webp",
+    "size": 356864
+  },
+  {
+    "success": true,
+    "relPath": "assets/bow-candy-render-960.webp",
+    "size": 786760
+  },
+  {
+    "success": true,
+    "relPath": "assets/flower-candy-render.webp",
+    "size": 1595644
+  },
+  {
+    "success": true,
+    "relPath": "assets/flower-candy-render-384.webp",
+    "size": 174278
+  },
+  {
+    "success": true,
+    "relPath": "assets/flower-candy-render-640.webp",
+    "size": 467914
+  },
+  {
+    "success": true,
+    "relPath": "assets/flower-candy-render-960.webp",
+    "size": 1012726
+  },
+  {
+    "success": true,
+    "relPath": "assets/bean-candy-render.webp",
+    "size": 1507262
+  },
+  {
+    "success": true,
+    "relPath": "assets/bean-candy-render-384.webp",
+    "size": 162076
+  },
+  {
+    "success": true,
+    "relPath": "assets/bean-candy-render-640.webp",
+    "size": 434520
+  },
+  {
+    "success": true,
+    "relPath": "assets/bean-candy-render-960.webp",
+    "size": 951844
+  },
+  {
+    "success": true,
+    "relPath": "assets/pretzel-candy-render.webp",
+    "size": 1090688
+  },
+  {
+    "success": true,
+    "relPath": "assets/pretzel-candy-render-384.webp",
+    "size": 113326
+  },
+  {
+    "success": true,
+    "relPath": "assets/pretzel-candy-render-640.webp",
+    "size": 305200
+  },
+  {
+    "success": true,
+    "relPath": "assets/pretzel-candy-render-960.webp",
+    "size": 692502
+  },
+  {
+    "success": true,
+    "relPath": "assets/squiggle-candy-render.webp",
+    "size": 1450474
+  },
+  {
+    "success": true,
+    "relPath": "assets/squiggle-candy-render-384.webp",
+    "size": 160212
+  },
+  {
+    "success": true,
+    "relPath": "assets/squiggle-candy-render-640.webp",
+    "size": 415676
+  },
+  {
+    "success": true,
+    "relPath": "assets/squiggle-candy-render-960.webp",
+    "size": 912898
+  },
+  {
+    "success": true,
+    "relPath": "assets/heart-candy-render.webp",
+    "size": 1128720
+  },
+  {
+    "success": true,
+    "relPath": "assets/heart-candy-render-384.webp",
+    "size": 117096
+  },
+  {
+    "success": true,
+    "relPath": "assets/heart-candy-render-640.webp",
+    "size": 335178
+  },
+  {
+    "success": true,
+    "relPath": "assets/heart-candy-render-960.webp",
+    "size": 717080
+  },
+  {
+    "success": true,
+    "relPath": "assets/pebble-candy-render.webp",
+    "size": 1292352
+  },
+  {
+    "success": true,
+    "relPath": "assets/pebble-candy-render-384.webp",
+    "size": 118532
+  },
+  {
+    "success": true,
+    "relPath": "assets/pebble-candy-render-640.webp",
+    "size": 352976
+  },
+  {
+    "success": true,
+    "relPath": "assets/pebble-candy-render-960.webp",
+    "size": 789450
+  },
+  {
+    "success": true,
+    "relPath": "assets/clover-candy-render.webp",
+    "size": 1441960
+  },
+  {
+    "success": true,
+    "relPath": "assets/clover-candy-render-384.webp",
+    "size": 137662
+  },
+  {
+    "success": true,
+    "relPath": "assets/clover-candy-render-640.webp",
+    "size": 389712
+  },
+  {
+    "success": true,
+    "relPath": "assets/clover-candy-render-960.webp",
+    "size": 914076
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-friends-1600.webp",
+    "size": 235630
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-pages-final-1397.webp",
+    "size": 173742
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-stores-1452.mp4",
+    "size": 4997200
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-stores-800.mp4",
+    "size": 1954295
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-stores-poster.webp",
+    "size": 43712
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/akqa-verizon-final-1430.webp",
+    "size": 96616
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/digitas-amexapp-1600.webp",
+    "size": 72264
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/digitas-cups-final-1452.webp",
+    "size": 141174
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/digitas-digital-1527.webp",
+    "size": 65630
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/digitas-event-enhanced-1573.webp",
+    "size": 189184
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong-borderless-1600.mp4",
+    "size": 361586
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong-borderless-800.mp4",
+    "size": 137629
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong-borderless-poster.webp",
+    "size": 57998
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong2-borderless-1600.mp4",
+    "size": 512590
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong2-borderless-800.mp4",
+    "size": 218859
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-emojipong2-borderless-poster.webp",
+    "size": 46754
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-fun-clean-1600.mp4",
+    "size": 1053585
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-fun-clean-800.mp4",
+    "size": 433762
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-fun-clean-poster.webp",
+    "size": 57876
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-groups-1600.webp",
+    "size": 81320
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-instants-1484.mp4",
+    "size": 1043457
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-instants-800.mp4",
+    "size": 471969
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-instants-poster.webp",
+    "size": 28336
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-mentions-1600.webp",
+    "size": 83702
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-music-1600.mp4",
+    "size": 3291922
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-music-800.mp4",
+    "size": 1176631
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-music-poster.webp",
+    "size": 77164
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-quicksnap-1600.webp",
+    "size": 40508
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-reddit-1600.webp",
+    "size": 88420
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-spam-clean-1600.mp4",
+    "size": 836651
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-spam-clean-800.mp4",
+    "size": 299127
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-spam-clean-poster.webp",
+    "size": 75170
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-stories-clean-1600.mp4",
+    "size": 1211879
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-stories-clean-800.mp4",
+    "size": 479133
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-stories-clean-poster.webp",
+    "size": 98420
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-team-1600.webp",
+    "size": 231782
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/instagram-tweet-1600.webp",
+    "size": 43376
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-1600.mp4",
+    "size": 609332
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-800.mp4",
+    "size": 211381
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-cover-1600.webp",
+    "size": 72580
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-overview-1600.webp",
+    "size": 39784
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-overview-still-1600.webp",
+    "size": 32630
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-pages-1600.webp",
+    "size": 90596
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/mrm-hitachi-poster.webp",
+    "size": 28828
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-hue-final-v2-1434.webp",
+    "size": 179636
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-photoshop-1448.webp",
+    "size": 128366
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung1-1600.mp4",
+    "size": 1059212
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung1-800.mp4",
+    "size": 419223
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung1-poster.webp",
+    "size": 22396
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung2-1600.mp4",
+    "size": 2375231
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung2-800.mp4",
+    "size": 918857
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-samsung2-poster.webp",
+    "size": 26226
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/rga-timessquare-updated-1536.webp",
+    "size": 272590
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-bts-1600.mp4",
+    "size": 1508959
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-bts-800.mp4",
+    "size": 498574
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-bts-poster.webp",
+    "size": 91412
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-demo-1600.webp",
+    "size": 78254
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-ids-1600.webp",
+    "size": 140470
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-lift-1600.mp4",
+    "size": 2067309
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-lift-800.mp4",
+    "size": 848548
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-lift-poster.webp",
+    "size": 44552
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-shop-1600.mp4",
+    "size": 721666
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-shop-800.mp4",
+    "size": 281973
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-shop-poster.webp",
+    "size": 66148
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-team-1600.webp",
+    "size": 516520
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/shopify-ugly-1600.webp",
+    "size": 61524
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-collage-final-1432.webp",
+    "size": 218600
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-designers-final-1392.webp",
+    "size": 165262
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-example-final-1600.webp",
+    "size": 99094
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-expressibility-final-1600.mp4",
+    "size": 8848262
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-expressibility-final-800.mp4",
+    "size": 2242170
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-expressibility-final-poster.webp",
+    "size": 69404
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-header-1600.webp",
+    "size": 56840
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-index-final-1600.mp4",
+    "size": 450212
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-index-final-800.mp4",
+    "size": 173812
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-index-final-poster.webp",
+    "size": 43534
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-layouts-final-1600.webp",
+    "size": 209504
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-list-1518.webp",
+    "size": 97694
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-roof-1600.webp",
+    "size": 234768
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-styling-final-1600.webp",
+    "size": 141724
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/squarespace-v8-final-1448.webp",
+    "size": 159720
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/syp-graph-1600.webp",
+    "size": 55136
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/syp-office-final-1448.webp",
+    "size": 225872
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/syp-postit-final-1600.webp",
+    "size": 168154
+  },
+  {
+    "success": true,
+    "relPath": "assets/chapters/syp-work-final-1600.webp",
+    "size": 47324
+  }
+]

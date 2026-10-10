@@ -1,0 +1,2392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Design and Prompts — Live Showcase & Templates Hub</title>
+  <meta name="description" content="Democratizing award-winning website designs, interactive animations, and production prompt architectures. Live demos and ready-to-run source code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <style>
+    :root {
+      --bg: #090B10;
+      --bg-surface: #10141E;
+      --bg-card: rgba(22, 27, 39, 0.7);
+      --bg-card-hover: rgba(28, 35, 51, 0.95);
+      --border: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(99, 102, 241, 0.35);
+      --text: #F3F4F6;
+      --text-muted: #9CA3AF;
+      --accent-primary: #6366F1;
+      --accent-glow: rgba(99, 102, 241, 0.4);
+      --accent-neon: #38BDF8;
+      --accent-lime: #D7FF3E;
+      --accent-coral: #FB7185;
+      --font-display: 'Syne', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 102, 241, 0.22), transparent 70%),
+        radial-gradient(ellipse 60% 40% at 100% 50%, rgba(56, 189, 248, 0.1), transparent 60%),
+        radial-gradient(ellipse 50% 30% at 0% 80%, rgba(215, 255, 62, 0.08), transparent 60%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 6rem;
+    }
+
+    /* Header & Navigation */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .brand-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-neon));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #FFF;
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .brand-title {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      background: rgba(99, 102, 241, 0.15);
+      color: #A5B4FC;
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .nav-link:hover {
+      color: #FFF;
+    }
+
+    .btn-github {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 0.55rem 1.15rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .btn-github:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 4rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      background: rgba(215, 255, 62, 0.1);
+      border: 1px solid rgba(215, 255, 62, 0.35);
+      color: var(--accent-lime);
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.5rem;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      box-shadow: 0 0 10px var(--accent-lime);
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(215, 255, 62, 0.2); }
+      50% { box-shadow: 0 0 25px rgba(215, 255, 62, 0.4); }
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.25rem;
+      background: linear-gradient(180deg, #FFFFFF 20%, #A5B4FC 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      max-width: 700px;
+      margin: 0 auto 2.2rem;
+    }
+
+    /* ==========================================================================
+       Daryl Fig 0.1 Editorial Blueprint Reel
+       ========================================================================== */
+    .reel-section {
+      margin: 0 0 4.5rem;
+      width: 100%;
+    }
+
+    .fig {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin: 0 0 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+
+    .fig-bullet {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-lime);
+      box-shadow: 0 0 10px var(--accent-lime);
+      animation: pulseGlow 2.5s infinite ease-in-out;
+    }
+
+    .grid9 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: 0 25px 60px -20px rgba(0, 0, 0, 0.75);
+    }
+
+    @media (max-width: 1024px) {
+      .grid9 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .grid9 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      .grid9 > .shot:last-child {
+        grid-column: 2 / 3;
+      }
+    }
+
+    .shot {
+      position: relative;
+      display: block;
+      aspect-ratio: 16 / 9;
+      background: #0A0C10;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .shot video,
+    .shot img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      border: 0;
+      opacity: 1;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s;
+    }
+
+    a.shot:hover video,
+    a.shot:hover img {
+      transform: scale(1.04);
+    }
+
+    a.shot::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0.12;
+      transition: opacity 0.2s;
+      pointer-events: none;
+    }
+
+    a.shot:hover::after {
+      opacity: 0;
+    }
+
+    .shotload {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(10, 12, 16, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      overflow: hidden;
+      transition: opacity 0.2s;
+    }
+
+    .shotload b {
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      color: #F3F4F6;
+    }
+
+    .shotload::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 40%;
+      left: -40%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      animation: shotSweep 2.2s cubic-bezier(0.4, 0, 0.3, 1) infinite;
+    }
+
+    @keyframes shotSweep {
+      0% { left: -40%; }
+      100% { left: 140%; }
+    }
+
+    .shotmeta {
+      position: absolute;
+      left: 10px;
+      bottom: 10px;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      background: rgba(10, 12, 16, 0.82);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      max-width: calc(100% - 92px);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .xcell:hover .shotmeta {
+      background: rgba(10, 12, 16, 0.94);
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+
+    .shottitle {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      color: #FFFFFF;
+      line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .shotcat {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: #9CA3AF;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .xcell .shotout {
+      position: absolute;
+      right: 10px;
+      bottom: 10px;
+      z-index: 3;
+      padding: 4px 9px;
+      border-radius: 4px;
+      background: #FFFFFF;
+      color: #0A0C10;
+      font-family: var(--font-mono);
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1), transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+    }
+
+    a.xcell:hover .shotout {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fignote {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin: 1.25rem 0 0;
+      text-align: center;
+      letter-spacing: 0.03em;
+    }
+
+    /* Controls Bar: Filters & Search */
+    .controls-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--radius-md);
+      backdrop-filter: blur(12px);
+    }
+
+    .filter-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .nojs-note {
+      grid-column: 1 / -1;
+      margin: 0 0 8px;
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-card);
+      color: var(--text-muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.45rem 0.95rem;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover {
+      color: #FFF;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .filter-btn.active {
+      color: #FFF;
+      background: var(--accent-primary);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: #FFF;
+      padding: 0.55rem 1rem;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      width: 240px;
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 12px var(--accent-glow);
+    }
+
+    /* Gallery Grid */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 480px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(14px);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      background: var(--bg-card-hover);
+      border-color: var(--border-accent);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6), 0 0 25px rgba(99, 102, 241, 0.18);
+    }
+
+    .card-banner {
+      height: 190px;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-banner-bg {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s var(--transition);
+    }
+
+    .card:hover .card-banner-bg {
+      transform: scale(1.08);
+    }
+
+    .card-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(9, 11, 16, 0.1) 0%, rgba(9, 11, 16, 0.85) 100%);
+    }
+
+    .card-badge-top {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      z-index: 2;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .badge-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #FFF;
+      backdrop-filter: blur(8px);
+    }
+
+    .badge-tag.new {
+      background: rgba(215, 255, 62, 0.2);
+      border-color: var(--accent-lime);
+      color: var(--accent-lime);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-header {
+      margin-bottom: 0.75rem;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: #FFF;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.35rem;
+    }
+
+    .card-meta {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: #818CF8;
+    }
+
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 1.4rem;
+      flex-grow: 1;
+    }
+
+    .tech-stack-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: #D1D5DB;
+      padding: 0.2rem 0.55rem;
+      border-radius: 6px;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-launch {
+      flex: 1;
+      background: linear-gradient(135deg, var(--accent-primary), #4F46E5);
+      color: #FFF;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 0.7rem 1.1rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      transition: var(--transition);
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3);
+    }
+
+    .btn-launch:hover {
+      background: linear-gradient(135deg, #7073F6, #5850EC);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 0.85rem;
+      padding: 0.7rem 0.95rem;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 6rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1.5rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: #FFF;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <a href="./" class="brand">
+        <div class="brand-logo">W</div>
+        <div>
+          <div class="brand-title">Website Design & Prompts</div>
+        </div>
+        <span class="brand-tag">v2026.09</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts" target="_blank" rel="noopener noreferrer" class="btn-github">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+          GitHub Repository
+        </a>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Zero Intervention Autonomous Daily Curation & Live Deployment
+      </div>
+      <h1>Democratizing Award-Winning Web Architectures</h1>
+      <p>
+        A curated archive of production-ready website templates, design systems, and generative prompt specifications — ready to explore live with zero paywalls.
+      </p>
+    </section>
+
+    <!-- Fig 0.1 Reel Section (Adapted from imdaryl.com) -->
+    <section id="reel" class="reel-section">
+      <p class="fig" data-fig="0.1"><span class="fig-bullet"></span>Fig 0.1 · Nineteen pieces. Each cell is one thing I made.</p>
+      <div class="grid9" id="reelGrid">
+        <a class="shot xcell ready" href="./apogee/" title="Apogee — Data-Intelligence SaaS">
+          <video src="./assets/previews/apogee.mp4" poster="./assets/previews/apogee.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>01</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Apogee</span>
+            <span class="shotcat">Data-Intelligence SaaS</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./jack/" title="Jack — 3D Creator Portfolio">
+          <video src="./assets/previews/jack.mp4" poster="./assets/previews/jack.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>02</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Jack</span>
+            <span class="shotcat">3D Creator Portfolio</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./synapsex/" title="SynapseX — Neural-AI Canvas">
+          <video src="./assets/previews/synapsex.mp4" poster="./assets/previews/synapsex.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>03</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">SynapseX</span>
+            <span class="shotcat">Neural-AI Canvas</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./ethanvale/" title="Ethan Vale — Spatial Archive">
+          <video src="./assets/previews/ethanvale.mp4" poster="./assets/previews/ethanvale.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>04</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Ethan Vale</span>
+            <span class="shotcat">Spatial Archive</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./portfolio/" title="Editorial Portfolio — Creative Director Archive">
+          <video src="./assets/previews/portfolio.mp4" poster="./assets/previews/portfolio.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>05</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Editorial Portfolio</span>
+            <span class="shotcat">Creative Director</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./aetherascrollstory/" title="Aethera® — Scroll Storytelling">
+          <video src="./assets/previews/aetherascrollstory.mp4" poster="./assets/previews/aetherascrollstory.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>06</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Aethera®</span>
+            <span class="shotcat">Scroll Storytelling</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./measured/" title="Measured — Interactive Wearable">
+          <video src="./assets/previews/measured.mp4" poster="./assets/previews/measured.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>07</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Measured</span>
+            <span class="shotcat">Interactive Wearable</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./videoembeddeddesign/" title="Securify — Cinematic Storytelling">
+          <video src="./assets/previews/videoembeddeddesign.mp4" poster="./assets/previews/videoembeddeddesign.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>08</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Securify</span>
+            <span class="shotcat">Cinematic Video</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./brunosimon/" title="Bruno Simon — 3D Physics Toy Car">
+          <video src="./assets/previews/brunosimon.mp4" poster="./assets/previews/brunosimon.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>09</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Bruno Simon</span>
+            <span class="shotcat">3D Physics Toy Car</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./senbuzy/" title="Senbuzy — 3D Claymation Avatar">
+          <video src="./assets/previews/senbuzy.mp4" poster="./assets/previews/senbuzy.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>10</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Senbuzy</span>
+            <span class="shotcat">3D Clay Avatar</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./portfolio-console/" title="The Portfolio Console — Retro Hardware Terminal">
+          <video src="./assets/previews/portfolio-console.mp4" poster="./assets/previews/portfolio-console.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>11</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Portfolio Console</span>
+            <span class="shotcat">Retro Handheld</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./mariedrouvin/" title="Marie Drouvin — Botanical Design Portfolio">
+          <video src="./assets/previews/mariedrouvin.mp4" poster="./assets/previews/mariedrouvin.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>12</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Marie Drouvin</span>
+            <span class="shotcat">Botanical Design</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./bbdo/" title="BBDO Germany — Creative Agency">
+          <video src="./assets/previews/bbdo.mp4" poster="./assets/previews/bbdo.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>13</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">BBDO Germany</span>
+            <span class="shotcat">Creative Agency</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./bizarro/" title="Luis Bizarro — 3D Audio Cassette Archive">
+          <video src="./assets/previews/bizarro.mp4" poster="./assets/previews/bizarro.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>14</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Luis Bizarro</span>
+            <span class="shotcat">3D Audio Archive</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./designbyxam/" title="DesignByXam — Photographic Editorial Portfolio">
+          <video src="./assets/previews/designbyxam.mp4" poster="./assets/previews/designbyxam.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>15</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">DesignByXam</span>
+            <span class="shotcat">Editorial Design</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./expa/" title="Expa — Global Company Studio">
+          <video src="./assets/previews/expa.mp4" poster="./assets/previews/expa.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>16</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Expa</span>
+            <span class="shotcat">Global Studio</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./vitaliiradov/" title="Vitalii Radov — Digital Designer & Framer Developer">
+          <video src="./assets/previews/vitaliiradov.mp4" poster="./assets/previews/vitaliiradov.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>17</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Vitalii Radov</span>
+            <span class="shotcat">Digital Designer</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./meliketurgut/" title="Melike Turgut — Tactile 3D Gummy Portfolio">
+          <video src="./assets/previews/meliketurgut.mp4" poster="./assets/previews/meliketurgut.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>18</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Melike Turgut</span>
+            <span class="shotcat">Tactile 3D Gummy</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+        <a class="shot xcell ready" href="./ysuriadesign/" title="Yogi Suria — Neoclassical 3D & Web3">
+          <video src="./assets/previews/ysuriadesign.mp4" poster="./assets/previews/ysuriadesign.webp" preload="metadata" loop muted playsinline autoplay></video>
+          <span class="shotload" aria-hidden="true"><b>19</b></span>
+          <div class="shotmeta" aria-hidden="true">
+            <span class="shottitle">Yogi Suria</span>
+            <span class="shotcat">Neoclassical 3D</span>
+          </div>
+          <span class="shotout" aria-hidden="true">OPEN ↗</span>
+        </a>
+      </div>
+      <p class="fignote">Live interactive builds from the archive · Hover to preview, click any cell to launch full experience</p>
+    </section>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="filter-tabs" id="filterTabs">
+        <button class="filter-btn active" data-filter="all">All Templates (19)</button>
+        <button class="filter-btn" data-filter="interactive">Interactive & 3D (12)</button>
+        <button class="filter-btn" data-filter="editorial">Editorial & Portfolio (10)</button>
+        <button class="filter-btn" data-filter="cinematic">Cinematic Video (2)</button>
+        <button class="filter-btn" data-filter="product">Product & SaaS (1)</button>
+      </div>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search templates..." aria-label="Search templates">
+    </div>
+
+    <!-- Gallery Grid -->
+    <div class="grid" id="templatesGrid">
+
+      <noscript>
+        <p class="nojs-note">
+          JavaScript is off, so the filter buttons and search box are inactive. All
+          templates below are listed and linked regardless — each demo needs JavaScript too.
+        </p>
+      </noscript>
+
+      <!-- 7. Apogee (Glassmorphic Data-Intelligence) -->
+      <article class="card" data-category="product" data-title="apogee glassmorphic data intelligence saas hero">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #080A19 0%, #1B2452 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.55;">
+              <path transform="translate(150 50) scale(0.39)" fill="#FFF" d="M 256 256 L 178 256 C 150.386 256 128 233.614 128 206 L 128 256 L 0 256 L 0 192 C 0 156.654 28.654 128 64 128 C 99.346 128 128 156.654 128 192 L 128 128 L 256 128 Z M 78 0 C 105.614 0 128 22.386 128 50 L 128 0 L 256 0 L 256 64 C 256 99.346 227.346 128 192 128 C 156.654 128 128 99.346 128 64 L 128 128 L 0 128 L 0 0 Z"/>
+              <rect x="312" y="118" width="7" height="34" rx="1" fill="#FFF" opacity="0.7"/>
+              <rect x="324" y="104" width="7" height="48" rx="1" fill="#FFF" opacity="0.7"/>
+              <rect x="336" y="126" width="7" height="26" rx="1" fill="#FFF" opacity="0.7"/>
+              <rect x="348" y="96" width="7" height="56" rx="1" fill="#FFF" opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Pixel-Exact Hero</span>
+            <span class="badge-tag">Glassmorphism</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Apogee</h2>
+            <div class="card-meta">apogee/ · Data-Intelligence Landing</div>
+          </div>
+          <p class="card-desc">
+            Glassmorphic SaaS hero with a 32-bar revenue chart, staggered CSS keyframe timeline and animated mobile menu — expanded into a full product story with an interactive forecast console.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 18</span>
+            <span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">CSS Keyframes</span>
+          </div>
+          <div class="card-actions">
+            <a href="./apogee/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/apogee/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 8. Jack (3D Creator Portfolio) -->
+      <article class="card" data-category="editorial" data-title="jack 3d creator portfolio motion design">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #0c0c0c 0%, #242933 55%, #646973 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: .92;">
+              <text x="200" y="132" text-anchor="middle" fill="#D7E2EA" font-family="Arial,sans-serif" font-size="92" font-weight="900" letter-spacing="-6">JACK</text>
+              <path d="M28 156H372" stroke="#D7E2EA" stroke-opacity=".45"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top"><span class="badge-tag">3D Creator</span><span class="badge-tag">Motion &amp; Design</span></div>
+        </div>
+        <div class="card-content">
+          <div class="card-header"><h2 class="card-title">Jack</h2><div class="card-meta">jack/ · 3D Creator Portfolio</div></div>
+          <p class="card-desc">Dark editorial portfolio with a magnetic portrait, scroll-driven GIF marquees, animated biography, five creative services, and a sticky stack of 3D project previews.</p>
+          <div class="tech-stack-row"><span class="tech-pill">React 18</span><span class="tech-pill">Tailwind v3</span><span class="tech-pill">Framer Motion</span></div>
+          <div class="card-actions">
+            <a href="./jack/" class="btn-launch">Launch Live Demo <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg></a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/jack/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 1. SynapseX (Neural-AI) -->
+      <article class="card" data-category="interactive" data-title="synapsex neural-ai">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #050505 0%, #1A0B2E 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.6;">
+              <polygon points="200,30 310,170 90,170" stroke="#A855F7" stroke-width="2"/>
+              <circle cx="200" cy="115" r="30" stroke="#06B6D4" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Neural-AI</span>
+            <span class="badge-tag">3D Parallax</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">SynapseX</h2>
+            <div class="card-meta">synapsex/ · Neural BCI Landing</div>
+          </div>
+          <p class="card-desc">
+            Cyberpunk neural-AI interface with 3D cursor parallax, dynamic multi-stage scroll camera tilt, and telemetry counters.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 18</span>
+            <span class="tech-pill">Framer Motion</span>
+            <span class="tech-pill">Tailwind CSS</span>
+          </div>
+          <div class="card-actions">
+            <a href="./synapsex/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/synapsex/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 2. Ethan Vale 3D Sphere Archive -->
+      <article class="card" data-category="interactive" data-title="ethan vale 3d spatial archive">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #0A0A0C 0%, #15161E 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.5;">
+              <circle cx="200" cy="100" r="65" stroke="#6366F1" stroke-width="2"/>
+              <ellipse cx="200" cy="100" rx="65" ry="25" stroke="#38BDF8" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">3D Fibonacci</span>
+            <span class="badge-tag">Zero Deps</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Ethan Vale Spatial</h2>
+            <div class="card-meta">ethanvale/ · Mathematical 3D Sphere</div>
+          </div>
+          <p class="card-desc">
+            Fine-art photography mathematically projected on an interactive 3D Fibonacci sphere with drag inertia and depth shading.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Vanilla 3D CSS</span>
+            <span class="tech-pill">Fibonacci Math</span>
+            <span class="tech-pill">FLIP Modal</span>
+          </div>
+          <div class="card-actions">
+            <a href="./ethanvale/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/ethan-vale-archive/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 3. Editorial Dark Portfolio -->
+      <article class="card" data-category="editorial" data-title="editorial dark portfolio michael smith">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #0A0A0A 0%, #1F1F1F 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.4;">
+              <text x="50%" y="62%" text-anchor="middle" font-family="'Instrument Serif', serif" font-size="64" font-style="italic" fill="#FFF">Editorial</text>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Awwwards Grade</span>
+            <span class="badge-tag">GSAP & Lenis</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Editorial Portfolio</h2>
+            <div class="card-meta">portfolio/ · Instrument Serif</div>
+          </div>
+          <p class="card-desc">
+            Award-grade dark portfolio featuring Lenis smooth inertia scrolling synced with GSAP ScrollTrigger and dynamic cursor spotlights.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 18</span>
+            <span class="tech-pill">GSAP ScrollTrigger</span>
+            <span class="tech-pill">Lenis Scroll</span>
+          </div>
+          <div class="card-actions">
+            <a href="./portfolio/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/portfolio/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 4. Aethera Scroll-Story -->
+      <article class="card" data-category="cinematic" data-title="aethera white-to-night scroll story">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #18181B 0%, #3F3F46 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.4;">
+              <circle cx="200" cy="100" r="50" fill="url(#aethGlow)"/>
+              <defs>
+                <radialGradient id="aethGlow" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0%" stop-color="#FFF"/>
+                  <stop offset="100%" stop-color="transparent"/>
+                </radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">8-Chapter Video</span>
+            <span class="badge-tag">Digital Studio</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Aethera®</h2>
+            <div class="card-meta">aetherascrollstory/ · White-to-Night Haven</div>
+          </div>
+          <p class="card-desc">
+            Cinematic 8-chapter digital studio haven featuring synchronized video loops, custom rAF fade loops, and white-to-night transitions.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 18</span>
+            <span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">Video Sync</span>
+          </div>
+          <div class="card-actions">
+            <a href="./aetherascrollstory/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/aetherascrollstory/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 5. Measured Wearable -->
+      <article class="card" data-category="interactive" data-title="measured interactive wearable">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #09090B 0%, #18181B 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.5;">
+              <rect x="150" y="50" width="100" height="100" rx="20" stroke="#10B981" stroke-width="2"/>
+              <path d="M170 100 Q190 70 200 100 T230 100" stroke="#10B981" stroke-width="2" fill="none"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Optics Simulation</span>
+            <span class="badge-tag">Wearable</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Measured</h2>
+            <div class="card-meta">measured/ · Luxury Health Wearable</div>
+          </div>
+          <p class="card-desc">
+            Luxury wearable landing page across 5 interactive surfaces with spotlight mask reveals, live optical PPG simulation, and material customizer.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 19</span>
+            <span class="tech-pill">Tailwind v4</span>
+            <span class="tech-pill">Canvas PPG</span>
+          </div>
+          <div class="card-actions">
+            <a href="./measured/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/measured/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 6. Securify (Video Embedded) -->
+      <article class="card" data-category="cinematic" data-title="securify video embedded storytelling">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #030712 0%, #111827 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.5;">
+              <polygon points="175,70 245,100 175,130" fill="#6366F1"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">11-Chapter Film</span>
+            <span class="badge-tag">Dark Minimalism</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Securify</h2>
+            <div class="card-meta">videoembeddeddesign/ · Cinematic Story</div>
+          </div>
+          <p class="card-desc">
+            Full-screen 11-chapter cinematic storytelling landing page with synchronized video loops, fluid typography, and dark minimalism.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 19</span>
+            <span class="tech-pill">Tailwind CSS v4</span>
+            <span class="tech-pill">HLS Video</span>
+          </div>
+          <div class="card-actions">
+            <a href="./videoembeddeddesign/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/videoembeddeddesign/securify/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 9. Bruno Simon (3D Physics Playground) -->
+      <article class="card" data-category="interactive" data-title="bruno simon 3d physics playground driveable toy car">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #FF8908 0%, #FFB76B 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.85;">
+              <rect x="150" y="70" width="100" height="60" rx="12" fill="#E63946"/>
+              <circle cx="170" cy="130" r="18" fill="#1D2A44"/>
+              <circle cx="230" cy="130" r="18" fill="#1D2A44"/>
+              <rect x="175" y="55" width="50" height="25" rx="6" fill="#F1FAEE"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Site of the Year</span>
+            <span class="badge-tag">Cannon Physics</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Bruno Simon</h2>
+            <div class="card-meta">brunosimon/ · 3D Physics Playground</div>
+          </div>
+          <p class="card-desc">
+            Iconic 3D physics-driven driveable toy car playground with Cannon.js rigid bodies, Draco models, custom Matcaps, knockable bowling pins, and Howler audio.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Three.js</span>
+            <span class="tech-pill">Cannon.js</span>
+            <span class="tech-pill">Howler.js</span>
+          </div>
+          <div class="card-actions">
+            <a href="./brunosimon/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/brunosimon/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 10. Senbuzy (3D Claymation Studio) -->
+      <article class="card" data-category="interactive" data-title="senbuzy 3d claymation avatar studio resume">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #6F906F 0%, #DBD3B5 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.85;">
+              <circle cx="200" cy="100" r="45" fill="#E29578"/>
+              <ellipse cx="185" cy="95" rx="8" ry="12" fill="#FFF"/>
+              <ellipse cx="215" cy="95" rx="8" ry="12" fill="#FFF"/>
+              <circle cx="185" cy="95" r="4" fill="#000"/>
+              <circle cx="215" cy="95" r="4" fill="#000"/>
+              <path d="M185 125 Q200 115 215 125" stroke="#000" stroke-width="3" fill="none"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">R3F + Drei</span>
+            <span class="badge-tag">Scroll Splines</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Senbuzy</h2>
+            <div class="card-meta">senbuzy/ · 3D Clay Studio Resume</div>
+          </div>
+          <p class="card-desc">
+            Expressive 3D claymation avatar portfolio with continuous scroll-driven camera splines, film grain post-processing, bilingual localization, and rich markdown dossiers.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React Three Fiber</span>
+            <span class="tech-pill">Framer Motion</span>
+            <span class="tech-pill">Postprocessing</span>
+          </div>
+          <div class="card-actions">
+            <a href="./senbuzy/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/senbuzy/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 11. The Portfolio Console (Debbie) -->
+      <article class="card" data-category="interactive" data-title="the portfolio console debbie retro-futurism mechanical keycaps terminal skeuomorphic">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #111113 0%, #252528 50%, #EC6426 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.85;">
+              <rect x="50" y="30" width="300" height="55" rx="10" fill="#0A0A0C" stroke="#333" stroke-width="2"/>
+              <text x="75" y="65" fill="#FDE3CF" font-family="Courier,monospace" font-size="16" font-weight="bold">debbie's portfolio_</text>
+              <rect x="55" y="105" width="45" height="40" rx="8" fill="#EC6426"/>
+              <rect x="110" y="105" width="45" height="40" rx="8" fill="#F8A91F"/>
+              <rect x="165" y="105" width="45" height="40" rx="8" fill="#FDE3CF"/>
+              <rect x="220" y="105" width="45" height="40" rx="8" fill="#2E573A"/>
+              <rect x="275" y="105" width="45" height="40" rx="8" fill="#72AC43"/>
+              <rect x="55" y="152" width="32" height="30" rx="6" fill="#E4A5CA"/>
+              <rect x="95" y="152" width="32" height="30" rx="6" fill="#66271B"/>
+              <rect x="135" y="152" width="32" height="30" rx="6" fill="#EC6426"/>
+              <rect x="175" y="152" width="32" height="30" rx="6" fill="#F8A91F"/>
+              <rect x="215" y="152" width="32" height="30" rx="6" fill="#E4A5CA"/>
+              <rect x="255" y="152" width="90" height="30" rx="6" fill="#252525"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Retro-Futurism</span>
+            <span class="badge-tag">Skeuomorphism</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">The Portfolio Console</h2>
+            <div class="card-meta">portfolio-console/ · Mechanical Hardware Console</div>
+          </div>
+          <p class="card-desc">
+            Tactile retro-futurism portfolio for Debbie featuring physical mechanical keycaps with 3D spring lift and idle waves, synthesized audio clicks, and real-time CRT computer-terminal screen typing.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">React 18</span>
+            <span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">Web Audio API</span>
+            <span class="tech-pill">CRT Shaders</span>
+          </div>
+          <div class="card-actions">
+            <a href="./portfolio-console/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/portfolio-console/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- 12. Marie Drouvin Botanical Portfolio -->
+      <article class="card" data-category="editorial" data-title="marie drouvin botanical product designer builder portfolio paper canvas lancelot oklch masonry drawer">
+        <div class="card-banner">
+          <div class="card-banner-bg" style="background: linear-gradient(135deg, #131c15 0%, #1e2e22 50%, #111a13 100%);">
+            <svg width="100%" height="100%" viewBox="0 0 400 200" fill="none" style="opacity: 0.95;">
+              <!-- Botanical deep backdrop texture hint -->
+              <circle cx="20" cy="30" r="45" fill="#2d4a36" opacity="0.35"/>
+              <circle cx="380" cy="170" r="55" fill="#3d5a44" opacity="0.3"/>
+              <path d="M-10,120 Q40,90 20,190" stroke="#486b52" stroke-width="3" fill="none" opacity="0.4"/>
+              <path d="M360,20 Q410,50 390,110" stroke="#486b52" stroke-width="3" fill="none" opacity="0.4"/>
+              
+              <!-- Rounded cream paper canvas sheet -->
+              <rect x="36" y="22" width="328" height="156" rx="16" fill="#F7F5EE" stroke="#E5DEC9" stroke-width="1.5" filter="drop-shadow(0 8px 16px rgba(0,0,0,0.35))"/>
+              
+              <!-- Top bar: pills and language -->
+              <rect x="52" y="36" width="46" height="14" rx="7" fill="#1C1A17"/>
+              <text x="64" y="46" fill="#F7F5EE" font-family="system-ui, sans-serif" font-size="7.5" font-weight="600">Curated</text>
+              <rect x="102" y="36" width="58" height="14" rx="7" fill="none" stroke="#D5CFBE" stroke-width="1"/>
+              <text x="110" y="46" fill="#756E63" font-family="system-ui, sans-serif" font-size="7.5">All projects</text>
+              <text x="325" y="46" fill="#8C8475" font-family="system-ui, sans-serif" font-size="7.5">fr</text>
+
+              <!-- Main Title: Portfolio' with circle avatar -->
+              <text x="52" y="92" fill="#1C1A17" font-family="Georgia, serif" font-size="28" font-weight="700" letter-spacing="-1">P</text>
+              <!-- Avatar circle slot -->
+              <circle cx="77" cy="82" r="9" fill="#E86141"/>
+              <circle cx="77" cy="80" r="6" fill="#FDD7B2"/>
+              <path d="M72,89 A6,6 0 0,1 82,89" fill="#1C1A17"/>
+              <circle cx="77" cy="82" r="9" fill="none" stroke="#1C1A17" stroke-width="1.5"/>
+              <text x="89" y="92" fill="#1C1A17" font-family="Georgia, serif" font-size="28" font-weight="700" letter-spacing="-1">rtfolio’</text>
+
+              <!-- Masonry card previews in curated colors -->
+              <rect x="52" y="110" width="88" height="52" rx="6" fill="#FDFBF7" stroke="#DD361D" stroke-width="1.5"/>
+              <rect x="58" y="116" width="34" height="6" rx="3" fill="#DD361D" opacity="0.8"/>
+              <rect x="58" y="126" width="76" height="28" rx="3" fill="#EAE5D8"/>
+
+              <rect x="148" y="110" width="96" height="52" rx="6" fill="#FDFBF7" stroke="#0C765D" stroke-width="1.5"/>
+              <rect x="154" y="116" width="40" height="6" rx="3" fill="#0C765D" opacity="0.8"/>
+              <rect x="154" y="126" width="84" height="28" rx="3" fill="#E4EBE6"/>
+
+              <rect x="252" y="110" width="96" height="52" rx="6" fill="#FDFBF7" stroke="#315B82" stroke-width="1.5"/>
+              <rect x="258" y="116" width="36" height="6" rx="3" fill="#315B82" opacity="0.8"/>
+              <rect x="258" y="126" width="84" height="28" rx="3" fill="#E3E8EE"/>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Botanical Canvas</span>
+            <span class="badge-tag">OKLCH & Masonry</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Marie Drouvin Portfolio</h2>
+            <div class="card-meta">mariedrouvin/ · Botanical Paper & Product Builder</div>
+          </div>
+          <p class="card-desc">
+            Crafted independent portfolio for product designer Marie Drouvin, featuring a botanical oil-painted frame, signature 'Portfolio’' serif wordmark with interactive avatar popover, graph-colored masonry palette balancing, and slide-out case study drawers.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">HTML5 / Vanilla CSS</span>
+            <span class="tech-pill">OKLCH Colors</span>
+            <span class="tech-pill">Graph Coloring</span>
+            <span class="tech-pill">Slide-out Drawers</span>
+          </div>
+          <div class="card-actions">
+            <a href="./mariedrouvin/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/mariedrouvin/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 13: BBDO Germany Creative Agency Showcase -->
+      <article class="card" data-category="interactive editorial agency" data-title="BBDO Germany Creative Agency">
+        <div class="card-banner">
+          <div class="card-banner-graphic">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg, #FFD4D7 0%, #FFB6BC 100%);">
+              <!-- Ambient Blur Glows -->
+              <circle cx="100" cy="80" r="70" fill="#EF3F24" opacity="0.25" filter="blur(25px)"/>
+              <circle cx="310" cy="130" r="80" fill="#D81B60" opacity="0.2" filter="blur(30px)"/>
+
+              <!-- Header Bar preview -->
+              <text x="36" y="44" fill="#EF3F24" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="900" letter-spacing="-1">BBDO</text>
+              <rect x="336" y="28" width="28" height="24" rx="4" fill="#EF3F24"/>
+              <line x1="343" y1="36" x2="357" y2="36" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+              <line x1="343" y1="44" x2="357" y2="44" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+
+              <!-- Tilted 3D Cards in Deck -->
+              <g transform="rotate(7 200 110)">
+                <!-- Card 1 behind -->
+                <rect x="80" y="65" width="105" height="110" rx="6" fill="#FFFFFF" opacity="0.6" stroke="#EF3F24" stroke-width="1"/>
+                <rect x="88" y="73" width="89" height="55" rx="3" fill="#F8B4B8"/>
+                <rect x="88" y="136" width="35" height="5" rx="2.5" fill="#EF3F24" opacity="0.7"/>
+
+                <!-- Card 2 primary focal -->
+                <rect x="180" y="60" width="130" height="125" rx="8" fill="#FFFFFF" stroke="#EF3F24" stroke-width="1.8" filter="drop-shadow(0 12px 24px rgba(239,63,36,0.18))"/>
+                <rect x="188" y="68" width="114" height="66" rx="4" fill="#231E1F"/>
+                <text x="194" y="105" fill="#EF3F24" font-family="system-ui, sans-serif" font-size="11" font-weight="900" letter-spacing="-0.5">ADC RANKING</text>
+                <text x="188" y="148" fill="#EF3F24" font-family="system-ui, sans-serif" font-size="8" font-weight="800">01</text>
+                <text x="188" y="162" fill="#231E1F" font-family="system-ui, sans-serif" font-size="10" font-weight="800">Top Creative Agency</text>
+                <circle cx="290" cy="155" r="10" fill="none" stroke="#EF3F24" stroke-width="1.5"/>
+                <path d="M287,155 L293,155 M291,152 L294,155 L291,158" fill="none" stroke="#EF3F24" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+                <!-- Card 3 forward peek -->
+                <rect x="305" y="72" width="100" height="105" rx="6" fill="#FFFFFF" opacity="0.75" stroke="#EF3F24" stroke-width="1"/>
+                <rect x="313" y="80" width="84" height="50" rx="3" fill="#D32F2F" opacity="0.8"/>
+              </g>
+
+              <!-- Progress Indicator & Pagination -->
+              <rect x="36" y="180" width="48" height="2" fill="#EF3F24" opacity="0.3"/>
+              <rect x="36" y="180" width="18" height="2" fill="#EF3F24"/>
+              <text x="92" y="183" fill="#EF3F24" font-family="system-ui, sans-serif" font-size="8" font-weight="700">01 • 06</text>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Awwwards SOTD</span>
+            <span class="badge-tag">WebGL & Motion</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">BBDO Germany Creative Agency</h2>
+            <div class="card-meta">bbdo/ · Bizarro Design & ADC Gold Winner</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of the award-winning agency portfolio for BBDO Germany by Bizarro. Features a typographic preloader with curtain reveal, tilted 3D draggable Hero card carousel (01–06), ambient blurred background case study gallery (01–04), dual-row infinite SVG partner logo tickers (18 global brands), and full-screen red-orange navigation overlay with cursor photo cyclers.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">WebGL / OGL</span>
+            <span class="tech-pill">GSAP Motion</span>
+            <span class="tech-pill">Virtual Scroll Physics</span>
+            <span class="tech-pill">SVG Sprite Tickers</span>
+            <span class="tech-pill">Gotham HTF Fonts</span>
+          </div>
+          <div class="card-actions">
+            <a href="./bbdo/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/bbdo/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 14: Luis Bizarro 3D Cassette Projects Archive -->
+      <article class="card" data-category="interactive editorial" data-title="Luis Bizarro 3D Cassette Projects Archive">
+        <div class="card-banner">
+          <div class="card-banner-graphic">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg, #05070a 0%, #0d1117 50%, #161b22 100%);">
+              <!-- Cybernetic subtle grid lines -->
+              <defs>
+                <pattern id="bizarroGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                  <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.04)" stroke-width="0.8"/>
+                </pattern>
+                <linearGradient id="cassetteBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2a2e35"/>
+                  <stop offset="50%" stop-color="#181a1f"/>
+                  <stop offset="100%" stop-color="#0c0d10"/>
+                </linearGradient>
+                <linearGradient id="tapeWindow" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#141820" stop-opacity="0.9"/>
+                  <stop offset="100%" stop-color="#0a0c10" stop-opacity="0.95"/>
+                </linearGradient>
+              </defs>
+              <rect width="400" height="200" fill="url(#bizarroGrid)"/>
+
+              <!-- Ambient spotlight glow -->
+              <circle cx="200" cy="100" r="90" fill="#38bdf8" opacity="0.08" filter="blur(35px)"/>
+              <circle cx="290" cy="70" r="60" fill="#6366f1" opacity="0.07" filter="blur(25px)"/>
+
+              <!-- Stack of Cassettes (Back / Perspective) -->
+              <g opacity="0.35" transform="translate(0, 36) scale(0.95) translate(10, 0)">
+                <rect x="90" y="45" width="220" height="110" rx="8" fill="#121418" stroke="#333842" stroke-width="1.2"/>
+              </g>
+
+              <!-- Main Hero Cassette Tape -->
+              <g id="cassette-hero">
+                <!-- Outer Body Shell -->
+                <rect x="85" y="40" width="230" height="118" rx="9" fill="url(#cassetteBody)" stroke="#4a5260" stroke-width="1.5" filter="drop-shadow(0 14px 28px rgba(0,0,0,0.6))"/>
+                
+                <!-- Screw details in 4 corners -->
+                <circle cx="94" cy="48" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="306" cy="48" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="94" cy="150" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+                <circle cx="306" cy="150" r="2.5" fill="#5a6270" stroke="#222" stroke-width="0.5"/>
+
+                <!-- Label Sticker Area -->
+                <rect x="100" y="52" width="200" height="72" rx="4" fill="#E8EDF2" stroke="#BAC4D0" stroke-width="1"/>
+                <!-- Label Header Band -->
+                <rect x="100" y="52" width="200" height="14" rx="3" fill="#D32F2F"/>
+                <text x="108" y="62" fill="#FFFFFF" font-family="'Courier New', monospace" font-size="8" font-weight="900" letter-spacing="1">SONY HF 90</text>
+                <text x="270" y="62" fill="#FFFFFF" font-family="'Courier New', monospace" font-size="8" font-weight="800">SIDE A</text>
+
+                <!-- Project Written Label -->
+                <text x="108" y="77" fill="#1E293B" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700">XBOX MUSEUM (2021)</text>
+
+                <!-- Center Viewing Window -->
+                <rect x="125" y="84" width="150" height="34" rx="5" fill="url(#tapeWindow)" stroke="#64748B" stroke-width="1"/>
+
+                <!-- Left Spool & Teeth -->
+                <circle cx="155" cy="101" r="12" fill="#F8FAFC" stroke="#475569" stroke-width="1"/>
+                <circle cx="155" cy="101" r="6" fill="#0F172A"/>
+                <circle cx="155" cy="101" r="1.5" fill="#94A3B8"/>
+
+                <!-- Right Spool & Teeth -->
+                <circle cx="245" cy="101" r="12" fill="#F8FAFC" stroke="#475569" stroke-width="1"/>
+                <circle cx="245" cy="101" r="6" fill="#0F172A"/>
+                <circle cx="245" cy="101" r="1.5" fill="#94A3B8"/>
+
+                <!-- Magnetic Tape connecting spools -->
+                <rect x="167" y="99" width="66" height="4" fill="#3E2723"/>
+
+                <!-- Bottom Trapezoid head zone -->
+                <polygon points="120,158 135,142 265,142 280,158" fill="#14171C" stroke="#333842" stroke-width="1"/>
+                <circle cx="150" cy="150" r="3" fill="#0A0C0E"/>
+                <circle cx="250" cy="150" r="3" fill="#0A0C0E"/>
+              </g>
+
+              <!-- Dynamic Screen HUD Tracker Overlay -->
+              <!-- Crosshair Reticle -->
+              <g id="tracker-hud" transform="translate(245, 101)">
+                <!-- Target Reticle Ring -->
+                <circle cx="0" cy="0" r="22" fill="none" stroke="#38BDF8" stroke-width="1.2" stroke-dasharray="3 3"/>
+                <circle cx="0" cy="0" r="4" fill="none" stroke="#38BDF8" stroke-width="1.5"/>
+                <!-- Crosshair ticks -->
+                <line x1="-28" y1="0" x2="-23" y2="0" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="23" y1="0" x2="28" y2="0" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="0" y1="-28" x2="0" y2="-23" stroke="#38BDF8" stroke-width="1.5"/>
+                <line x1="0" y1="23" x2="0" y2="28" stroke="#38BDF8" stroke-width="1.5"/>
+              </g>
+
+              <!-- HUD Floating Coordinate Box -->
+              <g transform="translate(265, 32)">
+                <rect x="0" y="0" width="105" height="42" rx="4" fill="#0B1320" fill-opacity="0.85" stroke="#38BDF8" stroke-width="1"/>
+                <text x="8" y="14" fill="#38BDF8" font-family="'Courier New', monospace" font-size="8" font-weight="700">TRACK: CASSETTE_08</text>
+                <text x="8" y="26" fill="#E2E8F0" font-family="'Courier New', monospace" font-size="7.5">POS: [412, 184]</text>
+                <text x="8" y="36" fill="#94A3B8" font-family="'Courier New', monospace" font-size="7">FPS: 60 · RAYCAST OK</text>
+              </g>
+
+              <!-- Sound Equalizer Bars Indicator -->
+              <g transform="translate(25, 160)">
+                <rect x="0" y="10" width="2.5" height="10" rx="1" fill="#38BDF8"/>
+                <rect x="5" y="4" width="2.5" height="16" rx="1" fill="#38BDF8"/>
+                <rect x="10" y="12" width="2.5" height="8" rx="1" fill="#38BDF8"/>
+                <rect x="15" y="2" width="2.5" height="18" rx="1" fill="#38BDF8"/>
+                <text x="24" y="17" fill="#64748B" font-family="'Courier New', monospace" font-size="7.5">AUDIO SYNTH: ON</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Three.js r186</span>
+            <span class="badge-tag">WebGL 2.0</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Luis Bizarro 3D Projects Archive</h2>
+            <div class="card-meta">bizarro/ · Creative Technologist Archive</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Luis Bizarro's creative technology projects archive. Features a procedural 3D Sony cassette tape tower rendered in Three.js r186 with WebGL 2.0, dynamic screen-space raycasting HUD tracker with live coordinates and hovering micro-video previews, smooth inertial wheel physics navigation, and a zero-asset procedural Web Audio synthesizer.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Three.js r186</span>
+            <span class="tech-pill">Procedural 3D</span>
+            <span class="tech-pill">WebGL 2.0</span>
+            <span class="tech-pill">Screen Raycast HUD</span>
+            <span class="tech-pill">Web Audio Synth</span>
+            <span class="tech-pill">Inter Typography</span>
+          </div>
+          <div class="card-actions">
+            <a href="./bizarro/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/bizarro/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 15: DesignByXam Photographic Editorial Portfolio -->
+      <article class="card" data-category="interactive editorial" data-title="DesignByXam Samuel Idowu photographic editorial portfolio">
+        <div class="card-banner" style="background:#fff;overflow:hidden;">
+          <div class="card-banner-graphic" style="position:relative;background:#fff;width:100%;height:100%;">
+            <span aria-hidden="true" style="position:absolute;left:6%;top:10%;font:600 44px Arial,sans-serif;color:#e9e9e9;letter-spacing:-2px;">A Brand<br>Designer</span>
+            <img src="./designbyxam/ab/sh1.webp" alt="" aria-hidden="true" loading="lazy" style="position:absolute;width:55%;height:50%;object-fit:contain;left:40%;top:48%;">
+            <img src="./designbyxam/ab/p1.webp" alt="Samuel Idowu photographed in the reference portfolio" loading="lazy" style="position:absolute;left:43%;top:8%;height:100%;width:27%;object-fit:contain;object-position:top;">
+            <span aria-hidden="true" style="position:absolute;right:7%;bottom:9%;font:600 31px Arial,sans-serif;color:#000;letter-spacing:-1px;">Artist<br>Heart</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header"><h2 class="card-title">DesignByXam — Samuel Idowu</h2><div class="card-meta">designbyxam/ · Photographic Editorial Portfolio</div></div>
+          <p class="card-desc">Reference rendition retaining the original photographic cut-outs, cast shadows, typography, five views, poster archive, photo gallery and real Three.js object viewers. Original work by Samuel Idowu, with an exhaustive process and prompt guide.</p>
+          <div class="tech-stack-row"><span class="tech-pill">DOM / CSS</span><span class="tech-pill">Original Photography</span><span class="tech-pill">Three.js / WebGL</span><span class="tech-pill">Responsive</span></div>
+          <div class="card-actions"><a href="./designbyxam/#about" class="btn-launch">Launch Live Demo ↗</a><a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/designbyxam/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a></div>
+        </div>
+      </article>
+
+      <!-- Card 16: Expa Global Company Studio -->
+      <article class="card" data-category="interactive editorial" data-title="Expa Global Company Studio">
+        <div class="card-banner">
+          <div class="card-banner-graphic">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg, #070709 0%, #101014 50%, #181820 100%);">
+              <!-- Dot Matrix Grid Canvas Background -->
+              <defs>
+                <pattern id="expaDotGrid" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="8" cy="8" r="0.75" fill="#4B5563" fill-opacity="0.35"/>
+                </pattern>
+                <radialGradient id="expaGlow" cx="50%" cy="40%" r="55%">
+                  <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.25"/>
+                  <stop offset="60%" stop-color="#3B82F6" stop-opacity="0.08"/>
+                  <stop offset="100%" stop-color="#070709" stop-opacity="0"/>
+                </radialGradient>
+                <linearGradient id="expaCardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#22222A" stop-opacity="0.8"/>
+                  <stop offset="100%" stop-color="#14141A" stop-opacity="0.9"/>
+                </linearGradient>
+              </defs>
+
+              <rect width="400" height="200" fill="url(#expaDotGrid)"/>
+              <ellipse cx="200" cy="80" rx="160" ry="70" fill="url(#expaGlow)"/>
+
+              <!-- Kinetic WebGL Particle Swarm Field -->
+              <g id="particle-field">
+                <!-- Outer floating particles -->
+                <circle cx="45" cy="35" r="1.2" fill="#E2E8F0" fill-opacity="0.4"/>
+                <circle cx="85" cy="22" r="1.5" fill="#E2E8F0" fill-opacity="0.5"/>
+                <circle cx="120" cy="40" r="1" fill="#E2E8F0" fill-opacity="0.3"/>
+                <circle cx="280" cy="25" r="1.4" fill="#E2E8F0" fill-opacity="0.45"/>
+                <circle cx="325" cy="45" r="1.8" fill="#E2E8F0" fill-opacity="0.6"/>
+                <circle cx="360" cy="30" r="1.2" fill="#E2E8F0" fill-opacity="0.35"/>
+                <circle cx="70" cy="85" r="1.2" fill="#E2E8F0" fill-opacity="0.4"/>
+                <circle cx="340" cy="90" r="1.5" fill="#E2E8F0" fill-opacity="0.5"/>
+
+                <!-- Kinetic connecting vector filaments -->
+                <path d="M45 35 Q100 20 150 48" stroke="#6366F1" stroke-width="0.6" stroke-dasharray="2 4" stroke-opacity="0.4" fill="none"/>
+                <path d="M250 48 Q300 20 360 30" stroke="#6366F1" stroke-width="0.6" stroke-dasharray="2 4" stroke-opacity="0.4" fill="none"/>
+              </g>
+
+              <!-- Central Dot Matrix Typography: EXPA -->
+              <!-- Letter E -->
+              <g transform="translate(100, 36)">
+                <!-- Verticals -->
+                <circle cx="0" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="32" r="2.2" fill="#FFFFFF"/>
+                <!-- Top bar -->
+                <circle cx="8" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="16" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="0" r="2.2" fill="#FFFFFF"/>
+                <!-- Mid bar -->
+                <circle cx="8" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="16" cy="16" r="2.2" fill="#FFFFFF"/>
+                <!-- Bottom bar -->
+                <circle cx="8" cy="32" r="2.2" fill="#FFFFFF"/>
+                <circle cx="16" cy="32" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="32" r="2.2" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Letter X -->
+              <g transform="translate(152, 36)">
+                <circle cx="0" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="6" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="18" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="12" cy="16" r="2.5" fill="#A5B4FC"/>
+                <circle cx="6" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="18" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="32" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="32" r="2.2" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Letter P -->
+              <g transform="translate(204, 36)">
+                <!-- Verticals -->
+                <circle cx="0" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="32" r="2.2" fill="#FFFFFF"/>
+                <!-- Loop -->
+                <circle cx="8" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="16" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="4" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="12" r="2.2" fill="#FFFFFF"/>
+                <circle cx="16" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="8" cy="16" r="2.2" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Letter A -->
+              <g transform="translate(256, 36)">
+                <circle cx="12" cy="0" r="2.2" fill="#FFFFFF"/>
+                <circle cx="6" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="18" cy="8" r="2.2" fill="#FFFFFF"/>
+                <circle cx="2" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="10" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="14" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="22" cy="16" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="24" r="2.2" fill="#FFFFFF"/>
+                <circle cx="0" cy="32" r="2.2" fill="#FFFFFF"/>
+                <circle cx="24" cy="32" r="2.2" fill="#FFFFFF"/>
+              </g>
+
+              <!-- Subtitle: Studio Tagline in Kinetic Dotted Style -->
+              <text x="200" y="86" text-anchor="middle" fill="#94A3B8" font-family="'Courier New', monospace" font-size="8" letter-spacing="3" font-weight="600">IS A COMPANY STUDIO</text>
+
+              <!-- Staggered Parallax Company Cards Carousel (Lenis Simulation) -->
+              <!-- Card 1: Aero (Aviation) -->
+              <g transform="translate(35, 108)">
+                <rect x="0" y="0" width="95" height="74" rx="6" fill="url(#expaCardGrad)" stroke="#2E2E38" stroke-width="1"/>
+                <rect x="8" y="8" width="22" height="6" rx="2" fill="#4F46E5" fill-opacity="0.6"/>
+                <text x="8" y="28" fill="#F8FAFC" font-family="'Segoe UI', -apple-system, sans-serif" font-size="11" font-weight="700">Aero</text>
+                <text x="8" y="40" fill="#94A3B8" font-family="'Segoe UI', -apple-system, sans-serif" font-size="7.5">Next-gen aviation</text>
+                <!-- Aero Wing Geometric Symbol -->
+                <path d="M60 48 L80 40 L74 54 Z" fill="#6366F1" fill-opacity="0.8"/>
+                <circle cx="80" cy="40" r="2" fill="#A5B4FC"/>
+              </g>
+
+              <!-- Card 2: Fin.com (AI & Work Automation - Highlighted) -->
+              <g transform="translate(145, 96)">
+                <rect x="0" y="0" width="110" height="88" rx="6" fill="#181822" stroke="#6366F1" stroke-width="1.2"/>
+                <rect x="8" y="8" width="28" height="6" rx="2" fill="#10B981" fill-opacity="0.7"/>
+                <text x="8" y="28" fill="#FFFFFF" font-family="'Segoe UI', -apple-system, sans-serif" font-size="12" font-weight="700">Fin.com</text>
+                <text x="8" y="41" fill="#A5B4FC" font-family="'Segoe UI', -apple-system, sans-serif" font-size="8">Work automation & AI</text>
+                <!-- Code / Neural Graph Indicator -->
+                <line x1="8" y1="52" x2="102" y2="52" stroke="#2D2D3D" stroke-width="1"/>
+                <rect x="8" y="58" width="40" height="4" rx="2" fill="#38BDF8" fill-opacity="0.4"/>
+                <rect x="8" y="66" width="60" height="4" rx="2" fill="#4B5563" fill-opacity="0.4"/>
+                <rect x="8" y="74" width="25" height="4" rx="2" fill="#4B5563" fill-opacity="0.4"/>
+                <circle cx="95" cy="68" r="6" fill="#6366F1" fill-opacity="0.3"/>
+                <circle cx="95" cy="68" r="2.5" fill="#818CF8"/>
+              </g>
+
+              <!-- Card 3: Collective (Finance) -->
+              <g transform="translate(270, 114)">
+                <rect x="0" y="0" width="95" height="68" rx="6" fill="url(#expaCardGrad)" stroke="#2E2E38" stroke-width="1"/>
+                <rect x="8" y="8" width="20" height="6" rx="2" fill="#F59E0B" fill-opacity="0.6"/>
+                <text x="8" y="28" fill="#F8FAFC" font-family="'Segoe UI', -apple-system, sans-serif" font-size="11" font-weight="700">Collective</text>
+                <text x="8" y="40" fill="#94A3B8" font-family="'Segoe UI', -apple-system, sans-serif" font-size="7.5">Backoffice for businesses</text>
+                <!-- Metric Bars -->
+                <rect x="62" y="44" width="4" height="12" rx="1" fill="#34D399"/>
+                <rect x="69" y="38" width="4" height="18" rx="1" fill="#34D399"/>
+                <rect x="76" y="32" width="4" height="24" rx="1" fill="#34D399"/>
+              </g>
+
+              <!-- Kinetic Scroll HUD Indicator -->
+              <g transform="translate(18, 186)">
+                <text x="0" y="0" fill="#64748B" font-family="'Courier New', monospace" font-size="7.5">LENIS VIRTUAL SCROLL · PARALLAX: ACTIVE</text>
+              </g>
+              <g transform="translate(382, 186)">
+                <text x="0" y="0" text-anchor="end" fill="#6366F1" font-family="'Courier New', monospace" font-size="7.5">p5.js KINETIC MATRIX</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">p5.js Generative</span>
+            <span class="badge-tag">WebGL & Lenis</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Expa — Global Company Studio</h2>
+            <div class="card-meta">expa/ · Garrett Camp Studio & Portfolio</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Expa's global company studio platform. Features real-time generative dot matrix kinetic typography ("Expa is a Company Studio") powered by p5.js and OpenType glyph point sampling, a WebGL particle swarm hero loader, staggered multi-column company parallax cards driven by Lenis virtual scroll, and seamless subpath-aware PJAX client view transitions.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">p5.js Generative</span>
+            <span class="tech-pill">WebGL Particles</span>
+            <span class="tech-pill">Lenis Virtual Scroll</span>
+            <span class="tech-pill">PJAX Transitions</span>
+            <span class="tech-pill">Universal Sans</span>
+            <span class="tech-pill">153 Local Assets</span>
+          </div>
+          <div class="card-actions">
+            <a href="./expa/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/expa/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 17: Vitalii Radov Digital Designer & Framer Developer -->
+      <article class="card" data-category="editorial interactive" data-title="Vitalii Radov Digital Designer & Framer Developer">
+        <div class="card-banner">
+          <div class="card-banner-graphic">
+            <svg viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;background:linear-gradient(135deg, #FAF8F5 0%, #F4F1EA 50%, #ECE8DE 100%);">
+              <!-- Concentric Orbital Radar Rings -->
+              <circle cx="270" cy="100" r="45" fill="none" stroke="#D1D5DB" stroke-width="0.8" stroke-dasharray="3 3"/>
+              <circle cx="270" cy="100" r="75" fill="none" stroke="#D1D5DB" stroke-width="0.8" stroke-dasharray="3 3"/>
+              <circle cx="270" cy="100" r="105" fill="none" stroke="#D1D5DB" stroke-width="0.8" stroke-dasharray="3 3"/>
+              <circle cx="270" cy="100" r="135" fill="none" stroke="#E5E7EB" stroke-width="0.8"/>
+
+              <!-- Header Live Weather / Time Bar -->
+              <text x="375" y="24" text-anchor="end" font-family="'Courier New', monospace" font-size="7.5" fill="#6B7280" font-weight="600">21:23 EET · 17°C · SMOKY HAZE</text>
+
+              <!-- Editorial Headline (Crimson Pro Serif) -->
+              <text x="28" y="48" font-family="'Times New Roman', Georgia, serif" font-style="italic" font-size="20" fill="#111827">Hello there, I'm Vitalii.</text>
+              <line x1="140" y1="52" x2="238" y2="52" stroke="#4B5563" stroke-width="1.2" stroke-dasharray="2 2"/>
+
+              <!-- Subtitle Statement -->
+              <text x="28" y="70" font-family="'Segoe UI', -apple-system, sans-serif" font-size="8.5" fill="#374151" font-weight="500">I design &amp; develop websites in Framer with a focus</text>
+              <text x="28" y="82" font-family="'Segoe UI', -apple-system, sans-serif" font-size="8.5" fill="#374151" font-weight="500">on clarity, structure and editorial elegance.</text>
+
+              <!-- 3x3 Practice Matrix Center Hover Compass Box -->
+              <g transform="translate(28, 100)">
+                <rect x="0" y="0" width="56" height="52" rx="3" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="1"/>
+                <text x="28" y="20" text-anchor="middle" font-family="'Courier New', monospace" font-size="6.5" fill="#111827" font-weight="700">↑ HOVER ↓</text>
+                <text x="28" y="32" text-anchor="middle" font-family="'Courier New', monospace" font-size="7" fill="#6B7280">←   →</text>
+                <text x="28" y="44" text-anchor="middle" font-family="'Courier New', monospace" font-size="5.5" fill="#9CA3AF">COMPASS</text>
+              </g>
+
+              <!-- Laptop Frame Mockup (Promova / Kalyna / Nastaga) -->
+              <g transform="translate(205, 55)">
+                <!-- Laptop Lid Shadow & Base -->
+                <ellipse cx="85" cy="108" rx="80" ry="8" fill="#D1D5DB" fill-opacity="0.6"/>
+                <path d="M5 102 L165 102 L150 106 L20 106 Z" fill="#9CA3AF"/>
+                <!-- Laptop Screen -->
+                <rect x="18" y="10" width="134" height="90" rx="6" fill="#111827" stroke="#1F2937" stroke-width="1.5"/>
+                <!-- Inner Screen Display -->
+                <rect x="23" y="15" width="124" height="80" rx="3" fill="#FFFFFF"/>
+                <!-- Wireframe Content -->
+                <rect x="30" y="22" width="50" height="6" rx="1.5" fill="#111827"/>
+                <rect x="30" y="32" width="75" height="4" rx="1" fill="#9CA3AF"/>
+                <rect x="30" y="40" width="60" height="4" rx="1" fill="#E5E7EB"/>
+                <rect x="30" y="48" width="28" height="8" rx="2" fill="#111827"/>
+                <!-- Image block right -->
+                <rect x="110" y="22" width="30" height="34" rx="2" fill="#E5E7EB"/>
+                <circle cx="125" cy="36" r="6" fill="#D1D5DB"/>
+                <!-- Notch -->
+                <rect x="75" y="15" width="20" height="3" rx="1.5" fill="#111827"/>
+              </g>
+
+              <!-- 4 Interactive Screenshot Tabs -->
+              <g transform="translate(225, 168)">
+                <rect x="0" y="0" width="24" height="16" rx="2" fill="#FFFFFF" stroke="#111827" stroke-width="1.2"/>
+                <rect x="29" y="0" width="24" height="16" rx="2" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="0.8"/>
+                <rect x="58" y="0" width="24" height="16" rx="2" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="0.8"/>
+                <rect x="87" y="0" width="24" height="16" rx="2" fill="#FFFFFF" stroke="#D1D5DB" stroke-width="0.8"/>
+                <!-- Tiny preview indicators -->
+                <circle cx="12" cy="8" r="3" fill="#111827"/>
+                <rect x="37" y="5" width="8" height="6" fill="#D1D5DB"/>
+                <rect x="66" y="5" width="8" height="6" fill="#D1D5DB"/>
+                <rect x="95" y="5" width="8" height="6" fill="#D1D5DB"/>
+              </g>
+
+              <!-- Undulating Dashed Process Curve (Bottom Left) -->
+              <g transform="translate(95, 115)">
+                <path d="M0 25 Q 25 5, 50 25 T 100 25" fill="none" stroke="#6B7280" stroke-width="1.2" stroke-dasharray="2.5 2.5"/>
+                <circle cx="0" cy="25" r="2.5" fill="#111827"/>
+                <circle cx="50" cy="25" r="2.5" fill="#111827"/>
+                <circle cx="100" cy="25" r="2.5" fill="#111827"/>
+                <text x="0" y="38" text-anchor="middle" font-family="'Courier New', monospace" font-size="6" fill="#4B5563">DISCOVERY</text>
+                <text x="50" y="38" text-anchor="middle" font-family="'Courier New', monospace" font-size="6" fill="#4B5563">DIRECTION</text>
+                <text x="100" y="38" text-anchor="middle" font-family="'Courier New', monospace" font-size="6" fill="#4B5563">BUILD</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">Crimson Pro Serif</span>
+            <span class="badge-tag">Swiss Editorial</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Vitalii Radov — Digital Designer &amp; Framer Developer</h2>
+            <div class="card-meta">vitaliiradov/ · Swiss Editorial &amp; Framer Portfolio</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Vitalii Radov's award-winning digital design portfolio. Features a classic Swiss editorial typographic system in Crimson Pro &amp; Inter, interactive 4-tab laptop and mobile project mockups (Promova, Kalyna Studio, Nastaga), a 3×3 practice matrix with center hover compass, concentric capabilities radar, undulating sinusoidal process spine, and live local weather &amp; geocoding integration.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Crimson Pro Serif</span>
+            <span class="tech-pill">Inter Sans</span>
+            <span class="tech-pill">Swiss Editorial</span>
+            <span class="tech-pill">Interactive Mockups</span>
+            <span class="tech-pill">Concentric Radar</span>
+            <span class="tech-pill">94 Local Assets</span>
+          </div>
+          <div class="card-actions">
+            <a href="./vitaliiradov/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/vitaliiradov/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 18: Melike Turgut — me · like -->
+      <article class="card" data-category="interactive editorial">
+        <div class="card-banner-wrapper">
+          <div class="card-banner" style="background: #eaece5;">
+            <!-- Vector Banner for Melike Turgut: Gummy Charms & Editorial Story Sheet -->
+            <svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+              <rect width="400" height="200" fill="#eaece5"/>
+
+              <!-- Subtle soft grid dots -->
+              <defs>
+                <pattern id="melike-dots" x="0" y="0" width="16" height="16" patternUnits="userSpaceOnUse">
+                  <circle cx="2" cy="2" r="0.8" fill="#d2d5cb"/>
+                </pattern>
+                <!-- Candy Shading Gradients -->
+                <radialGradient id="candy-bow" cx="40%" cy="35%" r="65%">
+                  <stop offset="0%" stop-color="#ff4d6d"/>
+                  <stop offset="45%" stop-color="#e11d48"/>
+                  <stop offset="100%" stop-color="#9f1239"/>
+                </radialGradient>
+                <radialGradient id="candy-flower" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#fef08a"/>
+                  <stop offset="45%" stop-color="#eab308"/>
+                  <stop offset="100%" stop-color="#a16207"/>
+                </radialGradient>
+                <radialGradient id="candy-bean" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#e9d5ff"/>
+                  <stop offset="50%" stop-color="#c084fc"/>
+                  <stop offset="100%" stop-color="#7e22ce"/>
+                </radialGradient>
+                <radialGradient id="candy-pretzel" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#f0abfc"/>
+                  <stop offset="50%" stop-color="#a855f7"/>
+                  <stop offset="100%" stop-color="#6b21a8"/>
+                </radialGradient>
+                <radialGradient id="candy-squiggle" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#38bdf8"/>
+                  <stop offset="50%" stop-color="#0284c7"/>
+                  <stop offset="100%" stop-color="#0369a1"/>
+                </radialGradient>
+                <radialGradient id="candy-heart" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#fdba74"/>
+                  <stop offset="50%" stop-color="#f97316"/>
+                  <stop offset="100%" stop-color="#c2410c"/>
+                </radialGradient>
+                <radialGradient id="candy-pebble" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#f8fafc"/>
+                  <stop offset="50%" stop-color="#cbd5e1"/>
+                  <stop offset="100%" stop-color="#64748b"/>
+                </radialGradient>
+                <radialGradient id="candy-clover" cx="35%" cy="30%" r="65%">
+                  <stop offset="0%" stop-color="#86efac"/>
+                  <stop offset="50%" stop-color="#16a34a"/>
+                  <stop offset="100%" stop-color="#14532d"/>
+                </radialGradient>
+                <filter id="candy-glow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.12"/>
+                </filter>
+              </defs>
+              <rect width="400" height="200" fill="url(#melike-dots)"/>
+
+              <!-- Header Bar Info -->
+              <text x="24" y="24" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" fill="#40400c" font-weight="700" letter-spacing="1">MELIKE TURGUT</text>
+              <text x="376" y="24" text-anchor="end" font-family="'Helvetica Neue', Arial, sans-serif" font-size="7.5" fill="#40400c" font-weight="600" letter-spacing="0.5">PRODUCT DESIGNER · NY</text>
+
+              <!-- Central Hero Typography: me [8 candies] like -->
+              <!-- "me" text -->
+              <text x="24" y="108" font-family="'Helvetica Neue', Arial, sans-serif" font-size="42" fill="#40400c" font-weight="800" letter-spacing="-1.5">me</text>
+
+              <!-- 8 Gummy Candies in a row -->
+              <g transform="translate(92, 74)" filter="url(#candy-glow)">
+                <!-- 1. Bow (Red) -->
+                <path d="M4 14 C1 6, 8 2, 13 8 C15 10, 15 14, 13 16 C8 22, 1 18, 4 14 Z M22 14 C25 6, 18 2, 13 8 C11 10, 11 14, 13 16 C18 22, 25 18, 22 14 Z" fill="url(#candy-bow)"/>
+                <circle cx="13" cy="12" r="3.2" fill="url(#candy-bow)"/>
+                <ellipse cx="12" cy="10" rx="1" ry="0.6" fill="#ffffff" fill-opacity="0.6"/>
+
+                <!-- 2. Flower (Yellow) -->
+                <g transform="translate(26, 0)">
+                  <circle cx="12" cy="12" r="5" fill="url(#candy-flower)"/>
+                  <circle cx="12" cy="5" r="3.5" fill="url(#candy-flower)"/>
+                  <circle cx="18" cy="9" r="3.5" fill="url(#candy-flower)"/>
+                  <circle cx="17" cy="17" r="3.5" fill="url(#candy-flower)"/>
+                  <circle cx="7" cy="17" r="3.5" fill="url(#candy-flower)"/>
+                  <circle cx="6" cy="9" r="3.5" fill="url(#candy-flower)"/>
+                  <circle cx="10" cy="10" r="1.2" fill="#ffffff" fill-opacity="0.6"/>
+                </g>
+
+                <!-- 3. Bean (Lilac) -->
+                <g transform="translate(52, 0)">
+                  <path d="M7 6 C13 2, 19 6, 18 13 C17 19, 10 21, 6 17 C2 13, 2 8, 7 6 Z" fill="url(#candy-bean)"/>
+                  <ellipse cx="9" cy="8" rx="2" ry="1.2" fill="#ffffff" fill-opacity="0.5" transform="rotate(-20 9 8)"/>
+                </g>
+
+                <!-- 4. Pretzel (Plum) -->
+                <g transform="translate(76, 0)">
+                  <path d="M12 4 C18 4, 21 9, 19 14 C17 19, 13 20, 12 17 C11 20, 7 19, 5 14 C3 9, 6 4, 12 4 Z M9 11 C8 9, 11 8, 12 10 C10 11, 9 11, 9 11 Z M15 11 C16 9, 13 8, 12 10 C14 11, 15 11, 15 11 Z" fill="url(#candy-pretzel)"/>
+                  <circle cx="8" cy="8" r="1" fill="#ffffff" fill-opacity="0.5"/>
+                </g>
+
+                <!-- 5. Squiggle (Cyan) -->
+                <g transform="translate(100, 0)">
+                  <path d="M6 5 C12 3, 16 7, 12 10 C8 13, 16 16, 12 19 C8 22, 4 19, 7 16 C10 13, 3 10, 6 5 Z" fill="url(#candy-squiggle)"/>
+                  <ellipse cx="9" cy="6" rx="1.5" ry="0.8" fill="#ffffff" fill-opacity="0.6"/>
+                </g>
+
+                <!-- 6. Heart (Orange) -->
+                <g transform="translate(124, 0)">
+                  <path d="M11 7 C9 3, 4 3, 4 7 C4 12, 11 17, 11 17 C11 17, 18 12, 18 7 C18 3, 13 3, 11 7 Z" fill="url(#candy-heart)"/>
+                  <ellipse cx="8" cy="6" rx="1.5" ry="0.8" fill="#ffffff" fill-opacity="0.6"/>
+                </g>
+
+                <!-- 7. Pebble (Opal) -->
+                <g transform="translate(148, 0)">
+                  <circle cx="11" cy="11" r="8" fill="url(#candy-pebble)"/>
+                  <path d="M11 6 C14 6, 15 9, 13 11 C11 13, 8 12, 9 10" stroke="#ffffff" stroke-width="0.8" stroke-linecap="round" fill="none"/>
+                  <circle cx="9" cy="8" r="1.2" fill="#ffffff" fill-opacity="0.7"/>
+                </g>
+
+                <!-- 8. Clover (Emerald) -->
+                <g transform="translate(172, 0)">
+                  <circle cx="8" cy="8" r="3.5" fill="url(#candy-clover)"/>
+                  <circle cx="15" cy="8" r="3.5" fill="url(#candy-clover)"/>
+                  <circle cx="8" cy="15" r="3.5" fill="url(#candy-clover)"/>
+                  <circle cx="15" cy="15" r="3.5" fill="url(#candy-clover)"/>
+                  <circle cx="11.5" cy="11.5" r="3" fill="url(#candy-clover)"/>
+                  <circle cx="9" cy="7" r="1" fill="#ffffff" fill-opacity="0.6"/>
+                </g>
+              </g>
+
+              <!-- "like" text -->
+              <text x="300" y="108" font-family="'Helvetica Neue', Arial, sans-serif" font-size="42" fill="#40400c" font-weight="800" letter-spacing="-1.5">like</text>
+
+              <!-- Floating mini story card (bottom preview) -->
+              <g transform="translate(110, 135)">
+                <rect x="0" y="0" width="180" height="52" rx="8" fill="#ffffff" stroke="#d2d5cb" stroke-width="0.8"/>
+                <!-- Card Header -->
+                <text x="14" y="20" font-family="'Georgia', serif" font-weight="300" font-size="14" fill="#111827">2011—12</text>
+                <text x="75" y="18" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6" fill="#6b7280" font-weight="600">MRM · NEW YORK</text>
+                <!-- Mini Plot Scrubber -->
+                <line x1="14" y1="36" x2="166" y2="36" stroke="#e5e7eb" stroke-width="2" stroke-linecap="round"/>
+                <line x1="14" y1="36" x2="72" y2="36" stroke="#40400c" stroke-width="2" stroke-linecap="round"/>
+                <!-- Mini red candy thumb -->
+                <circle cx="72" cy="36" r="4.5" fill="url(#candy-bow)"/>
+                <circle cx="71" cy="35" r="1.2" fill="#ffffff" fill-opacity="0.7"/>
+                <text x="14" y="47" font-family="'Helvetica Neue', Arial, sans-serif" font-size="5.5" fill="#4b5563">The Plot Thickens · 8 Chapters</text>
+              </g>
+
+              <!-- Footnote in bottom left -->
+              <text x="24" y="178" font-family="'Helvetica Neue', Arial, sans-serif" font-size="6.5" fill="#40400c" opacity="0.8">15 years designing products · 8 tactile chapters</text>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">3D Gummy WebGL</span>
+            <span class="badge-tag">Pangram Agrandir</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Melike Turgut — me · like (Tactile 3D Gummy Portfolio)</h2>
+            <div class="card-meta">meliketurgut/ · Tactile 3D WebGL &amp; Editorial Storytelling</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Melike Turgut's interactive career archive. Features 8 glossy 3D gummy candy physics charms (bow, flower, bean, pretzel, squiggle, heart, pebble, clover) powered by Three.js shaders and spring mechanics, an interactive Plot scrubber slider with synchronous text reveals, hidden X-ray ballpoint secret notes, and dual-state editorial story sheets.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">Tactile 3D WebGL</span>
+            <span class="tech-pill">Three.js Shaders</span>
+            <span class="tech-pill">Spring Physics</span>
+            <span class="tech-pill">Pangram Agrandir</span>
+            <span class="tech-pill">The Plot Slider</span>
+            <span class="tech-pill">142 Local Assets</span>
+          </div>
+          <div class="card-actions">
+            <a href="./meliketurgut/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/meliketurgut/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Card 19: Yogi Suria — Design Partner -->
+      <article class="card" data-category="interactive editorial">
+        <div class="card-banner-wrapper">
+          <div class="card-banner" style="background: #ECECEC;">
+            <!-- Vector Banner for Yogi Suria: Neoclassical Marble Bust & Tech Juxtaposition -->
+            <svg width="400" height="200" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: 100%;">
+              <rect width="400" height="200" fill="#ECECEC"/>
+
+              <!-- Architectural Vertical Grid Lines -->
+              <line x1="66" y1="0" x2="66" y2="200" stroke="#DCDCDC" stroke-width="0.8"/>
+              <line x1="133" y1="0" x2="133" y2="200" stroke="#DCDCDC" stroke-width="0.8"/>
+              <line x1="200" y1="0" x2="200" y2="200" stroke="#DCDCDC" stroke-width="0.8"/>
+              <line x1="266" y1="0" x2="266" y2="200" stroke="#DCDCDC" stroke-width="0.8"/>
+              <line x1="333" y1="0" x2="333" y2="200" stroke="#DCDCDC" stroke-width="0.8"/>
+
+              <!-- Header Identity -->
+              <text x="24" y="24" font-family="'Geist', -apple-system, sans-serif" font-size="8.5" fill="#111827" font-weight="700">Yogi Suria</text>
+
+              <!-- Bold Hero Headline -->
+              <text x="24" y="52" font-family="'Geist', -apple-system, sans-serif" font-size="16" fill="#111827" font-weight="800" letter-spacing="-0.5">Design partner for</text>
+              <text x="24" y="70" font-family="'Geist', -apple-system, sans-serif" font-size="16" fill="#111827" font-weight="800" letter-spacing="-0.5">Web3 and AI builders.</text>
+
+              <!-- Central Neoclassical Marble Bust (Stylized Vector) -->
+              <g transform="translate(145, 20)">
+                <!-- Statue Body / Robe Shading -->
+                <path d="M55 160 C15 155, 0 175, -20 180 L130 180 C110 175, 95 155, 55 160 Z" fill="#E5E7EB"/>
+                <path d="M10 145 C25 125, 45 120, 55 120 C65 120, 85 125, 100 145 C115 165, 85 180, 55 180 C25 180, -5 165, 10 145 Z" fill="#F3F4F6"/>
+                <!-- Neck & Shoulders -->
+                <path d="M42 95 L68 95 L75 125 L35 125 Z" fill="#E5E7EB"/>
+                <!-- Head & Face -->
+                <ellipse cx="55" cy="72" rx="22" ry="28" fill="#F9FAFB"/>
+                <!-- Beard & Curly Hair (Marble Curls) -->
+                <path d="M35 55 C30 45, 40 38, 55 38 C70 38, 80 45, 75 55 C82 50, 85 65, 78 72 C78 88, 70 105, 55 108 C40 105, 32 88, 32 72 C25 65, 28 50, 35 55 Z" fill="#E5E7EB"/>
+                <circle cx="48" cy="68" r="2" fill="#9CA3AF"/>
+                <circle cx="62" cy="68" r="2" fill="#9CA3AF"/>
+                <path d="M52 72 L58 72 L55 80 Z" fill="#D1D5DB"/>
+                <path d="M48 88 Q 55 92, 62 88" stroke="#9CA3AF" stroke-width="1.2" fill="none"/>
+
+                <!-- Modern Over-Ear Headphones (Silver & Graphite) -->
+                <!-- Headband -->
+                <path d="M30 65 C26 30, 84 30, 80 65" fill="none" stroke="#6B7280" stroke-width="3" stroke-linecap="round"/>
+                <!-- Left & Right Earcups -->
+                <rect x="25" y="55" width="8" height="20" rx="4" fill="#111827" stroke="#9CA3AF" stroke-width="1"/>
+                <rect x="77" y="55" width="8" height="20" rx="4" fill="#111827" stroke="#9CA3AF" stroke-width="1"/>
+
+                <!-- Left Hand Holding iPhone -->
+                <g transform="translate(10, 85)">
+                  <!-- Phone Body -->
+                  <rect x="0" y="0" width="22" height="40" rx="3.5" fill="#111827" stroke="#9CA3AF" stroke-width="0.8"/>
+                  <!-- Screen -->
+                  <rect x="1.5" y="1.5" width="19" height="37" rx="2" fill="#374151"/>
+                  <circle cx="11" cy="7" r="1.5" fill="#6B7280"/>
+                  <!-- Marble Hand Fingers Holding Phone -->
+                  <rect x="-4" y="15" width="8" height="4" rx="2" fill="#E5E7EB"/>
+                  <rect x="-4" y="21" width="8" height="4" rx="2" fill="#E5E7EB"/>
+                  <rect x="-4" y="27" width="8" height="4" rx="2" fill="#E5E7EB"/>
+                </g>
+
+                <!-- Right Arm Holding MacBook Pro -->
+                <g transform="translate(68, 105)">
+                  <!-- Laptop Lid -->
+                  <rect x="0" y="0" width="48" height="34" rx="2.5" fill="#D1D5DB" stroke="#9CA3AF" stroke-width="0.8"/>
+                  <!-- Apple Logo Stamp -->
+                  <circle cx="24" cy="17" r="3" fill="#9CA3AF"/>
+                  <!-- Marble Hand Fingers Holding Laptop Base -->
+                  <rect x="8" y="28" width="12" height="6" rx="2" fill="#E5E7EB"/>
+                </g>
+              </g>
+
+              <!-- "Talk to Yogi" Floating Card (Right) -->
+              <g transform="translate(295, 45)">
+                <rect x="0" y="0" width="85" height="42" rx="4" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="0.8"/>
+                <!-- Avatar image box -->
+                <rect x="6" y="6" width="24" height="30" rx="2" fill="#374151"/>
+                <circle cx="18" cy="18" r="6" fill="#9CA3AF"/>
+                <!-- Text & Blue Button -->
+                <text x="35" y="16" font-family="'Geist', sans-serif" font-size="6.5" fill="#111827" font-weight="700">Talk to Yogi</text>
+                <rect x="35" y="22" width="42" height="13" rx="2" fill="#0066FF"/>
+                <text x="56" y="31" text-anchor="middle" font-family="'Geist', sans-serif" font-size="5.5" fill="#FFFFFF" font-weight="600">Mail me →</text>
+              </g>
+
+              <!-- Mockup Cards Carousel Teaser (Bottom) -->
+              <g transform="translate(24, 140)">
+                <rect x="0" y="0" width="70" height="42" rx="3" fill="#111827"/>
+                <rect x="5" y="5" width="60" height="32" rx="1.5" fill="#1F2937"/>
+                <circle cx="35" cy="21" r="8" fill="#3B82F6" fill-opacity="0.5"/>
+
+                <rect x="78" y="0" width="70" height="42" rx="3" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="0.8"/>
+                <rect x="83" y="5" width="60" height="8" rx="1.5" fill="#E5E7EB"/>
+                <rect x="83" y="16" width="40" height="4" rx="1" fill="#9CA3AF"/>
+                <rect x="83" y="23" width="50" height="4" rx="1" fill="#D1D5DB"/>
+
+                <rect x="156" y="0" width="70" height="42" rx="3" fill="#111827"/>
+                <rect x="161" y="5" width="60" height="32" rx="1.5" fill="#1F2937"/>
+                <text x="191" y="24" text-anchor="middle" font-family="'Geist', sans-serif" font-size="6" fill="#9CA3AF" font-weight="600">REDSTONE</text>
+              </g>
+
+              <!-- Live Twitter Social Ticker Bar -->
+              <g transform="translate(0, 186)">
+                <rect x="0" y="0" width="400" height="14" fill="#F3F4F6" stroke="#E5E7EB" stroke-width="0.5"/>
+                <!-- Ticker items -->
+                <circle cx="28" cy="7" r="3" fill="#3B82F6"/>
+                <text x="35" y="9.5" font-family="'Geist Mono', monospace" font-size="5.5" fill="#374151">@splinetool: 😍</text>
+                <circle cx="118" cy="7" r="3" fill="#10B981"/>
+                <text x="125" y="9.5" font-family="'Geist Mono', monospace" font-size="5.5" fill="#374151">@happydesign: magic</text>
+                <circle cx="218" cy="7" r="3" fill="#F59E0B"/>
+                <text x="225" y="9.5" font-family="'Geist Mono', monospace" font-size="5.5" fill="#374151">@kubadesign: cool idea</text>
+                <circle cx="318" cy="7" r="3" fill="#EF4444"/>
+                <text x="325" y="9.5" font-family="'Geist Mono', monospace" font-size="5.5" fill="#374151">@nickbakeddesign</text>
+              </g>
+            </svg>
+          </div>
+          <div class="card-banner-overlay"></div>
+          <div class="card-badge-top">
+            <span class="badge-tag">3D Spline Sculpture</span>
+            <span class="badge-tag">Web3 &amp; AI Partner</span>
+          </div>
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="card-title">Yogi Suria — Design Partner (Neoclassical 3D &amp; Web3)</h2>
+            <div class="card-meta">ysuriadesign/ · Neoclassical 3D Spline &amp; Web3 Studio</div>
+          </div>
+          <p class="card-desc">
+            1:1 autonomous replication of Yogi Suria's design studio portfolio. Features an interactive 3D Spline neoclassical marble bust with headphones holding an iPhone and MacBook, local Draco wasm decompression, infinite dual-speed project carousels with 27 WebM looping video reels, a live Twitter social proof ticker, engraved dual-approach cards, and a panoramic cloudscape contact footer.
+          </p>
+          <div class="tech-stack-row">
+            <span class="tech-pill">3D Spline Tool</span>
+            <span class="tech-pill">Draco Wasm</span>
+            <span class="tech-pill">27 WebM Reels</span>
+            <span class="tech-pill">FK Raster Pixel Font</span>
+            <span class="tech-pill">Geist &amp; Geist Mono</span>
+            <span class="tech-pill">276 Local Assets</span>
+          </div>
+          <div class="card-actions">
+            <a href="./ysuriadesign/" class="btn-launch">
+              Launch Live Demo
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+            </a>
+            <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/tree/main/ysuriadesign/ADAPTED_PROMPT.md" target="_blank" rel="noopener noreferrer" class="btn-secondary">Prompt Spec</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-left">
+        <div><strong>Website Design & Prompts</strong> — Open Curation Archive</div>
+        <div>Built autonomously with DeepMind Antigravity, TypeSafe Jev & Gemini 3.5 Flash</div>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="https://github.com/knarayanareddy/WebsitedesignandPrompts/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Interactive Filter & Search Script -->
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+
+    filterBtns.forEach(button => { const name=button.textContent.replace(/\s*\(\d+\)$/, ''); const count=button.dataset.filter==='all'?cards.length:[...cards].filter(card=>card.dataset.category.split(' ').includes(button.dataset.filter)).length; button.textContent=`${name} (${count})`; });
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    function applyFilters() {
+      cards.forEach(card => {
+        const categories = card.dataset.category.split(' ');
+        const title = (card.dataset.title || '').toLowerCase();
+        const text = card.textContent.toLowerCase();
+
+        const matchesFilter = (currentFilter === 'all') || categories.includes(currentFilter);
+        const matchesSearch = !currentSearch || title.includes(currentSearch) || text.includes(currentSearch);
+
+        if (matchesFilter && matchesSearch) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentFilter = btn.dataset.filter;
+        applyFilters();
+      });
+    });
+
+    searchInput.addEventListener('input', (e) => {
+      currentSearch = e.target.value.trim().toLowerCase();
+      applyFilters();
+    });
+
+    // Smart IntersectionObserver to control playback of Fig 0.1 reel videos
+    const reelVideos = document.querySelectorAll('.grid9 video');
+    if ('IntersectionObserver' in window) {
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.15 });
+
+      reelVideos.forEach(v => videoObserver.observe(v));
+    }
+  </script>
+</body>
+</html>
