@@ -34,8 +34,9 @@ async function run() {
     }
   });
 
-  console.log('Navigating to http://localhost:3008/kumo/ ...');
-  await page.goto('http://localhost:3008/kumo/', { waitUntil: 'networkidle2' });
+  const targetUrl = process.argv[2] || 'http://localhost:3008/kumo/';
+  console.log(`Navigating to ${targetUrl} ...`);
+  await page.goto(targetUrl, { waitUntil: 'networkidle2' });
 
   // 1. Capture preloader screenshot immediately or during progress
   await page.screenshot({ path: path.join(__dirname, 'kumo_live_preloader.png') });
