@@ -55,6 +55,8 @@ statics=(
   "ysuriadesign:ysuriadesign"
   "atrium:atrium"
   "kumo:kumo"
+  "wanderlust:wanderlust"
+  "halcyon:halcyon"
 )
 
 echo "==> assembling $site_dir from $(git rev-parse --short HEAD 2>/dev/null || echo 'working tree')"
