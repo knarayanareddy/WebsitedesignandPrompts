@@ -265,6 +265,16 @@
     body.theme-light .studio-header {
       color: var(--ink);
       text-shadow: none;
+      opacity: 1 !important;
+    }
+    body.video-active:not(.theme-light) .studio-header {
+      opacity: 0;
+      pointer-events: auto;
+      transition: opacity 0.3s ease;
+    }
+    body.video-active:not(.theme-light) .ticker-bar {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .header-logo {
@@ -408,6 +418,18 @@
       overflow: hidden;
       background-color: #0b0c10;
     }
+    .cinematic-bg .scene-video-scrub {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      will-change: opacity;
+      z-index: 2;
+    }
     .cinematic-bg .scene-bg-img {
       position: absolute;
       inset: 0;
@@ -418,6 +440,7 @@
       transform: scale(1.05);
       transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
       pointer-events: none;
+      z-index: 1;
     }
     .cinematic-bg .scene-bg-img.active {
       opacity: 1;
@@ -506,6 +529,44 @@
       border-left: 1px solid rgba(255, 255, 255, 0.3);
       padding-left: 12px;
       font-weight: 700;
+    }
+
+    /* Seamless Native Video Integration: Hide DOM duplicate text on desktop, clean card on mobile */
+    @media (min-width: 769px) {
+      body.video-active .scene-caption-layer .scene-text-block,
+      body.video-active .scene-caption-layer .scene-stamp-block {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none;
+      }
+    }
+    @media (max-width: 768px) {
+      body.video-active .scene-caption-layer .scene-text-block.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        bottom: 36px;
+        left: 18px;
+        right: 18px;
+        max-width: 100%;
+        text-align: center;
+        background: rgba(14, 13, 12, 0.72);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      body.video-active .scene-caption-layer .scene-text-block .scene-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      body.video-active .scene-caption-layer .scene-text-block .scene-desc {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      body.video-active .scene-caption-layer .scene-stamp-block {
+        display: none !important;
+      }
     }
 
     /* Bottom Ticker Marquee Bar */
@@ -1083,6 +1144,7 @@
 
       <!-- Master Cinematic Hand-Painted Background Scenes -->
       <div class="cinematic-bg" id="cinematicBg">
+        <video id="storyVideo" class="scene-video-scrub" muted playsinline preload="auto" src="./assets/video/kumo-scrub.mp4"></video>
         <img class="scene-bg-img active" id="sceneImg01" src="./assets/images/scene_01_sky.jpg" alt="Sky over the city">
         <img class="scene-bg-img" id="sceneImg02" src="./assets/images/scene_02_city.jpg" alt="Autumn city avenue">
         <img class="scene-bg-img" id="sceneImg03" src="./assets/images/scene_03_girl.jpg" alt="Looking up at facades">
@@ -1383,6 +1445,38 @@
       updateClock();
 
       // 3. Scrollytelling Unbroken Shot Progression & Scene Crossfade
+      const storyVideo = document.getElementById('storyVideo');
+      let isVideoSeeking = false;
+      let pendingScrubTime = null;
+
+      if (storyVideo) {
+        storyVideo.muted = true;
+        storyVideo.play().then(() => storyVideo.pause()).catch(() => {});
+        storyVideo.addEventListener('loadedmetadata', () => {
+          document.body.classList.add('video-active');
+        });
+        storyVideo.addEventListener('seeked', () => {
+          isVideoSeeking = false;
+          if (pendingScrubTime !== null) {
+            const nextTime = pendingScrubTime;
+            pendingScrubTime = null;
+            applyVideoScrub(nextTime);
+          }
+        });
+      }
+
+      function applyVideoScrub(targetTime) {
+        if (!storyVideo || isNaN(storyVideo.duration) || storyVideo.duration <= 0) return;
+        if (isVideoSeeking) {
+          pendingScrubTime = targetTime;
+          return;
+        }
+        if (Math.abs(storyVideo.currentTime - targetTime) > 0.02) {
+          isVideoSeeking = true;
+          storyVideo.currentTime = targetTime;
+        }
+      }
+
       const sceneImages = [
         document.getElementById('sceneImg01'),
         document.getElementById('sceneImg02'),
@@ -1461,7 +1555,29 @@
           }
         });
 
-        // Scene background images crossfade (scenes 4 and 5 use panorama sceneImg05)
+        // Continuous Cinematic 3D Movie Scrub Engine
+        const hasVideo = storyVideo && !isNaN(storyVideo.duration) && storyVideo.duration > 0;
+        if (hasVideo) {
+          document.body.classList.add('video-active');
+          const scrubCutoff = 0.74; // At 0.74, 3D movie dissolves into 3D revolving carousel
+          const duration = storyVideo.duration;
+
+          if (currentScrollFraction < scrubCutoff) {
+            // Scrub smoothly through the unbroken 3D anime camera flight
+            const scrubNorm = Math.max(0, currentScrollFraction / scrubCutoff);
+            const targetTime = Math.min(duration - 0.03, scrubNorm * duration);
+            applyVideoScrub(targetTime);
+            storyVideo.style.opacity = '1';
+          } else {
+            // Smoothly dissolve video into the cream 3D amphitheater carousel
+            const fade = Math.max(0, 1 - (currentScrollFraction - scrubCutoff) / 0.03);
+            storyVideo.style.opacity = fade.toFixed(3);
+          }
+        } else {
+          document.body.classList.remove('video-active');
+        }
+
+        // Scene background images crossfade (scenes 4 and 5 use panorama sceneImg05 as fallback)
         const activeImgIdx = Math.min(sceneImages.length - 1, activeScene);
         sceneImages.forEach((img, idx) => {
           if (img) {
