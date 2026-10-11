@@ -28,7 +28,8 @@ const sites = [
   { slug: 'expa', title: 'Expa', url: 'http://localhost:3008/_site/expa/', waitMs: 2500 },
   { slug: 'vitaliiradov', title: 'Vitalii Radov', url: 'http://localhost:3008/_site/vitaliiradov/', waitMs: 2000 },
   { slug: 'meliketurgut', title: 'Melike Turgut', url: 'http://localhost:3008/_site/meliketurgut/', waitMs: 2500 },
-  { slug: 'ysuriadesign', title: 'Yogi Suria', url: 'http://localhost:3008/_site/ysuriadesign/', waitMs: 2500 }
+  { slug: 'ysuriadesign', title: 'Yogi Suria', url: 'http://localhost:3008/_site/ysuriadesign/', waitMs: 2500 },
+  { slug: 'atrium', title: 'ATRIUM MTL', url: 'http://localhost:3008/_site/atrium/', waitMs: 2600 }
 ];
 
 console.log(`Starting preview capture for ${sites.length} sites...`);

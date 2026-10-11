@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>ATRIUM MTL — An archive of light cast in stone</title>
+  <meta name="description" content="ATRIUM MTL archives old structures as raw photographs from across Montreal, a collection at an Annual Photography Retrospective, autumn 2026.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ef5d44'/%3E%3Ctext x='50' y='68' font-size='50' font-family='sans-serif' font-weight='900' text-anchor='middle' fill='%23fff'%3EA%3C/text%3E%3C/svg%3E">
+
+  <!-- Self-hosted Variable Fonts & Google Fonts Fallback -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Inter:wght@100..900&display=block" rel="stylesheet">
+
+  <style>
+    /* Self-hosted fonts */
+    @font-face {
+      font-family: "Archivo";
+      font-style: normal;
+      font-weight: 100 900;
+      font-stretch: 62% 125%;
+      font-display: block;
+      src: url("./assets/fonts/archivo.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 100 900;
+      font-display: block;
+      src: url("./assets/fonts/inter.woff2") format("woff2");
+    }
+
+    :root {
+      /* Palette */
+      --paper: #f5f4ef;
+      --ink: #0f0f0e;
+      --card-dark: #151515;
+      --card-cream: #f9f6f1;
+      --red: #ef5d44;
+      --yellow: #fcdd71;
+      --blue: #9fd5f7;
+
+      /* Header tokens (White theme) */
+      --nav-bg: #ffffff;
+      --nav-bar: #ffffff;
+      --nav-fg: var(--ink);
+      --nav-muted: #62615d;
+      --nav-line: rgba(15, 15, 14, 0.08);
+      --nav-rule: rgba(15, 15, 14, 0.16);
+      --nav-search: #e8e7e2;
+      --nav-cta: var(--ink);
+      --nav-cta-fg: #ffffff;
+
+      /* Grid desktop tokens */
+      --col: 205.33px;
+      --gap: 13px;
+      --pitch: 282.5px;
+      --r: 22px;
+
+      /* Fonts */
+      --display: "Archivo", "Arial Black", Impact, system-ui, sans-serif;
+      --sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+      /* CloudFront Media */
+      --img-sculpt: url(https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc524fc3-03c3-40a1-9954-22eab1322592.webp);
+      --img-man: url(https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/1d56967e-0ed5-40f8-812d-9360e5ec1780.webp);
+      --img-visit: url(https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5f3f6135-26b9-4c48-92ad-105161327cbc.webp);
+      --img-sil: url(https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/e7b68ae9-9240-4f52-a0a2-89082df4b8d0.webp);
+      --grain: url(https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/40b7fef3-410d-4ef3-bd67-0a2fc7ee5a1d.svg);
+
+      /* Responsive Mode */
+      --mode: mob;
+    }
+
+    @media (min-width: 560px) and (min-aspect-ratio: 1/1) {
+      :root { --mode: mob-l; }
+    }
+    @media (min-width: 600px) and (min-height: 820px) and (max-aspect-ratio: 21/20) {
+      :root { --mode: tab-p; }
+    }
+    @media (min-width: 900px) and (min-height: 540px) and (min-aspect-ratio: 21/20) {
+      :root { --mode: tab-l; }
+    }
+    @media (min-width: 1097px) and (min-aspect-ratio: 27/25) {
+      :root { --mode: desk; }
+    }
+
+    /* Reset & Base */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: geometricPrecision;
+      overflow: hidden;
+    }
+
+    a, button {
+      color: inherit;
+      outline-offset: 3px;
+    }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid #3b82f6;
+    }
+
+    /* ==========================================================================
+       STAGE CONTAINER
+       ========================================================================== */
+    .stage {
+      position: relative;
+      width: 100%;
+      height: 100svh;
+      overflow: hidden;
+      background: var(--paper);
+    }
+
+    /* Desktop Viewport Canvas */
+    html.desk .stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: calc(var(--W, 1280) * 1px);
+      height: calc(var(--H, 800) * 1px);
+      transform: scale(var(--s, 1));
+      transform-origin: 0 0;
+    }
+
+    /* ==========================================================================
+       HEADER (Desktop Architecture)
+       ========================================================================== */
+    .hdr {
+      position: absolute;
+      top: 0;
+      left: 40px;
+      right: 40px;
+      height: 142px;
+      z-index: 10;
+      background: var(--nav-bg);
+      border-radius: 0 0 22px 22px;
+      box-shadow: 0 0 0 1px var(--nav-line), 0 16px 36px -24px rgba(15, 15, 14, 0.30);
+      display: flex;
+      flex-direction: column;
+      transform: translate3d(0, 0, 0);
+      transition: box-shadow 0.2s ease;
+    }
+
+    .util {
+      height: 40px;
+      border-bottom: 1px solid var(--nav-line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0 0 24px;
+      font-size: 11px;
+    }
+
+    .phones {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+
+    .phone-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--nav-fg);
+      text-decoration: none;
+      font-size: 11px;
+      line-height: 1.25;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+    .phone-link:hover {
+      color: var(--red);
+    }
+
+    .ico-phone {
+      flex-shrink: 0;
+      color: var(--ink);
+    }
+
+    .v-rule {
+      width: 1px;
+      height: 20px;
+      background: var(--nav-rule);
+      margin: 0 24px;
+    }
+
+    .unav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      height: 100%;
+    }
+
+    .unav-link {
+      color: var(--nav-fg);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      line-height: 1.15;
+      transition: color 0.15s ease;
+    }
+    .unav-link:hover {
+      color: var(--red);
+    }
+    .unav-link.two-line {
+      text-align: left;
+    }
+
+    .search-btn {
+      width: 39px;
+      height: 39px;
+      background: var(--nav-search);
+      border: none;
+      border-radius: 5px 0 0 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      margin-left: 10px;
+      transition: background 0.15s ease;
+    }
+    .search-btn:hover {
+      background: #dfded8;
+    }
+
+    .main-row {
+      height: 102px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .logo-title {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 31px;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      font-stretch: 85%;
+      -webkit-text-stroke: 0.35px currentColor;
+    }
+
+    .logo-sub {
+      font-family: var(--sans);
+      font-weight: 600;
+      font-size: 8.6px;
+      letter-spacing: 0.14em;
+      color: var(--nav-muted);
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .nav-item {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.15s ease;
+    }
+    .nav-item:hover {
+      color: var(--red);
+    }
+
+    .nav-arrow-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    }
+    .nav-item:hover .nav-arrow-circle {
+      transform: translate(2px, -2px);
+      background: var(--red);
+    }
+
+    .nav-sep {
+      color: var(--nav-rule);
+      font-size: 16px;
+      user-select: none;
+    }
+
+    .menu-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+      padding: 6px 8px;
+      border-radius: 6px;
+      transition: background 0.15s;
+    }
+    .menu-btn:hover {
+      background: rgba(15, 15, 14, 0.05);
+    }
+
+    .menu-burger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+      width: 16px;
+      height: 14px;
+    }
+    .menu-burger span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    .hdr-cta {
+      display: flex;
+      align-items: center;
+    }
+
+    .btn-tickets {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      background: var(--nav-cta);
+      color: var(--nav-cta-fg);
+      width: 116px;
+      height: 63px;
+      border-radius: 22px;
+      position: relative;
+      padding-left: 20px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    }
+    .btn-tickets:hover {
+      transform: translateY(-2px);
+      background: #262625;
+    }
+
+    .ticket-badge {
+      position: absolute;
+      right: -2px;
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--nav-cta);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-45deg);
+      border: 3px solid #fff;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-tickets:hover .ticket-badge {
+      transform: rotate(0deg) scale(1.04);
+    }
+
+    /* Expandable Menu Panel (Mob/Tab) */
+    .menu-panel {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border-radius: 0 0 22px 22px;
+      box-shadow: 0 24px 48px -12px rgba(15, 15, 14, 0.25);
+      border: 1px solid var(--nav-line);
+      border-top: none;
+      padding: 24px 28px 32px;
+      z-index: 9;
+    }
+    .hdr[data-open="true"] .menu-panel {
+      display: block;
+      animation: menuFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes menuFadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .menu-panel-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .menu-group-title {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--nav-muted);
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .menu-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .menu-link {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .menu-link:hover {
+      color: var(--red);
+    }
+
+    /* ==========================================================================
+       HERO (Desktop Architecture)
+       ========================================================================== */
+    .hero {
+      position: absolute;
+      left: 86px;
+      top: calc(200px + (var(--H, 800) - 800) * 0.5px);
+      width: 480px;
+      z-index: 3;
+    }
+
+    .h1 {
+      font-family: var(--display);
+      font-weight: 900;
+      font-size: 80px;
+      line-height: 75.3px;
+      letter-spacing: -0.06em;
+      text-transform: uppercase;
+      font-stretch: 85%;
+      font-variation-settings: "wdth" 85;
+      -webkit-text-stroke: 1.1px currentColor;
+      margin: 0;
+      color: var(--ink);
+    }
+
+    .ln-wrap {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .ln {
+      display: inline-block;
+      font-size: 0.95em;
+      letter-spacing: -0.05em;
+      white-space: nowrap;
+      will-change: transform;
+    }
+
+    .hero-p {
+      position: absolute;
+      top: 344px;
+      left: 0;
+      width: 460px;
+      font-family: var(--sans);
+      font-size: 18px;
+      line-height: 26.6px;
+      color: var(--nav-muted);
+      margin: 0;
+    }
+    .hero-p strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .acts {
+      position: absolute;
+      top: 460px;
+      left: 0;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .act-btn-tickets {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      background: var(--ink);
+      color: #fff;
+      height: 56px;
+      padding: 0 8px 0 24px;
+      border-radius: 22px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 700;
+      gap: 14px;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    }
+    .act-btn-tickets:hover {
+      transform: translateY(-2px);
+      background: #262625;
+    }
+
+    .act-ticket-circle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: #2a2a29;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: rotate(-45deg);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .act-link-inst {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    .act-link-inst:hover {
+      color: var(--red);
+    }
+
+    .act-arrow-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s;
+    }
+    .act-link-inst:hover .act-arrow-circle {
+      transform: translate(2px, -2px);
+      background: var(--red);
+    }
+
+    /* ==========================================================================
+       MOSAIC GRID & INFINITE MARQUEE
+       ========================================================================== */
+    .grid {
+      position: absolute;
+      right: 62px;
+      top: 0;
+      bottom: 0;
+      width: calc(3 * var(--col) + 2 * var(--gap));
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .col {
+      position: absolute;
+      width: var(--col);
+      display: flex;
+      flex-direction: column;
+      will-change: transform;
+      animation: colDown 14.6s linear infinite;
+    }
+
+    .c1 {
+      left: 0;
+      top: 86px;
+    }
+    .c2 {
+      left: calc(var(--col) + var(--gap));
+      top: -11.5px;
+      animation-name: colUp;
+    }
+    .c3 {
+      left: calc(2 * (var(--col) + var(--gap)));
+      top: 86.5px;
+    }
+
+    /* Extra Wide-Screen Columns */
+    .x1 {
+      left: calc(-1 * (var(--col) + var(--gap)));
+      top: -11.5px;
+      display: none;
+      animation-name: colUp;
+    }
+    .x2 {
+      left: calc(-2 * (var(--col) + var(--gap)));
+      top: 86px;
+      display: none;
+      animation-name: colDown;
+    }
+    .x3 {
+      left: calc(-3 * (var(--col) + var(--gap)));
+      top: -11.5px;
+      display: none;
+      animation-name: colUp;
+    }
+
+    html.desk.ex1 .x1 { display: flex; }
+    html.desk.ex2 .x1, html.desk.ex2 .x2 { display: flex; }
+    html.desk.ex3 .x1, html.desk.ex3 .x2, html.desk.ex3 .x3 { display: flex; }
+
+    @keyframes colDown {
+      0% { transform: translate3d(0, 0, 0); }
+      100% { transform: translate3d(0, -50%, 0); }
+    }
+    @keyframes colUp {
+      0% { transform: translate3d(0, -50%, 0); }
+      100% { transform: translate3d(0, 0, 0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .col {
+        animation: none !important;
+      }
+    }
+
+    /* Cell Styles */
+    .cell {
+      width: var(--col);
+      height: calc(var(--pitch) - var(--gap));
+      border-radius: var(--r);
+      margin-bottom: var(--gap);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      box-sizing: border-box;
+      background-color: var(--paper);
+    }
+
+    .ph {
+      background-color: #d8d6cf;
+    }
+    .ph::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--pic);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .i-sculpt { --pic: var(--img-sculpt); }
+    .i-man { --pic: var(--img-man); }
+    .i-visit { --pic: var(--img-visit); }
+    .i-sil { --pic: var(--img-sil); }
+
+    .red { background-color: var(--red); }
+    .yellow { background-color: var(--yellow); }
+    .blue { background-color: var(--blue); }
+    .cream {
+      background-color: var(--card-cream);
+      box-shadow: inset 0 0 0 1px #e9e6df;
+    }
+    .dark {
+      background-color: var(--card-dark);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    }
+
+    /* Grain Overlay on Solid Cells */
+    .cell:not(.ph)::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--grain);
+      background-repeat: repeat;
+      background-size: 160px 160px;
+      opacity: 0.13;
+      mix-blend-mode: multiply;
+      pointer-events: none;
+    }
+    .dark::after {
+      mix-blend-mode: screen !important;
+      opacity: 0.035 !important;
+    }
+
+    /* Numeric Photo Crops (Desktop Hero Tiles) */
+    .f-sculpt::before {
+      width: 124.19%;
+      height: 112.57%;
+      left: -16.07%;
+      top: -8.5%;
+      background-size: 100% 100%;
+    }
+    .f-man::before {
+      width: 113.48%;
+      height: 103.36%;
+      left: -5.36%;
+      top: -3.54%;
+      background-size: 100% 100%;
+    }
+    .f-visit {
+      background: linear-gradient(90deg, #c6c5c3, #9b9a98 55%, #7a7977);
+    }
+    .f-visit::before {
+      width: 110.07%;
+      height: 100%;
+      left: -3.9%;
+      top: 8.5%;
+      background-size: 100% 100%;
+    }
+    .f-visit::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.26) 0%, transparent 13%);
+      pointer-events: none;
+    }
+    .f-sil::before {
+      width: 139.29%;
+      height: 126.37%;
+      left: -8.77%;
+      top: -56.64%;
+      background-size: 100% 100%;
+    }
+
+    /* ==========================================================================
+       RESPONSIVE ARCHITECTURE: MOBILE & TABLET MODES
+       ========================================================================== */
+
+    /* MOBILE PORTRAIT (html.mob) */
+    html.mob body {
+      overflow: hidden;
+    }
+    html.mob .stage {
+      display: flex;
+      flex-direction: column;
+      height: 100svh;
+      padding: env(safe-area-inset-top, 0) env(safe-area-inset-right, 0) env(safe-area-inset-bottom, 0) env(safe-area-inset-left, 0);
+    }
+    html.mob .hdr {
+      position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: auto;
+      border-radius: 0 0 16px 16px;
+      margin: 0 12px;
+      box-shadow: 0 0 0 1px var(--nav-line), 0 8px 24px -12px rgba(15, 15, 14, 0.2);
+    }
+    html.mob .util,
+    html.mob .main-nav .nav-item,
+    html.mob .main-nav .nav-sep,
+    html.mob .hdr-cta {
+      display: none;
+    }
+    html.mob .main-row {
+      height: 64px;
+      padding: 0 16px;
+    }
+    html.mob .logo-title {
+      font-size: 22px;
+    }
+    html.mob .logo-sub {
+      font-size: 7.2px;
+    }
+    html.mob .hero {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: 20px 20px 16px;
+      order: 1;
+      flex-shrink: 0;
+    }
+    html.mob .h1 {
+      font-size: clamp(38px, 10vw, 56px);
+      line-height: 0.94;
+    }
+    html.mob .hero-p {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      font-size: 14px;
+      line-height: 20px;
+      margin-top: 14px;
+    }
+    html.mob .acts {
+      position: relative;
+      top: 0;
+      left: 0;
+      margin-top: 16px;
+      gap: 14px;
+    }
+    html.mob .act-btn-tickets {
+      height: 48px;
+      font-size: 14px;
+      padding: 0 6px 0 16px;
+    }
+    html.mob .act-ticket-circle {
+      width: 36px;
+      height: 36px;
+    }
+    html.mob .act-link-inst {
+      font-size: 14px;
+    }
+    html.mob .act-arrow-circle {
+      width: 28px;
+      height: 28px;
+    }
+    html.mob .grid {
+      position: relative;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      order: 2;
+      flex: 1;
+      min-height: 0;
+      width: calc(100vw - 24px);
+      margin: 0 auto;
+      --col: calc((100vw - 24px - 2 * 10px) / 3);
+      --pitch: calc(var(--col) * 1.37);
+      --gap: 10px;
+      --r: 14px;
+    }
+    html.mob .c1 { top: -20px; }
+    html.mob .c2 { top: -60px; }
+    html.mob .c3 { top: -10px; }
+    html.mob .f-visit::before,
+    html.mob .f-sil::before {
+      width: 100% !important;
+      height: 100% !important;
+      left: 0 !important;
+      top: 0 !important;
+      background-size: cover !important;
+    }
+    html.mob .f-visit::after {
+      display: none !important;
+    }
+
+    /* MOBILE LANDSCAPE (html.mob-l) */
+    html.mob-l .stage {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
+      height: 100svh;
+    }
+    html.mob-l .hdr {
+      grid-column: 1 / -1;
+      position: relative;
+      left: 0;
+      right: 0;
+      margin: 0 16px;
+      height: 58px;
+    }
+    html.mob-l .main-row {
+      height: 58px;
+    }
+    html.mob-l .util {
+      display: none;
+    }
+    html.mob-l .hero {
+      position: relative;
+      left: 0;
+      top: 0;
+      width: 100%;
+      padding: 16px 24px;
+    }
+    html.mob-l .h1 {
+      font-size: 38px;
+      line-height: 36px;
+    }
+    html.mob-l .hero-p {
+      position: relative;
+      top: 0;
+      font-size: 13px;
+      line-height: 18px;
+      margin-top: 10px;
+    }
+    html.mob-l .acts {
+      position: relative;
+      top: 0;
+      margin-top: 12px;
+    }
+    html.mob-l .grid {
+      position: relative;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      --col: 100px;
+      --pitch: 138px;
+      --gap: 8px;
+      --r: 12px;
+    }
+
+    /* TABLET MODES (html.tab, html.tab-p, html.tab-l) */
+    html.tab .hdr {
+      position: absolute;
+      top: 0;
+      left: 24px;
+      right: 24px;
+      height: 128px;
+    }
+    html.tab .util {
+      height: 36px;
+      padding-left: 18px;
+    }
+    html.tab .main-row {
+      height: 92px;
+      padding: 0 18px;
+    }
+    html.tab .main-nav .nav-item,
+    html.tab .main-nav .nav-sep {
+      display: none;
+    }
+    html.tab .main-nav .menu-btn {
+      display: inline-flex;
+    }
+    html.tab .hero {
+      left: 36px;
+      width: 420px;
+    }
+    html.tab .h1 {
+      font-size: clamp(52px, 6vw, 72px);
+      line-height: 0.94;
+    }
+    html.tab .hero-p {
+      width: 380px;
+      font-size: 16px;
+      line-height: 24px;
+      top: 300px;
+    }
+    html.tab .acts {
+      top: 410px;
+    }
+    html.tab .grid {
+      right: 24px;
+      --col: 160px;
+      --pitch: 220px;
+      --gap: 10px;
+      --r: 18px;
+    }
+
+    /* ==========================================================================
+       INTRO LOAD TIMELINE (WAAPI Preparation & Fallback)
+       ========================================================================== */
+    html.intro .hdr {
+      transform: translateY(calc(-100% - 48px));
+      opacity: 0;
+    }
+    html.intro .h1 .ln {
+      transform: translateY(110%);
+    }
+    html.intro .hero-p,
+    html.intro .acts {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    html.intro .col {
+      opacity: 0;
+    }
+
+    .h1.masking .ln-wrap {
+      overflow: hidden;
+    }
+  </style>
+
+  <script>
+    // Immediate pre-execution: enable intro state if user prefers motion
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('intro');
+      setTimeout(() => document.documentElement.classList.remove('intro'), 4000);
+    }
+  </script>
+</head>
+<body>
+
+  <div class="stage" id="stage">
+
+    <!-- FLOATING WHITE HEADER -->
+    <header class="hdr" id="header" role="banner">
+      <!-- Utility Strip -->
+      <div class="util">
+        <div class="phones">
+          <a href="tel:+14188386000" class="phone-link p1" aria-label="House of Brutalism phone">
+            <svg class="ico-phone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span class="p-txt">House of Brutalism : 418<br>838-6000</span>
+          </a>
+          <span class="v-rule" aria-hidden="true"></span>
+          <a href="tel:+14188386001" class="phone-link p2" aria-label="Studio Exhibitions phone">
+            <svg class="ico-phone" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            <span class="p-txt">Studio Exhibitions : 418<br>838-6001</span>
+          </a>
+        </div>
+
+        <nav class="unav" aria-label="Useful links">
+          <a href="#programmes" class="unav-link">Programmes</a>
+          <a href="#events" class="unav-link">Events</a>
+          <a href="#prints" class="unav-link two-line">Photo-<br>prints</a>
+          <a href="#visits" class="unav-link">Visits</a>
+          <a href="#preserve" class="unav-link two-line">Help<br>preserve</a>
+          <button class="search-btn" aria-label="Search archive">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </button>
+        </nav>
+      </div>
+
+      <!-- Main Navigation Row -->
+      <div class="main-row">
+        <div class="brand">
+          <a href="./" class="logo" aria-label="ATRIUM MTL Home">
+            <span class="logo-title">ATRIUM MTL</span>
+            <span class="logo-sub">AN ARCHIVE OF LIGHT CAST IN STONE</span>
+          </a>
+        </div>
+
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#installations" class="nav-item">
+            <span>Installations</span>
+            <span class="nav-arrow-circle" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 17 7 17 17"/>
+              </svg>
+            </span>
+          </a>
+          <span class="nav-sep" aria-hidden="true">/</span>
+          <a href="#interviews" class="nav-item">Interviews</a>
+          <a href="#photographs" class="nav-item">Photographs</a>
+          <button class="menu-btn" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
+            <span class="menu-burger" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+            <span class="menu-label">Menu</span>
+          </button>
+        </nav>
+
+        <div class="hdr-cta">
+          <a href="#tickets" class="btn-tickets" aria-label="Tickets">
+            <span class="ticket-txt">Tickets</span>
+            <span class="ticket-badge" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="6" width="20" height="12" rx="2"/>
+                <circle cx="6" cy="12" r="2" fill="currentColor"/>
+                <line x1="10" y1="9" x2="10" y2="15" stroke-dasharray="2 2"/>
+                <circle cx="18" cy="12" r="2" fill="currentColor"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Expandable Mobile / Tablet Menu Panel -->
+      <div class="menu-panel" id="menuPanel" aria-hidden="true">
+        <div class="menu-panel-grid">
+          <div>
+            <div class="menu-group-title">Exhibitions</div>
+            <div class="menu-links">
+              <a href="#installations" class="menu-link">Installations <span>↗</span></a>
+              <a href="#interviews" class="menu-link">Interviews <span>↗</span></a>
+              <a href="#photographs" class="menu-link">Photographs <span>↗</span></a>
+              <a href="#tickets" class="menu-link">Tickets <span>↗</span></a>
+            </div>
+          </div>
+          <div>
+            <div class="menu-group-title">Archive</div>
+            <div class="menu-links">
+              <a href="#programmes" class="menu-link">Programmes</a>
+              <a href="#events" class="menu-link">Events</a>
+              <a href="#prints" class="menu-link">Photo-prints</a>
+              <a href="#visits" class="menu-link">Visits</a>
+              <a href="#preserve" class="menu-link">Help preserve</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO CONTENT -->
+    <section class="hero" id="hero">
+      <h1 class="h1 masking" id="heroH1">
+        <span class="ln-wrap"><span class="ln">An archive</span></span>
+        <span class="ln-wrap"><span class="ln">of light</span></span>
+        <span class="ln-wrap"><span class="ln">cast in</span></span>
+        <span class="ln-wrap"><span class="ln">stone</span></span>
+      </h1>
+      <p class="hero-p" id="heroP">
+        ATRIUM MTL archives old structures as raw photographs from across Montreal, a collection at an <strong>Annual Photography Retrospective</strong>, autumn 2026.
+      </p>
+      <div class="acts" id="heroActs">
+        <a href="#tickets" class="act-btn-tickets" aria-label="Get Tickets">
+          <span class="act-ticket-txt">Tickets</span>
+          <span class="act-ticket-circle" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="6" width="20" height="12" rx="2"/>
+              <circle cx="6" cy="12" r="2" fill="currentColor"/>
+              <line x1="10" y1="9" x2="10" y2="15" stroke-dasharray="2 2"/>
+              <circle cx="18" cy="12" r="2" fill="currentColor"/>
+            </svg>
+          </span>
+        </a>
+        <a href="#installations" class="act-link-inst">
+          <span class="act-inst-txt">Installations</span>
+          <span class="act-arrow-circle" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="7" y1="17" x2="17" y2="7"/>
+              <polyline points="7 7 17 7 17 17"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <!-- RIGHT-HAND MOSAIC GRID (6 COLUMNS) -->
+    <div class="grid" id="grid" aria-hidden="true">
+      <!-- Wide-Screen Extra Columns (Left extensions) -->
+      <div class="col x3">
+        <div class="cell ph i-man"></div>
+        <div class="cell blue"></div>
+        <div class="cell dark"></div>
+        <div class="cell ph i-sculpt"></div>
+        <div class="cell yellow"></div>
+      </div>
+      <div class="col x2">
+        <div class="cell yellow"></div>
+        <div class="cell ph i-sil"></div>
+        <div class="cell cream"></div>
+        <div class="cell red"></div>
+        <div class="cell ph i-visit"></div>
+      </div>
+      <div class="col x1">
+        <div class="cell blue"></div>
+        <div class="cell ph i-man"></div>
+        <div class="cell red"></div>
+        <div class="cell ph i-sculpt"></div>
+        <div class="cell cream"></div>
+      </div>
+
+      <!-- Main Columns -->
+      <div class="col c1">
+        <div class="cell red"></div>
+        <div class="cell ph i-sculpt f-sculpt"></div>
+        <div class="cell ph i-man f-man"></div>
+        <div class="cell blue"></div>
+        <div class="cell ph i-visit"></div>
+      </div>
+      <div class="col c2">
+        <div class="cell yellow"></div>
+        <div class="cell ph i-visit f-visit visit"></div>
+        <div class="cell dark"></div>
+        <div class="cell ph i-sil"></div>
+        <div class="cell red"></div>
+      </div>
+      <div class="col c3">
+        <div class="cell blue"></div>
+        <div class="cell cream"></div>
+        <div class="cell ph i-sil f-sil"></div>
+        <div class="cell yellow"></div>
+        <div class="cell ph i-sculpt"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SCRIPT: VIEWPORT FIT, INFINITE CLONES, MENU & WAAPI TIMELINE -->
+  <script>
+    (function() {
+      const docEl = document.documentElement;
+      const stage = document.getElementById('stage');
+      const header = document.getElementById('header');
+      const menuToggle = document.getElementById('menuToggle');
+      const menuPanel = document.getElementById('menuPanel');
+      const MODES = ['desk', 'mob', 'mob-l', 'tab', 'tab-l', 'tab-p'];
+
+      // 1. Clone each column's 5 cells once to create seamless 50% translation loop
+      document.querySelectorAll('.col').forEach(col => {
+        const originalCells = Array.from(col.children);
+        originalCells.forEach(cell => {
+          col.appendChild(cell.cloneNode(true));
+        });
+      });
+
+      // 2. Responsive Mode & Scale Engine
+      function fit() {
+        const vw = window.innerWidth;
+        const vh = window.innerHeight;
+
+        // Read CSS-defined --mode custom property
+        const rawMode = getComputedStyle(docEl).getPropertyValue('--mode').trim() || 'mob';
+        
+        MODES.forEach(m => docEl.classList.remove(m));
+        docEl.classList.add(rawMode);
+        if (rawMode.startsWith('tab')) docEl.classList.add('tab');
+        if (rawMode.startsWith('mob')) docEl.classList.add('mob');
+
+        if (rawMode === 'desk') {
+          // Reference canvas 1280x800 - scale cover viewport
+          const s = (vw / vh > 1280 / 800) ? (vh / 800) : (vw / 1280);
+          const W = vw / s;
+          const H = vh / s;
+
+          docEl.style.setProperty('--s', s);
+          docEl.style.setProperty('--W', W);
+          docEl.style.setProperty('--H', H);
+
+          if (H > 845) {
+            docEl.classList.add('tall');
+          } else {
+            docEl.classList.remove('tall');
+          }
+
+          // Extra columns calculation
+          const extra = Math.max(0, Math.min(3, Math.floor((W - 1294) / 218.33)));
+          docEl.classList.remove('ex1', 'ex2', 'ex3');
+          if (extra >= 1) docEl.classList.add('ex1');
+          if (extra >= 2) docEl.classList.add('ex2');
+          if (extra >= 3) docEl.classList.add('ex3');
+        } else {
+          docEl.style.removeProperty('--s');
+          docEl.style.removeProperty('--W');
+          docEl.style.removeProperty('--H');
+          docEl.classList.remove('tall', 'ex1', 'ex2', 'ex3');
+        }
+      }
+
+      window.addEventListener('resize', fit);
+      window.addEventListener('orientationchange', fit);
+      fit();
+
+      // 3. Menu interactions for Mobile & Tablet
+      if (menuToggle) {
+        menuToggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = header.getAttribute('data-open') === 'true';
+          const nextState = !isOpen;
+          header.setAttribute('data-open', nextState);
+          menuToggle.setAttribute('aria-expanded', nextState);
+          menuPanel.setAttribute('aria-hidden', !nextState);
+
+          if (nextState) {
+            const firstFocusable = menuPanel.querySelector('a, button');
+            if (firstFocusable) firstFocusable.focus();
+          }
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && header.getAttribute('data-open') === 'true') {
+          header.setAttribute('data-open', 'false');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuPanel.setAttribute('aria-hidden', 'true');
+          menuToggle.focus();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (header.getAttribute('data-open') === 'true' && !header.contains(e.target)) {
+          header.setAttribute('data-open', 'false');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuPanel.setAttribute('aria-hidden', 'true');
+        }
+      });
+
+      menuPanel.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          header.setAttribute('data-open', 'false');
+          menuToggle.setAttribute('aria-expanded', 'false');
+          menuPanel.setAttribute('aria-hidden', 'true');
+        });
+      });
+
+      // 4. WAAPI Entrance Timeline
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reducedMotion) {
+        const EXPO = 'cubic-bezier(0.16, 1, 0.3, 1)';
+        const QUART = 'cubic-bezier(0.25, 1, 0.5, 1)';
+        const QUINT = 'cubic-bezier(0.22, 1, 0.36, 1)';
+
+        // Pause marquee columns during intro handoff
+        const cols = document.querySelectorAll('.col');
+        cols.forEach(col => col.style.animationPlayState = 'paused');
+
+        // Header slide down
+        header.animate([
+          { transform: 'translateY(calc(-100% - 48px))', opacity: 0 },
+          { transform: 'translateY(0)', opacity: 1 }
+        ], {
+          duration: 950,
+          easing: EXPO,
+          fill: 'forwards'
+        });
+
+        // Headline lines reveal
+        const h1Lines = document.querySelectorAll('.h1 .ln');
+        h1Lines.forEach((ln, idx) => {
+          ln.animate([
+            { transform: 'translateY(110%)' },
+            { transform: 'translateY(0)' }
+          ], {
+            duration: 1000,
+            delay: 300 + idx * 85,
+            easing: EXPO,
+            fill: 'forwards'
+          });
+        });
+
+        // Hero paragraph & action buttons
+        const heroP = document.getElementById('heroP');
+        if (heroP) {
+          heroP.animate([
+            { opacity: 0, transform: 'translateY(14px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ], {
+            duration: 900,
+            delay: 540,
+            easing: QUART,
+            fill: 'forwards'
+          });
+        }
+
+        const heroActs = document.querySelectorAll('#heroActs > *');
+        heroActs.forEach((act, idx) => {
+          act.animate([
+            { opacity: 0, transform: 'translateY(12px)' },
+            { opacity: 1, transform: 'translateY(0)' }
+          ], {
+            duration: 800,
+            delay: 620 + idx * 70,
+            easing: QUART,
+            fill: 'forwards'
+          });
+        });
+
+        // Columns entrance fade & quint-out drift ending at 2.1s handoff
+        cols.forEach((col, idx) => {
+          col.animate([
+            { opacity: 0, transform: 'translate3d(0, 40px, 0)' },
+            { opacity: 1, transform: 'translate3d(0, 0, 0)' }
+          ], {
+            duration: 1200,
+            delay: 200 + idx * 60,
+            easing: QUINT,
+            fill: 'forwards'
+          });
+        });
+
+        // Handoff to CSS marquee at T0 + 2100ms
+        setTimeout(() => {
+          cols.forEach(col => {
+            col.style.animationPlayState = 'running';
+          });
+          const h1 = document.getElementById('heroH1');
+          if (h1) h1.classList.remove('masking');
+          docEl.classList.remove('intro');
+          docEl.setAttribute('data-entrance', 'done');
+        }, 2100);
+
+      } else {
+        docEl.classList.remove('intro');
+        docEl.setAttribute('data-entrance', 'done');
+      }
+
+    })();
+  </script>
+</body>
+</html>
