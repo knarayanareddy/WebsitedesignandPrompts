@@ -34,14 +34,19 @@ Kumo is a hand-painted 2D Japanese anime animation studio website told as one un
    - Dynamic real-time canvas character wave synthesis (`@ % # * + = - : .`).
    - Harmonic noise algorithms simulate drifting cumulus clouds in golden autumn sunlight.
    - Live percentage counter (`000%` → `100%`), telemetry status ticker (`DRAWING THE CITY...` → `INKING AUTUMN LIGHT...`), and user "Skip intro" bypass.
-2. **Unbroken Shot Scrollytelling Engine**:
-   - Single continuous scroll narrative spanning 5 key animation scenes:
-     - **Scene 01**: *Above the City* — Billowing cumulus clouds with radiant golden sunlight rays over autumn hills and Mt. Fuji.
-     - **Scene 02**: *Golden Boulevard* — Sun-drenched Shibuya boulevard lined with golden ginkgo trees and Tokyo bus transit.
-     - **Scene 03**: *Looking Up* — Anime schoolgirl gazing up at gleaming glass facades with falling leaves.
-     - **Scene 04**: *The Studio Desk* — Cozy hand-drawn animation room with open window, blowing curtains, and animator's workspace.
-     - **Scene 05**: *Autumn Horizon Panorama* — Panoramic autumn tree canopy at dusk.
-   - Synchronized typography transitions with Japanese vertical kanji cel stamps (`秋の街`, `秋の`, `見上`, `制作`).
+2. **Unbroken 3D Anime Movie Scrollytelling Engine**:
+   - Single continuous 3D camera flight scrubbed smoothly by page scroll across 600vh:
+     - **Scene 01: Above the City** — Diving from radiant golden cumulus clouds over Mt. Fuji.
+     - **Scene 02: Golden Boulevard** — Swooping down into a sun-drenched Tokyo avenue lined with amber ginkgo trees.
+     - **Scene 03: Looking Up** — Gliding up towering glass skyscraper facades into the autumn sky.
+     - **Scene 04: The Animator's Room** — Flying through the window into the warm cozy studio room with paper drafts and drawing desk.
+     - **Scene 05: Skyline Horizon** — Sweeping across the autumn city horizon, smoothly dissolving into the cream 3D amphitheater carousel.
+   - **Zero-Latency Video Scrubbing Architecture**:
+     - Encoded as an intra-frame-only (all I-frame, `-g 1`) MP4 asset (`kumo-scrub.mp4`) allowing instantaneous sub-3ms seeking without decoding stalls.
+     - Processed with FFmpeg `delogo` inpainting filter to remove the stationary screen-recorder cursor without artifacts.
+     - Non-blocking sequential seek queue (`applyVideoScrub`) with `isVideoSeeking` latch and `pendingScrubTime` preventing Chromium seek cancellations.
+     - Clean typographic isolation: native anime typography displays pristinely on desktop without duplicate text ghosting; mobile renders a frosted-glass glassmorphism caption card.
+     - Dual-mode fallback: automatically falls back to 5 high-resolution hand-painted cel stills if video is unavailable.
 3. **Dual Amphitheater 3D Rotating Film Reel Ring**:
    - Revolving 3D cylinder carousel (`preserve-3d`, `rotateY`) with upper and lower tracks orbiting in opposing perspective inclinations (`rotateX(4deg)` and `rotateX(-4deg)`).
    - Momentum drag physics with inertia, touch swipes, and mouse wheel scrubbing.
