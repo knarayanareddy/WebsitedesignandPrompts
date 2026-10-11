@@ -29,10 +29,14 @@ const sites = [
   { slug: 'vitaliiradov', title: 'Vitalii Radov', url: 'http://localhost:3008/_site/vitaliiradov/', waitMs: 2000 },
   { slug: 'meliketurgut', title: 'Melike Turgut', url: 'http://localhost:3008/_site/meliketurgut/', waitMs: 2500 },
   { slug: 'ysuriadesign', title: 'Yogi Suria', url: 'http://localhost:3008/_site/ysuriadesign/', waitMs: 2500 },
-  { slug: 'atrium', title: 'ATRIUM MTL', url: 'http://localhost:3008/_site/atrium/', waitMs: 2600 }
+  { slug: 'atrium', title: 'ATRIUM MTL', url: 'http://localhost:3008/_site/atrium/', waitMs: 2600 },
+  { slug: 'kumo', title: 'Kumo Layers', url: 'http://localhost:3008/kumo/', waitMs: 2600 }
 ];
 
-console.log(`Starting preview capture for ${sites.length} sites...`);
+const targetSlug = process.argv[2];
+const activeSites = targetSlug ? sites.filter(s => s.slug === targetSlug) : sites;
+
+console.log(`Starting preview capture for ${activeSites.length} sites...`);
 
 const browser = await puppeteer.launch({
   headless: 'new',
@@ -42,8 +46,8 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 await page.setViewport({ width: 960, height: 540, deviceScaleFactor: 1 });
 
-for (let i = 0; i < sites.length; i++) {
-  const item = sites[i];
+for (let i = 0; i < activeSites.length; i++) {
+  const item = activeSites[i];
   const posterPath = join(outDir, `${item.slug}.webp`);
   const videoPath = join(outDir, `${item.slug}.mp4`);
   const frameDir = `/tmp/reel_frames_${item.slug}`;
