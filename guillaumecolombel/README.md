@@ -10,6 +10,8 @@ This folder contains the complete reverse-engineering analysis, master build pro
 | **[`REA_REVERSE_ENGINEERING_REPORT.md`](./REA_REVERSE_ENGINEERING_REPORT.md)** | Full architectural breakdown of the 12 JS chunks, 18 internal WebGPU/TSL shader subsystems, audio stems, and DOM-to-WebGPU thermal text bridge. |
 | **[`BUILD_PROMPT.md`](./BUILD_PROMPT.md)** | Copy-pasteable master prompt to build this exact 3D monolithic alabaster showcase website adapted for your own projects. |
 | **[`ORIGINAL_CSS_AND_SHADERS.md`](./ORIGINAL_CSS_AND_SHADERS.md)** | Exact production CSS (`entry.DY30v6x4.css`), MSDF 3D title wheel shader math, and pointer-fluid screen frost shader extracted from the bundles. |
+| **[`index.html`](./index.html)** | ✅ The built site — a single self-contained Three.js + GSAP recreation (open it directly or via the root showcase at `./guillaumecolombel/`). Edit the `PROJECTS` array at the top of its module script. |
+| **[`BUILD_LOG.md`](./BUILD_LOG.md)** | Build log: how every prompt section was implemented, verification steps, and how to customise. |
 
 ---
 
