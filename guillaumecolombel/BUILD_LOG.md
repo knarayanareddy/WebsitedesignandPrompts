@@ -3,8 +3,9 @@
 ### Overview
 - **Project**: Recreation of `guillaumecolombel.fr` from the REA reverse-engineering report + `BUILD_PROMPT.md` in this folder
 - **Date**: 2026-10-12
-- **Output**: `guillaumecolombel/index.html` — one self-contained file (no build step), served at `./guillaumecolombel/` from the root showcase
-- **Stack**: Three.js `0.165.0` + GSAP `3.12.5` (+ lazy `lil-gui 0.19`) via `<script type="importmap">` from jsDelivr; Inter from Google Fonts as the `Neue Montreal` fallback; Unsplash cover images with procedural fallbacks.
+- **Output**: `guillaumecolombel/` Vite + TypeScript app (`index.html` + `src/` + `public/`), built to `dist/` by `scripts/build-site.sh` and published at `/guillaumecolombel/` on GitHub Pages
+- **Stack**: Vite 6.4, TypeScript 5.5 (strict), Three.js `0.165.0`, GSAP `3.12.5`, lazy `lil-gui 0.19` — all bundled locally (`manualChunks: three, gsap`); Inter from Google Fonts as the `Neue Montreal` fallback; Unsplash cover images with procedural fallbacks.
+- **History**: first shipped as a single self-contained import-map file (commit `fa947f1`), then restructured to the repository's Vite/TypeScript template layout (like `apogee/`) so it deploys through the same pipeline as the other apps.
 
 > The brand/bio/awards content is fictional placeholder copy ("Aurèle Vasseur") — swap it with your own in the header and `#about-panel`, and edit the `PROJECTS` array at the top of the module script.
 
@@ -32,14 +33,24 @@
 
 ---
 
+### Project layout
+```
+index.html · vite.config.ts · tsconfig*.json · package.json · .gitignore
+public/favicon.svg · public/assets/covers/
+src/main.ts · src/app.ts · src/style.css · src/tune.ts
+src/data/projects.ts · src/lib/math.ts · src/ui/dom.ts · src/audio/engine.ts
+src/scene/{shaders,stele,drum,landscape,post}.ts
+```
+
 ### Verification
-- JS module parsed with `node --check` — OK.
+- `npm run build` (= `tsc --noEmit -p tsconfig.app.json && vite build`) passes: 33 modules, `dist/` = index.html 8 kB + CSS 20 kB + app 84 kB + three 466 kB + gsap 70 kB (+ lil-gui 32 kB lazy chunk). `npx oxlint src` — 0 warnings.
+- Built `dist/index.html` references only `./assets/*` (no `/src/` dev entry), satisfying `scripts/verify-site.mjs`.
 - All 16 GLSL vertex/fragment shaders (with Three's injected prelude) parsed with `@shaderfrog/glsl-parser` — 0 errors.
 - Voronoi stele builder executed under Node with Three 0.165 `ConvexGeometry`: 16 cells, bounding box `[-0.49,-0.22,-0.17] → [0.50,2.47,0.30]`, exterior / interior vertex split 5,925 / 2,103.
 - Served via `python3 -m http.server` and verified HTTP 200. (The sandbox has no headless browser/GPU, so visual QA should be done in the live preview: CDN modules, fonts and Unsplash covers are loaded by the visitor's browser.)
 
 ### Customising
-1. Edit `PROJECTS` (top of the module script). Keep `wheel` to two short uppercase lines.
+1. Edit `PROJECTS` in `src/data/projects.ts`. Keep `wheel` to two short uppercase lines.
 2. Replace `coverImage` URLs (any CORS-enabled image; local files under `./assets/covers/` work too).
-3. Replace the brand, bio, awards and links in `#site-header` / `#about-panel` and `data-email` on `#copy-email`.
+3. Replace the brand, bio, awards and links in `index.html` (`#site-header` / `#about-panel`) and `data-email` on `#copy-email`.
 4. Open `?debug`, tune the sliders, press **Copy project preset** and paste the JSON into a project entry.

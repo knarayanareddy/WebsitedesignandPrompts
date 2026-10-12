@@ -1,69 +1,115 @@
-# Guillaume Colombel Portfolio (`guillaumecolombel.fr`) — Reverse Engineering & Build Guide
+# Guillaume Colombel — Backlit Alabaster Stele Portfolio
 
-This folder contains the complete reverse-engineering analysis, master build prompt, and extracted CSS/shaders for **[guillaumecolombel.fr](https://guillaumecolombel.fr/)**, generated using [`morluto/rea`](https://github.com/morluto/rea) (`rea-agents`, Evidence ID: `ev_a3687a50aecf5cb4dadd3fc58b6108288ffae805dea7c83aedf6b26cde5a2e37`, 104 nodes / 236 edges across 12 Nuxt/Vite bundles).
+![Vite](https://img.shields.io/badge/Vite-6.4-646CFF?logo=vite&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.5+-3178C6?logo=typescript&logoColor=white)
+![Three.js](https://img.shields.io/badge/Three.js-0.165-000000?logo=threedotjs&logoColor=white)
+![GSAP](https://img.shields.io/badge/GSAP-3.12-88CE02?logo=greensock&logoColor=black)
+![GitHub Pages](https://img.shields.io/badge/deploy-GitHub%20Pages-121013?logo=github)
 
-## 📂 Contents of This Folder
+A **Vite + TypeScript + Three.js** recreation of [guillaumecolombel.fr](https://guillaumecolombel.fr/) —
+*"a backlit alabaster standing stone with coloured strata, in a dusk landscape"* — rebuilt from the
+REA reverse-engineering analysis in this folder as a customisable developer portfolio. Every project
+you list changes the stone's minerals, the landscape biome and the title drum. GitHub Pages ready
+(`base: './'`).
+
+> **Live Demo:** [https://knarayanareddy.github.io/WebsitedesignandPrompts/guillaumecolombel/](https://knarayanareddy.github.io/WebsitedesignandPrompts/guillaumecolombel/)
+
+> The brand/bio/awards copy is fictional placeholder content ("Aurèle Vasseur"). Replace it with your
+> own in `index.html` and your projects in `src/data/projects.ts`.
+
+---
+
+## 📂 Contents of this folder
 
 | File | Description |
 | :--- | :--- |
-| **[`README.md`](./README.md)** | Executive summary of how `guillaumecolombel.fr` works under the hood and how to customize it for your own projects. |
-| **[`REA_REVERSE_ENGINEERING_REPORT.md`](./REA_REVERSE_ENGINEERING_REPORT.md)** | Full architectural breakdown of the 12 JS chunks, 18 internal WebGPU/TSL shader subsystems, audio stems, and DOM-to-WebGPU thermal text bridge. |
-| **[`BUILD_PROMPT.md`](./BUILD_PROMPT.md)** | Copy-pasteable master prompt to build this exact 3D monolithic alabaster showcase website adapted for your own projects. |
-| **[`ORIGINAL_CSS_AND_SHADERS.md`](./ORIGINAL_CSS_AND_SHADERS.md)** | Exact production CSS (`entry.DY30v6x4.css`), MSDF 3D title wheel shader math, and pointer-fluid screen frost shader extracted from the bundles. |
-| **[`index.html`](./index.html)** | ✅ The built site — a single self-contained Three.js + GSAP recreation (open it directly or via the root showcase at `./guillaumecolombel/`). Edit the `PROJECTS` array at the top of its module script. |
-| **[`BUILD_LOG.md`](./BUILD_LOG.md)** | Build log: how every prompt section was implemented, verification steps, and how to customise. |
+| **`index.html`, `src/`, `public/`** | The built site (Vite entry + TypeScript modules). `npm run dev` to work on it, `npm run build` to produce `dist/`. |
+| **[`ADAPTED_PROMPT.md`](./ADAPTED_PROMPT.md)** | Prompt spec adapted to this repository's Vite/TypeScript stack — feed it to a coding assistant to reproduce the template. |
+| **[`BUILD_LOG.md`](./BUILD_LOG.md)** | Build log: prompt → implementation map, verification steps, customisation notes. |
+| **[`BUILD_PROMPT.md`](./BUILD_PROMPT.md)** | Original master prompt (single-file / import-map version). |
+| **[`REA_REVERSE_ENGINEERING_REPORT.md`](./REA_REVERSE_ENGINEERING_REPORT.md)** | Architectural breakdown of the original's 12 bundles and 18 shader subsystems. |
+| **[`ORIGINAL_CSS_AND_SHADERS.md`](./ORIGINAL_CSS_AND_SHADERS.md)** | Verbatim production CSS and the 404 "void" slab shader extracted from the original. |
 
 ---
 
-## 🔍 How `guillaumecolombel.fr` Works Under the Hood
+## ✨ The experience
 
-### 1. Core Concept & Stack
-- **Visual Metaphor**: *"A backlit alabaster standing stone with coloured strata, in a dusk landscape."*
-- **Tech Stack**:
-  - **Framework**: Nuxt 3 + Vue 3 (SSR shell + client-side canvas controller in `DECYU8Im.js`)
-  - **3D & Shaders**: **Three.js `WebGPURenderer`** with automatic **WebGL2 fallback**, authored in **TSL (Three.js Shading Language)** inside `Cd_dFser.js` (495 KB)
-  - **Typography & Motion**: **GSAP 3.15** (`SplitText`) + custom **MSDF (Multi-channel Signed Distance Field)** 3D cylindrical text drum (`/assets/fonts/msdf/Harmond-SemiBoldCondensed.png` + `SpaceMono-Regular.png`)
-  - **Interactive Audio**: **Howler.js** (`DKWN85t0.js`) mixing 7 procedural/recorded `.ogg` stems (`ambient-drone`, `wind-loop`, `stone-hover`, `stone-open`, `stone-close`, `wheel-tick`, `about-toggle`)
+| # | Layer | What it does |
+|---|-------|--------------|
+| 0 | **Preloader** | SVG stele silhouette traces itself (`--stele-progress`) while the 8 covers load, then the stone lights up over 2.4 s |
+| 1 | **The stele** | Parametric monolith split into **16 convex Voronoi cells**; subsurface backlight, sedimentary strata and incandescent veins; the active cover is **refracted inside** the stone |
+| 2 | **Hover** | Cells under the cursor heat up and conduct to neighbours, seams glow in the project colour, a molten pinhole reveals the cover; mineral crackle audio |
+| 3 | **Click** | Spring fracture parts the cells, debris flies, a cloth cover sheet unfolds from the core; `#project-sheet` slides in with description / credits / year / **Visit website ↗** |
+| 4 | **Title drum** | Helical drum of two-line titles around the stone — wheel, drag, touch, arrow keys; bokeh blur on inactive rows, meniscus warp near the silhouette, click-and-hold jog mode |
+| 5 | **Landscape** | Terrain relief, reflective water, mist layers, 6,500 wind-bent grass blades, dusk/night sky, birds — all morphing per project's `scene` |
+| 6 | **About** | Camera slides, the stone erodes into a hollow relic around a breathing amber lantern that casts caustics; the header brand FLIPs into the bio; awards ledger, links, copy-email |
+| 7 | **Post & sound** | Bloom → ACES → pointer-frost lens / vignette / grain; zero-asset Web Audio wind, ticks, thuds and chimes (bottom-right toggle) |
 
----
-
-### 2. How Projects Are Showcased & Transitioned
-Every project in the portfolio is driven by a single declarative `PROJECTS` array (`hd` in `DECYU8Im.js`) that simultaneously morphs **five** visual layers when you scroll the wheel:
-
-1. **3D Cylindrical Title Drum (`Roue des titres`)**:
-   - Project titles (`wheel: ["LINE 1", "LINE 2"]`) and indices (`01`, `02`...) are rendered on an invisible 3D cylinder wrapping around the standing stone (`radius: 2.3`, `verticalStep: 0.72`).
-   - Non-selected rows blur out via an MSDF bokeh shader (`bokehWidth: 8.5`) while the active row glows and warps near the stone's silhouette via a molten meniscus (`meniscusStrength: 0.08`).
-2. **Alabaster Mineralogy (`Matière`)**:
-   - Scrolling to a project interpolates the stone's internal subsurface scattering color (`color: [R, G, B]`), mineral vein intensity/frequency (`matter.veins`, `matter.veinScale`), sedimentary strata bands (`matter.bands`, `matter.bandScale`), and optical density (`matter.density`).
-3. **Landscape & Atmosphere (`Décor`)**:
-   - Each project morphs the surrounding world between **5 camera viewpoints (`scene.view`)**, **day/dusk/night (`scene.night`, `scene.skyDim`)**, **water level (`scene.water`)**, **valley mist (`scene.mist`)**, **terrain relief (`scene.relief`)**, and **wind-bent flora (`scene.flora`)**.
-4. **Refracted Cover Inclusion (`Inclusion`)**:
-   - The project's cover video/image (`/assets/covers/<slug>.mp4` or `.webp`) is embedded *inside* the translucent stone (`depth: 0.55`, `ior: 1.5`, `parallax: 0.28`), refracting through the stone's mineral veins as you move your pointer.
-5. **Voronoi Stone Fracture & Cloth Unfold (`Fracture` + `Project Sheet`)**:
-   - **Hovering** the stone heats up Voronoi fracture seams under the cursor (`pointerRadius: 0.25`, `conductionRate: 2.5`) and opens a molten pinhole peeking at the cover inside.
-   - **Clicking** shatters the stone along its Voronoi cells (`openOffset: 0.9`, `springW0: 7.5`), unfolds the project cover onto a 3D cloth-physics plane (`foldAmount`, `edgeWeave`), and slides in the bottom `#project-sheet` with the project's `description`, `credits`, `year`, and live `Visit ↗` link.
+Secret: append `?debug` or press `Ctrl+Shift+D` for the lil-gui inspector (Source, Lumière, Matière,
+Décor, Inclusion, Fracture, Lanterne, Roue, Fluide, Post) and **Copy project preset**.
 
 ---
 
-### 3. How to Customize It for Your Own Projects
-To adapt this architecture for your own portfolio (using [`BUILD_PROMPT.md`](./BUILD_PROMPT.md)), you only need to supply your project entries in `src/data/projects.ts` and drop a `.mp4` or `.webp` preview into `public/assets/covers/<slug>.mp4`:
+## 🧬 How a project drives the scene
 
 ```ts
-export const PROJECTS = [
-  {
-    slug: "my-flagship-project",
-    title: "My Flagship Project",
-    wheel: ["MY FLAGSHIP", "PROJECT"], // 2-line 3D cylindrical MSDF drum label
-    year: "2026",
-    description: "Short 1-2 sentence description shown in the bottom sheet when the stone fractures open.",
-    credits: [{ role: "Architecture & Engineering", name: "Your Name" }],
-    url: "https://github.com/your-org/your-repo",
-    color: [1.5, 0.42, 0.1], // Linear RGB internal stone glow (>1.0 triggers HDR bloom)
-    matter: { veins: 0.2, veinScale: 0.7, bands: 1.5, bandScale: 0.5, density: 0.8 },
-    scene: { water: 0.2, mist: 0.2, view: 0, flora: 0.7, relief: 0.2, night: 0, skyDim: 0 },
-  },
-];
+{
+  slug: "clarte", title: "CLARTÉ", wheel: ["CLARTÉ", "WORLD"], year: 2026,
+  description: "…", credits: "Design & Creative Development", url: "https://…",
+  coverImage: "https://images.unsplash.com/…",
+  color: [1.0, 0.25, 0.1],                                   // internal glow (linear RGB, >1 blooms)
+  matter: { veins: 1.4, veinScale: 1.0, bands: 0.5, bandScale: 1.0, density: 1.0 },
+  scene:  { water: 0.02, mist: 0.7, view: 1.05, flora: 0.85, relief: 1.25, night: 0, skyDim: 1 },
+}
 ```
 
-> [!TIP]
-> **Built-in Inspector Secret**: On the live site (and documented in the build prompt), appending `?debug` to the URL (`https://guillaumecolombel.fr/?debug`) or pressing `Ctrl+Shift+D` unlocks the full 18-folder `lil-gui` shader tuning panel (`Source`, `Lumière`, `Matière`, `Décor`, `Inclusion`, `Fracture`, `Lanterne / ambre`, `Roue des titres`, `Fluide pointeur`) plus a **`Copy project preset`** button that copies the exact `matter` and `scene` JSON values for your new projects.
+| Field | Effect |
+|---|---|
+| `color` | Stone transmission/rim glow, vein incandescence, ground light puddle, water streak, label tint, debris |
+| `matter.*` | Vein strength/frequency, strata strength/frequency, optical density (how deep the light travels) |
+| `scene.water` | Water level (−0.12 dry canyon → +0.08 flooded) |
+| `scene.mist` / `relief` / `flora` | Fog density, terrain amplitude, grass instance count |
+| `scene.view` | Camera distance multiplier (0.8 close → 1.3 wide) |
+| `scene.night` / `skyDim` | Night sky blend (stars) and sky brightness |
+
+All values are **interpolated continuously** as the drum turns, so neighbouring projects melt into
+one another.
+
+---
+
+## 🚀 Run it
+
+```bash
+npm install
+npm run dev        # http://localhost:5173
+npm run build      # typecheck + production build → dist/
+npm run preview
+```
+
+Deployed by [`scripts/build-site.sh`](../scripts/build-site.sh) (listed in `apps`), which builds
+`dist/` and publishes it at `/guillaumecolombel/`.
+
+---
+
+## 🛠 Customising
+
+1. **Projects** — edit `src/data/projects.ts`. Keep `wheel` to two short uppercase lines.
+2. **Covers** — any CORS-enabled image, or drop files into `public/assets/covers/` and reference
+   `./assets/covers/<slug>.jpg`. Failed loads fall back to a procedural gradient card.
+3. **Identity** — header brand, `#about-panel` bio / awards / links and `data-email` in `index.html`;
+   `<title>` and meta tags.
+4. **Look** — defaults in `src/tune.ts`; tune live with `?debug`, then paste **Copy project preset**
+   output into a project entry.
+
+## 🧱 Architecture
+
+```
+src/app.ts ─ renderer · state · input · routes · open/close/switch · about · frame loop · boot
+   ├─ scene/stele.ts      parametric stone → Voronoi cells (ConvexGeometry) → SSS ShaderMaterial, core, debris, cover sheet
+   ├─ scene/drum.ts       canvas label textures, helical layout, bokeh/meniscus shader
+   ├─ scene/landscape.ts  sky · ground · water · grass (InstancedMesh) · mist · birds (shared terrainH GLSL)
+   ├─ scene/post.ts       EffectComposer: Render → UnrealBloom → Output → frost/vignette/grain
+   ├─ audio/engine.ts     procedural SoundEngine (Web Audio)
+   ├─ data/projects.ts    PROJECTS
+   └─ tune.ts             TUNE (lil-gui tree)
+```

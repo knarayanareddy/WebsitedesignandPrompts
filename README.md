@@ -23,6 +23,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 - **One Thread (3D WebGL Spline Flight):** [https://kiranreddy.nl](https://kiranreddy.nl)
 - **WanderLust (Windswept Travel Studio):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/wanderlust/](https://knarayanareddy.github.io/WebsitedesignandPrompts/wanderlust/)
 - **Halcyon (Time, Cast in Gold | Haute Horlogerie):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/halcyon/](https://knarayanareddy.github.io/WebsitedesignandPrompts/halcyon/)
+- **Guillaume Colombel (Backlit Alabaster Stele 3D Portfolio):** [https://knarayanareddy.github.io/WebsitedesignandPrompts/guillaumecolombel/](https://knarayanareddy.github.io/WebsitedesignandPrompts/guillaumecolombel/)
 
 ---
 
@@ -43,6 +44,7 @@ Visit the deployed GitHub Pages site to experience the templates live in action:
 | **11** | **Senbuzy (3D Claymation Studio Portfolio & Spatial WebGL)** | [`senbuzy/`](./senbuzy/) | The authentic 3D spatial portfolio by Senbuzy (about.senbuzy.com). Features custom-rigged 3D clay character, continuous scroll-driven camera spline trajectories, post-processing film grain shader, depth-of-field blur, interactive timeline checkpoints, bilingual English/Chinese toggle, and rich markdown project dossiers. | React 18, React Three Fiber, Drei, Postprocessing, Framer Motion, Zustand, Vite 5, TypeScript | [Prompt Spec](./senbuzy/ADAPTED_PROMPT.md) · [Build Log](./senbuzy/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/senbuzy/) |
 | **15** | **DesignByXam — Samuel Idowu** | [`designbyxam/`](./designbyxam/) | Original photographic editorial reference rendition with five views, cast shadows, poster archive, gallery and real WebGL object previews; exhaustive process/prompt guide included. Original attribution retained. | Static HTML/CSS/JS, Three.js | [Prompt Spec](./designbyxam/ADAPTED_PROMPT.md) · [Build Log](./designbyxam/BUILD_LOG.md) · [Deployment](./designbyxam/DEPLOYMENT.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/designbyxam/#about) |
 | **23** | **Halcyon (Time, Cast in Gold | Haute Horlogerie)** | [`halcyon/`](./halcyon/) | Scroll-driven timepiece voyage across four biomes (Dawn, Dusk, Night, Emerald) with intra-coded 60fps scrubbing, 3D interactive pocket watch atelier drawer with dial flip physics, and dual-layer Web Audio ambient ocean & mechanical escapement synthesizer. | Vanilla HTML5/CSS3/ES6+, Web Audio API | [Prompt Spec](./halcyon/ADAPTED_PROMPT.md) · [Code Archive](./halcyon/index.html) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/halcyon/) |
+| **24** | **Guillaume Colombel (Backlit Alabaster Stele 3D Portfolio)** | [`guillaumecolombel/`](./guillaumecolombel/) | Recreation of guillaumecolombel.fr: a sculpted standing stone split into 16 convex Voronoi cells with a subsurface-scattering strata shader, cover art refracted inside the stone, pointer heat conduction, spring fracture that unfolds a cloth cover sheet, a helical title drum, a procedural dusk landscape (terrain, water, mist, instanced grass, birds), pointer-frost post-processing, an eroded amber-lantern About route and a zero-asset Web Audio engine. | Vite 6, TypeScript, Three.js 0.165, GSAP 3.12, lil-gui | [Prompt Spec](./guillaumecolombel/ADAPTED_PROMPT.md) · [Build Log](./guillaumecolombel/BUILD_LOG.md) | [Live Demo](https://knarayanareddy.github.io/WebsitedesignandPrompts/guillaumecolombel/) |
 
 *More curated designs and prompt kits coming soon!*
 
@@ -110,6 +112,10 @@ npm install && npm run dev
 # 11. To run Senbuzy (3D Claymation Avatar):
 cd ../senbuzy
 npm install && npm run dev
+
+# 12. To run Guillaume Colombel (Backlit Alabaster Stele):
+cd ../guillaumecolombel
+npm install && npm run dev
 ```
 
 Open `http://localhost:5173` to explore the design locally.
@@ -143,6 +149,7 @@ including a fork's Pages URL. The folder → URL mapping is explicit:
 | `synapsex/` | `/synapsex/` |
 | `portfolio/` | `/portfolio/` |
 | `jack/` | `/jack/` |
+| `guillaumecolombel/` | `/guillaumecolombel/` |
 | `brunosimon/` | `/brunosimon/` |
 | `senbuzy/` | `/senbuzy/` |
 
