@@ -49,6 +49,7 @@ jobs:
             brunosimon/package-lock.json
             senbuzy/package-lock.json
             portfolio-console/package-lock.json
+            guillaumecolombel/package-lock.json
 
       # Installs, builds all seven apps, assembles _site/, and runs verify-site.
       # A failure here fails the pull request.

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#05050a"/><stop offset=".55" stop-color="#1a0f16"/><stop offset=".78" stop-color="#4a2419"/><stop offset="1" stop-color="#7a3a1f"/></linearGradient>
+    <radialGradient id="glow" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#ff6a2a" stop-opacity=".95"/><stop offset=".45" stop-color="#ff4a1a" stop-opacity=".35"/><stop offset="1" stop-color="#ff3a10" stop-opacity="0"/></radialGradient>
+    <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#2a1c17"/><stop offset=".35" stop-color="#f1e2cf"/><stop offset=".55" stop-color="#ffb37a"/><stop offset=".75" stop-color="#e8d2b8"/><stop offset="1" stop-color="#2a1c17"/></linearGradient>
+    <linearGradient id="ground" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b1a12"/><stop offset="1" stop-color="#050404"/></linearGradient>
+    <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="40"/></filter>
+    <filter id="soft"><feGaussianBlur stdDeviation="3"/></filter>
+    <clipPath id="stoneClip"><path d="M745 820 C715 650 705 450 735 290 C750 200 770 120 800 60 C830 120 850 200 865 290 C895 450 885 650 855 820 Z"/></clipPath>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <ellipse cx="800" cy="700" rx="700" ry="150" fill="#2a1410" opacity=".5" filter="url(#blur)"/>
+  <rect y="690" width="1600" height="210" fill="url(#ground)"/>
+  <ellipse cx="800" cy="500" rx="360" ry="320" fill="url(#glow)" filter="url(#blur)"/>
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-weight="800" fill="#f4f2ee" text-anchor="middle" opacity=".92">
+    <text x="800" y="400" font-size="210" letter-spacing="-6" transform="scale(.82,1) translate(175,0)">CLARTÉ</text>
+    <text x="800" y="600" font-size="210" letter-spacing="-6" transform="scale(.82,1) translate(175,0)">WORLD</text>
+  </g>
+  <text x="300" y="170" font-family="Inter, Helvetica, Arial, sans-serif" font-size="30" fill="#f4f2ee" opacity=".45">01</text>
+  <g clip-path="url(#stoneClip)">
+    <rect x="690" y="40" width="220" height="800" fill="url(#stone)"/>
+    <g stroke="#6b2a16" stroke-width="3" opacity=".55" fill="none">
+      <path d="M720 300 C780 310 820 290 880 300"/><path d="M715 380 C790 395 830 370 885 385"/><path d="M712 470 C770 480 840 460 888 475"/><path d="M718 560 C760 570 850 550 884 565"/><path d="M725 650 C790 660 820 640 878 655"/>
+    </g>
+    <path d="M760 90 C775 220 740 380 790 520 C830 640 800 720 815 820" stroke="#ff7a30" stroke-width="4" fill="none" opacity=".9" filter="url(#soft)"/>
+    <ellipse cx="805" cy="470" rx="70" ry="160" fill="#ff8a3a" opacity=".55" filter="url(#blur)"/>
+  </g>
+  <path d="M745 820 C715 650 705 450 735 290 C750 200 770 120 800 60 C830 120 850 200 865 290 C895 450 885 650 855 820 Z" fill="none" stroke="#ffd6b0" stroke-opacity=".55" stroke-width="2"/>
+  <ellipse cx="800" cy="822" rx="260" ry="26" fill="#ff5a20" opacity=".35" filter="url(#blur)"/>
+  <rect y="690" width="1600" height="210" fill="#ff6a2a" opacity=".06"/>
+  <g font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" fill="#f4f2ee">
+    <text x="48" y="60" font-weight="600">Aurèle Vasseur</text>
+    <text x="1552" y="60" text-anchor="end" opacity=".6">About</text>
+  </g>
+</svg>
