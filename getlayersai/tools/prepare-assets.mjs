@@ -14,3 +14,9 @@ for (const [from,to] of [
  ['@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2','cormorant-500.woff2'],
  ['@fontsource/cormorant-garamond/LICENSE','CORMORANT-LICENSE.txt']
 ]) copyFileSync(`${root}/node_modules/${from}`,`${dest}/${to}`);
+
+// Dedicated, non-published Soda v02 pilot font.
+const sodaAssets = `${root}/rebuilds/soda/assets`;
+mkdirSync(sodaAssets, {recursive:true});
+copyFileSync(`${root}/node_modules/@fontsource/lobster/files/lobster-latin-400-normal.woff2`, `${sodaAssets}/lobster-latin-400-normal.woff2`);
+copyFileSync(`${root}/node_modules/@fontsource/lobster/LICENSE`, `${sodaAssets}/LOBSTER-LICENSE.txt`);

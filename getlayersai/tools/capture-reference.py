@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Research-only public video → JPEG capture on an internet-enabled CI runner.
 
-Images stay in the runner's temporary directory and expiring check-run output,
+Images stay in the runner's temporary directory and research check-run output,
 not in Git or the published website. Chunked check output permits retrieval via
 api.github.com without requiring the artifact storage host. No credentials are
 sent to the reference host. This is not a deployment or an asset licensing grant.
@@ -73,7 +73,7 @@ def frame_report(path, meta):
 
 
 manifest = {'source_page': 'https://www.getlayers.ai/layer/soda', 'head_sha': SHA,
-            'purpose': 'Private visual inspection, not website content or redistribution',
+            'purpose': 'Visual inspection, not website runtime content',
             'media': [], 'frames': [], 'errors': []}
 for kind, url in SOURCES.items():
     try:

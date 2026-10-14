@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#002a20">
+  <meta name="description" content="Soda — a reference-led, interactive product design study. A real-time metallic can, floating fruit, and two immersive flavor worlds.">
+  <title>Soda — Pure Zero / Reference-led rebuild</title>
+  <link rel="icon" href="../../shared/favicon.svg">
+  <link rel="preload" href="./assets/lobster-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to product</a>
+  <main id="main" class="experience" data-flavor="classic">
+    <div class="world world-green" aria-hidden="true"></div>
+    <div class="world world-blue" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="scene" id="scene" role="img" aria-label="A large tilted green metallic soda can, surrounded by floating cherries, leaves, and bubbles">
+      <canvas id="product-canvas" aria-hidden="true"></canvas>
+      <img class="product-fallback" src="./assets/fallback-can.svg" alt="" aria-hidden="true">
+    </div>
+
+    <header class="header">
+      <a class="brand" href="./" aria-label="Soda home"><span class="brand-plus" aria-hidden="true">+</span><span>Soda</span></a>
+      <button class="mobile-menu" aria-expanded="false" aria-controls="main-nav">Menu <span aria-hidden="true">+</span></button>
+      <nav class="nav" id="main-nav" aria-label="Soda navigation">
+        <button class="nav-item selected" data-page="home" aria-current="page">Home</button>
+        <button class="nav-item" data-page="ingredients">Ingredients</button>
+        <button class="nav-item" data-page="taste">Taste</button>
+        <button class="nav-item" data-page="eco">Eco</button>
+        <button class="nav-item" data-page="reviews">Reviews</button>
+      </nav>
+      <button class="contact" data-open="contact">Contact Us</button>
+    </header>
+
+    <section class="intro" aria-labelledby="hero-title">
+      <h1 id="hero-title">Pure<br>Zero</h1>
+      <p>Unleash the crisp taste of zero sugar. <br>Refreshment redefined in every bubble — <br>all in one sleek design.</p>
+      <button class="shop" data-open="shop"><span>Shop Now</span><span class="shop-plus" aria-hidden="true">+</span><span class="cart-count" hidden>0</span></button>
+    </section>
+
+    <section class="flavor-selector" aria-label="Choose your flavor">
+      <div class="flavor-cards" role="group" aria-label="Flavor">
+        <button class="flavor-card active" data-select="0" aria-pressed="true">
+          <img id="classic-thumb" src="./assets/fallback-can.svg" alt="" width="150" height="180">
+          <span class="flavor-name">Diet Classic</span><span class="flavor-price">$2.99</span>
+        </button>
+        <button class="flavor-card" data-select="1" aria-pressed="false">
+          <img id="lime-thumb" src="./assets/fallback-can.svg" alt="" width="150" height="180">
+          <span class="flavor-name">Zero Lime</span><span class="flavor-price">$2.99</span>
+        </button>
+      </div>
+      <div class="flavor-arrows"><button data-direction="-1" aria-label="Previous flavor">←</button><button data-direction="1" aria-label="Next flavor">→</button></div>
+    </section>
+
+    <p class="closing" aria-hidden="true">Refreshingly<br><span>Clean</span></p>
+    <a class="study-signature" href="./methodology.html"><span class="signature-icon" aria-hidden="true">⌄<span>⌄</span></span><span><small>DESIGN STUDY</small><strong>REFERENCE-LED REBUILD</strong></span></a>
+    <div class="utility"><button id="motion-toggle" aria-pressed="false" aria-label="Pause automatic motion"><span class="motion-symbol" aria-hidden="true">Ⅱ</span><span class="motion-label">Pause motion</span></button><button data-open="about">About this study ↗</button></div>
+    <div class="sr-only" id="flavor-status" role="status">Diet Classic selected. Green can with cherries.</div>
+    <div class="scene-status" role="status" hidden>Static preview — interactive 3D is unavailable in this browser.</div>
+  </main>
+
+  <dialog id="detail-dialog" aria-labelledby="dialog-title">
+    <button class="close-dialog" aria-label="Close details">×</button>
+    <span class="dialog-eyebrow" id="dialog-eyebrow">SODA / A PRODUCT STUDY</span>
+    <h2 id="dialog-title">Pure refreshment.</h2>
+    <div id="dialog-content"></div>
+  </dialog>
+  <div class="toast" role="status" id="toast"></div>
+  <noscript><p class="noscript">JavaScript is off. This static product view remains available; flavor switching and 3D motion require JavaScript.</p></noscript>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 # Soda fidelity reset — reference audit
 
 Date: 2026-10-14  
-Status: **Awaiting an inspectable original screenshot/video. No replacement design approved or published.**
+Status: **Reference acquired and inspected. A dedicated v02 review preview is in `../../rebuilds/soda/`; no replacement has been approved or published.**
 
 ## Why the first implementation is being rejected
 
@@ -42,9 +42,20 @@ The standalone template markdown repeats the original metadata but then adds gen
 - Direct retrieval of `https://storage.getlayers.ai/templates/soda.webp` from the workspace failed with an SSL connection error.
 - The page-retrieval tool also failed to retrieve that image (HTTP 500 reported by the tool).
 - Image search did not return a verified screenshot of this design. Unrelated search results are not design references and must not be used as substitutes.
-- **No original screenshot or video has been visually inspected in this revision.** Do not claim otherwise in a build log, preview, or user update.
+- **At the initial audit, no original screenshot or video had been visually inspected.** The blocker has since been resolved as recorded below.
 
-## Required reference before implementation
+## Blocker resolved without a user upload
+
+A branch-scoped remote capture job fetched the original public poster and MP4s, extracted JPEG frames with FFmpeg, and exposed SHA-verified image chunks through the GitHub checks API. The local retrieval script recovered all 13 images successfully. The original master is 1440 × 1026 and 7.433333 seconds.
+
+Inspected master states: 0.00 / 1.34 s green can and cherries; 2.68 s blurred blue can during transition; 4.01 / 5.35 / 6.69 s blue world and blueberries. The original clip confirms the catalog's single-screen emerald/cursive direction. The earlier download-failure notes above are historical evidence, **not a current blocker**.
+
+- Capture workflow: https://github.com/knarayanareddy/WebsitedesignandPrompts/actions/runs/38624787534
+- Capture commit: `36ae0822c43116b003886592852c6992471b9cc0`
+- Restore frames: `python3 getlayersai/tools/retrieve-reference.py 36ae0822c43116b003886592852c6992471b9cc0`
+- Dedicated implementation and detailed notes: [Soda v02](../../rebuilds/soda/README.md)
+
+## Reference requirements used for implementation
 
 One original desktop screenshot is the minimum needed to establish composition. A short video covering idle motion, pointer interaction, and a flavor switch is strongly preferred. The original “Copy prompt” text is also useful for resolving the conflicting archived specifications.
 
