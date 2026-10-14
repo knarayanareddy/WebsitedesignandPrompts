@@ -171,3 +171,18 @@ Deployment and code-quality status is tracked in [`REVIEW_CHECKLIST.md`](./REVIE
 - **Media is not covered by that licence.** Photography and video are hot-linked from Pexels (free for commercial use, no attribution required), Unsplash, and a set of undocumented AI-generated reference clips on a third-party CDN. Per-template provenance, licences, and replacement steps are in [`ASSETS.md`](./ASSETS.md) — read it before publishing any template as your own site.
 
 
+
+
+## GetLayers featured website collection — 2026-10-14
+
+The 13 featured briefs now have independently implemented static websites, a searchable gallery,
+and separate Apogee-style documentation folders. The other 41 catalog briefs remain archived prompts.
+
+- **[Browse the collection](https://knarayanareddy.github.io/WebsitedesignandPrompts/getlayersai/)**
+- [Repository/integration review](getlayersai/REVIEW.md)
+- [Implementation and asset decisions](getlayersai/IMPLEMENTATION.md)
+- [Recorded validation](getlayersai/VALIDATION.md)
+- [Individual source and methodology folders](getlayersai/sites/)
+
+These are original text-brief adaptations, not exact reference reproductions or operating businesses.
+All commercial, medical, financial, and operational interactions are explicitly local demonstrations.

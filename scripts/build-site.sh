@@ -108,6 +108,9 @@ for entry in "${statics[@]}"; do
   echo "==> [$slug] copied static  ($src)"
 done
 
+# GetLayers: 13 featured sites + gallery + methodology; no node_modules or test artifacts.
+bash scripts/assemble-getlayers.sh "$site_dir"
+
 # Showcase hub + shared root assets.
 cp index.html "$site_dir/index.html"
 if [ -f favicon.svg ]; then

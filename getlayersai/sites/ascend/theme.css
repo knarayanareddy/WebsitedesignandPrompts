@@ -1,0 +1,2 @@
+:root{--bg:#030a10;--fg:#ecfff8;--accent:#76e8b6;--surface:#101e26}
+:root{--radius:16px}.hero h1{font-size:clamp(65px,7vw,108px)}.hero .stage{height:620px;background:radial-gradient(ellipse,#13443b40,transparent 67%)}.big-number small{font:17px monospace;letter-spacing:0}.brand{letter-spacing:-1.5px}.hero .stage-corner{color:var(--muted)}@media(max-width:680px){.hero .stage{height:400px}}

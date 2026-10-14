@@ -28,6 +28,7 @@ concurrency:
 
 jobs:
   site:
+    needs: getlayers-checks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -95,3 +96,39 @@ jobs:
           # survive from an earlier revision.
           git push --force origin gh-pages
           echo "Published gh-pages from ${GITHUB_SHA::7}."
+
+  getlayers-checks:
+    name: GetLayers browser and accessibility checks
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: getlayersai/package-lock.json
+      - name: Install pinned test tools
+        run: npm ci --prefix getlayersai
+      - name: Check dependency advisories
+        run: npm audit --prefix getlayersai --audit-level=high
+      - name: Validate deterministic output and links
+        run: |
+          python3 getlayersai/tools/build.py
+          git diff --exit-code -- getlayersai/sites getlayersai/index.html getlayersai/sites.json
+          python3 getlayersai/tools/verify.py
+      - name: Browser, accessibility, and interaction tests
+        run: |
+          python3 -m http.server 8080 --bind 0.0.0.0 > /tmp/getlayers-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          npm test --prefix getlayersai
+      - name: Upload browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: getlayers-browser-evidence
+          path: getlayersai/.cache/
+          include-hidden-files: true
+          retention-days: 7

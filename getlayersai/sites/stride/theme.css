@@ -1,0 +1,2 @@
+:root{--bg:#050a1b;--fg:#f8fafc;--accent:#86b7ff;--surface:#101b32}
+:root{--radius:14px}.hero{grid-template-columns:1.1fr 1fr}.hero h1{font-size:clamp(65px,7.3vw,106px)}.mini-card{background:linear-gradient(125deg,#34456c,#101727);padding:30px;border:1px solid #ffffff40;border-radius:14px;aspect-ratio:1.7;display:flex;flex-direction:column;justify-content:space-between}.mini-card strong{font:20px monospace}.mini-card small{font:9px monospace;letter-spacing:2px}.mini-card>span{font-size:24px}.stage{background:radial-gradient(ellipse at 50% 50%,#153ba533,transparent 65%)}
