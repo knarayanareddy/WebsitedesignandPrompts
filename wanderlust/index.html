@@ -1,0 +1,2855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>WanderLust — Beyond Places, Into Moments</title>
+  <meta name="description" content="A dark, windswept travel studio that lingers on wide country and quiet mornings. Real journeys, handpicked stays, and trips designed for the moments you'll still talk about years later.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%23060507' stroke='%23f4eedb' stroke-width='2'/><text x='16' y='21' font-family='serif' font-size='14' font-weight='bold' fill='%23f4eedb' text-anchor='middle'>N</text></svg>">
+
+  <style>
+    /* -------------------------------------------------------------
+       SELF-HOSTED FONTS
+       ------------------------------------------------------------- */
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/cormorant-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('./assets/fonts/cormorant-600.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      font-style: italic;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/cormorant-italic.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Cormorant Garamond';
+      font-style: italic;
+      font-weight: 600;
+      font-display: swap;
+      src: url('./assets/fonts/cormorant-italic.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/jakarta-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Plus Jakarta Sans';
+      font-style: normal;
+      font-weight: 600;
+      font-display: swap;
+      src: url('./assets/fonts/jakarta-600.woff2') format('woff2');
+    }
+
+    @font-face {
+      font-family: 'Caveat';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url('./assets/fonts/caveat-400.woff2') format('woff2');
+    }
+    @font-face {
+      font-family: 'Caveat';
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url('./assets/fonts/caveat-700.woff2') format('woff2');
+    }
+
+    /* -------------------------------------------------------------
+       DESIGN TOKENS & RESET
+       ------------------------------------------------------------- */
+    :root {
+      --bg-dark: #000000;
+      --bg-ink: #060507;
+      --bg-panel: #0d0c0e;
+      --paper: #fcfbf7;
+      --gold-light: #f7f3e8;
+      --gold: #f4eedb;
+      --gold-muted: #d5caa9;
+      --text-muted: #9e9a90;
+      --text-dim: #605d56;
+      --line: rgba(244, 238, 219, 0.15);
+      --line-subtle: rgba(244, 238, 219, 0.08);
+      --accent-red: #e53935;
+      --tape: rgba(162, 186, 120, 0.82);
+
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-hand: 'Caveat', cursive, sans-serif;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background-color: var(--bg-ink);
+      color: var(--gold);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    body {
+      background-color: var(--bg-ink);
+      min-height: 100vh;
+      line-height: 1.5;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.25s ease, opacity 0.25s ease;
+    }
+
+    button {
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+      outline: none;
+    }
+
+    img, video {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* Selection */
+    ::selection {
+      background: rgba(244, 238, 219, 0.25);
+      color: #ffffff;
+    }
+
+    /* -------------------------------------------------------------
+       GLOBAL HEADER & NAVIGATION
+       ------------------------------------------------------------- */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 94px;
+      padding: 0 44px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      pointer-events: none;
+      transition: background-color 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+    }
+    .site-header.scrolled {
+      background: rgba(6, 5, 7, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line-subtle);
+      height: 80px;
+    }
+    .site-header > * {
+      pointer-events: auto;
+    }
+
+    .brand-logo {
+      font-family: var(--font-serif);
+      font-size: 32px;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      color: var(--gold);
+      display: flex;
+      align-items: baseline;
+      gap: 1px;
+    }
+    .brand-logo .logo-l {
+      font-style: italic;
+      font-size: 35px;
+      font-weight: 600;
+      margin-left: -1px;
+      margin-right: -1px;
+    }
+    .brand-logo:hover {
+      opacity: 0.85;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+    }
+
+    .nav-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .nav-stack a {
+      position: relative;
+      opacity: 0.9;
+    }
+    .nav-stack a:hover {
+      opacity: 1;
+      color: #ffffff;
+    }
+
+    .btn-explore {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      border: 1px solid rgba(244, 238, 219, 0.35);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(6, 5, 7, 0.2);
+      backdrop-filter: blur(8px);
+      transition: all 0.3s var(--ease-out);
+    }
+    .btn-explore:hover {
+      background: var(--gold);
+      color: var(--bg-ink);
+      border-color: var(--gold);
+      transform: translateY(-1px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+    .btn-explore svg {
+      width: 11px;
+      height: 11px;
+      transition: transform 0.3s ease;
+    }
+    .btn-explore:hover svg {
+      transform: translate(2px, 2px);
+    }
+
+    /* Mobile Hamburger */
+    .nav-burger {
+      display: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      cursor: pointer;
+      pointer-events: auto;
+    }
+    .nav-burger span {
+      width: 18px;
+      height: 1.5px;
+      background: var(--gold);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    /* -------------------------------------------------------------
+       FLOATING COMPASS & VIEW SWITCHER (BOTTOM LEFT)
+       ------------------------------------------------------------- */
+    .floating-compass-dock {
+      position: fixed;
+      bottom: 32px;
+      left: 36px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      z-index: 90;
+      pointer-events: auto;
+    }
+    .compass-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(14, 13, 16, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 13px;
+      font-weight: 700;
+      font-family: var(--font-serif);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+    }
+    .compass-btn:hover {
+      border-color: var(--gold);
+      background: rgba(25, 23, 28, 0.95);
+      transform: scale(1.08);
+    }
+    .compass-btn .needle {
+      position: absolute;
+      top: 5px;
+      width: 2px;
+      height: 6px;
+      background: var(--accent-red);
+      border-radius: 1px;
+      transform-origin: 50% 17px;
+      transition: transform 0.2s ease-out;
+    }
+
+    .view-switcher {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      background: rgba(14, 13, 16, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--line-subtle);
+    }
+    .view-switcher button {
+      color: var(--text-dim);
+      transition: color 0.2s ease;
+      cursor: pointer;
+    }
+    .view-switcher button.active {
+      color: var(--gold);
+    }
+    .view-switcher span {
+      opacity: 0.3;
+    }
+
+    /* Sound Audio Dock Button */
+    .sound-toggle-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(14, 13, 16, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--line-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      opacity: 0.7;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .sound-toggle-btn:hover {
+      opacity: 1;
+      transform: scale(1.06);
+    }
+    .sound-toggle-btn.active {
+      opacity: 1;
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    /* -------------------------------------------------------------
+       HERO SECTION: BEYOND PLACES · INTO MOMENTS
+       ------------------------------------------------------------- */
+    .hero-section {
+      position: relative;
+      height: 100vh;
+      min-height: 760px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background-color: #0b0c0e;
+    }
+
+    .hero-bg-media {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      transform: scale(1.04);
+      transition: transform 10s ease-out;
+      will-change: transform;
+      z-index: 1;
+    }
+    .hero-section:hover .hero-bg-media {
+      transform: scale(1.08);
+    }
+
+    /* Vignette & Gradients */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.65) 75%, rgba(0,0,0,0.92) 100%),
+                  linear-gradient(to bottom, rgba(6,5,7,0.5) 0%, transparent 20%, transparent 70%, rgba(6,5,7,0.95) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* Reticle Cam Viewfinder (Opening Animation) */
+    .cam-reticle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      pointer-events: none;
+      z-index: 10;
+      opacity: 0;
+      animation: reticlePulse 3s ease-out forwards;
+    }
+    .cam-reticle::before, .cam-reticle::after {
+      content: '';
+      position: absolute;
+      background: rgba(244, 238, 219, 0.4);
+    }
+    .cam-reticle::before {
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      transform: translateY(-50%);
+    }
+    .cam-reticle::after {
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      transform: translateX(-50%);
+    }
+    @keyframes reticlePulse {
+      0% { opacity: 0; transform: translate(-50%, -50%) scale(1.4); }
+      30% { opacity: 0.8; }
+      70% { opacity: 0.6; }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+    }
+
+    /* Hero Typography Layout */
+    .hero-content {
+      position: relative;
+      width: 100%;
+      max-width: 1560px;
+      padding: 0 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 5;
+    }
+
+    .hero-heading {
+      font-family: var(--font-serif);
+      font-size: clamp(52px, 6.2vw, 94px);
+      line-height: 0.95;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      letter-spacing: -0.015em;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+      transition: transform 0.6s var(--ease-out);
+    }
+    .hero-heading.left {
+      text-align: left;
+      max-width: 380px;
+    }
+    .hero-heading.right {
+      text-align: right;
+      max-width: 380px;
+    }
+
+    /* Floating Center Media Reel Window */
+    .hero-center-reel {
+      position: relative;
+      width: clamp(320px, 34vw, 540px);
+      aspect-ratio: 16 / 10.4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      perspective: 1000px;
+    }
+
+    /* Peeking vertical reels top and bottom */
+    .reel-peek {
+      position: absolute;
+      width: 82%;
+      height: 28px;
+      border-radius: 12px;
+      overflow: hidden;
+      opacity: 0.45;
+      filter: blur(1px) brightness(0.7);
+      transition: all 0.4s ease;
+      z-index: 1;
+    }
+    .reel-peek.top {
+      top: -38px;
+      transform: scale(0.94);
+    }
+    .reel-peek.bottom {
+      bottom: -38px;
+      transform: scale(0.94);
+    }
+    .reel-peek img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Main Center Card */
+    .reel-main-card {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(244, 238, 219, 0.3);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      background: #111014;
+      z-index: 3;
+      cursor: pointer;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
+    }
+    .reel-main-card:hover {
+      transform: translateY(-4px) scale(1.015);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.9), 0 0 30px rgba(244, 238, 219, 0.15);
+    }
+
+    .reel-video-element {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Red recording indicator */
+    .rec-indicator {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent-red);
+      box-shadow: 0 0 10px var(--accent-red);
+      animation: recBlink 1.8s infinite;
+      z-index: 5;
+    }
+    @keyframes recBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    /* Card Telemetry / Metadata */
+    .reel-meta-top {
+      position: absolute;
+      top: -26px;
+      left: 4px;
+      right: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 238, 219, 0.7);
+    }
+    .reel-meta-bottom {
+      position: absolute;
+      bottom: -26px;
+      left: 4px;
+      right: 4px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(244, 238, 219, 0.7);
+    }
+
+    /* Bottom-Right Destinations Quick List */
+    .hero-destinations-quicklist {
+      position: absolute;
+      bottom: 40px;
+      right: 50px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+      z-index: 10;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero-destinations-quicklist .list-title {
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-destinations-quicklist .list-title::before {
+      content: '•';
+      color: var(--gold);
+    }
+    .hero-destinations-quicklist a {
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+    .hero-destinations-quicklist a:hover {
+      color: var(--gold);
+      transform: translateX(-4px);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 2: DESTINATIONS WORTH WANDERING (POLAROID BOARD)
+       ------------------------------------------------------------- */
+    .destinations-section {
+      position: relative;
+      min-height: 100vh;
+      padding: 120px 40px 100px;
+      background: var(--bg-ink);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Ambient Film Grain Overlay */
+    .destinations-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(244, 238, 219, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .destinations-header {
+      text-align: center;
+      margin-bottom: 40px;
+      z-index: 10;
+      position: relative;
+    }
+    .destinations-title {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 5.5vw, 84px);
+      line-height: 1.02;
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: -0.01em;
+    }
+    .destinations-title .title-italic {
+      font-style: italic;
+      display: block;
+    }
+
+    /* Two Side Catalog Navigation Columns */
+    .destinations-catalog-container {
+      position: relative;
+      width: 100%;
+      max-width: 1680px;
+      min-height: 620px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .catalog-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 20;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .catalog-column.left {
+      align-items: flex-start;
+    }
+    .catalog-column.right {
+      align-items: flex-end;
+    }
+    .catalog-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+    }
+    .catalog-item:hover,
+    .catalog-item.active {
+      color: var(--gold);
+      transform: translateX(4px);
+    }
+    .catalog-column.right .catalog-item:hover,
+    .catalog-column.right .catalog-item.active {
+      transform: translateX(-4px);
+    }
+
+    /* Scattered Polaroid Canvas */
+    .polaroid-board {
+      position: absolute;
+      inset: 0;
+      pointer-events: auto;
+      z-index: 15;
+    }
+
+    /* Individual Polaroid Card */
+    .polaroid-card {
+      position: absolute;
+      width: 220px;
+      background: var(--paper);
+      padding: 10px 10px 28px 10px;
+      border-radius: 3px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.75), 0 2px 6px rgba(0, 0, 0, 0.4);
+      cursor: grab;
+      user-select: none;
+      transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), z-index 0.1s ease;
+      will-change: transform;
+    }
+    .polaroid-card:active {
+      cursor: grabbing;
+    }
+    .polaroid-card.hovered,
+    .polaroid-card.highlighted {
+      transform: scale(1.18) rotate(0deg) !important;
+      z-index: 60 !important;
+      box-shadow: 0 32px 70px rgba(0, 0, 0, 0.95), 0 0 40px rgba(244, 238, 219, 0.25);
+    }
+
+    .polaroid-photo-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      background: #201e22;
+      border-radius: 2px;
+    }
+    .polaroid-photo-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(1.05) contrast(1.02);
+      transition: transform 0.6s var(--ease-out);
+    }
+    .polaroid-card:hover .polaroid-photo-wrap img {
+      transform: scale(1.06);
+    }
+
+    .polaroid-caption {
+      margin-top: 10px;
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: #2b2824;
+      text-transform: capitalize;
+    }
+
+    /* Stickers & Stamps on Polaroids */
+    .polaroid-sticker {
+      position: absolute;
+      pointer-events: none;
+      z-index: 5;
+      filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.35));
+    }
+
+    /* Specific Stickers */
+    .sticker-flag-ch {
+      top: -12px;
+      left: 12px;
+      width: 32px;
+      height: 32px;
+      background: #d52b1e;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transform: rotate(-8deg);
+    }
+    .sticker-flag-ch::before, .sticker-flag-ch::after {
+      content: '';
+      position: absolute;
+      background: #ffffff;
+    }
+    .sticker-flag-ch::before { width: 16px; height: 5px; }
+    .sticker-flag-ch::after { width: 5px; height: 16px; }
+
+    .sticker-flag-it {
+      top: -14px;
+      left: 18px;
+      width: 36px;
+      height: 22px;
+      display: flex;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      border-radius: 2px;
+      overflow: hidden;
+      transform: rotate(6deg);
+    }
+    .sticker-flag-it span:nth-child(1) { flex: 1; background: #009246; }
+    .sticker-flag-it span:nth-child(2) { flex: 1; background: #ffffff; }
+    .sticker-flag-it span:nth-child(3) { flex: 1; background: #ce2b37; }
+
+    .sticker-stamp-airmail {
+      top: -16px;
+      right: 14px;
+      width: 34px;
+      height: 42px;
+      background: #e8ede4;
+      border: 2px dashed #4b6b47;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 8px;
+      font-weight: 700;
+      color: #3b5738;
+      transform: rotate(12deg);
+    }
+
+    .sticker-flag-is {
+      top: -12px;
+      right: -10px;
+      width: 34px;
+      height: 24px;
+      background: #02529c;
+      border-radius: 2px;
+      position: relative;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transform: rotate(14deg);
+    }
+    .sticker-flag-is::before {
+      content: '';
+      position: absolute;
+      left: 9px;
+      top: 0;
+      bottom: 0;
+      width: 5px;
+      background: #ffffff;
+    }
+    .sticker-flag-is::after {
+      content: '';
+      position: absolute;
+      top: 9px;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: #ffffff;
+    }
+
+    .sticker-flower {
+      top: -16px;
+      left: -12px;
+      font-size: 26px;
+      transform: rotate(-15deg);
+    }
+    .sticker-puffin {
+      bottom: 24px;
+      left: -14px;
+      font-size: 24px;
+      transform: rotate(8deg);
+    }
+
+    /* Structured List Mode (Toggled via bottom-left switch) */
+    .destinations-list-mode {
+      display: none;
+      width: 100%;
+      max-width: 1100px;
+      margin: 40px auto 0;
+      border-top: 1px solid var(--line);
+      z-index: 25;
+    }
+    .destinations-list-mode.active {
+      display: block;
+    }
+    .dest-row {
+      display: grid;
+      grid-template-columns: 80px 1.8fr 1.2fr 1fr 120px;
+      align-items: center;
+      padding: 20px 12px;
+      border-bottom: 1px solid var(--line-subtle);
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background 0.2s ease, padding-left 0.2s ease;
+    }
+    .dest-row:hover {
+      background: rgba(244, 238, 219, 0.05);
+      padding-left: 18px;
+    }
+    .dest-row .row-num {
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+    .dest-row .row-name {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      color: var(--gold);
+    }
+    .dest-row .row-region {
+      color: var(--text-muted);
+    }
+    .dest-row .row-season {
+      color: var(--gold-muted);
+      font-size: 12px;
+    }
+    .dest-row .row-cta {
+      text-align: right;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 3: GO SOMEWHERE THAT STAYS WITH YOU (SCRAPBOOK COLLAGE)
+       ------------------------------------------------------------- */
+    .stays-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 40px;
+      background: #090a0c;
+      overflow: hidden;
+    }
+
+    .stays-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.35;
+      filter: saturate(0.8) brightness(0.7);
+      transform: scale(1.05);
+      z-index: 1;
+    }
+
+    .stays-container {
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .stays-title {
+      font-family: var(--font-serif);
+      font-size: clamp(44px, 5.2vw, 80px);
+      line-height: 1.05;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 50px;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.7);
+    }
+
+    /* Scrapbook Collage Centerpiece */
+    .scrapbook-stage {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .collage-centerpiece {
+      position: relative;
+      width: clamp(280px, 32vw, 440px);
+      filter: drop-shadow(0 24px 60px rgba(0, 0, 0, 0.85));
+      transition: transform 0.5s var(--ease-out);
+      cursor: pointer;
+    }
+    .collage-centerpiece:hover {
+      transform: scale(1.03) rotate(-1deg);
+    }
+    .collage-centerpiece img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* Floating Manifesto Columns on Left & Right */
+    .manifesto-quote {
+      position: absolute;
+      width: 260px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      line-height: 1.6;
+      color: rgba(244, 238, 219, 0.75);
+      text-transform: uppercase;
+      z-index: 10;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .manifesto-quote.left {
+      left: 0;
+      text-align: right;
+    }
+    .manifesto-quote.right {
+      right: 0;
+      text-align: left;
+    }
+
+    /* Handwritten Caveat Sub-quote at bottom */
+    .stays-hand-caption {
+      font-family: var(--font-hand);
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 700;
+      color: var(--gold-light);
+      text-align: center;
+      line-height: 1.25;
+      margin-top: 15px;
+      letter-spacing: 0.02em;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 4: HOW WE TRAVEL (EXPANDABLE ACCORDION SLATS)
+       ------------------------------------------------------------- */
+    .accordion-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-dark);
+      padding: 100px 0 0;
+      overflow: hidden;
+    }
+
+    .accordion-header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 0 40px;
+      z-index: 10;
+    }
+    .accordion-title {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 5.8vw, 86px);
+      line-height: 1;
+      font-weight: 400;
+      color: var(--gold);
+    }
+    .accordion-subtitle {
+      font-family: var(--font-hand);
+      font-size: clamp(20px, 2vw, 28px);
+      color: rgba(244, 238, 219, 0.7);
+      margin-top: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    /* Full-Height Vertical Slats Strip */
+    .accordion-panels-wrap {
+      flex: 1;
+      min-height: 640px;
+      display: flex;
+      width: 100%;
+    }
+
+    .accordion-panel {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      min-height: 600px;
+      overflow: hidden;
+      cursor: pointer;
+      border-right: 1px solid rgba(244, 238, 219, 0.12);
+      transition: flex 0.75s var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 48px 36px;
+    }
+    .accordion-panel:last-child {
+      border-right: none;
+    }
+    .accordion-panel.active,
+    .accordion-panel:hover {
+      flex: 3.4;
+    }
+
+    .panel-bg-image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.5) saturate(0.85);
+      transform: scale(1.02);
+      transition: filter 0.6s ease, transform 1.2s var(--ease-out);
+      z-index: 1;
+    }
+    .accordion-panel.active .panel-bg-image,
+    .accordion-panel:hover .panel-bg-image {
+      filter: brightness(0.85) saturate(1.1);
+      transform: scale(1.06);
+    }
+
+    /* Gradients */
+    .panel-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(6, 5, 7, 0.95) 0%, rgba(6, 5, 7, 0.4) 45%, transparent 80%);
+      z-index: 2;
+    }
+
+    /* Collapsed state title on panel */
+    .panel-collapsed-title {
+      position: relative;
+      z-index: 5;
+      font-family: var(--font-serif);
+      font-size: clamp(24px, 2.4vw, 34px);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: -0.01em;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      white-space: nowrap;
+    }
+    .accordion-panel.active .panel-collapsed-title,
+    .accordion-panel:hover .panel-collapsed-title {
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    }
+
+    /* Expanded Content Block */
+    .panel-expanded-content {
+      position: absolute;
+      bottom: 48px;
+      left: 36px;
+      right: 36px;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s var(--ease-out) 0.15s, transform 0.5s var(--ease-out) 0.15s;
+      pointer-events: none;
+    }
+    .accordion-panel.active .panel-expanded-content,
+    .accordion-panel:hover .panel-expanded-content {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .panel-title-large {
+      font-family: var(--font-serif);
+      font-size: clamp(34px, 3.6vw, 52px);
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1.05;
+      margin-bottom: 14px;
+    }
+    .panel-desc {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+      color: rgba(244, 238, 219, 0.85);
+      text-transform: uppercase;
+      max-width: 480px;
+      margin-bottom: 14px;
+    }
+    .panel-hand-note {
+      font-family: var(--font-hand);
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--gold-light);
+      letter-spacing: 0.02em;
+    }
+
+    /* -------------------------------------------------------------
+       SECTION 5: PLAN A JOURNEY (PINNED NOTE & INQUIRY)
+       ------------------------------------------------------------- */
+    .plan-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 120px 40px 140px;
+      background: #111411;
+      overflow: hidden;
+    }
+
+    .plan-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65) saturate(0.9);
+      transform: scale(1.03);
+      z-index: 1;
+    }
+
+    .plan-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(6, 5, 7, 0.2) 0%, rgba(6, 5, 7, 0.85) 100%);
+      z-index: 2;
+    }
+
+    .plan-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    .plan-title {
+      font-family: var(--font-serif);
+      font-size: clamp(48px, 6vw, 92px);
+      line-height: 1;
+      font-weight: 400;
+      color: #121114;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.4), 0 4px 20px rgba(0, 0, 0, 0.2);
+      margin-bottom: 40px;
+    }
+
+    /* Pinned White Parchment Note */
+    .pinned-note-card {
+      position: relative;
+      width: clamp(280px, 32vw, 420px);
+      filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.85));
+      margin-bottom: 34px;
+      cursor: pointer;
+      transition: transform 0.3s var(--ease-out);
+    }
+    .pinned-note-card:hover {
+      transform: translateY(-4px) scale(1.02);
+    }
+    .pinned-note-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* Start Planning Button */
+    .btn-plan-journey {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 34px;
+      border-radius: 999px;
+      background: rgba(14, 13, 16, 0.7);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(244, 238, 219, 0.4);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+    }
+    .btn-plan-journey:hover {
+      background: var(--gold);
+      color: var(--bg-ink);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
+    }
+    .btn-plan-journey svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* -------------------------------------------------------------
+       GLOBAL FOOTER & NEWSLETTER
+       ------------------------------------------------------------- */
+    .site-footer {
+      position: relative;
+      background: rgba(6, 5, 7, 0.94);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--line-subtle);
+      padding: 80px 50px 40px;
+      color: var(--gold);
+      z-index: 20;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr 1.6fr;
+      gap: 40px;
+      max-width: 1560px;
+      margin: 0 auto 60px;
+    }
+
+    .footer-brand .brand-logo {
+      margin-bottom: 14px;
+    }
+    .footer-brand p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      max-width: 260px;
+    }
+
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    /* Newsletter Column */
+    .footer-newsletter-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      line-height: 1.6;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .newsletter-form {
+      position: relative;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 8px;
+    }
+    .newsletter-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      font-family: var(--font-sans);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      outline: none;
+    }
+    .newsletter-input::placeholder {
+      color: var(--text-dim);
+    }
+    .newsletter-submit {
+      color: var(--gold);
+      padding: 0 4px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+    .newsletter-submit:hover {
+      transform: translate(3px, 3px);
+    }
+
+    /* Bottom Sub-bar */
+    .footer-bottom {
+      max-width: 1560px;
+      margin: 0 auto;
+      padding-top: 30px;
+      border-top: 1px solid var(--line-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+    }
+    .footer-copy {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .footer-copy .copy-compass {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--gold);
+      font-family: var(--font-serif);
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .social-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      transition: all 0.25s ease;
+    }
+    .social-btn:hover {
+      background: var(--gold);
+      color: var(--bg-ink);
+      border-color: var(--gold);
+      transform: translateY(-2px);
+    }
+    .social-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* -------------------------------------------------------------
+       MODALS & INTERACTIVE DRAWERS
+       ------------------------------------------------------------- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 5, 7, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .modal-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-dialog {
+      position: relative;
+      width: 100%;
+      max-width: 680px;
+      background: #111014;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 44px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9);
+      transform: translateY(20px) scale(0.97);
+      transition: transform 0.35s var(--ease-out);
+    }
+    .modal-backdrop.open .modal-dialog {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .modal-close:hover {
+      background: var(--gold);
+      color: var(--bg-ink);
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: 38px;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .modal-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+    }
+
+    .modal-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .form-group.full {
+      grid-column: span 2;
+    }
+    .form-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .form-input, .form-select, .form-textarea {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: var(--gold);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--gold);
+      color: var(--bg-ink);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .form-submit-btn:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Destination Card Quick-View Modal */
+    .dest-modal-dialog {
+      max-width: 780px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      padding: 0;
+      overflow: hidden;
+    }
+    .dest-modal-img {
+      width: 100%;
+      height: 100%;
+      min-height: 420px;
+      object-fit: cover;
+    }
+    .dest-modal-content {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Toast Notification */
+    .toast-pill {
+      position: fixed;
+      bottom: 30px;
+      right: 40px;
+      padding: 12px 24px;
+      background: #19181d;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 12px;
+      font-weight: 600;
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: all 0.4s var(--ease-out);
+      z-index: 300;
+      pointer-events: none;
+    }
+    .toast-pill.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* -------------------------------------------------------------
+       RESPONSIVE ADAPTATIONS (MOBILE & TABLET)
+       ------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .site-header {
+        padding: 0 24px;
+      }
+      .nav-stack {
+        display: none;
+      }
+      .nav-burger {
+        display: flex;
+      }
+      .hero-content {
+        padding: 0 24px;
+        flex-direction: column;
+        gap: 30px;
+      }
+      .hero-heading.left, .hero-heading.right {
+        text-align: center;
+        max-width: 100%;
+      }
+      .hero-destinations-quicklist {
+        display: none;
+      }
+      .destinations-catalog-container {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .catalog-column {
+        display: none;
+      }
+      .polaroid-board {
+        position: relative;
+        min-height: 520px;
+        width: 100%;
+      }
+      .accordion-panels-wrap {
+        flex-direction: column;
+        min-height: auto;
+      }
+      .accordion-panel {
+        min-height: 240px;
+        border-right: none;
+        border-bottom: 1px solid rgba(244, 238, 219, 0.12);
+      }
+      .accordion-panel.active,
+      .accordion-panel:hover {
+        flex: 1;
+        min-height: 380px;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+      }
+      .footer-brand {
+        grid-column: span 2;
+      }
+      .dest-modal-dialog {
+        grid-template-columns: 1fr;
+      }
+      .dest-modal-img {
+        min-height: 240px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero-section {
+        min-height: 640px;
+      }
+      .hero-heading {
+        font-size: 42px;
+      }
+      .hero-center-reel {
+        width: 90%;
+      }
+      .destinations-section {
+        padding: 80px 20px 60px;
+      }
+      .polaroid-card {
+        width: 160px;
+      }
+      .stays-section {
+        padding: 80px 20px;
+      }
+      .manifesto-quote {
+        position: static;
+        width: 100%;
+        text-align: center !important;
+        margin: 10px 0;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-brand {
+        grid-column: span 1;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =============================================================
+       SITE HEADER
+       ============================================================= -->
+  <header class="site-header" id="siteHeader">
+    <a href="#" class="brand-logo" aria-label="Wanderlust Home">
+      Wander<span class="logo-l">L</span>ust
+    </a>
+
+    <div class="header-right">
+      <nav class="nav-stack" aria-label="Primary navigation">
+        <a href="#staysSection">JOURNAL.</a>
+        <a href="#accordionSection">EXPERIENCES.</a>
+        <a href="#destinationsSection">ABOUT.</a>
+        <a href="#planSection">CONTACT.</a>
+      </nav>
+
+      <button class="btn-explore" id="exploreBtn" onclick="scrollToDestinations()">
+        <span>Explore Destinations</span>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M2 2h8v8M10 2 3 9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" onclick="toggleMobileNav()">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =============================================================
+       FLOATING VIEW CONTROLS (BOTTOM LEFT)
+       ============================================================= -->
+  <aside class="floating-compass-dock" aria-label="Navigation controls">
+    <button class="compass-btn" id="compassBtn" title="Heading North" onclick="spinCompass()">
+      <div class="needle" id="compassNeedle"></div>
+      <span>N</span>
+    </button>
+
+    <div class="view-switcher" role="radiogroup" aria-label="View format">
+      <button class="active" id="btnSliderView" onclick="setViewMode('slider')">SLIDER</button>
+      <span>/</span>
+      <button id="btnListView" onclick="setViewMode('list')">LIST</button>
+    </div>
+
+    <button class="sound-toggle-btn" id="soundToggleBtn" title="Toggle ambient sound" onclick="toggleAmbientSound()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" class="sound-wave"></path>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" class="sound-wave"></path>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- =============================================================
+       HERO SECTION: BEYOND PLACES · INTO MOMENTS
+       ============================================================= -->
+  <section class="hero-section" id="heroSection">
+    <img class="hero-bg-media" src="./assets/images/hero_bg.jpg" alt="Traveler overlooking misty Iceland valley with braided glacial rivers">
+    <div class="hero-overlay"></div>
+    <div class="cam-reticle"></div>
+
+    <div class="hero-content">
+      <h1 class="hero-heading left">
+        Beyond<br>Places
+      </h1>
+
+      <!-- Center Floating Video Reel Window -->
+      <div class="hero-center-reel">
+        <div class="reel-meta-top">
+          <span>TRAVEL STORIES</span>
+          <span>JOURNAL</span>
+        </div>
+
+        <div class="reel-peek top">
+          <img src="./assets/images/polaroids/02_norway.jpg" alt="Norway fjord">
+        </div>
+
+        <div class="reel-main-card" onclick="openReelModal()">
+          <span class="rec-indicator" title="Live reel recording"></span>
+          <video class="reel-video-element" autoplay muted loop playsinline src="./assets/video/hero_reel.mp4" poster="./assets/images/hero_bg.jpg"></video>
+        </div>
+
+        <div class="reel-peek bottom">
+          <img src="./assets/images/polaroids/01_iceland.jpg" alt="Iceland canyon">
+        </div>
+
+        <div class="reel-meta-bottom">
+          <span>01.</span>
+          <span>REAL JOURNEYS</span>
+          <span>42.</span>
+        </div>
+      </div>
+
+      <h1 class="hero-heading right">
+        Into<br>Moments
+      </h1>
+    </div>
+
+    <!-- Quick destination shortlist -->
+    <div class="hero-destinations-quicklist">
+      <span class="list-title">ALL DESTINATIONS</span>
+      <a href="#destinationsSection" onclick="highlightDestination('01_iceland')">ICELAND</a>
+      <a href="#destinationsSection" onclick="highlightDestination('02_norway')">NORWAY</a>
+      <a href="#destinationsSection" onclick="highlightDestination('03_japan')">JAPAN</a>
+      <a href="#destinationsSection" onclick="highlightDestination('12_canada')">CANADA</a>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       SECTION 2: DESTINATIONS WORTH WANDERING (POLAROID BOARD)
+       ============================================================= -->
+  <section class="destinations-section" id="destinationsSection">
+    <div class="destinations-header">
+      <h2 class="destinations-title">
+        Destinations
+        <span class="title-italic">Worth Wandering</span>
+      </h2>
+    </div>
+
+    <div class="destinations-catalog-container" id="polaroidContainer">
+      <!-- Left Catalog Column (01 to 08) -->
+      <nav class="catalog-column left" aria-label="Destinations index 1 to 8">
+        <div class="catalog-item" data-dest="01_iceland" onmouseenter="highlightCard('01_iceland')" onmouseleave="unhighlightCard('01_iceland')" onclick="openDestModal('01_iceland')">01. ICELAND</div>
+        <div class="catalog-item" data-dest="02_norway" onmouseenter="highlightCard('02_norway')" onmouseleave="unhighlightCard('02_norway')" onclick="openDestModal('02_norway')">02. NORWAY</div>
+        <div class="catalog-item" data-dest="03_japan" onmouseenter="highlightCard('03_japan')" onmouseleave="unhighlightCard('03_japan')" onclick="openDestModal('03_japan')">03. JAPAN</div>
+        <div class="catalog-item" data-dest="04_morocco" onmouseenter="highlightCard('04_morocco')" onmouseleave="unhighlightCard('04_morocco')" onclick="openDestModal('04_morocco')">04. MOROCCO</div>
+        <div class="catalog-item" data-dest="05_switzerland" onmouseenter="highlightCard('05_switzerland')" onmouseleave="unhighlightCard('05_switzerland')" onclick="openDestModal('05_switzerland')">05. SWITZERLAND</div>
+        <div class="catalog-item" data-dest="06_italy" onmouseenter="highlightCard('06_italy')" onmouseleave="unhighlightCard('06_italy')" onclick="openDestModal('06_italy')">06. ITALY</div>
+        <div class="catalog-item" data-dest="07_france" onmouseenter="highlightCard('07_france')" onmouseleave="unhighlightCard('07_france')" onclick="openDestModal('07_france')">07. FRANCE</div>
+        <div class="catalog-item" data-dest="08_portugal" onmouseenter="highlightCard('08_portugal')" onmouseleave="unhighlightCard('08_portugal')" onclick="openDestModal('08_portugal')">08. PORTUGAL</div>
+      </nav>
+
+      <!-- Center Scattered Polaroids Canvas -->
+      <div class="polaroid-board" id="polaroidBoard">
+        <!-- 05 Switzerland -->
+        <div class="polaroid-card" id="card-05_switzerland" style="top: 2%; left: 8%; transform: rotate(-5deg);" data-dest="05_switzerland">
+          <div class="polaroid-sticker sticker-flag-ch" title="Switzerland"></div>
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/05_switzerland.jpg" alt="Switzerland alpine reflection">
+          </div>
+          <div class="polaroid-caption">Switzerland</div>
+        </div>
+
+        <!-- 02 Norway -->
+        <div class="polaroid-card" id="card-02_norway" style="top: 6%; left: 18%; transform: rotate(4deg);" data-dest="02_norway">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/02_norway.jpg" alt="Norway Lofoten red rorbu cabins">
+          </div>
+          <div class="polaroid-caption">Norway</div>
+        </div>
+
+        <!-- 06 Italy -->
+        <div class="polaroid-card" id="card-06_italy" style="top: 28%; left: 14%; transform: rotate(-8deg);" data-dest="06_italy">
+          <div class="polaroid-sticker sticker-flag-it" title="Italy">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/06_italy.jpg" alt="Rome Vittorio Emanuele monument">
+          </div>
+          <div class="polaroid-caption">Italy</div>
+        </div>
+
+        <!-- 03 Japan -->
+        <div class="polaroid-card" id="card-03_japan" style="top: 24%; left: 24%; transform: rotate(-12deg);" data-dest="03_japan">
+          <div class="polaroid-sticker sticker-flower" title="Cherry Blossom">🌸</div>
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/03_japan.jpg" alt="Chureito Pagoda looking at Mount Fuji">
+          </div>
+          <div class="polaroid-caption">Japan</div>
+        </div>
+
+        <!-- 04 Morocco -->
+        <div class="polaroid-card" id="card-04_morocco" style="top: 48%; left: 19%; transform: rotate(7deg);" data-dest="04_morocco">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/04_morocco.jpg" alt="Marrakech medina rugs and lanterns">
+          </div>
+          <div class="polaroid-caption">Morocco</div>
+        </div>
+
+        <!-- 15 Slovenia -->
+        <div class="polaroid-card" id="card-15_slovenia" style="top: 32%; left: 34%; transform: rotate(10deg);" data-dest="15_slovenia">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/15_slovenia.jpg" alt="Lake Bled emerald waters island church">
+          </div>
+          <div class="polaroid-caption">Slovenia</div>
+        </div>
+
+        <!-- 16 Istanbul -->
+        <div class="polaroid-card" id="card-16_istanbul" style="top: 18%; left: 39%; transform: rotate(-4deg);" data-dest="16_istanbul">
+          <div class="polaroid-sticker sticker-stamp-airmail" title="Postage Stamp">✈ POST</div>
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/16_istanbul.jpg" alt="Istanbul Hagia Sophia sunset">
+          </div>
+          <div class="polaroid-caption">Istanbul</div>
+        </div>
+
+        <!-- 07 France -->
+        <div class="polaroid-card" id="card-07_france" style="top: 30%; left: 45%; transform: rotate(6deg);" data-dest="07_france">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/07_france.jpg" alt="Eiffel Tower Paris avenue">
+          </div>
+          <div class="polaroid-caption">France</div>
+        </div>
+
+        <!-- 12 Canada -->
+        <div class="polaroid-card" id="card-12_canada" style="top: 52%; left: 48%; transform: rotate(-3deg);" data-dest="12_canada">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/12_canada.jpg" alt="Moraine Lake turquoise water Canada">
+          </div>
+          <div class="polaroid-caption">Canada</div>
+        </div>
+
+        <!-- 09 Spain -->
+        <div class="polaroid-card" id="card-09_spain" style="top: 26%; left: 55%; transform: rotate(3deg);" data-dest="09_spain">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/09_spain.jpg" alt="Andalusian courtyard flowers Spain">
+          </div>
+          <div class="polaroid-caption">Spain</div>
+        </div>
+
+        <!-- 01 Iceland -->
+        <div class="polaroid-card" id="card-01_iceland" style="top: 22%; left: 63%; transform: rotate(-10deg);" data-dest="01_iceland">
+          <div class="polaroid-sticker sticker-flag-is" title="Iceland"></div>
+          <div class="polaroid-sticker sticker-puffin" title="Puffin">🐧</div>
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/01_iceland.jpg" alt="Iceland Fjaðrárgljúfur canyon river">
+          </div>
+          <div class="polaroid-caption">Iceland</div>
+        </div>
+
+        <!-- 14 Australia -->
+        <div class="polaroid-card" id="card-14_australia" style="top: 42%; left: 67%; transform: rotate(5deg);" data-dest="14_australia">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/14_australia.jpg" alt="Sydney Opera House harbour Australia">
+          </div>
+          <div class="polaroid-caption">Australia</div>
+        </div>
+
+        <!-- 08 Portugal -->
+        <div class="polaroid-card" id="card-08_portugal" style="top: 50%; left: 74%; transform: rotate(14deg);" data-dest="08_portugal">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/08_portugal.jpg" alt="Lisbon coastal cliffs Portugal">
+          </div>
+          <div class="polaroid-caption">Portugal</div>
+        </div>
+
+        <!-- 11 Austria -->
+        <div class="polaroid-card" id="card-11_austria" style="top: 4%; left: 73%; transform: rotate(-6deg);" data-dest="11_austria">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/11_austria.jpg" alt="Hallstatt lakeside village Austria">
+          </div>
+          <div class="polaroid-caption">Austria</div>
+        </div>
+
+        <!-- 10 Greece -->
+        <div class="polaroid-card" id="card-10_greece" style="top: 3%; left: 81%; transform: rotate(8deg);" data-dest="10_greece">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/10_greece.jpg" alt="Santorini whitewashed cliffs Greece">
+          </div>
+          <div class="polaroid-caption">Greece</div>
+        </div>
+
+        <!-- 13 New Zealand -->
+        <div class="polaroid-card" id="card-13_newzealand" style="top: 6%; left: 89%; transform: rotate(-14deg);" data-dest="13_newzealand">
+          <div class="polaroid-photo-wrap">
+            <img src="./assets/images/polaroids/13_newzealand.jpg" alt="Milford Sound fiords New Zealand">
+          </div>
+          <div class="polaroid-caption">New Zealand</div>
+        </div>
+      </div>
+
+      <!-- Right Catalog Column (09 to 16) -->
+      <nav class="catalog-column right" aria-label="Destinations index 9 to 16">
+        <div class="catalog-item" data-dest="09_spain" onmouseenter="highlightCard('09_spain')" onmouseleave="unhighlightCard('09_spain')" onclick="openDestModal('09_spain')">SPAIN 09.</div>
+        <div class="catalog-item" data-dest="10_greece" onmouseenter="highlightCard('10_greece')" onmouseleave="unhighlightCard('10_greece')" onclick="openDestModal('10_greece')">GREECE 10.</div>
+        <div class="catalog-item" data-dest="11_austria" onmouseenter="highlightCard('11_austria')" onmouseleave="unhighlightCard('11_austria')" onclick="openDestModal('11_austria')">AUSTRIA 11.</div>
+        <div class="catalog-item" data-dest="12_canada" onmouseenter="highlightCard('12_canada')" onmouseleave="unhighlightCard('12_canada')" onclick="openDestModal('12_canada')">CANADA 12.</div>
+        <div class="catalog-item" data-dest="13_newzealand" onmouseenter="highlightCard('13_newzealand')" onmouseleave="unhighlightCard('13_newzealand')" onclick="openDestModal('13_newzealand')">NEW ZEALAND 13.</div>
+        <div class="catalog-item" data-dest="14_australia" onmouseenter="highlightCard('14_australia')" onmouseleave="unhighlightCard('14_australia')" onclick="openDestModal('14_australia')">AUSTRALIA 14.</div>
+        <div class="catalog-item" data-dest="15_slovenia" onmouseenter="highlightCard('15_slovenia')" onmouseleave="unhighlightCard('15_slovenia')" onclick="openDestModal('15_slovenia')">SLOVENIA 15.</div>
+        <div class="catalog-item" data-dest="16_istanbul" onmouseenter="highlightCard('16_istanbul')" onmouseleave="unhighlightCard('16_istanbul')" onclick="openDestModal('16_istanbul')">ISTANBUL 16.</div>
+      </nav>
+    </div>
+
+    <!-- Alternative Structured List Mode -->
+    <div class="destinations-list-mode" id="destinationsListMode">
+      <div class="dest-row" onclick="openDestModal('01_iceland')">
+        <span class="row-num">01.</span>
+        <span class="row-name">Iceland</span>
+        <span class="row-region">Nordic / Volcanic Highlands</span>
+        <span class="row-season">June — September</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('02_norway')">
+        <span class="row-num">02.</span>
+        <span class="row-name">Norway</span>
+        <span class="row-region">Lofoten & Western Fjords</span>
+        <span class="row-season">May — October</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('03_japan')">
+        <span class="row-num">03.</span>
+        <span class="row-name">Japan</span>
+        <span class="row-region">Kyoto & Fuji Five Lakes</span>
+        <span class="row-season">Autumn / Cherry Blossom</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('04_morocco')">
+        <span class="row-num">04.</span>
+        <span class="row-name">Morocco</span>
+        <span class="row-region">Atlas Mountains & Sahara</span>
+        <span class="row-season">October — April</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('05_switzerland')">
+        <span class="row-num">05.</span>
+        <span class="row-name">Switzerland</span>
+        <span class="row-region">Bernese Oberland & Valais</span>
+        <span class="row-season">July — September</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('12_canada')">
+        <span class="row-num">12.</span>
+        <span class="row-name">Canada</span>
+        <span class="row-region">Banff & Jasper Wilderness</span>
+        <span class="row-season">June — September</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('15_slovenia')">
+        <span class="row-num">15.</span>
+        <span class="row-name">Slovenia</span>
+        <span class="row-region">Julian Alps & Lake Bled</span>
+        <span class="row-season">May — October</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+      <div class="dest-row" onclick="openDestModal('16_istanbul')">
+        <span class="row-num">16.</span>
+        <span class="row-name">Istanbul</span>
+        <span class="row-region">Bosphorus & Old City</span>
+        <span class="row-season">April — June, Sept — Nov</span>
+        <span class="row-cta">EXPLORE ↗</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       SECTION 3: GO SOMEWHERE THAT STAYS WITH YOU (SCRAPBOOK COLLAGE)
+       ============================================================= -->
+  <section class="stays-section" id="staysSection">
+    <img class="stays-bg" src="./assets/images/hero_bg.jpg" alt="Nordic canyon landscape background">
+
+    <div class="stays-container">
+      <h2 class="stays-title">
+        Go Somewhere That<br>Stays With You
+      </h2>
+
+      <div class="scrapbook-stage">
+        <!-- Left Quote -->
+        <div class="manifesto-quote left" id="quoteLeft">
+          We plan trips for the moments you'll still talk about years later.
+        </div>
+
+        <!-- Center Collage Asset -->
+        <div class="collage-centerpiece" onclick="openReelModal()">
+          <img src="./assets/images/scrapbook_collage.png" alt="Scrapbook collage with traveler girl on ridge, washi tape, torn binder paper, and vintage letters">
+        </div>
+
+        <!-- Right Quote -->
+        <div class="manifesto-quote right" id="quoteRight">
+          The quiet mornings, the unexpected turns, the places you almost didn't find.
+        </div>
+      </div>
+
+      <p class="stays-hand-caption">
+        Less ticking places off a list.<br>More actually being there.
+      </p>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       SECTION 4: HOW WE TRAVEL (EXPANDABLE ACCORDION SLATS)
+       ============================================================= -->
+  <section class="accordion-section" id="accordionSection">
+    <div class="accordion-header">
+      <h2 class="accordion-title">How We Travel</h2>
+      <p class="accordion-subtitle">Different trips, same intention.</p>
+    </div>
+
+    <div class="accordion-panels-wrap" id="accordionWrap">
+      <!-- Panel 1: Small Group Trips -->
+      <article class="accordion-panel" data-panel="0" onclick="setActivePanel(0)">
+        <img class="panel-bg-image" src="./assets/images/accordion/accordion_01_groups.jpg" alt="Friends in yellow raincoats on Icelandic ridge">
+        <div class="panel-gradient"></div>
+        <div class="panel-collapsed-title">Small Group Trips</div>
+        <div class="panel-expanded-content">
+          <h3 class="panel-title-large">Small Group Trips</h3>
+          <p class="panel-desc">We travel in small groups so everyone feels included, heard, and able to move freely without rigid schedules.</p>
+          <span class="panel-hand-note">Travel with people who get it.</span>
+        </div>
+      </article>
+
+      <!-- Panel 2: Road Trips -->
+      <article class="accordion-panel" data-panel="1" onclick="setActivePanel(1)">
+        <img class="panel-bg-image" src="./assets/images/accordion/accordion_02_road.jpg" alt="Overland 4x4 camper on winding mountain road">
+        <div class="panel-gradient"></div>
+        <div class="panel-collapsed-title">Road Trips</div>
+        <div class="panel-expanded-content">
+          <h3 class="panel-title-large">Road Trips</h3>
+          <p class="panel-desc">Long roads, good playlists, and the freedom to stop whenever the view calls to you along rugged mountain passes.</p>
+          <span class="panel-hand-note">The open road is the itinerary.</span>
+        </div>
+      </article>
+
+      <!-- Panel 3: Handpicked Stays (Default Spotlight) -->
+      <article class="accordion-panel active" data-panel="2" onclick="setActivePanel(2)">
+        <img class="panel-bg-image" src="./assets/images/accordion/accordion_03_stays.jpg" alt="Rushing glacial waterfall with lone traveler on basalt rocks">
+        <div class="panel-gradient"></div>
+        <div class="panel-collapsed-title">Handpicked Stays</div>
+        <div class="panel-expanded-content">
+          <h3 class="panel-title-large">Handpicked Stays</h3>
+          <p class="panel-desc">We choose places with soul. Local, beautiful, comfortable, and run by people who genuinely care about hospitality.</p>
+          <span class="panel-hand-note">Stay somewhere you'll remember.</span>
+        </div>
+      </article>
+
+      <!-- Panel 4: Local Experiences -->
+      <article class="accordion-panel" data-panel="3" onclick="setActivePanel(3)">
+        <img class="panel-bg-image" src="./assets/images/accordion/accordion_04_local.jpg" alt="Travelers sharing warm meal and tea at outdoor wooden table">
+        <div class="panel-gradient"></div>
+        <div class="panel-collapsed-title">Local Experiences</div>
+        <div class="panel-expanded-content">
+          <h3 class="panel-title-large">Local Experiences</h3>
+          <p class="panel-desc">We meet local people, try real food, learn the stories, and see the places that don't make it to the guidebooks.</p>
+          <span class="panel-hand-note">The heart of the journey.</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       SECTION 5: PLAN A JOURNEY (PINNED NOTE & INQUIRY)
+       ============================================================= -->
+  <section class="plan-section" id="planSection">
+    <img class="plan-bg" src="./assets/images/hero_bg.jpg" alt="Foggy alpine mountain ridge">
+    <div class="plan-overlay"></div>
+
+    <div class="plan-container">
+      <h2 class="plan-title">Plan a Journey</h2>
+
+      <!-- Pinned White Paper Note with 3D Red Pushpin -->
+      <div class="pinned-note-card" onclick="openPlanModal()">
+        <img src="./assets/images/pinned_note.png" alt="Pinned paper note with red pushpin saying 'TELL US WHAT YOU'RE DREAMING OF. WE'LL SHAPE THE JOURNEY.'">
+      </div>
+
+      <button class="btn-plan-journey" onclick="openPlanModal()">
+        <span>Start Planning</span>
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M2 2h8v8M10 2 3 9" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </section>
+
+  <!-- =============================================================
+       GLOBAL FOOTER & NEWSLETTER
+       ============================================================= -->
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="brand-logo">
+          Wander<span class="logo-l">L</span>ust
+        </a>
+        <p>A windswept travel studio designing intimate, considered journeys across the earth's quiet corners.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">DESTINATIONS</h4>
+        <ul class="footer-links">
+          <li><a href="#destinationsSection" onclick="highlightDestination('01_iceland')">Iceland</a></li>
+          <li><a href="#destinationsSection" onclick="highlightDestination('02_norway')">Norway</a></li>
+          <li><a href="#destinationsSection" onclick="highlightDestination('03_japan')">Japan</a></li>
+          <li><a href="#destinationsSection" onclick="highlightDestination('12_canada')">Canada</a></li>
+          <li><a href="#destinationsSection" onclick="highlightDestination('05_switzerland')">Switzerland</a></li>
+          <li><a href="#destinationsSection" onclick="highlightDestination('04_morocco')">Morocco</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">EXPERIENCES</h4>
+        <ul class="footer-links">
+          <li><a href="#accordionSection">Small Group Trips</a></li>
+          <li><a href="#accordionSection">Overland Road Trips</a></li>
+          <li><a href="#accordionSection">Handpicked Stays</a></li>
+          <li><a href="#accordionSection">Local Food & Culture</a></li>
+          <li><a href="#accordionSection">Slow Expeditions</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-col-title">COMPANY</h4>
+        <ul class="footer-links">
+          <li><a href="#staysSection">About Us</a></li>
+          <li><a href="#staysSection">The Journal</a></li>
+          <li><a href="#staysSection">Testimonials</a></li>
+          <li><a href="#planSection">Contact</a></li>
+          <li><a href="#planSection">Private Booking</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-newsletter-text">
+          Stories, guides & ideas for wherever you're headed next.
+        </p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Your E-Mail" required>
+          <button type="submit" class="newsletter-submit" aria-label="Submit newsletter">
+            <svg width="14" height="14" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M2 2h8v8M10 2 3 9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-copy">
+        <span class="copy-compass">N</span>
+        <span>© 2026 Wanderlust. All rights reserved.</span>
+      </div>
+
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+          </svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="YouTube">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+            <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- =============================================================
+       MODAL: PLAN YOUR JOURNEY INQUIRY
+       ============================================================= -->
+  <div class="modal-backdrop" id="planModal" onclick="closeOnBackdrop(event, 'planModal')">
+    <div class="modal-dialog">
+      <button class="modal-close" onclick="closeModal('planModal')" aria-label="Close modal">✕</button>
+      <h3 class="modal-title">Plan a Journey</h3>
+      <p class="modal-subtitle">Tell us what you're dreaming of. We'll shape the route, stays, and moments.</p>
+
+      <form onsubmit="handlePlanSubmit(event)">
+        <div class="modal-form-grid">
+          <div class="form-group">
+            <label class="form-label">Destination</label>
+            <select class="form-select" id="planDest">
+              <option value="iceland">Iceland — Highlands & Coast</option>
+              <option value="norway">Norway — Lofoten Fjords</option>
+              <option value="japan">Japan — Mountain & Tea Routes</option>
+              <option value="canada">Canada — Rockies Wilderness</option>
+              <option value="switzerland">Switzerland — Alpine Lakes</option>
+              <option value="morocco">Morocco — Atlas & Desert</option>
+              <option value="custom">Custom Multi-Country Journey</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Travel Style</label>
+            <select class="form-select" id="planStyle">
+              <option value="group">Small Group Trip (4-8 people)</option>
+              <option value="road">Self-Drive Overland Road Trip</option>
+              <option value="stays">Private Retreat & Curated Stays</option>
+              <option value="slow">Slow Exploration & Photography</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Name</label>
+            <input type="text" class="form-input" required placeholder="Elena Vance">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" required placeholder="elena@example.com">
+          </div>
+
+          <div class="form-group full">
+            <label class="form-label">What does your dream trip look like?</label>
+            <textarea class="form-textarea" rows="3" placeholder="Tell us about the landscapes you love, who you are traveling with, and when you wish to leave..."></textarea>
+          </div>
+        </div>
+
+        <button type="submit" class="form-submit-btn">Send Journey Inquiry ↳</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =============================================================
+       MODAL: DESTINATION DETAIL QUICK-VIEW
+       ============================================================= -->
+  <div class="modal-backdrop" id="destModal" onclick="closeOnBackdrop(event, 'destModal')">
+    <div class="modal-dialog dest-modal-dialog">
+      <img class="dest-modal-img" id="destModalImg" src="./assets/images/polaroids/01_iceland.jpg" alt="Destination View">
+      <div class="dest-modal-content">
+        <button class="modal-close" onclick="closeModal('destModal')" aria-label="Close modal">✕</button>
+        <div>
+          <span style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:var(--text-dim);" id="destModalTag">01. EXPEDITION</span>
+          <h3 class="modal-title" id="destModalTitle" style="font-size:42px; margin-top:4px;">Iceland</h3>
+          <p class="modal-subtitle" id="destModalDesc" style="margin-bottom:20px; line-height:1.6;">
+            Braided glacial rivers, mossy basalt canyons, and wide-open silence. An expedition through the southern volcanic highlands and remote coastal fjords.
+          </p>
+          <div style="display:flex; flex-direction:column; gap:8px; font-size:12px; color:var(--gold-muted); margin-bottom:28px;">
+            <div><strong>Best Season:</strong> <span id="destModalSeason">June — September</span></div>
+            <div><strong>Trip Length:</strong> <span id="destModalDays">8 to 12 Days</span></div>
+            <div><strong>Group Size:</strong> <span>4 to 8 Explorers</span></div>
+          </div>
+        </div>
+        <button class="form-submit-btn" onclick="openPlanModalFromDest()">Inquire About This Journey ↳</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Feedback -->
+  <div class="toast-pill" id="toastPill">You're on the dispatch list. First story lands Friday.</div>
+
+  <!-- =============================================================
+       JAVASCRIPT INTERACTIONS & ENGINE
+       ============================================================= -->
+  <script>
+    // 1. Destination Metadata Repository
+    const DESTINATIONS = {
+      "01_iceland": {
+        num: "01.",
+        name: "Iceland",
+        tag: "01. HIGHLANDS EXPEDITION",
+        desc: "Braided glacial rivers, emerald moss canyons, and wide-open Arctic silence. An overland route tracing southern volcanic ridges, hot spring valleys, and secret coastal sea cliffs.",
+        season: "June — September",
+        days: "9 Days"
+      },
+      "02_norway": {
+        num: "02.",
+        name: "Norway",
+        tag: "02. FJORDS & ARCHIPELAGO",
+        desc: "Red rorbu fishermen cabins perched over crystal fjords, craggy granite peaks of Lofoten, and midnight sun drives along winding coastal bridges.",
+        season: "May — October",
+        days: "10 Days"
+      },
+      "03_japan": {
+        num: "03.",
+        name: "Japan",
+        tag: "03. MOUNTAIN & TEA TRAILS",
+        desc: "Misty mountain pagodas, alpine cedar trails in the Kii Peninsula, cedar-smoked onsen baths, and golden ginkgo groves overlooking snowcapped Mount Fuji.",
+        season: "October — November / April",
+        days: "14 Days"
+      },
+      "04_morocco": {
+        num: "04.",
+        name: "Morocco",
+        tag: "04. HIGH ATLAS & DESERT",
+        desc: "Centuries-old earthen kasbahs, aromatic saffron souks in Marrakech, star-filled dunes of Erg Chebbi, and secluded stone riads.",
+        season: "October — April",
+        days: "8 Days"
+      },
+      "05_switzerland": {
+        num: "05.",
+        name: "Switzerland",
+        tag: "05. VALAIS & ALPINE LAKES",
+        desc: "Turquoise glacial tarns reflecting towering 4,000-meter massifs, quiet pine chalets, and historic pass routes carved into limestone crags.",
+        season: "July — September",
+        days: "7 Days"
+      },
+      "06_italy": {
+        num: "06.",
+        name: "Italy",
+        tag: "06. DOLOMITES & TUSCANY",
+        desc: "Limestone spires catching the pink evening enrosadira light, family olive estates, and secluded stone hamlets away from crowds.",
+        season: "May — October",
+        days: "10 Days"
+      },
+      "07_france": {
+        num: "07.",
+        name: "France",
+        tag: "07. PROVENCE & PYRENEES",
+        desc: "Ancient stone mas nestled in lavender valleys, high mountain passes bordering Spain, and slow dinners under old plane trees.",
+        season: "June — September",
+        days: "9 Days"
+      },
+      "08_portugal": {
+        num: "08.",
+        name: "Portugal",
+        tag: "08. ATLANTIC CLIFFS & ALENTEJO",
+        desc: "Wind-whipped coastal cliffs along the Rota Vicentina, whitewashed coastal villages, and rustic cork oak country estates.",
+        season: "April — October",
+        days: "8 Days"
+      },
+      "09_spain": {
+        num: "09.",
+        name: "Spain",
+        tag: "09. ANDALUSIA & SIERRA",
+        desc: "Sun-dappled courtyards overflowing with bougainvillea, flamenco notes drifting across ancient plazas, and olive groves stretching to the mountains.",
+        season: "April — June / September — October",
+        days: "10 Days"
+      },
+      "10_greece": {
+        num: "10.",
+        name: "Greece",
+        tag: "10. CYCLADIC SEA SHORES",
+        desc: "Whitewashed stone pathways overlooking cobalt deep blue seas, sea-salt breezes, and secluded coves only reached by wooden kaiki boats.",
+        season: "May — June / September — October",
+        days: "8 Days"
+      },
+      "11_austria": {
+        num: "11.",
+        name: "Austria",
+        tag: "11. SALZKAMMERGUT LAKES",
+        desc: "Mirror-still alpine waters reflecting wooden boat houses, bell-tower chimes echoing across valleys, and misty morning forest walks.",
+        season: "May — September",
+        days: "7 Days"
+      },
+      "12_canada": {
+        num: "12.",
+        name: "Canada",
+        tag: "12. ROCKIES & PACIFIC RIM",
+        desc: "Glacial lakes of impossible turquoise, ancient temperate rainforests dripping in fog, and backcountry canoe expeditions across Banff and Jasper.",
+        season: "June — September",
+        days: "12 Days"
+      },
+      "13_newzealand": {
+        num: "13.",
+        name: "New Zealand",
+        tag: "13. SOUTHERN ALPS & FIORDS",
+        desc: "Sheer granite walls falling into inky fiords, braided glacier rivers, and campervan journeys traversing golden tussock country.",
+        season: "November — April",
+        days: "14 Days"
+      },
+      "14_australia": {
+        num: "14.",
+        name: "Australia",
+        tag: "14. TASMANIA & COASTAL REACHES",
+        desc: "Ancient temperate wilderness, sea cliffs pummeled by Southern Ocean swells, and paddock-to-plate farmhouses in the Derwent Valley.",
+        season: "October — April",
+        days: "10 Days"
+      },
+      "15_slovenia": {
+        num: "15.",
+        name: "Slovenia",
+        tag: "15. JULIAN ALPS & SOČA VALLEY",
+        desc: "Emerald waters of the Soča River, island bell towers on Lake Bled, and mountain shepherd huts nestled beneath Triglav.",
+        season: "May — October",
+        days: "8 Days"
+      },
+      "16_istanbul": {
+        num: "16.",
+        name: "Istanbul",
+        tag: "16. BOSPHORUS CROSSING",
+        desc: "Minarets silhouetted against twilight skies, call to prayer drifting across the Golden Horn, and centuries of spice routes meeting at the strait.",
+        season: "April — June / September — November",
+        days: "6 Days"
+      }
+    };
+
+    // 2. Header Scroll Effect
+    const siteHeader = document.getElementById('siteHeader');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        siteHeader.classList.add('scrolled');
+      } else {
+        siteHeader.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    function scrollToDestinations() {
+      document.getElementById('destinationsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // 3. View Switcher Mode (Slider vs List)
+    function setViewMode(mode) {
+      const btnSlider = document.getElementById('btnSliderView');
+      const btnList = document.getElementById('btnListView');
+      const board = document.getElementById('polaroidContainer');
+      const list = document.getElementById('destinationsListMode');
+
+      if (mode === 'list') {
+        btnList.classList.add('active');
+        btnSlider.classList.remove('active');
+        board.style.display = 'none';
+        list.classList.add('active');
+      } else {
+        btnSlider.classList.add('active');
+        btnList.classList.remove('active');
+        board.style.display = 'flex';
+        list.classList.remove('active');
+      }
+    }
+
+    // 4. Interactive Polaroid Hover & Drag Engine
+    const polaroidBoard = document.getElementById('polaroidBoard');
+    const polaroids = document.querySelectorAll('.polaroid-card');
+
+    function highlightCard(destKey) {
+      const card = document.getElementById(`card-${destKey}`);
+      if (card) {
+        card.classList.add('highlighted');
+      }
+      const catItem = document.querySelector(`.catalog-item[data-dest="${destKey}"]`);
+      if (catItem) {
+        catItem.classList.add('active');
+      }
+    }
+
+    function unhighlightCard(destKey) {
+      const card = document.getElementById(`card-${destKey}`);
+      if (card) {
+        card.classList.remove('highlighted');
+      }
+      const catItem = document.querySelector(`.catalog-item[data-dest="${destKey}"]`);
+      if (catItem) {
+        catItem.classList.remove('active');
+      }
+    }
+
+    function highlightDestination(destKey) {
+      scrollToDestinations();
+      setTimeout(() => {
+        highlightCard(destKey);
+        setTimeout(() => unhighlightCard(destKey), 2500);
+      }, 400);
+    }
+
+    // Bidirectional Linking for each polaroid
+    polaroids.forEach(card => {
+      const destKey = card.getAttribute('data-dest');
+
+      card.addEventListener('mouseenter', () => {
+        highlightCard(destKey);
+      });
+      card.addEventListener('mouseleave', () => {
+        unhighlightCard(destKey);
+      });
+      card.addEventListener('click', (e) => {
+        if (!card.dataset.dragged) {
+          openDestModal(destKey);
+        }
+      });
+
+      // Draggable Physics on Polaroids
+      let isDragging = false;
+      let startX, startY;
+      let initLeft, initTop;
+
+      card.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        card.dataset.dragged = '';
+        startX = e.clientX;
+        startY = e.clientY;
+        const rect = card.getBoundingClientRect();
+        const parentRect = polaroidBoard.getBoundingClientRect();
+        initLeft = rect.left - parentRect.left;
+        initTop = rect.top - parentRect.top;
+        card.style.zIndex = '80';
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        if (Math.abs(dx) > 4 || Math.abs(dy) > 4) {
+          card.dataset.dragged = 'true';
+        }
+        card.style.left = `${initLeft + dx}px`;
+        card.style.top = `${initTop + dy}px`;
+        card.style.transform = `scale(1.15) rotate(0deg)`;
+      });
+
+      window.addEventListener('mouseup', () => {
+        if (isDragging) {
+          isDragging = false;
+          setTimeout(() => { card.dataset.dragged = ''; }, 50);
+        }
+      });
+    });
+
+    // 5. Expandable Accordion Engine
+    const accordionPanels = document.querySelectorAll('.accordion-panel');
+    function setActivePanel(index) {
+      accordionPanels.forEach((panel, i) => {
+        if (i === index) {
+          panel.classList.add('active');
+        } else {
+          panel.classList.remove('active');
+        }
+      });
+    }
+
+    accordionPanels.forEach((panel, idx) => {
+      panel.addEventListener('mouseenter', () => {
+        setActivePanel(idx);
+      });
+    });
+
+    // 6. Dynamic Compass Needle Rotation
+    const compassNeedle = document.getElementById('compassNeedle');
+    let compassDeg = 0;
+
+    window.addEventListener('mousemove', (e) => {
+      if (!compassNeedle) return;
+      const xNorm = (e.clientX / window.innerWidth) - 0.5;
+      const deg = xNorm * 45;
+      compassNeedle.style.transform = `rotate(${deg}deg)`;
+    });
+
+    function spinCompass() {
+      compassDeg += 360;
+      compassNeedle.style.transform = `rotate(${compassDeg}deg)`;
+    }
+
+    // 7. Modals: Destination Detail & Plan Journey
+    function openDestModal(destKey) {
+      const data = DESTINATIONS[destKey];
+      if (!data) return;
+
+      document.getElementById('destModalImg').src = `./assets/images/polaroids/${destKey}.jpg`;
+      document.getElementById('destModalTag').innerText = data.tag;
+      document.getElementById('destModalTitle').innerText = data.name;
+      document.getElementById('destModalDesc').innerText = data.desc;
+      document.getElementById('destModalSeason').innerText = data.season;
+      document.getElementById('destModalDays').innerText = data.days;
+
+      document.getElementById('destModal').classList.add('open');
+    }
+
+    function openPlanModal() {
+      document.getElementById('planModal').classList.add('open');
+    }
+
+    function openPlanModalFromDest() {
+      closeModal('destModal');
+      setTimeout(() => openPlanModal(), 200);
+    }
+
+    function openReelModal() {
+      openDestModal('01_iceland');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+    }
+
+    function closeOnBackdrop(e, id) {
+      if (e.target.id === id) {
+        closeModal(id);
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal('planModal');
+        closeModal('destModal');
+      }
+    });
+
+    // Form handlers & toast
+    function showToast(msg) {
+      const toast = document.getElementById('toastPill');
+      toast.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function handlePlanSubmit(e) {
+      e.preventDefault();
+      closeModal('planModal');
+      showToast('Journey inquiry received. Our expedition lead will connect shortly.');
+    }
+
+    function handleNewsletter(e) {
+      e.preventDefault();
+      const input = document.getElementById('newsletterEmail');
+      input.value = '';
+      showToast("You're on the list. First field dispatch lands Friday.");
+    }
+
+    // Mobile navigation toggle
+    function toggleMobileNav() {
+      const nav = document.querySelector('.nav-stack');
+      if (nav.style.display === 'flex') {
+        nav.style.display = 'none';
+      } else {
+        nav.style.display = 'flex';
+        nav.style.position = 'fixed';
+        nav.style.top = '94px';
+        nav.style.left = '0';
+        nav.style.right = '0';
+        nav.style.background = 'rgba(6, 5, 7, 0.96)';
+        nav.style.padding = '24px 36px';
+        nav.style.borderBottom = '1px solid var(--line)';
+      }
+    }
+
+    // 8. Web Audio API Ambient Atmosphere (Wind & Chimes)
+    let audioCtx = null;
+    let isSoundPlaying = false;
+    let noiseGain = null;
+    let chimeInterval = null;
+
+    function toggleAmbientSound() {
+      const btn = document.getElementById('soundToggleBtn');
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+      }
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      if (isSoundPlaying) {
+        // Mute
+        if (noiseGain) noiseGain.gain.linearRampToValueAtTime(0.0001, audioCtx.currentTime + 0.5);
+        clearInterval(chimeInterval);
+        isSoundPlaying = false;
+        btn.classList.remove('active');
+        showToast('Ambient audio muted.');
+      } else {
+        // Start wind synth
+        startWindSynth();
+        isSoundPlaying = true;
+        btn.classList.add('active');
+        showToast('Nordic breeze ambience active.');
+      }
+    }
+
+    function startWindSynth() {
+      // Pink noise simulation for gentle breeze
+      const bufferSize = audioCtx.sampleRate * 2;
+      const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+      for (let i = 0; i < bufferSize; i++) {
+        const white = Math.random() * 2 - 1;
+        b0 = 0.99886 * b0 + white * 0.0555179;
+        b1 = 0.99332 * b1 + white * 0.0750759;
+        b2 = 0.96900 * b2 + white * 0.1538520;
+        b3 = 0.86650 * b3 + white * 0.3104856;
+        b4 = 0.55000 * b4 + white * 0.5329522;
+        b5 = -0.7616 * b5 - white * 0.0168980;
+        output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+        b6 = white * 0.115926;
+      }
+
+      const whiteNoise = audioCtx.createBufferSource();
+      whiteNoise.buffer = noiseBuffer;
+      whiteNoise.loop = true;
+
+      const filter = audioCtx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(450, audioCtx.currentTime);
+
+      noiseGain = audioCtx.createGain();
+      noiseGain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      noiseGain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 1.2);
+
+      whiteNoise.connect(filter);
+      filter.connect(noiseGain);
+      noiseGain.connect(audioCtx.destination);
+      whiteNoise.start();
+
+      // Occasional gentle pentatonic chimes
+      const chimePitches = [329.63, 392.00, 493.88, 587.33, 659.25]; // E minor pentatonic
+      chimeInterval = setInterval(() => {
+        if (!isSoundPlaying) return;
+        const pitch = chimePitches[Math.floor(Math.random() * chimePitches.length)];
+        playChimeTone(pitch);
+      }, 5000);
+    }
+
+    function playChimeTone(freq) {
+      if (!audioCtx) return;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0.0001, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.015, audioCtx.currentTime + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.8);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 3.0);
+    }
+  </script>
+</body>
+</html>

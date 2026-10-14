@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Aethera mark: a quiet horizon with one eternal light above it -->
+  <circle cx="32" cy="21" r="7" fill="#000000"/>
+  <path d="M8 45 H56" stroke="#000000" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M18 53 H46" stroke="#6F6F6F" stroke-width="2.5" stroke-linecap="round"/>
+</svg>

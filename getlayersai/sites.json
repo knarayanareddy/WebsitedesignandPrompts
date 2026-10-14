@@ -1,0 +1,171 @@
+[
+  {
+    "slug": "vesper",
+    "name": "Vesper",
+    "number": 4,
+    "category": "Intelligence",
+    "blurb": "A living instrument for a world in motion.",
+    "colors": [
+      "#05060b",
+      "#f0f4f8",
+      "#4dffb8",
+      "#111621"
+    ]
+  },
+  {
+    "slug": "soda",
+    "name": "Soda",
+    "number": 3,
+    "category": "Product",
+    "blurb": "A little wild. A lot of fizz.",
+    "colors": [
+      "#260b1b",
+      "#fff5ed",
+      "#ff92b2",
+      "#3b152d"
+    ]
+  },
+  {
+    "slug": "kimi",
+    "name": "GRIDO1",
+    "number": 2,
+    "category": "Sport",
+    "blurb": "Every thousandth tells a story.",
+    "colors": [
+      "#080b0d",
+      "#f4f6f8",
+      "#00f59b",
+      "#12181b"
+    ]
+  },
+  {
+    "slug": "stride",
+    "name": "Stride",
+    "number": 5,
+    "category": "Finance",
+    "blurb": "Money should move like you do.",
+    "colors": [
+      "#050a1b",
+      "#f8fafc",
+      "#86b7ff",
+      "#101b32"
+    ]
+  },
+  {
+    "slug": "ai-studio",
+    "name": "AI.STUDIO",
+    "number": 6,
+    "category": "Studio",
+    "blurb": "Human imagination. New dimensions.",
+    "colors": [
+      "#100c18",
+      "#faf6ff",
+      "#d2b4ff",
+      "#1c1627"
+    ]
+  },
+  {
+    "slug": "creative-director",
+    "name": "ALEX / MORGAN",
+    "number": 7,
+    "category": "Portfolio",
+    "blurb": "Work that makes you feel something.",
+    "colors": [
+      "#210706",
+      "#fff0dd",
+      "#ff9e64",
+      "#34110d"
+    ]
+  },
+  {
+    "slug": "dantora",
+    "name": "dantora",
+    "number": 8,
+    "category": "Health",
+    "blurb": "A deeper understanding of you.",
+    "colors": [
+      "#edf1e8",
+      "#163a2e",
+      "#276b48",
+      "#f8faf5"
+    ]
+  },
+  {
+    "slug": "clarix",
+    "name": "clarix_",
+    "number": 9,
+    "category": "Developer",
+    "blurb": "Infrastructure, made legible.",
+    "colors": [
+      "#080d12",
+      "#e9f3ff",
+      "#87e0ff",
+      "#101b25"
+    ]
+  },
+  {
+    "slug": "relay",
+    "name": "relay",
+    "number": 10,
+    "category": "Automation",
+    "blurb": "Let the good work flow.",
+    "colors": [
+      "#0c100b",
+      "#f5f7ec",
+      "#c7f76d",
+      "#171f13"
+    ]
+  },
+  {
+    "slug": "lumora",
+    "name": "lumora\u00ae",
+    "number": 11,
+    "category": "Studio",
+    "blurb": "Considered design. Thoughtful engineering.",
+    "colors": [
+      "#0d0e10",
+      "#f2f1ed",
+      "#e8b668",
+      "#1b1c1f"
+    ]
+  },
+  {
+    "slug": "laocoon",
+    "name": "LAOCO\u00d6N",
+    "number": 12,
+    "category": "Exhibition",
+    "blurb": "Form, tension, and the space between.",
+    "colors": [
+      "#0d0a08",
+      "#f1e5d2",
+      "#dbb377",
+      "#1c1510"
+    ]
+  },
+  {
+    "slug": "baseline",
+    "name": "BASELINE",
+    "number": 13,
+    "category": "Sport",
+    "blurb": "A lifelong love of the game.",
+    "colors": [
+      "#0b213d",
+      "#f5f7ee",
+      "#d4ee7b",
+      "#142e4c"
+    ]
+  },
+  {
+    "slug": "ascend",
+    "name": "ascend",
+    "number": 14,
+    "category": "Infrastructure",
+    "blurb": "A world closer to your users.",
+    "colors": [
+      "#030a10",
+      "#ecfff8",
+      "#76e8b6",
+      "#101e26"
+    ]
+  }
+]

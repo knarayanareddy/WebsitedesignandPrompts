@@ -1,0 +1,1797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>KUMO · 層 — Hand-Painted 2D Animation Studio</title>
+  <meta name="description" content="A hand-painted animation studio told as one unbroken shot through an autumn city, sewn together by clouds.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='18' fill='%23ECE6DC'/%3E%3Crect x='10' y='10' width='80' height='80' rx='12' fill='%23111111'/%3E%3Ctext x='50' y='68' font-size='48' font-family='serif' text-anchor='middle' fill='%23ECE6DC'%3E層%3C/text%3E%3C/svg%3E">
+
+  <style>
+    /* --------------------------------------------------------------------------
+       SELF-HOSTED FONTS
+       -------------------------------------------------------------------------- */
+    @font-face {
+      font-family: "Newsreader";
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("./assets/fonts/newsreader.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Newsreader";
+      font-style: italic;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("./assets/fonts/newsreader-italic.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Space Mono";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("./assets/fonts/spacemono.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Space Mono";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("./assets/fonts/spacemono-bold.woff2") format("woff2");
+    }
+    @font-face {
+      font-family: "Cinzel";
+      font-style: normal;
+      font-weight: 600 800;
+      font-display: swap;
+      src: url("./assets/fonts/cinzel.woff2") format("woff2");
+    }
+
+    /* --------------------------------------------------------------------------
+       DESIGN TOKENS & RESET
+       -------------------------------------------------------------------------- */
+    :root {
+      --bg-parchment: #ece6dc;
+      --bg-dark: #0e0d0c;
+      --ink: #111111;
+      --ink-dim: rgba(17, 17, 17, 0.65);
+      --ink-subtle: rgba(17, 17, 17, 0.38);
+      --paper: #f4f0e8;
+      --white: #ffffff;
+      --amber: #d97706;
+      --amber-glow: rgba(217, 119, 6, 0.45);
+      --indigo: #203a60;
+      --border: rgba(17, 17, 17, 0.12);
+      --serif: "Newsreader", "Times New Roman", Georgia, serif;
+      --mono: "Space Mono", ui-monospace, SFMono-Regular, monospace;
+      --heading: "Newsreader", serif;
+      --scanlines: rgba(0, 0, 0, 0.04);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100%;
+      background-color: var(--bg-parchment);
+      color: var(--ink);
+      font-family: var(--serif);
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Outer Studio Monitor Border & CRT Vignette */
+    .viewport-frame {
+      position: fixed;
+      inset: 8px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      pointer-events: none;
+      z-index: 999;
+      box-shadow: 0 0 0 8px var(--bg-parchment);
+    }
+
+    .corner-mark {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      border-color: var(--ink-dim);
+      border-style: solid;
+      pointer-events: none;
+    }
+    .corner-tl { top: 12px; left: 12px; border-width: 1.5px 0 0 1.5px; }
+    .corner-tr { top: 12px; right: 12px; border-width: 1.5px 1.5px 0 0; }
+    .corner-bl { bottom: 12px; left: 12px; border-width: 0 0 1.5px 1.5px; }
+    .corner-br { bottom: 12px; right: 12px; border-width: 0 1.5px 1.5px 0; }
+
+    /* Scanline Raster Overlay (Toggleable) */
+    .scanlines-overlay {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(255,255,255,0),
+        rgba(255,255,255,0) 50%,
+        var(--scanlines) 50%,
+        var(--scanlines)
+      );
+      background-size: 100% 4px;
+      pointer-events: none;
+      z-index: 990;
+      opacity: 0.85;
+      transition: opacity 0.3s ease;
+    }
+    body.no-crt .scanlines-overlay {
+      opacity: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       ASCII MATRIX CLOUD PRELOADER
+       -------------------------------------------------------------------------- */
+    #preloader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-parchment);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 32px 40px;
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s ease;
+    }
+    #preloader.dismissed {
+      opacity: 0;
+      transform: scale(1.02);
+      pointer-events: none;
+    }
+
+    .pre-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .pre-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .kanji-box {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border: 1.2px solid var(--ink);
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: serif;
+      font-weight: 700;
+    }
+    .pre-subtitle {
+      color: var(--ink-dim);
+    }
+
+    .pre-canvas-wrap {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      margin: 16px 0;
+    }
+    #asciiCanvas {
+      font-family: var(--mono);
+      font-size: 10px;
+      line-height: 9.5px;
+      letter-spacing: 1px;
+      color: var(--indigo);
+      white-space: pre;
+      user-select: none;
+      text-align: center;
+      text-shadow: 0 0 1px rgba(32, 58, 96, 0.3);
+      filter: contrast(1.15);
+    }
+
+    .pre-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      font-family: var(--mono);
+      font-size: 13px;
+      color: var(--ink);
+    }
+    .pre-status {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .pre-counter {
+      font-size: clamp(38px, 6vw, 64px);
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .skip-btn {
+      background: none;
+      border: 1px solid var(--border);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 11px;
+      cursor: pointer;
+      color: var(--ink-dim);
+      margin-left: 16px;
+      transition: all 0.2s ease;
+    }
+    .skip-btn:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+
+    /* --------------------------------------------------------------------------
+       MAIN FLOATING STUDIO HEADER
+       -------------------------------------------------------------------------- */
+    .studio-header {
+      position: fixed;
+      top: 24px;
+      left: 32px;
+      right: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      pointer-events: none;
+      color: var(--white);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+      transition: color 0.4s ease;
+    }
+    .studio-header * {
+      pointer-events: auto;
+    }
+    body.theme-light .studio-header {
+      color: var(--ink);
+      text-shadow: none;
+      opacity: 1 !important;
+    }
+    body.video-active:not(.theme-light) .studio-header {
+      opacity: 0;
+      pointer-events: auto;
+      transition: opacity 0.3s ease;
+    }
+    body.video-active:not(.theme-light) .ticker-bar {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .header-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    .header-logo .kanji-box {
+      border-color: currentColor;
+    }
+    .header-logo-title {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-columns {
+      display: flex;
+      gap: 40px;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.05em;
+    }
+    @media (max-width: 900px) {
+      .nav-columns { display: none; }
+    }
+    .nav-col {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .nav-link {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-link:hover {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+
+    .header-center-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-family: var(--mono);
+      text-align: center;
+    }
+    .timecode-pill {
+      border: 1px solid currentColor;
+      padding: 2px 10px;
+      border-radius: 12px;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+    }
+    .scene-tag {
+      font-size: 9.5px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.7;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .btn-start-project {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(17, 17, 17, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    body.theme-light .btn-start-project {
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--ink);
+      border-color: rgba(17, 17, 17, 0.2);
+    }
+    .btn-start-project:hover {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: #fff;
+      box-shadow: 0 0 16px var(--amber-glow);
+    }
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--amber);
+      box-shadow: 0 0 8px var(--amber);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    /* --------------------------------------------------------------------------
+       SCROLLYTELLING VIEWPORT & UNBROKEN SHOT
+       -------------------------------------------------------------------------- */
+    .scroller {
+      height: 600vh;
+      position: relative;
+    }
+
+    .stage-sticky {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Clean High-Resolution Background Scenes */
+    .cinematic-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #0b0c10;
+    }
+    .cinematic-bg .scene-video-scrub {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      opacity: 1;
+      transition: opacity 0.4s ease;
+      will-change: opacity;
+      z-index: 2;
+    }
+    .cinematic-bg .scene-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .cinematic-bg .scene-bg-img.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Overlay Vignette */
+    .cinematic-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, rgba(14, 13, 12, 0.45) 100%);
+      pointer-events: none;
+    }
+
+    /* Scene Captions & Story Typography */
+    .scene-caption-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .scene-text-block {
+      position: absolute;
+      bottom: 64px;
+      left: 54px;
+      max-width: 620px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      color: var(--white);
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.75);
+    }
+    .scene-text-block.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scene-title {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5.5vw, 68px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      color: #fff;
+    }
+    .scene-desc {
+      font-family: var(--serif);
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height: 1.45;
+      color: rgba(255, 255, 255, 0.88);
+      max-width: 480px;
+    }
+
+    /* Right Kanji Stamp & Metadata */
+    .scene-stamp-block {
+      position: absolute;
+      bottom: 70px;
+      right: 54px;
+      display: flex;
+      align-items: flex-end;
+      gap: 24px;
+      color: var(--white);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .scene-stamp-block.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stamp-text {
+      max-width: 320px;
+      font-size: 15px;
+      line-height: 1.4;
+      text-align: right;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .stamp-kanji {
+      writing-mode: vertical-rl;
+      font-family: serif;
+      font-size: 24px;
+      letter-spacing: 0.3em;
+      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      padding-left: 12px;
+      font-weight: 700;
+    }
+
+    /* Seamless Native Video Integration: Hide DOM duplicate text on desktop, clean card on mobile */
+    @media (min-width: 769px) {
+      body.video-active .scene-caption-layer .scene-text-block,
+      body.video-active .scene-caption-layer .scene-stamp-block {
+        opacity: 0 !important;
+        visibility: hidden !important;
+        pointer-events: none;
+      }
+    }
+    @media (max-width: 768px) {
+      body.video-active .scene-caption-layer .scene-text-block.active {
+        opacity: 1 !important;
+        visibility: visible !important;
+        bottom: 36px;
+        left: 18px;
+        right: 18px;
+        max-width: 100%;
+        text-align: center;
+        background: rgba(14, 13, 12, 0.72);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        padding: 14px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+      }
+      body.video-active .scene-caption-layer .scene-text-block .scene-title {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      body.video-active .scene-caption-layer .scene-text-block .scene-desc {
+        font-size: 13px;
+        line-height: 1.4;
+      }
+      body.video-active .scene-caption-layer .scene-stamp-block {
+        display: none !important;
+      }
+    }
+
+    /* Bottom Ticker Marquee Bar */
+    .ticker-bar {
+      position: absolute;
+      bottom: 18px;
+      left: 32px;
+      right: 32px;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: var(--mono);
+      font-size: 10.5px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      padding-top: 10px;
+      z-index: 30;
+      pointer-events: none;
+    }
+    body.theme-light .ticker-bar {
+      color: var(--ink-dim);
+      border-top-color: var(--border);
+    }
+    .ticker-track {
+      display: inline-block;
+      animation: tickerLoop 30s linear infinite;
+    }
+    @keyframes tickerLoop {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* --------------------------------------------------------------------------
+       SECTION 2: 3D INTERACTIVE PROJECT RING
+       -------------------------------------------------------------------------- */
+    .ring-section {
+      position: absolute;
+      inset: 0;
+      background-color: var(--bg-parchment);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      z-index: 40;
+    }
+    .ring-section.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .ring-viewport {
+      width: 100%;
+      height: 100%;
+      perspective: 1400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      cursor: grab;
+      padding: 70px 0 60px 0;
+      overflow: hidden;
+    }
+    .ring-viewport:active {
+      cursor: grabbing;
+    }
+
+    .carousel-track-top {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      pointer-events: none;
+    }
+    .carousel-track-bottom {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      pointer-events: none;
+      margin-bottom: 24px;
+    }
+
+    .carousel-3d-stage {
+      width: 180px;
+      height: 180px;
+      position: relative;
+      transform-style: preserve-3d;
+      will-change: transform;
+      pointer-events: auto;
+    }
+
+    /* Amphitheater Project Card */
+    .card-3d {
+      position: absolute;
+      width: 155px;
+      height: 185px;
+      left: 12px;
+      top: 0;
+      border-radius: 8px;
+      overflow: hidden;
+      background-color: #1a1a1a;
+      box-shadow: 0 10px 24px -6px rgba(0, 0, 0, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: filter 0.25s, transform 0.25s;
+      user-select: none;
+      cursor: pointer;
+    }
+    .carousel-track-top .card-3d {
+      width: 140px;
+      height: 165px;
+      opacity: 0.92;
+    }
+    .card-3d:hover {
+      filter: brightness(1.18);
+    }
+    .card-3d img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      display: block;
+    }
+
+    /* Center Active Project Meta */
+    .ring-center-meta {
+      position: relative;
+      text-align: center;
+      pointer-events: none;
+      z-index: 10;
+      margin: auto 0;
+    }
+    .ring-active-title {
+      font-family: var(--serif);
+      font-size: clamp(52px, 7vw, 92px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      line-height: 1.05;
+      margin-bottom: 8px;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    .ring-active-sub {
+      font-family: var(--mono);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+    }
+
+    /* Bottom Ring Controls */
+    .ring-controls {
+      position: absolute;
+      bottom: 48px;
+      left: 48px;
+      right: 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      z-index: 50;
+    }
+    .ring-hint {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--ink-dim);
+    }
+    .ring-action-btn {
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--ink);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-family: var(--mono);
+      font-size: 12px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+    }
+    .ring-action-btn:hover {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    /* --------------------------------------------------------------------------
+       SECTION 3: CLOUDSCAPE CONTACT FOOTER
+       -------------------------------------------------------------------------- */
+    .footer-section {
+      position: absolute;
+      inset: 0;
+      background: var(--bg-parchment);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 60px 48px 36px;
+      z-index: 50;
+    }
+    .footer-section.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .footer-marquee-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .footer-marquee-line {
+      font-family: var(--serif);
+      font-size: clamp(60px, 9vw, 130px);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      white-space: nowrap;
+      user-select: none;
+      display: flex;
+      gap: 32px;
+    }
+    .footer-marquee-track {
+      display: inline-flex;
+      gap: 32px;
+      animation: footerMarquee 35s linear infinite;
+    }
+    @keyframes footerMarquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .footer-bottom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      align-items: flex-end;
+      gap: 24px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      font-family: var(--mono);
+      font-size: 13px;
+    }
+    @media (max-width: 800px) {
+      .footer-bottom-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    .footer-contact-link {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .footer-contact-link:hover {
+      color: var(--amber);
+    }
+    .footer-colophon {
+      color: var(--ink-dim);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* --------------------------------------------------------------------------
+       MODAL: CINEMA FILM VIEWER
+       -------------------------------------------------------------------------- */
+    .film-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(14, 13, 12, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      padding: 32px;
+    }
+    .film-modal.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .film-modal-box {
+      width: 100%;
+      max-width: 1100px;
+      background: #111;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+    .film-modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      z-index: 10;
+      transition: background 0.2s;
+    }
+    .film-modal-close:hover {
+      background: var(--amber);
+    }
+    .film-modal-media {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      position: relative;
+    }
+    .film-modal-media video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    .film-modal-meta {
+      padding: 24px 32px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .film-modal-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 700;
+    }
+    .film-modal-tags {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--amber);
+    }
+
+    /* --------------------------------------------------------------------------
+       BOTTOM UTILITY CONTROLS (Sound / CRT / Progress)
+       -------------------------------------------------------------------------- */
+    .utility-dock {
+      position: fixed;
+      bottom: 24px;
+      right: 32px;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+    .dock-btn {
+      background: rgba(17, 17, 17, 0.6);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 12px;
+      border-radius: 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+    body.theme-light .dock-btn {
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--ink);
+      border-color: var(--border);
+    }
+    .dock-btn:hover {
+      border-color: var(--amber);
+      color: var(--amber);
+    }
+
+    /* --------------------------------------------------------------------------
+       RESPONSIVE ADAPTATIONS (TABLETS & MOBILE DEVICES)
+       -------------------------------------------------------------------------- */
+    @media (max-width: 768px) {
+      .studio-header {
+        top: 14px;
+        left: 16px;
+        right: 16px;
+      }
+      .header-center-info {
+        display: none;
+      }
+      .btn-start-project {
+        padding: 6px 14px;
+        font-size: 11px;
+      }
+      .scene-text-block {
+        left: 20px;
+        right: 20px;
+        bottom: 58px;
+        max-width: none;
+      }
+      .scene-title {
+        font-size: clamp(28px, 7.5vw, 40px);
+      }
+      .scene-desc {
+        font-size: 14px;
+        max-width: none;
+      }
+      .scene-stamp-block {
+        right: 18px;
+        bottom: 58px;
+      }
+      .stamp-text {
+        display: none;
+      }
+      .stamp-kanji {
+        font-size: 18px;
+        padding-left: 8px;
+        border-left: 1px solid rgba(255, 255, 255, 0.4);
+      }
+      .ring-viewport {
+        padding: 40px 0 50px 0;
+      }
+      .carousel-track-top {
+        height: 140px;
+      }
+      .carousel-track-bottom {
+        height: 150px;
+        margin-bottom: 20px;
+      }
+      .carousel-track-top .card-3d {
+        width: 105px;
+        height: 125px;
+      }
+      .card-3d {
+        width: 115px;
+        height: 135px;
+      }
+      .ring-active-title {
+        font-size: clamp(34px, 9vw, 48px);
+      }
+      .ring-active-sub {
+        font-size: 11px;
+      }
+      .ring-controls {
+        left: 20px;
+        right: 20px;
+        bottom: 24px;
+        font-size: 10px;
+        z-index: 50;
+      }
+      .ring-controls .ring-hint {
+        display: none;
+      }
+      .utility-dock {
+        bottom: 12px;
+        right: 16px;
+        gap: 6px;
+      }
+      .dock-btn {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+      .ticker-bar {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Outer Studio Monitor Registration Frame -->
+  <div class="viewport-frame" aria-hidden="true">
+    <div class="corner-mark corner-tl"></div>
+    <div class="corner-mark corner-tr"></div>
+    <div class="corner-mark corner-bl"></div>
+    <div class="corner-mark corner-br"></div>
+  </div>
+
+  <!-- Scanline CRT Texture Overlay -->
+  <div class="scanlines-overlay" id="scanlines" aria-hidden="true"></div>
+
+  <!-- ========================================================================
+       1. ASCII MATRIX CLOUD PRELOADER
+       ======================================================================== -->
+  <aside id="preloader" role="dialog" aria-label="Loading Experience">
+    <div class="pre-header">
+      <div class="pre-brand">
+        <span class="kanji-box">層</span>
+        <span>Layers</span>
+      </div>
+      <div class="pre-subtitle">
+        <span>Hand-Painted 2D Animation Studio</span>
+        <button class="skip-btn" id="skipPreloaderBtn">Skip Intro ↵</button>
+      </div>
+    </div>
+
+    <div class="pre-canvas-wrap">
+      <div id="asciiCanvas" aria-hidden="true"></div>
+    </div>
+
+    <div class="pre-footer">
+      <div class="pre-status" id="preStatus">Drawing the city...</div>
+      <div class="pre-counter" id="preCounter">000%</div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       2. PERSISTENT STUDIO NAVIGATION HEADER
+       ======================================================================== -->
+  <header class="studio-header" id="studioHeader">
+    <a href="./" class="header-logo" aria-label="Kumo Layers Studio Home">
+      <span class="kanji-box">層</span>
+      <span class="header-logo-title">Layers</span>
+    </a>
+
+    <nav class="nav-columns" aria-label="Main Navigation">
+      <div class="nav-col">
+        <a href="#films" class="nav-link">Films</a>
+        <a href="#clips" class="nav-link">Clips</a>
+        <a href="#brand-films" class="nav-link">Brand films</a>
+      </div>
+      <div class="nav-col">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#process" class="nav-link">Process</a>
+        <a href="#journal" class="nav-link">Journal</a>
+      </div>
+      <div class="nav-col">
+        <a href="#contact" class="nav-link">Say hello</a>
+        <a href="#careers" class="nav-link">Careers</a>
+      </div>
+    </nav>
+
+    <div class="header-center-info">
+      <div class="timecode-pill" id="timecodeClock">09:04:40</div>
+      <div class="scene-tag" id="sceneTag">ABOVE THE CITY · SC 01</div>
+    </div>
+
+    <div class="header-actions">
+      <a href="#contact" class="btn-start-project" id="btnContact">
+        <span class="status-dot"></span>
+        <span>Start a project</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. CONTINUOUS CINEMATIC SCROLLYTELLING CONTAINER
+       ======================================================================== -->
+  <main class="scroller" id="scroller">
+    <div class="stage-sticky">
+
+      <!-- Master Cinematic Hand-Painted Background Scenes -->
+      <div class="cinematic-bg" id="cinematicBg">
+        <video id="storyVideo" class="scene-video-scrub" muted playsinline preload="auto" src="./assets/video/kumo-scrub.mp4"></video>
+        <img class="scene-bg-img active" id="sceneImg01" src="./assets/images/scene_01_sky.jpg" alt="Sky over the city">
+        <img class="scene-bg-img" id="sceneImg02" src="./assets/images/scene_02_city.jpg" alt="Autumn city avenue">
+        <img class="scene-bg-img" id="sceneImg03" src="./assets/images/scene_03_girl.jpg" alt="Looking up at facades">
+        <img class="scene-bg-img" id="sceneImg04" src="./assets/images/scene_04_studio.jpg" alt="Animator drawing in room">
+        <img class="scene-bg-img" id="sceneImg05" src="./assets/images/scene_05_panorama.jpg" alt="Autumn horizon panorama">
+        <div class="cinematic-vignette"></div>
+      </div>
+
+      <!-- Scrollytelling Narrative Overlay Captions -->
+      <div class="scene-caption-layer">
+
+        <!-- Scene 1: Sky Over the City -->
+        <article class="scene-text-block active" id="sceneCaption01">
+          <h1 class="scene-title">We paint the city<br>one frame at a time.</h1>
+          <p class="scene-desc">We make animated films the slow way: pencil first, paint second, software last.</p>
+        </article>
+        <div class="scene-stamp-block active" id="sceneStamp01">
+          <div class="stamp-text">Every sky is painted by hand in multi-plane layers.</div>
+          <div class="stamp-kanji">秋の街</div>
+        </div>
+
+        <!-- Scene 2: Small Team, Slow Pencils -->
+        <article class="scene-text-block" id="sceneCaption02">
+          <h2 class="scene-title">Small team.<br>Slow pencils.<br>Big skies.</h2>
+          <p class="scene-desc">Eleven artists who still start on paper. Every shot is painted in layers, so it can breathe, move and change without starting over.</p>
+        </article>
+        <div class="scene-stamp-block" id="sceneStamp02">
+          <div class="stamp-text">Autumn city avenues drawn with charcoal & gouache.</div>
+          <div class="stamp-kanji">秋の</div>
+        </div>
+
+        <!-- Scene 3: Films, Clips & Brand Stories -->
+        <article class="scene-text-block" id="sceneCaption03">
+          <h2 class="scene-title">Films, clips<br>and brand stories</h2>
+          <p class="scene-desc">From a fifteen-second loop to a seven-minute short, for musicians, brands and international animation festivals.</p>
+        </article>
+        <div class="scene-stamp-block" id="sceneStamp03">
+          <div class="stamp-text">Handcrafted cinematography that commands undivided emotion.</div>
+          <div class="stamp-kanji">見上</div>
+        </div>
+
+        <!-- Scene 4: The Animator's Room -->
+        <article class="scene-text-block" id="sceneCaption04">
+          <h2 class="scene-title">Every world begins<br>at the drawing desk.</h2>
+          <p class="scene-desc">Sunlight through the window, flutter of sketches on the wall, and the patient cadence of hand-drawn frames.</p>
+        </article>
+        <div class="scene-stamp-block" id="sceneStamp04">
+          <div class="stamp-text">Studio sanctuary in Montreal & Tokyo.</div>
+          <div class="stamp-kanji">制作</div>
+        </div>
+
+        <!-- Bottom Dynamic Ticker Marquee -->
+        <div class="ticker-bar" id="tickerBar">
+          <div class="ticker-track">
+            SCENE 01 — SKY OVER THE CITY ● FRAME 0001 / 0450 ● 24 FPS ● PAINTED BY HAND ● ABOVE THE CITY, 15:40 ● AUTUMN CANOPY ● KUMO STUDIO MONTREAL &amp; TOKYO ● HAND-DRAWN CELL ANIMATION ● SCENE 01 — SKY OVER THE CITY ● FRAME 0001 / 0450 ● 24 FPS ● PAINTED BY HAND ● ABOVE THE CITY, 15:40 ● AUTUMN CANOPY ● KUMO STUDIO MONTREAL &amp; TOKYO ● HAND-DRAWN CELL ANIMATION ●
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           4. 3D REVOLVING PROJECT CYLINDER RING
+           ==================================================================== -->
+      <section class="ring-section" id="ringSection" aria-label="3D Project Film Reel">
+        <div class="ring-viewport" id="ringViewport">
+
+          <!-- Upper 3D Amphitheater Track -->
+          <div class="carousel-track-top">
+            <div class="carousel-3d-stage" id="carouselTopStage">
+              <div class="card-3d" data-index="0" data-title="Autumn City" data-meta="Original Short · 2:15 · 2026" style="transform: rotateY(0deg) translateZ(520px);">
+                <img src="./assets/images/card_01.jpg" alt="Autumn City film frame">
+              </div>
+              <div class="card-3d" data-index="1" data-title="Paper Weather" data-meta="Brand Film · 1:30 · 2026" style="transform: rotateY(60deg) translateZ(520px);">
+                <img src="./assets/images/card_02.jpg" alt="Paper Weather film frame">
+              </div>
+              <div class="card-3d" data-index="2" data-title="Sky Overpass" data-meta="Music Video · 3:45 · 2025" style="transform: rotateY(120deg) translateZ(520px);">
+                <img src="./assets/images/card_03.jpg" alt="Sky Overpass film frame">
+              </div>
+              <div class="card-3d" data-index="3" data-title="Gilded Avenue" data-meta="Commercial · 0:45 · 2025" style="transform: rotateY(180deg) translateZ(520px);">
+                <img src="./assets/images/card_04.jpg" alt="Gilded Avenue film frame">
+              </div>
+              <div class="card-3d" data-index="4" data-title="Last Tram" data-meta="Music Video · 4:05 · 2024" style="transform: rotateY(240deg) translateZ(520px);">
+                <img src="./assets/images/card_05.jpg" alt="Last Tram film frame">
+              </div>
+              <div class="card-3d" data-index="5" data-title="Window Seat" data-meta="Short Film · 5:20 · 2024" style="transform: rotateY(300deg) translateZ(520px);">
+                <img src="./assets/images/card_06.jpg" alt="Window Seat film frame">
+              </div>
+            </div>
+          </div>
+
+          <!-- Dynamic Center Meta -->
+          <div class="ring-center-meta">
+            <h2 class="ring-active-title" id="activeProjectTitle">Paper Weather</h2>
+            <div class="ring-active-sub" id="activeProjectMeta">Brand film · 1:30 · 2026</div>
+          </div>
+
+          <!-- Lower 3D Amphitheater Track -->
+          <div class="carousel-track-bottom">
+            <div class="carousel-3d-stage" id="carouselBottomStage">
+              <div class="card-3d" data-index="0" data-title="Autumn City" data-meta="Original Short · 2:15 · 2026" style="transform: rotateY(0deg) translateZ(520px);">
+                <img src="./assets/images/card_01.jpg" alt="Autumn City film frame">
+              </div>
+              <div class="card-3d" data-index="1" data-title="Paper Weather" data-meta="Brand Film · 1:30 · 2026" style="transform: rotateY(60deg) translateZ(520px);">
+                <img src="./assets/images/card_02.jpg" alt="Paper Weather film frame">
+              </div>
+              <div class="card-3d" data-index="2" data-title="Sky Overpass" data-meta="Music Video · 3:45 · 2025" style="transform: rotateY(120deg) translateZ(520px);">
+                <img src="./assets/images/card_03.jpg" alt="Sky Overpass film frame">
+              </div>
+              <div class="card-3d" data-index="3" data-title="Gilded Avenue" data-meta="Commercial · 0:45 · 2025" style="transform: rotateY(180deg) translateZ(520px);">
+                <img src="./assets/images/card_04.jpg" alt="Gilded Avenue film frame">
+              </div>
+              <div class="card-3d" data-index="4" data-title="Last Tram" data-meta="Music Video · 4:05 · 2024" style="transform: rotateY(240deg) translateZ(520px);">
+                <img src="./assets/images/card_05.jpg" alt="Last Tram film frame">
+              </div>
+              <div class="card-3d" data-index="5" data-title="Window Seat" data-meta="Short Film · 5:20 · 2024" style="transform: rotateY(300deg) translateZ(520px);">
+                <img src="./assets/images/card_06.jpg" alt="Window Seat film frame">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Ring Navigation Controls -->
+        <div class="ring-controls">
+          <div class="ring-hint">
+            <span>SCROLL TO TURN THE RING</span>
+          </div>
+          <div>
+            <button class="ring-action-btn" id="btnWatchActiveFilm">
+              <span id="activeFilmBtnText">02 / 06 PAPER WEATHER — WATCH FILM</span>
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+           5. ATMOSPHERIC CLOUDSCAPE CONTACT FOOTER
+           ==================================================================== -->
+      <footer class="footer-section" id="footerSection">
+        <div class="footer-marquee-wrap">
+          <div class="footer-marquee-line">
+            <div class="footer-marquee-track">
+              <span>View us ● Have a brief? ● Ship on paper ● Layers Studio ●</span>
+              <span>View us ● Have a brief? ● Ship on paper ● Layers Studio ●</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom-grid">
+          <div>
+            <a href="mailto:hello@layers.studio" class="footer-contact-link">
+              <span>hello@layers.studio</span>
+              <span>↗</span>
+            </a>
+          </div>
+          <div class="footer-colophon">
+            <strong>Kumo Layers Studio</strong><br>
+            Hand-Painted 2D Animation · Tokyo &amp; Montreal<br>
+            Pencil first, paint second, software last.
+          </div>
+          <div style="text-align: right; color: var(--ink-dim);">
+            <span>© 2026 Kumo Layers Studio</span><br>
+            <span>All rights reserved.</span>
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       6. CINEMA FILM PLAYER MODAL
+       ======================================================================== -->
+  <div class="film-modal" id="filmModal" role="dialog" aria-hidden="true">
+    <div class="film-modal-box">
+      <button class="film-modal-close" id="closeModalBtn" aria-label="Close Film Viewer">✕</button>
+      <div class="film-modal-media">
+        <video id="modalVideoPlayer" controls playsinline></video>
+      </div>
+      <div class="film-modal-meta">
+        <div>
+          <h3 class="film-modal-title" id="modalFilmTitle">Paper Weather</h3>
+          <p style="color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 4px;" id="modalFilmSynopsis">
+            An unbroken autumn journey through high-rise rooftops, golden trees, and the silent meditation of an animator's room.
+          </p>
+        </div>
+        <div class="film-modal-tags" id="modalFilmTags">BRAND FILM · 24 FPS · HAND-PAINTED</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Utility Dock (Sound & CRT Toggles) -->
+  <aside class="utility-dock">
+    <button class="dock-btn" id="toggleSoundBtn" aria-label="Toggle Sound">
+      <span>♫</span>
+      <span id="soundLabel">Sound: Off</span>
+    </button>
+    <button class="dock-btn" id="toggleCrtBtn" aria-label="Toggle CRT Effect">
+      <span>⚡</span>
+      <span id="crtLabel">CRT: On</span>
+    </button>
+  </aside>
+
+  <!-- ========================================================================
+       CLIENT RUNTIME JAVASCRIPT
+       ======================================================================== -->
+  <script>
+    (function () {
+      'use strict';
+
+      // 1. ASCII Matrix Cloud Preloader Animation
+      const asciiCanvas = document.getElementById('asciiCanvas');
+      const preCounter = document.getElementById('preCounter');
+      const preloader = document.getElementById('preloader');
+      const skipPreloaderBtn = document.getElementById('skipPreloaderBtn');
+      const preStatus = document.getElementById('preStatus');
+
+      const ASCII_CHARS = '@%#*+=-:. ';
+      const COLS = 72;
+      const ROWS = 28;
+
+      let progress = 0;
+      let preloaderDismissed = false;
+
+      function renderAsciiFrame(t, p) {
+        let output = '';
+        const cloudThreshold = 0.55 - (p / 100) * 0.15;
+
+        for (let r = 0; r < ROWS; r++) {
+          for (let c = 0; c < COLS; c++) {
+            const x = (c / COLS) * 4 - 2;
+            const y = (r / ROWS) * 3 - 1.5;
+
+            // Multi-octave wave synthesis simulating drifting cumulus clouds
+            const wave1 = Math.sin(x * 1.8 + t * 0.002) * Math.cos(y * 2.2 + t * 0.0015);
+            const wave2 = Math.sin(x * 3.5 - t * 0.001) * Math.cos(y * 4.0 + t * 0.0025) * 0.5;
+            const dist = Math.sqrt(x * x * 0.7 + y * y * 1.4);
+            const val = wave1 + wave2 - dist * 0.4 + (p / 100) * 0.3;
+
+            if (val > cloudThreshold) {
+              const charIdx = Math.min(
+                ASCII_CHARS.length - 1,
+                Math.max(0, Math.floor(((val - cloudThreshold) / (1.5 - cloudThreshold)) * ASCII_CHARS.length))
+              );
+              output += ASCII_CHARS[charIdx];
+            } else if (r > ROWS - 4 && (c % 8 === 0 || c % 12 === 0)) {
+              // Subtle horizon building markers
+              output += '|';
+            } else {
+              output += ' ';
+            }
+          }
+          output += '\n';
+        }
+        asciiCanvas.textContent = output;
+      }
+
+      let startTime = performance.now();
+      function updatePreloader(now) {
+        if (preloaderDismissed) return;
+        const elapsed = now - startTime;
+
+        if (progress < 100) {
+          progress = Math.min(100, Math.floor((elapsed / 2200) * 100));
+          preCounter.textContent = String(progress).padStart(3, '0') + '%';
+          if (progress > 40 && progress < 80) preStatus.textContent = 'Inking autumn light...';
+          if (progress >= 80) preStatus.textContent = 'Entering the city...';
+
+          renderAsciiFrame(now, progress);
+          requestAnimationFrame(updatePreloader);
+        } else {
+          dismissPreloader();
+        }
+      }
+      requestAnimationFrame(updatePreloader);
+
+      function dismissPreloader() {
+        if (preloaderDismissed) return;
+        preloaderDismissed = true;
+        preloader.classList.add('dismissed');
+        setTimeout(() => {
+          preloader.style.display = 'none';
+        }, 800);
+      }
+
+      skipPreloaderBtn.addEventListener('click', dismissPreloader);
+
+      // 2. Real-time Clock in Header
+      const timecodeClock = document.getElementById('timecodeClock');
+      function updateClock() {
+        const d = new Date();
+        const h = String(d.getHours()).padStart(2, '0');
+        const m = String(d.getMinutes()).padStart(2, '0');
+        const s = String(d.getSeconds()).padStart(2, '0');
+        timecodeClock.textContent = `${h}:${m}:${s}`;
+      }
+      setInterval(updateClock, 1000);
+      updateClock();
+
+      // 3. Scrollytelling Unbroken Shot Progression & Scene Crossfade
+      const storyVideo = document.getElementById('storyVideo');
+      let isVideoSeeking = false;
+      let pendingScrubTime = null;
+
+      if (storyVideo) {
+        storyVideo.muted = true;
+        storyVideo.play().then(() => storyVideo.pause()).catch(() => {});
+        storyVideo.addEventListener('loadedmetadata', () => {
+          document.body.classList.add('video-active');
+        });
+        storyVideo.addEventListener('seeked', () => {
+          isVideoSeeking = false;
+          if (pendingScrubTime !== null) {
+            const nextTime = pendingScrubTime;
+            pendingScrubTime = null;
+            applyVideoScrub(nextTime);
+          }
+        });
+      }
+
+      function applyVideoScrub(targetTime) {
+        if (!storyVideo || isNaN(storyVideo.duration) || storyVideo.duration <= 0) return;
+        if (isVideoSeeking) {
+          pendingScrubTime = targetTime;
+          return;
+        }
+        if (Math.abs(storyVideo.currentTime - targetTime) > 0.02) {
+          isVideoSeeking = true;
+          storyVideo.currentTime = targetTime;
+        }
+      }
+
+      const sceneImages = [
+        document.getElementById('sceneImg01'),
+        document.getElementById('sceneImg02'),
+        document.getElementById('sceneImg03'),
+        document.getElementById('sceneImg04'),
+        document.getElementById('sceneImg05')
+      ];
+
+      const sceneCaptions = [
+        document.getElementById('sceneCaption01'),
+        document.getElementById('sceneCaption02'),
+        document.getElementById('sceneCaption03'),
+        document.getElementById('sceneCaption04')
+      ];
+      const sceneStamps = [
+        document.getElementById('sceneStamp01'),
+        document.getElementById('sceneStamp02'),
+        document.getElementById('sceneStamp03'),
+        document.getElementById('sceneStamp04')
+      ];
+
+      const sceneTag = document.getElementById('sceneTag');
+      const ringSection = document.getElementById('ringSection');
+      const footerSection = document.getElementById('footerSection');
+
+      let targetScrollFraction = 0;
+      let currentScrollFraction = 0;
+
+      window.addEventListener('scroll', () => {
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        targetScrollFraction = maxScroll > 0 ? window.scrollY / maxScroll : 0;
+      }, { passive: true });
+
+      function lerp(a, b, t) {
+        return a + (b - a) * t;
+      }
+
+      function updateScrollytelling() {
+        currentScrollFraction = lerp(currentScrollFraction, targetScrollFraction, 0.08);
+
+        // Active scene evaluation
+        let activeScene = 0;
+        if (currentScrollFraction < 0.20) activeScene = 0;
+        else if (currentScrollFraction < 0.42) activeScene = 1;
+        else if (currentScrollFraction < 0.60) activeScene = 2;
+        else if (currentScrollFraction < 0.78) activeScene = 3;
+        else if (currentScrollFraction < 0.94) activeScene = 4; // 3D Ring
+        else activeScene = 5; // Footer
+
+        // Header scene tag
+        if (activeScene === 0) sceneTag.textContent = 'ABOVE THE CITY · SC 01';
+        else if (activeScene === 1) sceneTag.textContent = 'GOLDEN BOULEVARD · SC 02';
+        else if (activeScene === 2) sceneTag.textContent = 'LOOKING UP · SC 03';
+        else if (activeScene === 3) sceneTag.textContent = 'THE STUDIO DESK · SC 04';
+        else if (activeScene === 4) sceneTag.textContent = 'FILM REEL RING · 3D';
+        else sceneTag.textContent = 'CONTACT · LAYERS STUDIO';
+
+        // Update Theme (Light / Dark for header text contrast)
+        if (activeScene >= 4) {
+          document.body.classList.add('theme-light');
+        } else {
+          document.body.classList.remove('theme-light');
+        }
+
+        // Scene captions visibility
+        sceneCaptions.forEach((cap, idx) => {
+          if (cap) {
+            if (activeScene === idx) cap.classList.add('active');
+            else cap.classList.remove('active');
+          }
+        });
+        sceneStamps.forEach((st, idx) => {
+          if (st) {
+            if (activeScene === idx) st.classList.add('active');
+            else st.classList.remove('active');
+          }
+        });
+
+        // Continuous Cinematic 3D Movie Scrub Engine
+        const hasVideo = storyVideo && !isNaN(storyVideo.duration) && storyVideo.duration > 0;
+        if (hasVideo) {
+          document.body.classList.add('video-active');
+          const scrubCutoff = 0.74; // At 0.74, 3D movie dissolves into 3D revolving carousel
+          const duration = storyVideo.duration;
+
+          if (currentScrollFraction < scrubCutoff) {
+            // Scrub smoothly through the unbroken 3D anime camera flight
+            const scrubNorm = Math.max(0, currentScrollFraction / scrubCutoff);
+            const targetTime = Math.min(duration - 0.03, scrubNorm * duration);
+            applyVideoScrub(targetTime);
+            storyVideo.style.opacity = '1';
+          } else {
+            // Smoothly dissolve video into the cream 3D amphitheater carousel
+            const fade = Math.max(0, 1 - (currentScrollFraction - scrubCutoff) / 0.03);
+            storyVideo.style.opacity = fade.toFixed(3);
+          }
+        } else {
+          document.body.classList.remove('video-active');
+        }
+
+        // Scene background images crossfade (scenes 4 and 5 use panorama sceneImg05 as fallback)
+        const activeImgIdx = Math.min(sceneImages.length - 1, activeScene);
+        sceneImages.forEach((img, idx) => {
+          if (img) {
+            if (activeImgIdx === idx) img.classList.add('active');
+            else img.classList.remove('active');
+          }
+        });
+
+        // 3D Ring activation (0.76 to 0.94)
+        if (currentScrollFraction >= 0.75 && currentScrollFraction < 0.94) {
+          ringSection.classList.add('active');
+        } else {
+          ringSection.classList.remove('active');
+        }
+
+        // Footer activation (> 0.93)
+        if (currentScrollFraction >= 0.93) {
+          footerSection.classList.add('active');
+        } else {
+          footerSection.classList.remove('active');
+        }
+
+        requestAnimationFrame(updateScrollytelling);
+      }
+      requestAnimationFrame(updateScrollytelling);
+
+      // 4. 3D Project Ring Carousel Drag & Rotation Engine
+      const carouselTopStage = document.getElementById('carouselTopStage');
+      const carouselBottomStage = document.getElementById('carouselBottomStage');
+      const ringViewport = document.getElementById('ringViewport');
+      const activeProjectTitle = document.getElementById('activeProjectTitle');
+      const activeProjectMeta = document.getElementById('activeProjectMeta');
+      const activeFilmBtnText = document.getElementById('activeFilmBtnText');
+      const cards3D = document.querySelectorAll('.card-3d');
+
+      const projectData = [
+        { title: 'Autumn City', meta: 'Original Short · 2:15 · 2026', tags: 'ORIGINAL SHORT · 24 FPS · HAND-PAINTED' },
+        { title: 'Paper Weather', meta: 'Brand Film · 1:30 · 2026', tags: 'BRAND FILM · 24 FPS · GOUACHE & CHARCOAL' },
+        { title: 'Sky Overpass', meta: 'Music Video · 3:45 · 2025', tags: 'MUSIC VIDEO · 24 FPS · CELL ANIMATION' },
+        { title: 'Gilded Avenue', meta: 'Commercial · 0:45 · 2025', tags: 'COMMERCIAL · 24 FPS · MULTI-PLANE' },
+        { title: 'Last Tram', meta: 'Music Video · 4:05 · 2024', tags: 'MUSIC VIDEO · 24 FPS · TOKYO SCENERY' },
+        { title: 'Window Seat', meta: 'Short Film · 5:20 · 2024', tags: 'SHORT FILM · 24 FPS · AWARD WINNER' }
+      ];
+
+      let ringRotationY = 0;
+      let targetRingRotationY = 0;
+      let isDragging = false;
+      let startX = 0;
+      let currentIdx = 0;
+
+      ringViewport.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+      });
+      window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        const deltaX = e.clientX - startX;
+        startX = e.clientX;
+        targetRingRotationY += deltaX * 0.45;
+      });
+      window.addEventListener('mouseup', () => { isDragging = false; });
+
+      // Touch support
+      ringViewport.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 1) {
+          isDragging = true;
+          startX = e.touches[0].clientX;
+        }
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (!isDragging || e.touches.length !== 1) return;
+        const deltaX = e.touches[0].clientX - startX;
+        startX = e.touches[0].clientX;
+        targetRingRotationY += deltaX * 0.55;
+      }, { passive: true });
+      window.addEventListener('touchend', () => { isDragging = false; });
+
+      // Wheel scrub support when over ring
+      ringViewport.addEventListener('wheel', (e) => {
+        if (ringSection.classList.contains('active')) {
+          targetRingRotationY -= e.deltaY * 0.25;
+        }
+      }, { passive: true });
+
+      function updateRingTransform() {
+        ringRotationY = lerp(ringRotationY, targetRingRotationY, 0.12);
+        if (carouselTopStage) carouselTopStage.style.transform = `rotateY(${ringRotationY}deg) rotateX(4deg)`;
+        if (carouselBottomStage) carouselBottomStage.style.transform = `rotateY(${ringRotationY}deg) rotateX(-4deg)`;
+
+        // Calculate closest front-facing card (each card is 60deg apart)
+        const normalized = ((-ringRotationY % 360) + 360) % 360;
+        const cardIndex = Math.round(normalized / 60) % 6;
+
+        if (cardIndex !== currentIdx) {
+          currentIdx = cardIndex;
+          const p = projectData[currentIdx];
+          if (p) {
+            activeProjectTitle.textContent = p.title;
+            activeProjectMeta.textContent = p.meta;
+            if (activeFilmBtnText) {
+              const num = String(currentIdx + 1).padStart(2, '0');
+              activeFilmBtnText.textContent = `${num} / 06 ${p.title.toUpperCase()} — WATCH FILM`;
+            }
+          }
+        }
+
+        requestAnimationFrame(updateRingTransform);
+      }
+      requestAnimationFrame(updateRingTransform);
+
+      // Clicking any 3D card rotates it to front or opens modal
+      cards3D.forEach(card => {
+        card.addEventListener('click', () => {
+          const idx = parseInt(card.dataset.index, 10);
+          targetRingRotationY = -idx * 60;
+          setTimeout(() => {
+            openFilmModal(idx);
+          }, 200);
+        });
+      });
+
+      // 5. Film Modal Cinema Viewer
+      const filmModal = document.getElementById('filmModal');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const modalVideoPlayer = document.getElementById('modalVideoPlayer');
+      const modalFilmTitle = document.getElementById('modalFilmTitle');
+      const modalFilmTags = document.getElementById('modalFilmTags');
+      const btnWatchActiveFilm = document.getElementById('btnWatchActiveFilm');
+
+      function openFilmModal(idx) {
+        const item = projectData[idx] || projectData[0];
+        modalFilmTitle.textContent = item.title;
+        modalFilmTags.textContent = item.tags;
+        modalVideoPlayer.src = './assets/video/kumo.mp4';
+        filmModal.classList.add('open');
+        modalVideoPlayer.play().catch(() => {});
+      }
+
+      function closeFilmModal() {
+        filmModal.classList.remove('open');
+        modalVideoPlayer.pause();
+        modalVideoPlayer.currentTime = 0;
+      }
+
+      closeModalBtn.addEventListener('click', closeFilmModal);
+      filmModal.addEventListener('click', (e) => {
+        if (e.target === filmModal) closeFilmModal();
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && filmModal.classList.contains('open')) closeFilmModal();
+      });
+
+      if (btnWatchActiveFilm) {
+        btnWatchActiveFilm.addEventListener('click', () => {
+          openFilmModal(currentIdx);
+        });
+      }
+
+      // 6. Audio Synthesizer (Web Audio API)
+      let audioCtx = null;
+      let soundEnabled = false;
+      const toggleSoundBtn = document.getElementById('toggleSoundBtn');
+      const soundLabel = document.getElementById('soundLabel');
+
+      function initAudio() {
+        if (!audioCtx) {
+          audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+      }
+
+      function playChime() {
+        if (!soundEnabled || !audioCtx) return;
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(440 + Math.random() * 200, now);
+        osc.frequency.exponentialRampToValueAtTime(880, now + 0.3);
+
+        gain.gain.setValueAtTime(0.04, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.5);
+      }
+
+      toggleSoundBtn.addEventListener('click', () => {
+        initAudio();
+        soundEnabled = !soundEnabled;
+        soundLabel.textContent = soundEnabled ? 'Sound: On' : 'Sound: Off';
+        if (soundEnabled) playChime();
+      });
+
+      // 7. CRT Filter Toggle
+      const toggleCrtBtn = document.getElementById('toggleCrtBtn');
+      const crtLabel = document.getElementById('crtLabel');
+      let crtEnabled = true;
+
+      toggleCrtBtn.addEventListener('click', () => {
+        crtEnabled = !crtEnabled;
+        if (crtEnabled) {
+          document.body.classList.remove('no-crt');
+          crtLabel.textContent = 'CRT: On';
+        } else {
+          document.body.classList.add('no-crt');
+          crtLabel.textContent = 'CRT: Off';
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

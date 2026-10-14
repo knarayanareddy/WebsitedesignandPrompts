@@ -1,0 +1,29 @@
+/* The corners open outward: top copy rises, bottom copy settles down. */
+[data-corner-copy]{--corner-enter-y:8px;--corner-exit-y:-6px;--corner-stagger:0ms;animation:corner-copy-arrive 420ms cubic-bezier(.2,.7,.2,1) calc(40ms + var(--corner-stagger)) both}
+.footnote,.home-socials,.lost-footnote,.home-link{--corner-enter-y:-8px;--corner-exit-y:6px;--corner-stagger:40ms}
+@media(width < 900px) and (pointer:coarse){.home-socials{--corner-enter-y:8px;--corner-exit-y:-6px;--corner-stagger:0ms}}
+html[data-corner-arrival="pending"] [data-corner-copy]{animation-play-state:paused}
+@keyframes corner-copy-arrive{from{opacity:0;transform:translateY(var(--corner-enter-y))}to{opacity:1;transform:translateY(0)}}
+.home[data-corners-hidden] > [data-corner-copy]{visibility:hidden}
+/* Phone returns use the real, bottom-anchored copy above the outgoing sheet.
+   Keep its normal layout; no fixed-position snapshot is swapped in afterward. */
+.home[data-corners-returning] > .footnote[data-corner-copy]{visibility:visible;z-index:11}
+.chapter-corner-copy,.chapter-corner-copy *{pointer-events:none!important}
+@media(prefers-reduced-motion:reduce){[data-corner-copy]{animation:none}}
+
+/* Shared with the 404's Back to home CTA. */
+.home-link-label{display:block;transition:transform 240ms cubic-bezier(.2,.7,.2,1)}
+.home-link-arrow{position:absolute;right:0;top:0;opacity:0;transform:translateX(-8px);transition:transform 240ms cubic-bezier(.2,.7,.2,1),opacity 240ms cubic-bezier(.2,.7,.2,1)}
+.home-link:is(:hover,:focus-visible) .home-link-label{transform:translateX(-22px)}
+.home-link:is(:hover,:focus-visible) .home-link-arrow{opacity:1;transform:translateX(0)}
+.about-link{position:relative}
+.home-chapter-label{position:absolute;left:0;top:0;text-transform:uppercase;pointer-events:none}
+.home-chapter-name{position:absolute;left:0;top:0}
+.about-link .home-link-label,.home-chapter-name{opacity:0;transform:translateY(8px);transition:transform 240ms cubic-bezier(.2,.7,.2,1),opacity 240ms cubic-bezier(.2,.7,.2,1)}
+.home-identity:is(:hover,:focus-visible) .home-link-label{opacity:1;transform:translateY(0)}
+@media(hover:hover) and (pointer:fine){
+ .home:has(.charms .charm-button:hover) .home-chapter-name.is-current{opacity:1;transform:translateY(0)}
+ .home:has(.charms .charm-button:hover) .about-link .home-link-label{opacity:0;transform:translateY(8px)}
+}
+@media(hover:none){.about-link .home-link-label{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.home-link-label,.home-link-arrow,.about-link .home-link-label,.home-chapter-name{transition:none}}

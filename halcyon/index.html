@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Halcyon — Time, Cast in Gold | Haute Horlogerie</title>
+  <meta name="description" content="A pocket watch drifts above an endless sea as the sky burns from dawn to dusk to moonlit night — a slow, cinematic voyage for a timepiece made to outlast generations.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='56' r='38' fill='%23131518' stroke='%23d4af37' stroke-width='4'/%3E%3Cpath d='M50 18 C40 18 36 6 50 6 C64 6 60 18 50 18 Z' fill='none' stroke='%23d4af37' stroke-width='4'/%3E%3Ccircle cx='50' cy='56' r='30' fill='none' stroke='%23d4af37' stroke-width='1.5' stroke-dasharray='2 4'/%3E%3Cpath d='M50 56 L50 36 M50 56 L64 56' stroke='%23d4af37' stroke-width='2.5' stroke-linecap='round'/%3E%3Ccircle cx='50' cy='56' r='4' fill='%23d4af37'/%3E%3C/svg%3E">
+
+  <style>
+    /* --------------------------------------------------------------------------
+       SELF-HOSTED FONTS
+       -------------------------------------------------------------------------- */
+    @font-face {
+      font-family: "UnifrakturMaguntia";
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url("./assets/fonts/unifraktur-maguntia.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "UnifrakturCook";
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+      src: url("./assets/fonts/unifraktur-cook.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Cinzel";
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("./assets/fonts/cinzel.woff2") format("woff2");
+    }
+
+    @font-face {
+      font-family: "Plus Jakarta Sans";
+      font-style: normal;
+      font-weight: 400 700;
+      font-display: swap;
+      src: url("./assets/fonts/plus-jakarta-sans.woff2") format("woff2");
+    }
+
+    /* --------------------------------------------------------------------------
+       DESIGN TOKENS & RESET
+       -------------------------------------------------------------------------- */
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f5e8b7;
+      --gold-glow: rgba(212, 175, 55, 0.4);
+      --brass: #c5a059;
+      --ink: #0d0f12;
+      --ink-dim: rgba(13, 15, 18, 0.65);
+      --paper: #f8f6f0;
+      --white: #ffffff;
+      
+      --glass-bg: rgba(255, 255, 255, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.55);
+      --glass-shadow: 0 18px 42px -12px rgba(0, 0, 0, 0.16);
+      
+      --font-blackletter: "UnifrakturMaguntia", "UnifrakturCook", cursive, serif;
+      --font-serif: "Cinzel", Georgia, serif;
+      --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      width: 100%;
+      min-height: 100%;
+      height: auto;
+      background-color: #c8d3db;
+      overflow-x: hidden;
+    }
+
+    body {
+      width: 100%;
+      min-height: 100%;
+      height: auto;
+      background-color: transparent;
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      line-height: 1.5;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* --------------------------------------------------------------------------
+       FIXED CINEMATIC STAGE & VIDEO
+       -------------------------------------------------------------------------- */
+    .cinematic-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .voyage-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+      pointer-events: none;
+      will-change: transform;
+    }
+
+    /* Ambient Canvas for Living Water & Caustic Sparkles */
+    .ambient-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: 0.75;
+      mix-blend-mode: screen;
+      z-index: 2;
+    }
+
+    /* Subtle Architectural Vignette */
+    .vignette-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 60%, rgba(13, 15, 18, 0.15) 100%);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* --------------------------------------------------------------------------
+       VIRTUAL SCROLL TRACK
+       -------------------------------------------------------------------------- */
+    .scroll-track {
+      position: relative;
+      width: 100%;
+      height: 500vh;
+      z-index: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       TOP INTERACTIVE NAVIGATION PILL
+       -------------------------------------------------------------------------- */
+    .nav-dock-container {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: auto;
+    }
+
+    /* Center-docked luxury frosted glass capsule */
+    .nav-dock-hotspots {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 7px 18px 7px 22px;
+      border-radius: 9999px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--glass-shadow);
+      transition: all 0.35s ease;
+    }
+
+    .nav-dock-hotspots:hover {
+      background: rgba(255, 255, 255, 0.58);
+      border-color: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+    }
+
+    body.theme-night .nav-dock-hotspots {
+      background: rgba(18, 14, 28, 0.65);
+      border-color: rgba(212, 175, 55, 0.25);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.15) inset;
+    }
+
+    .nav-logo-hotspot {
+      background: none;
+      border: none;
+      padding: 2px 4px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-blackletter);
+      font-size: 26px;
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      position: relative;
+      transition: transform 0.2s ease, color 0.3s ease;
+    }
+
+    .nav-logo-hotspot:hover {
+      color: #000000;
+      transform: scale(1.04);
+    }
+
+    body.theme-night .nav-logo-hotspot {
+      color: #ffffff;
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 18px;
+      background: rgba(13, 15, 18, 0.22);
+      margin: 0 2px;
+    }
+
+    body.theme-night .nav-divider {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-links-list {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      list-style: none;
+    }
+
+    .nav-hotspot-btn {
+      background: none;
+      border: none;
+      padding: 6px 4px;
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: capitalize;
+      color: var(--ink-dim);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    .nav-hotspot-btn:hover {
+      color: var(--ink);
+    }
+
+    .nav-hotspot-btn.active {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .nav-hotspot-btn.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0px;
+      left: 4px;
+      right: 4px;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+    }
+
+    body.theme-night .nav-hotspot-btn {
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    body.theme-night .nav-hotspot-btn:hover,
+    body.theme-night .nav-hotspot-btn.active {
+      color: #ffffff;
+    }
+
+    body.theme-night .nav-hotspot-btn.active::after {
+      background: #ffffff;
+    }
+
+    /* Sound Synthesizer Button */
+    .btn-sound {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.3s ease;
+      margin-left: 4px;
+      position: relative;
+    }
+
+    .btn-sound:hover {
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(1.08);
+    }
+
+    .btn-sound.active {
+      background: var(--gold);
+      color: #0b0d11;
+      border-color: var(--gold);
+      box-shadow: 0 0 14px var(--gold-glow);
+    }
+
+    .sound-waves {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      height: 12px;
+    }
+
+    .sound-bar {
+      width: 2px;
+      height: 4px;
+      background: currentColor;
+      border-radius: 2px;
+      transition: height 0.2s ease;
+    }
+
+    .btn-sound.active .sound-bar:nth-child(1) { animation: wave 1.2s ease-in-out infinite 0.1s; }
+    .btn-sound.active .sound-bar:nth-child(2) { animation: wave 1.2s ease-in-out infinite 0.3s; }
+    .btn-sound.active .sound-bar:nth-child(3) { animation: wave 1.2s ease-in-out infinite 0.2s; }
+    .btn-sound.active .sound-bar:nth-child(4) { animation: wave 1.2s ease-in-out infinite 0.4s; }
+
+    @keyframes wave {
+      0%, 100% { height: 4px; }
+      50% { height: 13px; }
+    }
+
+    /* --------------------------------------------------------------------------
+       INTERACTIVE "SHOP NOW" CTA HOTSPOT OVERLAY (Chapter 4)
+       -------------------------------------------------------------------------- */
+    .shop-cta-hotspot {
+      position: fixed;
+      bottom: calc(10vh + 30px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 195px;
+      height: 52px;
+      border-radius: 9999px;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      z-index: 45;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .shop-cta-hotspot.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .shop-cta-hotspot:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 28px rgba(212, 175, 55, 0.45);
+      transform: translateX(-50%) translateY(-2px) scale(1.03);
+    }
+
+    /* Screen-reader only text for accessibility */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* --------------------------------------------------------------------------
+       BOTTOM TELEMETRY & PROGRESS CONTROLS DOCK
+       -------------------------------------------------------------------------- */
+    .bottom-dock {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 7px 18px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 9999px;
+      box-shadow: var(--glass-shadow);
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      transition: all 0.4s ease;
+    }
+
+    body.theme-night .bottom-dock {
+      background: rgba(18, 14, 28, 0.65);
+      border-color: rgba(212, 175, 55, 0.25);
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    .biome-indicator {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .biome-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 8px var(--gold);
+    }
+
+    .chapter-pills {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .chapter-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(13, 15, 18, 0.25);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    body.theme-night .chapter-dot {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    .chapter-dot.active {
+      width: 18px;
+      border-radius: 6px;
+      background: var(--ink);
+    }
+
+    body.theme-night .chapter-dot.active {
+      background: #ffffff;
+    }
+
+    .scroll-pct {
+      font-variant-numeric: tabular-nums;
+      min-width: 38px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    .btn-atelier-toggle {
+      background: none;
+      border: 1px solid rgba(13, 15, 18, 0.2);
+      border-radius: 9999px;
+      padding: 3px 10px;
+      font-family: var(--font-serif);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-atelier-toggle:hover {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    body.theme-night .btn-atelier-toggle {
+      border-color: rgba(255, 255, 255, 0.3);
+      color: #ffffff;
+    }
+
+    body.theme-night .btn-atelier-toggle:hover {
+      background: #ffffff;
+      color: var(--ink);
+    }
+
+    /* --------------------------------------------------------------------------
+       ATELIER SHOP DRAWER (Luxury Slide-out Showcase)
+       -------------------------------------------------------------------------- */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(6, 8, 12, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .atelier-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 620px;
+      background: #0f1217;
+      border-left: 1px solid rgba(212, 175, 55, 0.3);
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.6);
+      z-index: 101;
+      transform: translateX(100%);
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      color: #f5f4ef;
+      overflow-y: auto;
+    }
+
+    .drawer-backdrop.open .atelier-drawer {
+      transform: translateX(0);
+    }
+
+    .drawer-header {
+      padding: 28px 32px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .drawer-edition-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.24em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .btn-close-drawer {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      color: #ffffff;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-close-drawer:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--gold);
+      transform: rotate(90deg);
+    }
+
+    .drawer-body {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    /* Interactive 3D Watch Preview in Drawer */
+    .watch-card-preview {
+      background: radial-gradient(circle at 50% 40%, #1e2430 0%, #10131a 100%);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 20px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    .watch-card-preview::before {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .watch-3d-stage {
+      width: 260px;
+      height: 310px;
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+      transform-style: preserve-3d;
+      cursor: grab;
+    }
+
+    .watch-3d-stage:active {
+      cursor: grabbing;
+    }
+
+    .watch-image-layer {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.8));
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .watch-image-layer.back {
+      opacity: 0;
+      pointer-events: none;
+      transform: rotateY(180deg);
+    }
+
+    .watch-3d-stage.flipped .watch-image-layer.front {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .watch-3d-stage.flipped .watch-image-layer.back {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .watch-view-toggles {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      z-index: 2;
+    }
+
+    .btn-view-toggle {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 9999px;
+      padding: 6px 14px;
+      font-family: var(--font-serif);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-view-toggle.active,
+    .btn-view-toggle:hover {
+      background: var(--gold);
+      color: #0b0d11;
+      border-color: var(--gold);
+      font-weight: 600;
+    }
+
+    /* Product Title & Price */
+    .drawer-product-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .drawer-product-title {
+      font-family: var(--font-blackletter);
+      font-size: 38px;
+      line-height: 1.1;
+      color: #ffffff;
+      letter-spacing: 0.02em;
+    }
+
+    .drawer-product-subtitle {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .drawer-product-price {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .price-val {
+      font-family: var(--font-sans);
+      font-size: 28px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .price-note {
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    /* Horological Dossier Specs */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .spec-label {
+      font-family: var(--font-serif);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .spec-val {
+      font-size: 13px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+
+    .drawer-desc {
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* Reservation Form */
+    .reservation-box {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      background: rgba(212, 175, 55, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+      border-radius: 16px;
+      padding: 22px;
+    }
+
+    .box-title {
+      font-family: var(--font-serif);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .form-group input,
+    .form-group select {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #ffffff;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .btn-reserve-submit {
+      margin-top: 6px;
+      background: var(--gold);
+      color: #0d0f12;
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 24px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-reserve-submit:hover {
+      background: #f1cf68;
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(212, 175, 55, 0.45);
+    }
+
+    /* --------------------------------------------------------------------------
+       TOAST NOTIFICATION
+       -------------------------------------------------------------------------- */
+    .toast-popup {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #111419;
+      color: #ffffff;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      padding: 16px 22px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 20px rgba(212, 175, 55, 0.2);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: none;
+    }
+
+    .toast-popup.visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .toast-icon {
+      color: var(--gold);
+      font-size: 20px;
+    }
+
+    .toast-title {
+      font-family: var(--font-serif);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .toast-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.65);
+    }
+
+    /* --------------------------------------------------------------------------
+       RESPONSIVE ADAPTATIONS
+       -------------------------------------------------------------------------- */
+    @media (max-width: 768px) {
+      .nav-dock-hotspots {
+        padding: 4px 10px;
+        gap: 6px;
+      }
+
+      .nav-hotspot-btn {
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        padding: 4px 6px;
+      }
+
+      .shop-cta-hotspot {
+        bottom: calc(8vh + 30px);
+        width: 170px;
+        height: 46px;
+      }
+
+      .bottom-dock {
+        bottom: 14px;
+        padding: 6px 14px;
+        gap: 12px;
+        font-size: 9px;
+      }
+
+      .atelier-drawer {
+        max-width: 100%;
+      }
+
+      .specs-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Stage & Cinematic Video -->
+  <div class="cinematic-stage" aria-hidden="true">
+    <video id="voyageVideo" class="voyage-video" playsinline muted preload="auto" src="./assets/video/halcyon_voyage.mp4" poster="./assets/images/halcyon_poster.jpg"></video>
+    <canvas id="ambientCanvas" class="ambient-canvas"></canvas>
+    <div class="vignette-overlay"></div>
+  </div>
+
+  <!-- Virtual Scroll Track (drives scrollytelling progress) -->
+  <div class="scroll-track" id="scrollTrack"></div>
+
+  <!-- Accessible Header with Navigation Hotspots Matching Video Capsule -->
+  <header class="nav-dock-container">
+    <nav class="nav-dock-hotspots" aria-label="Halcyon Chapters">
+      <button class="nav-logo-hotspot" id="logoLink" title="Halcyon Haute Horlogerie">Halcyon</button>
+      <div class="nav-divider"></div>
+      <ul class="nav-links-list">
+        <li><button class="nav-hotspot-btn active" data-target="0.0" id="navOrigin">Origin</button></li>
+        <li><button class="nav-hotspot-btn" data-target="0.48" id="navForge">Forge</button></li>
+        <li><button class="nav-hotspot-btn" data-target="0.72" id="navHeritage">Heritage</button></li>
+        <li><button class="nav-hotspot-btn" data-target="1.0" id="navShop">Shop</button></li>
+      </ul>
+      <div class="nav-divider"></div>
+      <!-- Web Audio Ambient Sound Toggle -->
+      <button class="btn-sound" id="btnSound" title="Toggle Ocean Breeze & Escapement Sound" aria-label="Toggle Sound">
+        <div class="sound-waves">
+          <span class="sound-bar"></span>
+          <span class="sound-bar"></span>
+          <span class="sound-bar"></span>
+          <span class="sound-bar"></span>
+        </div>
+      </button>
+    </nav>
+  </header>
+
+  <!-- Interactive "SHOP NOW" Hotspot Overlay (Chapter 4) -->
+  <button class="shop-cta-hotspot" id="btnShopCta" aria-label="Shop Halcyon Timepiece" title="Shop Now">
+    <span class="sr-only">Shop Now</span>
+  </button>
+
+  <!-- Bottom Telemetry & Navigation Dock -->
+  <aside class="bottom-dock" id="bottomDock">
+    <div class="biome-indicator">
+      <span class="biome-pulse"></span>
+      <span id="biomeLabel">Golden Hour</span>
+    </div>
+    <div class="chapter-pills">
+      <span class="chapter-dot active" data-target="0.0" title="Origin"></span>
+      <span class="chapter-dot" data-target="0.48" title="Forge"></span>
+      <span class="chapter-dot" data-target="0.72" title="Heritage"></span>
+      <span class="chapter-dot" data-target="1.0" title="Shop"></span>
+    </div>
+    <span class="scroll-pct" id="scrollPct">00%</span>
+    <button class="btn-atelier-toggle" id="btnOpenAtelier">Atelier Dossier</button>
+  </aside>
+
+  <!-- Atelier Shop & Timepiece Drawer -->
+  <div class="drawer-backdrop" id="drawerBackdrop">
+    <div class="atelier-drawer" id="atelierDrawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle">
+      <div class="drawer-header">
+        <div class="drawer-edition-badge">
+          <span>◈</span> Halcyon Horlogerie · Piece No. 042 / 100
+        </div>
+        <button class="btn-close-drawer" id="btnCloseDrawer" aria-label="Close Drawer">✕</button>
+      </div>
+
+      <div class="drawer-body">
+        <!-- 3D Interactive Watch Card -->
+        <div class="watch-card-preview" id="watchCardPreview">
+          <div class="watch-3d-stage" id="watch3dStage" title="Drag horizontally to inspect">
+            <img src="./assets/images/watch_dial_front.png" alt="Halcyon Pocket Watch Face with Roman Numerals and Fleur-de-lis Crest" class="watch-image-layer front">
+            <img src="./assets/images/watch_case_back.png" alt="Halcyon Pocket Watch Hand-Carved Damascus Caseback" class="watch-image-layer back">
+          </div>
+          <div class="watch-view-toggles">
+            <button class="btn-view-toggle active" id="btnViewFront">Enamel Dial</button>
+            <button class="btn-view-toggle" id="btnViewBack">Forged Caseback</button>
+          </div>
+        </div>
+
+        <div class="drawer-product-meta">
+          <span class="drawer-product-subtitle">Grand Horlogerie · Alpine Manufacture</span>
+          <h2 class="drawer-product-title" id="drawerTitle">The Halcyon Timepiece</h2>
+          <div class="drawer-product-price">
+            <span class="price-val">$18,500</span>
+            <span class="price-note">USD · Free Worldwide Armored Courier</span>
+          </div>
+        </div>
+
+        <p class="drawer-desc">
+          Crafted to withstand the corrosion of centuries. Each Halcyon pocket watch features an enamel parchment dial with hand-painted Roman numerals and oxidised Fleur-de-lis hands, enclosed within hand-forged patinated steel and 24K gilded brass framing.
+        </p>
+
+        <!-- Horological Dossier Specifications -->
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">Calibre</span>
+            <span class="spec-val">H-1889 Manual-Wind</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Frequency</span>
+            <span class="spec-val">18,000 vph (2.5 Hz)</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Power Reserve</span>
+            <span class="spec-val">48 Hours Dual-Barrel</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Jewels</span>
+            <span class="spec-val">21 Synthetic Rubies</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Case Diameter</span>
+            <span class="spec-val">49.5 mm / 14 mm Depth</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Crystal</span>
+            <span class="spec-val">Double-Curved Sapphire</span>
+          </div>
+        </div>
+
+        <!-- Reservation & Bespoke Inscription Form -->
+        <form class="reservation-box" id="reservationForm">
+          <div class="box-title">Commission / Reserve Timepiece</div>
+          <div class="form-group">
+            <label for="clientName">Full Name</label>
+            <input type="text" id="clientName" placeholder="e.g. Lord Alexander Vance" required>
+          </div>
+          <div class="form-group">
+            <label for="clientEmail">Email Coordinates</label>
+            <input type="email" id="clientEmail" placeholder="vance@heritage.com" required>
+          </div>
+          <div class="form-group">
+            <label for="serialChoice">Edition Allocation</label>
+            <select id="serialChoice">
+              <option value="042">Serial No. 042 / 100 (Immediate Dispatch)</option>
+              <option value="043">Serial No. 043 / 100 (In Final Regulation)</option>
+              <option value="050">Serial No. 050 / 100 (Bespoke Inscription)</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-reserve-submit">Acquire Allocation <span>→</span></button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-popup" id="toastPopup" role="status" aria-live="polite">
+    <div class="toast-icon">◈</div>
+    <div class="toast-text">
+      <div class="toast-title" id="toastTitle">Allocation Reserved</div>
+      <div class="toast-sub" id="toastSub">Your dossier has been recorded by our concierge.</div>
+    </div>
+  </div>
+
+  <!-- --------------------------------------------------------------------------
+       CLIENT SCRIPT: SCROLLYTELLING, VIDEO SYNC, AUDIO SYNTH, 3D CAROUSEL
+       -------------------------------------------------------------------------- -->
+  <script>
+    (function () {
+      "use strict";
+
+      // 1. Elements
+      const voyageVideo = document.getElementById("voyageVideo");
+      const ambientCanvas = document.getElementById("ambientCanvas");
+      const ctx = ambientCanvas.getContext("2d");
+
+      const navButtons = [
+        document.getElementById("navOrigin"),
+        document.getElementById("navForge"),
+        document.getElementById("navHeritage"),
+        document.getElementById("navShop")
+      ];
+
+      const chapterDots = document.querySelectorAll(".chapter-dot");
+      const biomeLabel = document.getElementById("biomeLabel");
+      const scrollPct = document.getElementById("scrollPct");
+      const btnShopCta = document.getElementById("btnShopCta");
+
+      // Drawer elements
+      const drawerBackdrop = document.getElementById("drawerBackdrop");
+      const atelierDrawer = document.getElementById("atelierDrawer");
+      const btnCloseDrawer = document.getElementById("btnCloseDrawer");
+      const btnOpenAtelier = document.getElementById("btnOpenAtelier");
+      const reservationForm = document.getElementById("reservationForm");
+      const toastPopup = document.getElementById("toastPopup");
+      const toastTitle = document.getElementById("toastTitle");
+      const toastSub = document.getElementById("toastSub");
+
+      // 3D watch tilt card
+      const watch3dStage = document.getElementById("watch3dStage");
+      const watchCardPreview = document.getElementById("watchCardPreview");
+      const btnViewFront = document.getElementById("btnViewFront");
+      const btnViewBack = document.getElementById("btnViewBack");
+
+      // Sound elements
+      const btnSound = document.getElementById("btnSound");
+
+      // 2. Scrollytelling State
+      let targetProgress = 0;
+      let currentProgress = 0;
+      let videoDuration = 8.6; // duration in seconds
+
+      voyageVideo.addEventListener("loadedmetadata", () => {
+        if (voyageVideo.duration && !isNaN(voyageVideo.duration)) {
+          videoDuration = voyageVideo.duration;
+        }
+      });
+
+      // Biomes metadata
+      const biomes = [
+        { name: "Golden Hour", theme: "dawn", range: [0, 0.35] },
+        { name: "Smouldering Dusk", theme: "theme-dusk", range: [0.35, 0.62] },
+        { name: "Moonlit Night", theme: "theme-night", range: [0.62, 0.88] },
+        { name: "Emerald Dawn", theme: "emerald", range: [0.88, 1.0] }
+      ];
+
+      // Smooth scroll calculation
+      function getScrollFraction() {
+        const scrollTop = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+        const maxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+        return maxScroll > 0 ? Math.min(1, Math.max(0, scrollTop / maxScroll)) : 0;
+      }
+
+      window.addEventListener("scroll", () => {
+        targetProgress = getScrollFraction();
+      }, { passive: true });
+
+      // Click to navigate chapters
+      function scrollToTarget(fraction) {
+        const maxScroll = (document.documentElement.scrollHeight || document.body.scrollHeight) - window.innerHeight;
+        window.scrollTo({
+          top: fraction * maxScroll,
+          behavior: "smooth"
+        });
+      }
+
+      navButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const target = parseFloat(btn.dataset.target);
+          if (target === 1.0) {
+            scrollToTarget(target);
+            setTimeout(openDrawer, 800);
+          } else {
+            scrollToTarget(target);
+          }
+        });
+      });
+
+      chapterDots.forEach((dot) => {
+        dot.addEventListener("click", () => {
+          const target = parseFloat(dot.dataset.target);
+          scrollToTarget(target);
+        });
+      });
+
+      document.getElementById("logoLink").addEventListener("click", (e) => {
+        e.preventDefault();
+        scrollToTarget(0.0);
+      });
+
+      // 3. Main Animation Loop (Scrollytelling + Video Sync + Canvas)
+      function updateScrollytelling() {
+        const diff = targetProgress - currentProgress;
+        currentProgress += diff * 0.12;
+
+        if (Math.abs(diff) < 0.0001) {
+          currentProgress = targetProgress;
+        }
+
+        // Synchronize Video currentTime
+        if (voyageVideo && videoDuration) {
+          const targetTime = Math.min(videoDuration - 0.04, Math.max(0.01, currentProgress * videoDuration));
+          if (Math.abs(voyageVideo.currentTime - targetTime) > 0.02) {
+            voyageVideo.currentTime = targetTime;
+          }
+        }
+
+        // Active Beat Determination
+        let activeBeatIdx = 0;
+        if (currentProgress < 0.35) activeBeatIdx = 0;
+        else if (currentProgress < 0.62) activeBeatIdx = 1;
+        else if (currentProgress < 0.88) activeBeatIdx = 2;
+        else activeBeatIdx = 3;
+
+        // Toggle Active Nav Buttons & Dots
+        navButtons.forEach((btn, idx) => {
+          if (idx === activeBeatIdx) btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+
+        chapterDots.forEach((dot, idx) => {
+          if (idx === activeBeatIdx) dot.classList.add("active");
+          else dot.classList.remove("active");
+        });
+
+        // Toggle Shop CTA Hotspot Visibility in Chapter 4
+        if (currentProgress > 0.85) {
+          btnShopCta.classList.add("visible");
+        } else {
+          btnShopCta.classList.remove("visible");
+        }
+
+        // Update Biome Label & Body Theme Class
+        const activeBiome = biomes[activeBeatIdx];
+        if (activeBiome) {
+          biomeLabel.textContent = activeBiome.name;
+          document.body.className = activeBiome.theme;
+        }
+
+        // Update Scroll Percentage Display
+        const pctString = Math.round(currentProgress * 100).toString().padStart(2, "0") + "%";
+        scrollPct.textContent = pctString;
+
+        // Draw Ambient Canvas
+        drawAmbientCanvas();
+
+        requestAnimationFrame(updateScrollytelling);
+      }
+      requestAnimationFrame(updateScrollytelling);
+
+      // 4. Ambient Living Canvas (Caustics, Golden Rays, Twinkling Night Stars)
+      let canvasW = 0;
+      let canvasH = 0;
+      const stars = [];
+
+      function resizeCanvas() {
+        canvasW = ambientCanvas.width = window.innerWidth;
+        canvasH = ambientCanvas.height = window.innerHeight;
+      }
+      window.addEventListener("resize", resizeCanvas);
+      resizeCanvas();
+
+      for (let i = 0; i < 90; i++) {
+        stars.push({
+          x: Math.random(),
+          y: Math.random() * 0.55,
+          r: Math.random() * 1.5 + 0.5,
+          speed: Math.random() * 2 + 1,
+          phase: Math.random() * Math.PI * 2
+        });
+      }
+
+      let animTime = 0;
+      function drawAmbientCanvas() {
+        animTime += 0.015;
+        ctx.clearRect(0, 0, canvasW, canvasH);
+
+        // Moonlit Night Stars (proportional to night biome)
+        if (currentProgress > 0.45 && currentProgress < 0.92) {
+          const nightWeight = Math.sin(Math.min(1, Math.max(0, (currentProgress - 0.45) / 0.47)) * Math.PI);
+          ctx.save();
+          stars.forEach((s) => {
+            const twinkle = (Math.sin(animTime * s.speed + s.phase) + 1) * 0.5;
+            ctx.fillStyle = `rgba(255, 255, 255, ${s.r * 0.45 * twinkle * nightWeight})`;
+            ctx.beginPath();
+            ctx.arc(s.x * canvasW, s.y * canvasH, s.r, 0, Math.PI * 2);
+            ctx.fill();
+          });
+          ctx.restore();
+        }
+
+        // Golden Hour / Dusk Horizon Caustic Shimmer
+        if (currentProgress < 0.55) {
+          const dawnWeight = 1.0 - (currentProgress / 0.55);
+          const horizonY = canvasH * 0.55;
+          const shimmer = (Math.sin(animTime * 1.8) + 1) * 0.5;
+          
+          const grad = ctx.createRadialGradient(
+            canvasW * 0.5, horizonY, 10,
+            canvasW * 0.5, horizonY, canvasW * 0.4
+          );
+          grad.addColorStop(0, `rgba(255, 235, 180, ${0.08 * dawnWeight * (0.8 + 0.2 * shimmer)})`);
+          grad.addColorStop(1, "transparent");
+
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, horizonY - 120, canvasW, 240);
+        }
+      }
+
+      // 5. Drawer Controls
+      function openDrawer() {
+        drawerBackdrop.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeDrawer() {
+        drawerBackdrop.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      btnOpenAtelier.addEventListener("click", openDrawer);
+      btnShopCta.addEventListener("click", openDrawer);
+      btnCloseDrawer.addEventListener("click", closeDrawer);
+
+      drawerBackdrop.addEventListener("click", (e) => {
+        if (e.target === drawerBackdrop) closeDrawer();
+      });
+
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && drawerBackdrop.classList.contains("open")) {
+          closeDrawer();
+        }
+      });
+
+      // 6. Interactive 3D Watch Tilt & Flip
+      let isDraggingWatch = false;
+
+      watchCardPreview.addEventListener("mousemove", (e) => {
+        if (isDraggingWatch) return;
+        const rect = watchCardPreview.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width - 0.5;
+        const y = (e.clientY - rect.top) / rect.height - 0.5;
+        watch3dStage.style.transform = `rotateY(${x * 24}deg) rotateX(${-y * 18}deg)`;
+      });
+
+      watchCardPreview.addEventListener("mouseleave", () => {
+        if (!isDraggingWatch) {
+          watch3dStage.style.transform = `rotateY(0deg) rotateX(0deg)`;
+        }
+      });
+
+      btnViewFront.addEventListener("click", () => {
+        watch3dStage.classList.remove("flipped");
+        btnViewFront.classList.add("active");
+        btnViewBack.classList.remove("active");
+      });
+
+      btnViewBack.addEventListener("click", () => {
+        watch3dStage.classList.add("flipped");
+        btnViewBack.classList.add("active");
+        btnViewFront.classList.remove("active");
+      });
+
+      // 7. Toast Feedback
+      function showToast(title, subtitle) {
+        toastTitle.textContent = title;
+        toastSub.textContent = subtitle;
+        toastPopup.classList.add("visible");
+        setTimeout(() => {
+          toastPopup.classList.remove("visible");
+        }, 4000);
+      }
+
+      reservationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const name = document.getElementById("clientName").value;
+        const serial = document.getElementById("serialChoice").value;
+        showToast(`Piece No. ${serial} Reserved`, `Privileged dossier for ${name} received.`);
+        setTimeout(closeDrawer, 1200);
+      });
+
+      // 8. Web Audio API Ambient Synthesizer
+      let audioCtx = null;
+      let isSoundPlaying = false;
+      let tickInterval = null;
+      let oceanNode = null;
+      let oceanGain = null;
+
+      function initAudio() {
+        if (audioCtx) return;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+
+        // Ocean waves
+        const bufferSize = audioCtx.sampleRate * 2;
+        const noiseBuffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+        const output = noiseBuffer.getChannelData(0);
+        let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+        for (let i = 0; i < bufferSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99886 * b0 + white * 0.0555179;
+          b1 = 0.99332 * b1 + white * 0.0750759;
+          b2 = 0.96900 * b2 + white * 0.1538520;
+          b3 = 0.86650 * b3 + white * 0.3104856;
+          b4 = 0.55000 * b4 + white * 0.5329522;
+          b5 = -0.7616 * b5 - white * 0.0168980;
+          output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.04;
+          b6 = white * 0.115926;
+        }
+
+        const whiteNoise = audioCtx.createBufferSource();
+        whiteNoise.buffer = noiseBuffer;
+        whiteNoise.loop = true;
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = "lowpass";
+        filter.frequency.value = 350;
+
+        const lfo = audioCtx.createOscillator();
+        lfo.frequency.value = 0.12;
+        const lfoGain = audioCtx.createGain();
+        lfoGain.gain.value = 220;
+        lfo.connect(lfoGain);
+        lfoGain.connect(filter.frequency);
+        lfo.start();
+
+        oceanGain = audioCtx.createGain();
+        oceanGain.gain.value = 0.35;
+
+        whiteNoise.connect(filter);
+        filter.connect(oceanGain);
+        oceanGain.connect(audioCtx.destination);
+        whiteNoise.start();
+        oceanNode = whiteNoise;
+      }
+
+      function playMechanicalTick(isTock) {
+        if (!audioCtx || !isSoundPlaying) return;
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        const bandpass = audioCtx.createBiquadFilter();
+
+        bandpass.type = "bandpass";
+        bandpass.frequency.value = isTock ? 1850 : 2100;
+        bandpass.Q.value = 8;
+
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(isTock ? 900 : 1050, now);
+        osc.frequency.exponentialRampToValueAtTime(140, now + 0.035);
+
+        gain.gain.setValueAtTime(0.2, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+
+        osc.connect(bandpass);
+        bandpass.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.start(now);
+        osc.stop(now + 0.05);
+      }
+
+      let isTockState = false;
+      function startTicking() {
+        if (tickInterval) clearInterval(tickInterval);
+        tickInterval = setInterval(() => {
+          playMechanicalTick(isTockState);
+          isTockState = !isTockState;
+        }, 400);
+      }
+
+      function stopTicking() {
+        if (tickInterval) {
+          clearInterval(tickInterval);
+          tickInterval = null;
+        }
+      }
+
+      btnSound.addEventListener("click", () => {
+        initAudio();
+        if (audioCtx.state === "suspended") {
+          audioCtx.resume();
+        }
+
+        isSoundPlaying = !isSoundPlaying;
+        if (isSoundPlaying) {
+          btnSound.classList.add("active");
+          if (oceanGain) oceanGain.gain.setTargetAtTime(0.35, audioCtx.currentTime, 0.2);
+          startTicking();
+        } else {
+          btnSound.classList.remove("active");
+          if (oceanGain) oceanGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.2);
+          stopTicking();
+        }
+      });
+
+    })();
+  </script>
+</body>
+</html>

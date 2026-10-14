@@ -1,0 +1,62 @@
+/* The tested pebble control, confined to stories with expandable copy. */
+.editorial-layout .has-plot-slider h2{border:0;margin:0;padding-bottom:6px}
+.plot-heading{margin-bottom:16px}
+.plot-rule{height:1px;background:#dededb;position:relative}
+.plot-rule input{appearance:none;-webkit-appearance:none;display:block;position:absolute;z-index:2;height:44px;width:calc(100% + 24px);left:-12px;top:-21.5px;margin:0;background:transparent;border:0;cursor:grab;touch-action:pan-y pinch-zoom}
+.plot-rule input:active{cursor:grabbing}
+.plot-rule input:focus{outline:none}
+html[data-keyboard] .plot-rule input:focus-visible + .jelly-position .jelly-thumb{outline:2px solid color-mix(in srgb,var(--chapter-accent) 65%,#ffffff);outline-offset:4px}
+.plot-rule input::-webkit-slider-runnable-track{height:44px;background:transparent}
+.plot-rule input::-moz-range-track{height:44px;background:transparent}
+.plot-rule input::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:44px;height:44px;margin:0;border:0;background:transparent;box-shadow:none}
+.plot-rule input::-moz-range-thumb{width:44px;height:44px;border:0;background:transparent;box-shadow:none}
+.jelly-position{position:absolute;z-index:1;top:.5px;left:calc(10px + (100% - 20px)*var(--jelly-position,0));width:20px;height:16px;transform:translate(-50%,-50%);pointer-events:none}
+/* The paper backing and 1.5px rim keep the divider out of the translucent
+   artwork. Both move with the gummy; no filter or extra animation is needed. */
+.jelly-thumb{display:block;position:relative;width:100%;height:100%;border-radius:50%;background:#ffffff;box-shadow:0 0 0 1.5px #ffffff;transform:translateY(var(--jelly-lift,0px)) rotate(var(--jelly-turn,0deg)) scale(var(--jelly-stretch,1),var(--jelly-squash,1));transform-origin:var(--jelly-anchor,0%) center}
+/* All colours share one preloaded image. Two CSS pixels of transparent padding
+   per tile prevent neighbouring colours bleeding into a stretched edge. */
+.jelly-thumb::after{content:'';position:absolute;inset:-2px;background:url('./assets/gummy-handles-v2.webp') calc(var(--chapter-gummy-index,0)*100%/7) 0 / 800% 100% no-repeat}
+.plot-title-line{display:inline-flex;align-items:baseline;vertical-align:top;white-space:nowrap}
+#world .plot-title-line{transform:translateY(-8px)}
+.plot-title-reveal{display:inline-block;width:var(--plot-word-width,0px);overflow:clip;vertical-align:top}
+.plot-title-word{display:inline-block;white-space:nowrap}
+.plot-title-word>span{display:inline-block;transform-origin:50% 85%}
+.plot-copy{display:flow-root;position:relative;overflow-anchor:none}
+/* The quiet frame reserves the media's full footprint before pixels arrive. */
+.plot-copy .chapter-media{position:relative;width:100%;margin:0 auto 24px;overflow:hidden;border-radius:16px;background:rgb(36 39 34 / 3%)}
+.chapter-media :is(video,img){position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;border-radius:inherit;pointer-events:none;opacity:0}
+.chapter-media.has-border::after{content:'';position:absolute;inset:0;border:.5px solid rgb(36 39 34 / 12%);border-radius:inherit;pointer-events:none}
+.chapter-media.is-ready>:is(video,img){opacity:1;animation:chapter-media-in 360ms ease-out}
+.chapter-media-play{position:absolute;z-index:1;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:8px;min-height:44px;padding:12px 18px;border:1px solid rgb(255 255 255 / 25%);border-radius:999px;background:rgb(36 39 34 / 88%);color:#fff;font:inherit;font-size:14px;line-height:1;white-space:nowrap;cursor:pointer;touch-action:manipulation}
+.chapter-media-play::before{content:'';width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:8px solid currentColor}
+.chapter-media-play:focus-visible{outline:2px solid var(--chapter-accent);outline-offset:4px}
+@keyframes chapter-media-in{from{opacity:0}to{opacity:1}}
+@media(prefers-reduced-motion:reduce){.chapter-media.is-ready>:is(video,img){animation:none}}
+.editorial-layout .plot-copy p{text-wrap:wrap;position:relative}
+.plot-copy [hidden]{display:none!important}
+/* Whole optional paragraphs collapse their spacing along with their copy. */
+.plot-copy p:has(> [data-insert][hidden]):not(:has(> [data-retained])){display:none}
+/* Space mixed text/media pairs without widening consecutive image stacks. */
+#world .plot-copy > .text-media-gap{margin-top:45px}
+/* End at the gutter, ignoring folded paragraphs/media and animation ghosts. */
+#world .plot-copy > :nth-last-child(1 of p:not([hidden]):not(:has(> [data-insert][hidden]):not(:has(> [data-retained]))), .chapter-media:not([hidden])){margin-bottom:0}
+.plot-copy [data-insert]{color:var(--chapter-accent)}
+.plot-copy a{color:inherit;text-decoration:none}
+.chapter-link-arc{position:absolute;height:6px;overflow:visible;pointer-events:none;fill:none;stroke:currentColor;stroke-width:1.5px;stroke-linecap:round;opacity:.45;transition:opacity 400ms ease}
+.chapter-link-arc path{transform-origin:0 0;transition:transform 400ms ease,d 400ms ease}
+/* Transform is a graceful fallback for browsers without CSS path morphing. */
+.plot-copy a:is(:hover,:focus-visible) .chapter-link-arc{opacity:.7}
+.plot-copy a:is(:hover,:focus-visible) .chapter-link-arc path{transform:scaleY(1.8)}
+@supports(d:path('M0 0')){
+ .chapter-link-arc path{d:path('M0 -.25 C27 2.5 70 2.2 100 -.5')}
+ .plot-copy a:is(:hover,:focus-visible) .chapter-link-arc path{d:path('M0 -.25 C27 4.5 70 3.96 100 -.5');transform:none}
+}
+.plot-copy a:focus-visible{outline:1px solid currentColor;outline-offset:4px;border-radius:2px}
+.plot-copy.is-reflowing .chapter-link-arc{visibility:hidden}
+@media(prefers-reduced-motion:reduce){.chapter-link-arc,.chapter-link-arc path{transition:none}}
+@media(forced-colors:active){.plot-copy a{color:LinkText;text-decoration:underline}.chapter-link-arc{display:none}}
+.flow-word{display:inline-block;white-space:pre;vertical-align:baseline}
+.flow-ghost{position:absolute;inset:0;pointer-events:none;user-select:none}
+.flow-ghost>span{position:absolute;white-space:pre;line-height:inherit}
+.plot-announcement{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}

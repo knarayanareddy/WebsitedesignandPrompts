@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Aurèle Vasseur — Interactive developer</title>
+    <meta name="description" content="Aurèle Vasseur, freelance interactive developer. A backlit alabaster standing stone with coloured strata, in a dusk landscape — selected projects 2022–2026." />
+    <meta name="theme-color" content="#050404" />
+    <meta property="og:title" content="Aurèle Vasseur — Interactive developer" />
+    <meta property="og:description" content="Selected interactive projects, carried inside a backlit alabaster stele." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" />
+    <script type="application/ld+json">
+      {"@context":"https://schema.org","@type":"Person","name":"Aurèle Vasseur","jobTitle":"Freelance interactive developer","url":"./","knowsAbout":["WebGL","Three.js","Creative development","Interaction design"]}
+    </script>
+    <script type="module" crossorigin src="./assets/index-DPHuKa4I.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/three-Dm9OCHQx.js">
+    <link rel="modulepreload" crossorigin href="./assets/gsap-BmWgXYHb.js">
+    <link rel="stylesheet" crossorigin href="./assets/index-BxtzbCUH.css">
+  </head>
+  <body>
+
+<canvas id="gl" aria-hidden="true"></canvas>
+
+<!-- SVG stele silhouette preloader -->
+<svg id="stele-loading" viewBox="0 0 100 240" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+  <path class="flank" pathLength="1" d="M38 236 C30 180 26 120 34 70 C40 40 44 20 50 4"/>
+  <path class="flank" pathLength="1" d="M62 236 C70 180 74 120 66 70 C60 40 56 20 50 4"/>
+  <path class="tip" pathLength="1" d="M38 236 C30 180 26 120 34 70 C40 40 44 20 50 4 C56 20 60 40 66 70 C74 120 70 180 62 236"/>
+</svg>
+<div id="stele-loading-hint" aria-live="polite">Carving the stone <span id="load-pct">00</span></div>
+
+<header id="site-header">
+  <a class="brand" href="#/" data-route="home">Aurèle Vasseur</a>
+  <a class="nav" id="nav-about" href="#/about"><span class="word" data-word="About">About</span></a>
+  <button class="nav close" id="nav-close" type="button" hidden><span class="word" data-word="Close">Close</span></button>
+</header>
+
+<nav id="project-index" aria-label="Projects"></nav>
+<div id="scroll-hint" aria-hidden="true">Scroll to turn the stone</div>
+
+<a id="project-prev" href="#" aria-label="Previous project">
+  <svg class="arrow leave is-flipped" viewBox="0 0 28 12" aria-hidden="true"><path class="shaft" pathLength="1" d="M0 6H27"/><path class="barb" pathLength="1" d="M21 1l6 5-6 5"/></svg>
+  <svg class="arrow enter is-flipped" viewBox="0 0 28 12" aria-hidden="true"><path class="shaft" pathLength="1" d="M0 6H27"/><path class="barb" pathLength="1" d="M21 1l6 5-6 5"/></svg>
+</a>
+<a id="project-next" href="#" aria-label="Next project">
+  <svg class="arrow leave" viewBox="0 0 28 12" aria-hidden="true"><path class="shaft" pathLength="1" d="M0 6H27"/><path class="barb" pathLength="1" d="M21 1l6 5-6 5"/></svg>
+  <svg class="arrow enter" viewBox="0 0 28 12" aria-hidden="true"><path class="shaft" pathLength="1" d="M0 6H27"/><path class="barb" pathLength="1" d="M21 1l6 5-6 5"/></svg>
+</a>
+
+<aside id="project-sheet" aria-live="polite">
+  <div class="text">
+    <p class="description"><span class="mask"><span class="line" id="sheet-desc"></span></span></p>
+    <p class="meta"><span class="mask"><span class="line"><span class="idx" id="sheet-idx">01</span><span id="sheet-credits"></span></span></span></p>
+    <p class="meta"><span class="mask"><span class="line" id="sheet-year">© 2026</span></span></p>
+  </div>
+  <span class="mask"><span class="line">
+  <a class="visit" id="sheet-visit" href="#" target="_blank" rel="noopener">
+    <span class="sr">Visit website</span>
+    <span class="roll" aria-hidden="true" id="visit-roll"></span>
+    <span class="ne" aria-hidden="true"><span>↗</span><span>↗</span></span>
+    <span class="rule"></span>
+  </a>
+  </span></span>
+</aside>
+
+<section id="about-panel" aria-label="About">
+  <div class="content">
+    <div class="bio">
+      <p class="lead"><span class="name"><a href="#/">Aurèle Vasseur</a></span><span class="rest">, freelance interactive developer. I build WebGL, shader-driven and real-time experiences for studios and brands, and I care about the quiet details: how light moves through a surface, how a page breathes when you stop touching it.</span></p>
+      <p><span class="mask"><span class="line">Since 2016 I have worked with <a href="#" rel="noopener">Studio Marée</a>, <a href="#" rel="noopener">Ondine</a>, <a href="#" rel="noopener">Atelier Nord</a> and independent artists, on everything from launch sites to museum installations. I also sit on the <span class="jury">Awwwards jury</span>.</span></span></p>
+      <p><span class="mask"><span class="line">Based in Lyon, available for new collaborations from spring 2026. The stone on the right is lit from inside: each project changes its minerals.</span></span></p>
+    </div>
+    <div class="awards">
+      <h2><span class="mask"><span class="line">Recognition</span></span></h2>
+      <ul>
+        <li><span class="mask"><span class="line row"><span class="count">14</span><span>Awwwards — Site of the Day</span></span></span></li>
+        <li><span class="mask"><span class="line row"><span class="count">6</span><span>Awwwards — Developer Award</span></span></span></li>
+        <li><span class="mask"><span class="line row"><span class="count">3</span><span>FWA — Site of the Day</span></span></span></li>
+        <li><span class="mask"><span class="line row"><span class="count">2</span><span>CSS Design Awards — Website of the Year, shortlist</span></span></span></li>
+        <li><span class="mask"><span class="line row"><span class="count">1</span><span>Webby Awards — Honoree, Experimental</span></span></span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <span class="mask"><span class="line"><a class="link" href="https://instagram.com" target="_blank" rel="noopener"><span class="row">Instagram</span></a></span></span>
+      <span class="mask"><span class="line"><a class="link" href="https://linkedin.com" target="_blank" rel="noopener"><span class="row">LinkedIn</span></a></span></span>
+      <span class="mask"><span class="line"><a class="link" href="https://github.com" target="_blank" rel="noopener"><span class="row">GitHub</span></a></span></span>
+      <span class="mask"><span class="line"><a class="link" href="https://x.com" target="_blank" rel="noopener"><span class="row">X</span></a></span></span>
+      <span class="mask"><span class="line"><button class="link" id="copy-email" type="button" data-email="hello@aurelevasseur.fr"><span class="row">Copy email</span></button></span></span>
+    </div>
+  </div>
+</section>
+
+<button id="sound-toggle" type="button" aria-pressed="false" aria-label="Toggle sound">
+  <svg viewBox="0 0 20 20" aria-hidden="true">
+    <path class="speaker" d="M3 7.5v5h3.2L11 16.5v-13L6.2 7.5z"/>
+    <path class="wave wave-1" pathLength="1" d="M13.5 7.2a4 4 0 0 1 0 5.6"/>
+    <path class="wave wave-2" pathLength="1" d="M15.8 4.8a7.4 7.4 0 0 1 0 10.4"/>
+    <path class="cross cross-1" pathLength="1" d="M13.5 7.5l4.5 5"/>
+    <path class="cross cross-2" pathLength="1" d="M18 7.5l-4.5 5"/>
+  </svg>
+</button>
+
+<div id="nogl">
+  <h1>Aurèle Vasseur — interactive developer</h1>
+  <p>This portfolio is a WebGL scene (a backlit alabaster stone in a dusk landscape). Your browser could not create a WebGL context, so here is the plain list of projects.</p>
+  <ul id="nogl-list"></ul>
+</div>
+
+    <noscript>
+      <p style="color:#f4f2ee;background:#050404;font-family:sans-serif;padding:24px">
+        This portfolio is a WebGL scene and needs JavaScript to render. Enable it to continue.
+      </p>
+    </noscript>
+  </body>
+</html>

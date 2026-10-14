@@ -1,0 +1,2 @@
+:root{--bg:#edf1e8;--fg:#163a2e;--accent:#276b48;--surface:#f8faf5}
+:root{--muted:#4f6558;--line:#163a2e26;--radius:60px 12px 60px 12px;color-scheme:light}.brand{font-family:Cormorant;font-size:38px}.hero h1{font-size:clamp(63px,6.4vw,96px)}.stage{background:radial-gradient(ellipse,#9cbea052,transparent 70%)}.hero .stage-tag{color:#355441}.btn{border-radius:40px}.serif{font-size:1.1em}.bar-chart span{border-radius:8px}.panel{box-shadow:0 15px 45px #163a2e05}

@@ -1,0 +1,404 @@
+@font-face{font-family:Agrandir;src:url('./assets/agrandir-regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+:root{color-scheme:light;--paper:#eaece5;--site-margin:3.35vw;--ink:#40400c;--lilac:#b466eb;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;color:var(--ink);font-family:Agrandir,Arial,sans-serif;font-weight:400;-webkit-font-smoothing:antialiased}
+html{background:var(--paper)}
+body{background-color:inherit}
+.browser-top-color{display:none}
+/* Keep the homepage's browser tint stable. Hide this fixed paint strip while
+   reading so Safari can show its native translucent scrolling edge. */
+@media(width < 900px) and (pointer:coarse){
+ html:not(.phone-reading) .browser-top-color{display:block;position:fixed;top:0;left:0;right:0;height:12px;background-color:var(--paper);z-index:20;pointer-events:none}
+}
+html,body{height:100%;overflow:hidden}
+button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+button:focus{outline:none}
+html[data-keyboard] button:focus-visible{outline:2px solid currentColor;outline-offset:4px}
+.home{--home-margin:clamp(24px,2.74vw,56px);--corner-inset:clamp(24px,2.74vw,56px);position:relative;height:100svh;overflow:hidden;opacity:1}
+.masthead,.footnote{position:absolute;z-index:2;left:max(var(--home-margin),env(safe-area-inset-left));right:max(var(--home-margin),env(safe-area-inset-right));color:#000;pointer-events:none}
+.masthead,.home-socials{font-family:AgrandirTight,Agrandir,Arial,sans-serif;font-size:14px;line-height:20px;font-weight:400;letter-spacing:.02em;text-transform:uppercase}
+.masthead{top:var(--corner-inset);display:flex;justify-content:space-between;gap:24px;align-items:flex-start}
+.masthead p{margin:0}
+.home-about{position:relative;display:block;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;white-space:nowrap;cursor:pointer;pointer-events:auto}
+.home-identity{text-align:left}
+/* Expand only fine-pointer corners. Cap the inner edges at the viewport's
+   midpoint so the two About targets never overlap in a narrow desktop window. */
+@media(pointer:fine){
+ .home-about::before{content:"";position:absolute;inset:-60px}
+ .home-identity::before{right:max(-60px,calc(100% + max(var(--home-margin),env(safe-area-inset-left)) - 50vw))}
+ .home-role::before{left:max(-60px,calc(100% + max(var(--home-margin),env(safe-area-inset-right)) - 50vw))}
+}
+.about-link{width:max-content}
+.home-role{text-align:right}
+.home-location{display:block;transform:translateY(-2px);color:rgb(0 0 0 / 50%)}
+.home-role-location{display:grid}
+.home-role-location>span{grid-area:1/1;transition:transform 240ms cubic-bezier(.2,.7,.2,1),opacity 240ms cubic-bezier(.2,.7,.2,1)}
+.home-role-about{opacity:0;transform:translateY(8px)}
+.home-role:is(:hover,:focus-visible) .home-role-city{opacity:0;transform:translateY(-8px)}
+.home-role:is(:hover,:focus-visible) .home-role-about{opacity:1;transform:translateY(0)}
+.collection-viewport{position:absolute;inset:0;display:flex;align-items:center;padding:64px var(--site-margin);container-type:inline-size;overflow-x:hidden;overflow-y:hidden;scrollbar-width:none;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.collection-viewport::-webkit-scrollbar{display:none}
+/* Agrandir's visible e spans -20..525 in its 1000-unit em. Match its ink,
+   including overshoot, rather than the font-size or image bounding square. */
+/* Width is allocated to ink and candy silhouettes; no flex growth or square
+   bitmap padding can turn into extra space between objects. */
+.collection{--row-width:100cqw;--gummy-gap:clamp(6px,calc(1.333333vw - 6px),18px);--word-gap:calc(clamp(18px,1.4vw,28px) + clamp(5px,calc(.55vw - 1px),11px) / 2);--type-scale:.9;--e-height:calc((var(--row-width) - 7 * var(--gummy-gap) - 2 * var(--word-gap)) / var(--suite-ratio));--letter-size:calc(var(--e-height) * var(--type-scale) / .545);display:flex;align-items:center;gap:var(--word-gap);width:var(--row-width);flex:none;transform:translateY(-1svh);visibility:hidden}
+.collection[data-ready][data-revealed]{visibility:visible}
+.collection.is-entering .word,.collection.is-entering .charm-slot{will-change:transform,opacity}
+.intro-name{--letter-size:clamp(80px,14vw,240px);position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:calc(.025em + 2px);font-size:var(--letter-size);pointer-events:none}
+@media(width < 900px){.intro-name{--letter-size:32vw}}
+.word{display:block;position:relative;flex:none;width:calc(var(--letter-size) * var(--ink-width));font-size:var(--letter-size);line-height:.9;letter-spacing:-.02em;padding-bottom:.07em;font-weight:400;font-kerning:normal;white-space:nowrap;user-select:none}
+.word>span{display:block;position:relative;left:calc(var(--letter-size) * var(--ink-offset))}
+.charms{list-style:none;padding:0;margin:0;display:flex;align-items:center;gap:var(--gummy-gap);flex:none;transform:translateY(calc(var(--letter-size)*-.0375))}
+.collection[data-desktop]{--e-height:var(--desktop-e-height);--word-gap:var(--desktop-word-gap);width:var(--desktop-row-width);margin-inline:auto}
+.collection[data-desktop] .charms{display:block;position:relative;width:var(--desktop-list-width);height:var(--desktop-list-height)}
+.collection[data-desktop] .charm-slot{position:absolute;left:var(--desktop-left);top:var(--desktop-top)}
+.collection-viewport[data-desktop-scroll]{overflow-x:auto;touch-action:pan-x}
+.collection-viewport[data-desktop-scroll] .charm-button{touch-action:pan-x pinch-zoom}
+/* Keep the painted layout until the resize handler bridges its geometry.
+   Media queries alone would change size and clamp scroll before capture. */
+.collection-viewport[data-home-layout="desktop"]{padding-inline:3.35vw}
+@media(width >= 1200px){
+ .collection-viewport,.collection-viewport[data-home-layout="desktop"]{padding-left:max(var(--home-margin),env(safe-area-inset-left));padding-right:max(var(--home-margin),env(safe-area-inset-right))}
+}
+.collection-viewport[data-home-layout="carousel"]{padding-inline:16px;overflow-x:auto;touch-action:pan-x}
+.collection[data-carousel]{--row-width:1698.06px;--gummy-gap:16.46666px;--word-gap:29.835px}
+@media(pointer:coarse){.collection[data-carousel]{--word-gap:var(--gummy-gap)}}
+.charm-slot{position:relative;flex:none;width:var(--slot-width);height:var(--e-height)}
+.charm-button{position:relative;display:block;border:0;padding:0;background:none;width:100%;height:100%;cursor:pointer;touch-action:pan-x;outline-offset:2px}
+.charm-button:focus-visible{border-radius:24px}
+.charm-motion{position:absolute;inset:0;display:grid;grid-template:minmax(0,1fr)/minmax(0,1fr);place-items:center;transform:translate3d(0,0,0);will-change:transform}
+.charm-art{pointer-events:none;position:relative;left:var(--art-offset-x,0px);top:var(--art-offset-y,0px);width:var(--art-size,100%);height:var(--art-size,auto);display:block;overflow:visible;transform-origin:50% 56%;transition:transform .58s var(--ease);will-change:transform}
+@media(hover:hover){.charm-button:hover .charm-art{transform:translate(var(--tx,0px),var(--ty,-5px)) rotate(var(--tilt,0deg)) scale(1.11)}}
+.charm-button:focus-visible .charm-art{transform:translateY(-5px) rotate(-4deg) scale(1.08)}
+.charm-button:active .charm-art{transform:scale(1.12,.84) translateY(5px);transition-duration:.13s}
+.charm-button.is-candy .charm-art{transform:none;transition:none;will-change:auto}
+.charm-button.is-candy .charm-motion{will-change:auto}
+.charm-button.is-candy{touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;cursor:grab}
+.charm-button.is-candy:active{cursor:grabbing}
+.candy-flower{position:relative;aspect-ratio:1;overflow:visible}
+.flower-shadow{position:absolute;inset:0;width:100%;height:100%;overflow:visible;pointer-events:none;transform-origin:50% 50%}
+.flower-canvas{position:absolute;left:-70%;top:-70%;width:240%;height:240%;display:block;pointer-events:none}
+
+.footnote{bottom:max(var(--corner-inset),env(safe-area-inset-bottom));display:flex;align-items:flex-end}
+.home-introduction{width:max-content;flex:none;min-width:0;pointer-events:auto;font-family:Agrandir,Arial,sans-serif;font-size:16px;line-height:20px;font-weight:400;letter-spacing:0}
+.home-introduction p{margin:0}
+#home-load-error:not([hidden]){margin-top:.75em}
+.home-socials{position:absolute;z-index:2;right:max(var(--home-margin),env(safe-area-inset-right));bottom:max(var(--corner-inset),env(safe-area-inset-bottom));display:flex;align-items:center;gap:16px;pointer-events:auto}
+.home-socials :is(a,button){position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:20px;padding:0;border:0;background:none;color:rgb(0 0 0 / 50%);font:inherit;letter-spacing:inherit;text-transform:inherit;white-space:nowrap;text-decoration:none;cursor:pointer;transition:color .18s ease}
+.home-socials :is(a,button)::after{content:"";position:absolute;inset:-10px -5px}
+.home-socials .about-button{display:none}
+.home-socials .arena-link{font-family:Arial,sans-serif;font-size:18px;letter-spacing:-.08em}
+.home-socials .email-button{justify-content:flex-start}
+.home-socials :is(a,button):is(:hover,:focus-visible){color:#000}
+.home-socials :is(a,button):focus-visible{outline:1px solid currentColor;outline-offset:4px;border-radius:2px}
+.visually-hidden{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.no-js{position:fixed;bottom:20%;left:4%;font-size:16px}
+@media(width < 900px){
+  :root{--site-margin:16px}
+  .collection-viewport{overflow-x:auto;touch-action:pan-x}
+  /* Enlarge the 1400px composition by 30% for intentional horizontal exploration. */
+  .collection{--row-width:1698.06px;--gummy-gap:16.46666px;--word-gap:29.835px}
+}
+/* Corner copy keeps the desktop layout when a desktop window gets narrower. */
+@media(width < 900px) and (pointer:coarse){
+  .home{--home-margin:16px;--corner-inset:24px}
+  .home-role{display:none}
+  .home-identity .about-link{display:none}
+  .home-socials{top:var(--corner-inset);bottom:auto}
+  .home-socials .about-button{display:inline-flex}
+  .home-introduction{width:100%}
+  .home-copy-break{display:none}
+}
+@media(width < 360px) and (pointer:coarse){.home-socials{gap:8px}}
+@media(max-height:500px){.home{--corner-inset:18px}.collection{transform:translateY(1svh)}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}.charm-art{will-change:auto}}
+
+/* Inline outlines keep the initial name independent of font loading and measurement. */
+.intro-name .word>svg{display:block;width:100%;height:.9em;fill:currentColor;overflow:visible}
+/* Agrandir m and l both begin 50 units into a 1000-unit em. Use the
+   font-native bearing on phones instead of WebKit canvas text metrics. */
+@media(width < 900px) and (pointer:coarse){
+  .collection .word>span,.chapter-word>span{left:-.05em}
+}
+
+@media(width < 900px) and (pointer:coarse){
+  .collection{--word-gap:var(--gummy-gap)}
+}
+
+/* Center only me on the first phone paint; it slides to the approved margin. */
+@media(width < 900px) and (pointer:coarse){
+  .intro-name{--letter-size:209.790258px;left:50%;transform:translate(-50%,-50%);gap:0}
+  .intro-name>.word:last-child{display:none}
+}
+
+/* Editorial chapter layout protects the reading width beside the carousel. */
+@property --desktop-paper-travel{syntax:'<length>';inherits:true;initial-value:0px}
+@property --desktop-paper-inset{syntax:'<length>';inherits:true;initial-value:24px}
+@property --desktop-paper-progress{syntax:'<number>';inherits:true;initial-value:0}
+.world{--sheet-dock-top:80px;--stage-width:clamp(34%,calc(82vw - 448px),50%);position:fixed;inset:0;margin:0;padding:0;border:0;width:100%;max-width:none;height:100svh;max-height:none;overflow:clip;color:#222;background-color:inherit}
+.world::backdrop{background:transparent}.world[open]{display:block}
+.chapter-stage{position:absolute;inset:0 auto 0 0;width:var(--stage-width);overflow:hidden;display:flex;align-items:center;justify-content:center}
+.chapter-hero,.chapter-neighbor{--e-height:clamp(125px,11.6vw,190px);display:flex;align-items:center;justify-content:center;flex:none}
+.world .charm-button{width:var(--slot-width);height:var(--e-height);flex:none;transform-origin:0 0}.world .charm-art{transition:none}
+.chapter-neighbor{position:absolute;top:calc(50% - var(--e-height)/2);width:var(--e-height);height:var(--e-height)}
+.chapter-prev{left:calc(var(--e-height)*-.6)}.chapter-next{right:calc(var(--e-height)*-.6)}
+.world.is-moving .chapter-stage{overflow:visible;clip-path:inset(-100vh calc(100% - 100vw + 16px) -100vh 0)}
+.story-sheet{position:absolute;inset:10px 16px 10px var(--stage-width);background:#ffffff;border:1px solid #eeeee5;border-radius:clamp(32px,3.8vw,56px);color:#252525;display:flex;flex-direction:column;z-index:3;min-height:0;overflow:hidden}
+.story-header{position:absolute;top:12px;right:16px;z-index:2}
+/* Shared sheet: keep the existing stacked layout below 900px.
+   Ease from the existing narrow-desktop width at 900px to 770px at 1400px. */
+@media(width >= 900px){
+ .world.editorial-layout{--card-width:clamp(574px,calc(39.2vw + 221.2px),770px);--stage-width:min(50%,calc(100% - var(--card-width) - 20px))}
+ .editorial-layout .story-sheet{inset:20px 20px 20px auto;width:var(--card-width)}
+ /* Chapter paper keeps the existing left edge and entrance, while its right
+    and bottom edges continue through the viewport. The native reader scroll
+    carries its inset top edge away without resizing or reflowing the article. */
+ #world.editorial-layout .story-sheet{inset:0 0 0 auto;width:calc(var(--card-width) + 20px);border-radius:0;background:transparent;border-image:none;overflow:visible;--desktop-paper-top:max(0px,calc(var(--desktop-paper-inset) - var(--desktop-paper-travel,0px)));--desktop-paper-radius:calc(clamp(32px,3.8vw,56px) * (1 - var(--desktop-paper-progress))) 0 0 0}
+ #world.editorial-layout .story-sheet::before{content:'';position:absolute;inset:var(--desktop-paper-top) 0 0;z-index:-2;border-radius:var(--desktop-paper-radius);border-image:var(--sheet-shadow);pointer-events:none}
+ #world.editorial-layout .story-sheet::after{top:var(--desktop-paper-top);border-radius:var(--desktop-paper-radius)}
+ #world.editorial-layout .story-body{padding-top:calc(var(--desktop-paper-inset) + var(--card-top-space))}
+ /* Shift the date's ink without increasing the facts or Plot footprint. */
+ #world.editorial-layout .story-body h1{transform:translateY(10px)}
+ /* Rest and chapter changes let neighboring gummies reach the paper's left
+    edge. Entry/exit uses the wider travel area connecting to the homepage. */
+ .editorial-layout .chapter-stage,
+ .world.is-switching .chapter-stage{overflow:visible;clip-path:inset(-100vh calc(100% - 100vw + var(--card-width) + 20px) -100vh 0)}
+}
+.close-world{display:none;border:0;background:none;cursor:pointer;width:44px;height:44px;font-size:24px;line-height:1;color:#666}
+.world>.close-world{place-items:center;position:absolute;top:16px;left:50%;right:auto;width:46px;height:46px;padding:11px;border:0;border-radius:50%;background:#fffefa;color:#464646;z-index:5;transform:translateX(-50%);opacity:1;pointer-events:auto}
+.world>.close-world svg{width:24px;height:24px}
+.sheet-handle{display:none}
+.story-body{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:none}
+.story-body:focus{outline:none}
+html[data-keyboard] .story-body:focus-visible{outline:2px solid #40400c;outline-offset:-8px;border-radius:inherit}
+.story-body h1{white-space:nowrap;transform-origin:center}
+.story-facts{display:grid;margin:0}
+/* Keep shorter fact groups packed at the top when neighboring copy is taller. */
+.story-facts>div{display:grid;align-items:start;align-content:start}
+.story-facts dt{white-space:nowrap}
+.story-facts dd{margin:0}
+.story-facts-reserve{display:none}
+.plot-reference{display:none}
+.story-plot h2{font-weight:400;text-align:center}
+.story-body .sample-label{font-size:12px;color:#969690;margin-bottom:8px}
+.story-body figure{margin:40px 0 0}
+.story-image-placeholder{aspect-ratio:1.5;display:grid;place-items:center;background:#f3f2ec;color:#99998f;font-size:14px}
+
+.chapter-offstage{--e-height:clamp(125px,11.6vw,190px);position:absolute;top:calc(50% - var(--e-height)/2);display:flex;height:var(--e-height);width:var(--e-height);align-items:center;justify-content:center;pointer-events:none}
+
+.chapter-neighbor[hidden]{display:none}
+.chapter-back-home{position:absolute;left:0;right:0;top:0;height:28%;border:0;background:none;text-align:left;cursor:pointer;color:#777;font-size:14px;padding:0;z-index:1}
+@media(width >= 900px){
+ /* One exit control with two hit areas. The clipped-out middle keeps carousel
+    gestures, including the label and 24px of clearance, on the stage. */
+ .chapter-stage>.chapter-back-home{--exit-lower-edge:calc(50% + clamp(125px,11.6vw,190px)/2 + 99px);height:100%;clip-path:polygon(0 0,100% 0,100% 28%,0 28%,0 var(--exit-lower-edge),100% var(--exit-lower-edge),100% 100%,0 100%)}
+}
+.chapter-word{position:fixed!important;margin:0;z-index:2;pointer-events:none}
+
+.story-body::-webkit-scrollbar{display:none;width:0;height:0}
+.chapter-exit-cursor{position:fixed;left:0;top:0;width:0;height:0;pointer-events:none;z-index:10;display:none}
+.chapter-exit-cursor span{position:absolute;left:-23px;top:-23px;width:46px;height:46px;border:0;border-radius:50%;background:#fffefa;opacity:0;transform:scale(.55) rotate(-35deg);transition:transform .2s cubic-bezier(.2,1.5,.4,1),opacity .12s ease}
+.chapter-exit-cursor svg{position:absolute;inset:11px;width:24px;height:24px;color:#464646}
+.chapter-exit-cursor.is-visible span{opacity:1;transform:scale(1) rotate(0)}
+@media(hover:hover) and (pointer:fine){.chapter-back-home{cursor:none}.chapter-exit-cursor{display:block}}
+
+@font-face{font-family:AgrandirTight;src:url('./assets/agrandir-tight-regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}
+.chapter-label{position:absolute;top:calc(50% + clamp(125px,11.6vw,190px)/2 + 36px);left:20px;right:20px;color:#252525;pointer-events:none}
+.chapter-label p{margin:0}
+
+.chapter-stage{touch-action:none;user-select:none;-webkit-user-select:none}
+@media(width < 900px) and (pointer:coarse){.collection-viewport,.collection-viewport .charm-button{touch-action:pan-x pinch-zoom;-webkit-touch-callout:none}}
+@media(width < 900px) and (pointer:coarse){
+ /* The home remains one screen tall. Let vertical pulls reach the browser,
+    while the collection keeps its native horizontal scrolling and momentum. */
+ html:not(.phone-reading),html:not(.phone-reading) body{overflow:visible}
+ html:not(.phone-reading) .collection-viewport{overscroll-behavior-x:contain;overscroll-behavior-y:auto;touch-action:auto}
+ html:not(.phone-reading) .collection-viewport .charm-button{touch-action:auto}
+}
+
+/* Mobile chapter geometry, sheet states, and close feedback. */
+@media(width < 900px){
+ .masthead,.footnote{left:max(var(--site-margin),env(safe-area-inset-left));right:max(var(--site-margin),env(safe-area-inset-right))}
+ .masthead{top:max(24px,calc(env(safe-area-inset-top) + 16px))}
+ .footnote{bottom:max(24px,calc(env(safe-area-inset-bottom) + 16px))}
+ /* Handwritten names may extend below the stage in short windows. Keep the
+    horizontal crop while allowing their full line to remain visible. */
+ .chapter-stage{inset:0 0 42%;width:100%;overflow:visible;clip-path:inset(0 0 -100vh 0);transform:translateY(var(--sheet-follow,0px));transition:transform .3s var(--ease)}
+ .world.is-moving .chapter-stage{clip-path:inset(-100vh 0 -100vh 0)}
+ .is-pulling-sheet .chapter-stage{transition:none}
+ .chapter-hero,.chapter-neighbor,.chapter-offstage{--e-height:min(160px,40vw);position:absolute;top:calc(62% - var(--e-height)/2 - 30px);translate:none}
+ .chapter-hero{left:50%;transform:translateX(-50%)}
+ .chapter-prev{left:auto;right:calc(50% + 128px)}
+ .chapter-next{right:auto;left:calc(50% + 128px)}
+ .chapter-label{top:calc(62% + min(160px,40vw)/2 - 6px);left:16px;right:16px}
+ .chapter-back-home{display:none}
+ .world .charm-motion{scale:calc(1 - .07 * var(--sheet-depth,0));transition:scale .3s var(--ease)}
+ .world.is-pulling-sheet .charm-motion{transition:none}
+
+ .story-sheet{inset:var(--sheet-top,max(58%,calc(35.96svh + 150px))) 6px 0;border-radius:56px 56px 0 0;overflow:visible;transition:none}
+ .world.sheet-settling .story-sheet{transition:top .3s var(--ease)}
+ .world.sheet-expanded .story-sheet{top:var(--sheet-top,var(--sheet-dock-top))}
+ .world.is-moving .story-sheet,.story-sheet.is-dragging,.story-sheet.is-wheel-scrolling{transition:none}
+ .story-sheet:focus{outline:none}
+ .story-header{top:0;left:0;right:0;height:0;pointer-events:none}
+ .sheet-handle{display:flex;position:absolute;left:50%;top:-23px;transform:translateX(-50%);width:120px;height:30px;align-items:center;justify-content:center;background:none;border:0;touch-action:none;cursor:ns-resize;pointer-events:auto}
+ .sheet-handle span{width:36px;height:4px;background:rgba(70,70,70,.16);border-radius:4px}
+ .sheet-expanded .sheet-handle{display:none}
+ .story-body{border-radius:inherit}
+ .world:not(.sheet-expanded) .story-body{touch-action:none}
+ .world.sheet-expanded .story-body{touch-action:pan-y pinch-zoom}
+
+ .world>.close-world{display:grid}
+}
+
+/* Keep the phone name aligned with navigation when in-app browsers report
+   extra top safe-area spacing. Both use the homepage's corner inset. */
+@media(width < 900px) and (pointer:coarse){
+ .masthead{top:var(--corner-inset)}
+}
+
+/* Narrow desktop uses the sheet layout with neighbors peeking at its edges. */
+@media(width < 900px) and (pointer:fine){
+ .chapter-prev{left:calc(var(--e-height) * -.5);right:auto}
+ .chapter-next{right:calc(var(--e-height) * -.5);left:auto}
+}
+
+/* Shared editorial sheet for every chapter.
+   These tokens own the approved spacing; layout variants override the values. */
+.editorial-layout{--card-top-space:48px;--card-bottom-space:48px;--date-tracking:-2px;--date-dash-space:4px;--stacked-plot-gap:48px;--sheet-shadow:url('./assets/sheet-shadow.png') 224 / 112px / 48px round}
+/* Chapter endings use the same inset as their side gutters. */
+#world{--card-bottom-space:40px}
+/* Gain vertical room through spacing while retaining the original date scale.
+   The paper begins 24px down in tall windows and reaches the top in short ones. */
+@media(width >= 900px){
+ #world{--desktop-paper-inset:clamp(0px,calc(24svh - 144px),24px);--card-top-space:clamp(24px,calc(8.8svh - 34px),48px)}
+}
+@media(width < 900px){#world{--card-bottom-space:24px}}
+@media(width < 900px) and (pointer:fine){#world{--card-bottom-space:clamp(24px,5vw,40px)}}
+#world.native-phone-reader{--card-bottom-space:18px}
+@font-face{font-family:PPEditorialNew;src:url('./assets/pp-editorial-new-ultralight.woff2') format('woff2');font-style:normal;font-weight:200;font-display:swap}
+.editorial-layout .story-sheet{background:#ffffff;border:0;border-image:var(--sheet-shadow);container-type:inline-size}
+/* Repeat the baked dither along the edges instead of stretching its pixels.
+   The white plate covers the shadow's interior at every responsive radius. */
+.editorial-layout .story-sheet::after{content:'';position:absolute;inset:0;z-index:-1;border-radius:inherit;background:#fff;pointer-events:none}
+.editorial-layout .story-body{padding:var(--card-top-space) 40px var(--card-bottom-space);font-family:Agrandir,Arial,sans-serif;font-size:20px;line-height:1.3}
+.editorial-layout .story-body h1{font-family:PPEditorialNew,serif;font-weight:200;font-size:clamp(96px,19cqw,124px);line-height:1.1;letter-spacing:var(--date-tracking);transform:none;margin:0 0 21px;text-align:center}
+.editorial-layout .story-year-dash{padding-inline-start:var(--date-dash-space)}
+.editorial-layout .story-facts{grid-template-columns:1.08fr 1fr;column-gap:64px;border-top:1px solid #dededb;padding-top:16px;font-family:AgrandirTight,Agrandir,sans-serif;font-size:18px;line-height:1.3}
+.editorial-layout .story-facts>div{grid-template-columns:88px minmax(0,1fr);gap:16px}
+.editorial-layout .story-facts dt{font-family:inherit;font-size:18px;color:#999c96}
+/* Keep desktop copy measures close to the compact four-column reference. */
+@container(width >= 650px){.editorial-layout .story-facts dd{max-inline-size:9.5em}}
+.editorial-layout .story-plot{margin-top:var(--plot-margin,var(--plot-gap,160px))}
+@media(width >= 900px){
+ .editorial-layout .story-facts-wrap{position:relative}
+ .editorial-layout .plot-reference{display:grid;position:absolute;inset:0 auto auto 0;inline-size:100%;visibility:hidden;pointer-events:none}
+}
+.editorial-layout .story-plot h2{font-family:AgrandirTight,Agrandir,sans-serif;font-size:18px;line-height:1.3;color:#999c96;margin:0 0 16px;padding-bottom:6px;border-bottom:1px solid #dededb}
+.editorial-layout .story-body p{max-width:none;margin:0 0 24px}
+.editorial-layout .story-plot p{text-wrap:pretty}
+.editorial-layout .story-body p:last-child{margin-bottom:0}
+@container(width < 650px){.editorial-layout .story-facts{column-gap:28px}.editorial-layout .story-facts>div{grid-template-columns:1fr;gap:8px}}
+@media(width < 900px){
+ .editorial-layout .story-body{padding:var(--card-top-space) max(24px,env(safe-area-inset-right)) max(var(--card-bottom-space),env(safe-area-inset-bottom)) max(24px,env(safe-area-inset-left));font-size:17px}
+ .editorial-layout .story-body h1{font-size:68px}
+ .editorial-layout .story-facts{column-gap:24px}
+ .editorial-layout .story-facts>div{grid-template-columns:1fr;gap:8px}
+ .editorial-layout .story-plot{margin-top:var(--stacked-plot-gap)}
+}
+/* Narrow mouse/trackpad windows retain desktop gutters and reading spacing. */
+@media(width < 900px) and (pointer:fine){
+ .editorial-layout .story-sheet{left:20px;right:20px;bottom:0;border-radius:56px 56px 0 0}
+ .editorial-layout.sheet-expanded .story-sheet{top:var(--sheet-top,var(--sheet-dock-top))}
+ .editorial-layout .sheet-handle{display:none}
+ .editorial-layout .story-body{padding:var(--card-top-space) clamp(24px,5vw,40px) var(--card-bottom-space);font-size:20px}
+ .editorial-layout .story-body h1{font-size:clamp(68px,19cqw,124px)}
+}
+/* A stacked desktop sheet can still have room for label/copy pairs.
+   Use its actual width, independently of the outer 900px layout breakpoint. */
+@media(width < 900px) and (pointer:fine){
+ @container(width >= 650px){
+  .editorial-layout .story-facts{column-gap:64px}
+  .editorial-layout .story-facts>div{grid-template-columns:88px minmax(0,1fr);gap:16px}
+ }
+}
+/* Phone spacing follows the approved mobile reference. */
+@media(width < 900px) and (pointer:coarse){
+ /* The handle is a separate drag surface; reading text has native scrolling. */
+ .world.sheet-expanded .sheet-handle{display:flex;top:-17px}
+ .world .story-body{overscroll-behavior-y:none;-webkit-overflow-scrolling:touch}
+ /* Phone typography/columns are explicit: the scrolling sheet must not also
+    establish the desktop container-query layout boundary. */
+ .editorial-layout .story-sheet{container-type:normal}
+ .editorial-layout{--card-top-space:46px;--card-bottom-space:36px;--stacked-plot-gap:32px}
+ /* Share the longest facts height at this width, with one visible copy only. */
+ .editorial-layout .story-facts dd{grid-area:2 / 1}
+ .editorial-layout .story-facts .story-facts-reserve{display:grid;visibility:hidden;pointer-events:none}
+ .story-facts-reserve>span{grid-area:1 / 1}
+ /* Shared phone reading type for chapter stories and About. Normal wrapping
+    uses the available width instead of shortening lines to improve the rag. */
+ .editorial-layout .story-plot p{font-size:18px;line-height:24.5px;letter-spacing:-.005em;margin-bottom:20px;text-wrap:wrap}
+}
+
+/* Phone reading uses a single native document scroller.
+   These structural overrides leave the approved typography and chapter copy
+   shared with desktop. Nothing switches overflow or scroll owners mid-swipe. */
+html.phone-reading,html.phone-reading body{height:auto;min-height:100%;overflow:visible}
+.phone-reading .home{position:fixed;inset:0}
+.phone-reading .home.is-covered-by-sheet{visibility:hidden}
+.world.native-phone-reader{position:relative;inset:auto;height:auto;min-height:100svh;overflow:visible;padding-top:max(58svh,calc(35.96svh + 150px))}
+/* At the opening position, the page shares the carousel's horizontal gesture;
+   vertical reading and pinch zoom still belong to the browser. */
+.world.native-phone-reader.is-sheet-at-start{touch-action:pan-y pinch-zoom}
+.world.native-phone-reader.is-sheet-at-start .story-sheet,
+.world.native-phone-reader.is-sheet-at-start .story-body{touch-action:pan-y pinch-zoom}
+.native-phone-reader .chapter-stage{position:absolute;top:0;bottom:auto;height:58svh;width:100%;touch-action:pan-y pinch-zoom}
+.native-phone-reader .chapter-stage .charm-button{touch-action:pan-y pinch-zoom}
+/* Keep opaque paper on the same surface as the text. The widening decoration
+   must not be its only paint when scrolling switches to the fixed exit layer. */
+.world.native-phone-reader .story-sheet{position:relative;inset:auto;margin:0 6px;min-height:100svh;display:block;overflow:visible;container-type:normal;transition:none;border-radius:calc(56px * (1 - var(--phone-sheet-progress,0)));background:#ffffff;border-image:none}
+.native-phone-reader .story-sheet:before{content:'';position:absolute;z-index:-1;inset:0 calc(-6px * var(--phone-sheet-progress,0));border-radius:inherit;background:#ffffff;border-image:var(--sheet-shadow);pointer-events:none}
+.native-phone-reader .story-sheet::after{inset-inline:calc(-6px * var(--phone-sheet-progress,0))}
+.world.native-phone-reader .story-body{display:block;overflow:visible;touch-action:auto;border-radius:inherit;overscroll-behavior:auto}
+/* Include the paper's 6px margin in the 24px screen-to-text gutter. Keep the
+   reading width steady while the paper widens, so lines do not rewrap on scroll. */
+.world.native-phone-reader .story-body{padding-left:max(18px,calc(env(safe-area-inset-left) - 6px));padding-right:max(18px,calc(env(safe-area-inset-right) - 6px))}
+.world.native-phone-reader .story-header{display:none}
+.world.native-phone-reader>.close-world{position:fixed;top:calc(16px + env(safe-area-inset-top));box-shadow:0 2px 10px rgba(35,40,30,.1),0 0 0 1px rgba(35,40,30,.025)}
+.phone-sheet-dismiss-handle{display:none}
+.native-phone-reader.is-sheet-at-start .phone-sheet-dismiss-handle{display:grid;place-items:center;position:absolute;top:-32px;left:50%;transform:translateX(-50%);width:120px;height:44px;margin:0;padding:0;border:0;background:transparent;z-index:6;touch-action:none;user-select:none;-webkit-user-select:none}
+.phone-sheet-dismiss-handle span{width:36px;height:4px;border-radius:4px;background:rgba(70,70,70,.22);pointer-events:none}
+
+/* One native document scroller with stationary artwork. Only the paper's paint
+   widens; the circular close button floats above the unmasked story. */
+html.phone-reading.phone-sheet-motion,html.phone-reading.phone-sheet-motion body{overscroll-behavior-y:auto}
+.native-phone-reader.phone-sheet-motion .chapter-stage{position:fixed}
+.native-phone-reader.phone-sheet-motion .chapter-stage .charm-button{touch-action:none}
+.native-phone-reader.phone-sheet-motion .charm-motion{transition:none}
+
+/* About borrows the chapter paper and reading styles without moving the home. */
+.about-world{--chapter-shadow:129,131,124;background:transparent}
+/* The blur scrolls with the phone document. Pinning this full-width layer to
+   the viewport lets Safari replace its scrolling edges with solid strips. */
+.about-backdrop{position:absolute;inset:0;background:rgb(234 236 229 / 18%);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.about-world>.close-world{display:grid;box-shadow:0 2px 10px rgba(35,40,30,.1),0 0 0 1px rgba(35,40,30,.025)}
+.about-world .story-sheet{overflow:hidden}
+.about-world .story-body{display:flex;flex-direction:column}
+.about-world .story-body h1{flex-shrink:0;white-space:normal;margin-bottom:var(--stacked-plot-gap)}
+.about-world .story-plot{flex-shrink:0;margin-top:0}
+.about-world .story-body .about-credit{flex-shrink:0;margin:calc(var(--stacked-plot-gap) + 20px) 0 0;padding-top:0;text-align:center;font-family:AgrandirTight,Agrandir,sans-serif;font-size:18px;line-height:1.3;color:#999c96;text-wrap:balance}
+/* The phone uses the same document scroller and widening paper as chapters. */
+.about-world.native-phone-reader{--sheet-dock-top:calc(104px + env(safe-area-inset-top));padding-top:var(--sheet-dock-top);z-index:4}
+.about-world.native-phone-reader .story-body .about-credit{margin-inline:-12px}
+@media(width >= 900px){
+ .about-world>.close-world{left:calc((100% - var(--card-width) - 20px)/2);top:32px}
+ .about-world>.chapter-back-home{width:calc(100% - var(--card-width) - 20px);height:100%;right:auto}
+}
+@media(width >= 900px) and (hover:hover) and (pointer:fine){.about-world>.close-world{display:none}}
+html[data-keyboard] .world[open]>.close-world{display:grid}
+@media(width < 900px){
+ .about-world{--sheet-dock-top:calc(80px + env(safe-area-inset-top))}
+ .about-world>.close-world{top:calc(16px + env(safe-area-inset-top))}
+ .about-world .story-body .about-credit{font-size:16px}
+}
