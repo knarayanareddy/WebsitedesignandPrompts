@@ -1,0 +1,22 @@
+{
+  "name": "getlayers-featured-studies",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 tools/build.py",
+    "assets": "node tools/prepare-assets.mjs",
+    "test": "node tests/sites.mjs",
+    "verify": "python3 tools/verify.py"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@fontsource/cormorant-garamond": "5.2.5",
+    "@fontsource/geist": "5.2.6",
+    "@fontsource/syne": "5.2.6",
+    "@sparticuz/chromium": "138.0.2",
+    "playwright": "1.56.1",
+    "sharp": "0.35.5",
+    "three": "0.165.0"
+  }
+}

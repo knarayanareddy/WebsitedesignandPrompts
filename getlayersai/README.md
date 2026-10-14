@@ -4,6 +4,35 @@ This directory (`getlayersai/`) contains the complete collection of website buil
 
 ---
 
+## Built collection — 13 featured sites
+
+**[Open the live gallery](https://knarayanareddy.github.io/WebsitedesignandPrompts/getlayersai/)** ·
+[Local gallery](./index.html) · [Review](./REVIEW.md) · [Implementation](./IMPLEMENTATION.md) · [Validation](./VALIDATION.md)
+
+The featured deep-dive briefs have been implemented as independent, interactive static sites.
+Each folder includes a README, adapted prompt, build log, and browser-readable methodology.
+They are text-brief adaptations with original procedural artwork, not pixel-identical replicas.
+
+| Website | Preview route | Documentation |
+| --- | --- | --- |
+| Vesper | [Open](./sites/vesper/) | [Methodology](./sites/vesper/methodology.html) · [README](./sites/vesper/README.md) |
+| Soda | [Open](./sites/soda/) | [Methodology](./sites/soda/methodology.html) · [README](./sites/soda/README.md) |
+| GRIDO1 | [Open](./sites/kimi/) | [Methodology](./sites/kimi/methodology.html) · [README](./sites/kimi/README.md) |
+| Stride | [Open](./sites/stride/) | [Methodology](./sites/stride/methodology.html) · [README](./sites/stride/README.md) |
+| AI.STUDIO | [Open](./sites/ai-studio/) | [Methodology](./sites/ai-studio/methodology.html) · [README](./sites/ai-studio/README.md) |
+| ALEX / MORGAN | [Open](./sites/creative-director/) | [Methodology](./sites/creative-director/methodology.html) · [README](./sites/creative-director/README.md) |
+| dantora | [Open](./sites/dantora/) | [Methodology](./sites/dantora/methodology.html) · [README](./sites/dantora/README.md) |
+| clarix_ | [Open](./sites/clarix/) | [Methodology](./sites/clarix/methodology.html) · [README](./sites/clarix/README.md) |
+| relay | [Open](./sites/relay/) | [Methodology](./sites/relay/methodology.html) · [README](./sites/relay/README.md) |
+| lumora® | [Open](./sites/lumora/) | [Methodology](./sites/lumora/methodology.html) · [README](./sites/lumora/README.md) |
+| LAOCOÖN | [Open](./sites/laocoon/) | [Methodology](./sites/laocoon/methodology.html) · [README](./sites/laocoon/README.md) |
+| BASELINE | [Open](./sites/baseline/) | [Methodology](./sites/baseline/methodology.html) · [README](./sites/baseline/README.md) |
+| ascend | [Open](./sites/ascend/) | [Methodology](./sites/ascend/methodology.html) · [README](./sites/ascend/README.md) |
+
+The remaining 41 catalog prompts are not implemented in this batch. For local viewing, serve the repository root with `python3 -m http.server 8080 --bind 0.0.0.0` and visit `/getlayersai/`.
+
+---
+
 ## Core Prompt Documents
 
 | Document | Purpose |
