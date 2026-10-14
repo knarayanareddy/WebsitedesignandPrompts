@@ -1,0 +1,30 @@
+name: Capture public Soda reference
+
+# Temporary research workflow. It cannot deploy Pages or push repository content.
+# This branch-only trigger lets the remote runner retrieve public reference media
+# when the local sandbox cannot reach the media host.
+on:
+  push:
+    branches: [arena/b8296872-websitedesignandprompts]
+    paths:
+      - .github/workflows/capture-getlayers-reference.yml
+      - getlayersai/tools/capture-reference.py
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  reference:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install frame extraction tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg
+      - name: Fetch public media and extract reference frames
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 getlayersai/tools/capture-reference.py
