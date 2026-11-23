@@ -42,6 +42,7 @@ apps=(
   "senbuzy:senbuzy"
   "portfolio-console:portfolio-console"
   "guillaumecolombel:guillaumecolombel"
+  "human-md:human-md"
 )
 # published-slug : source-folder   (already static, copied verbatim)
 statics=(
